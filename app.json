@@ -1,0 +1,12 @@
+{
+  "name": "ThaiEggHead_Project",
+  "displayName": "ThaiEggHead_Project",
+  "expo": {
+    "name": "ThaiEggHead_Project",
+    "slug": "ThaiEggHead_Project",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
