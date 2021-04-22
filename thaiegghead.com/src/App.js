@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./components/Home";
 import Profile from "./components/Profile";
+import Login from './components/Login';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           {/* <Route path="/dashboard">
             <Dashboard />

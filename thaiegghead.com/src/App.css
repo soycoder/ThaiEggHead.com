@@ -34,3 +34,14 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Login Page */
+
+.Login {
+  padding: 60px 0;
+}
+
+.Login form {
+  margin: 0 auto;
+  max-width: 320px;
+}
