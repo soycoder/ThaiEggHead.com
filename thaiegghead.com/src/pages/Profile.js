@@ -4,8 +4,6 @@ import { Icon } from "@blueprintjs/core";
 
 import "../App.css";
 
-
-
 const Profile = () => {
   return (
     <div style={{backgroundColor:"#dddddd"}}>
