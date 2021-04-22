@@ -1,0 +1,24 @@
+{
+  "name": "thaiegghead.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm start --prefix Backend",
+    "client": "npm start --prefix thaiegghead.com",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yoskorn-Git/ThaiEggHead.com.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yoskorn-Git/ThaiEggHead.com/issues"
+  },
+  "homepage": "https://github.com/Yoskorn-Git/ThaiEggHead.com#readme",
+  "dependencies": {
+    "concurrently": "^6.0.2"
+  }
+}
