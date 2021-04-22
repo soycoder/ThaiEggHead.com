@@ -5,7 +5,7 @@ import Profile from "./components/Profile";
 
 function App() {
   return (
-    <div>
+    <>
       {/* <Header/> */}
 
       <Router>
@@ -21,7 +21,7 @@ function App() {
           </Route> */}
         </Switch>
       </Router>
-    </div>
+    </>
   );
 }
 
