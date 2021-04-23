@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Button, Form } from 'react-bootstrap';
+import React, { useState, StyleSheet } from "react";
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { Card, Elevation } from "@blueprintjs/core";
 
 import "../App.css";
 
 const Header = () => {
     return (
       <div style = {{color:'blue', fontSize: 50, textAlign:'center', marginTop:30}}>
-        ThaiEggHead.com
+        {/* ThaiEggHead.com */}
       </div>
     )
 }
@@ -24,30 +25,44 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
-          Login
-        </Button>
-      </Form>
-    </div>
+    <Container>
+      <Row>
+        <Col sm={8}>
+          <img src = "https://img.online-station.net/_content/2019/0619/gallery/1560920701.jpg" style ={{width:'100%', height:'100%'}}>
+          </img>
+        </Col>
+        <Col sm={4}>
+          <div className="Login">
+            <Card interactive={true} elevation={Elevation.TWO}>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group size="lg" controlId="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    autoFocus
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Group>
+                <Button block size="lg" type="submit" disabled={!validateForm()}>
+                  Login
+                </Button>
+              </Form>
+            </Card>
+          </div>
+        </Col>
+      </Row>
+      
+    </Container>
+    
   );
 }
 
