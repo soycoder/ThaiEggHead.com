@@ -1,6 +1,7 @@
 import React, { useState, StyleSheet } from "react";
-import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import { Form, Container, Row, Col } from 'react-bootstrap';
 import { Card, Elevation } from "@blueprintjs/core";
+import { Button } from '@blueprintjs/core'
 
 import "../App.css";
 
@@ -34,7 +35,22 @@ const LoginForm = () => {
         <Col sm={4}>
           <div className="Login">
             <Card interactive={true} elevation={Elevation.TWO}>
+              <Button icon="predictive-analysis">
+                Sign up with Google 
+                </Button> 
+              <Button icon="manual">
+                Sign up via your insitution
+                </Button>
               <Form onSubmit={handleSubmit}>
+                <Form.Group size="lg" controlId="email">
+                    <Form.Label>Display name</Form.Label>
+                    <Form.Control
+                      autoFocus
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Form.Group>
                 <Form.Group size="lg" controlId="email">
                   <Form.Label>Email</Form.Label>
                   <Form.Control
@@ -52,7 +68,7 @@ const LoginForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
-                <Button block size="lg" type="submit" disabled={!validateForm()}>
+                <Button rightIcon="arrow-right" intent="success" disabled={!validateForm()} style={{justifyItems:'center'}}>
                   Login
                 </Button>
               </Form>

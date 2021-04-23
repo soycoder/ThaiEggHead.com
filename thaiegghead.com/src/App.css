@@ -45,3 +45,9 @@
   margin: 0 auto;
   max-width: 320px;
 }
+
+/* Navbar */
+
+.button-join-us {
+  border-radius: 30%;
+}

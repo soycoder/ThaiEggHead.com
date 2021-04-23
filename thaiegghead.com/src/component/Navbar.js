@@ -1,13 +1,14 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown , Button, Form, FormControl } from 'react-bootstrap';
-import { images } from "../constants";
+import { Navbar } from 'react-bootstrap';
+import { Button } from '@blueprintjs/core'
 import "../App.css";
-import logo from "../assets/images/egghead-logo.png"
+
+import { images, COLORS, FONTS, SIZES } from '../constants';
 
 const NavigationBar = () => {
 
   return (
-    <div className="Navbar-welcome">
+    <div className="Navbar">
      <Navbar bg="light" expand="lg">
         <Navbar.Brand href="/">ThaiEggHead
           <img
@@ -18,24 +19,15 @@ const NavigationBar = () => {
             alt="ThaiEggHead"
         /></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
-            </Nav>
-            <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-            </Form>
+        <Navbar.Collapse className="justify-content-end">
+          <div class="bp3-input-group .modifier">
+            <span class="bp3-icon bp3-icon-search"></span>
+            <input class="bp3-input" type="search" placeholder="Search input" dir="auto" />
+          </div>
+          <Button style={{marginLeft:SIZES.padding}}>Sign in</Button>
+          <Button style={{marginLeft:SIZES.padding2}}>Join us</Button>
         </Navbar.Collapse>
-        </Navbar>
+      </Navbar>
     </div>
   );
 }
