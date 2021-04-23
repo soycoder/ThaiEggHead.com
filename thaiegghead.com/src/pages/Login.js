@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Button, Form } from 'react-bootstrap';
 
 import "../App.css";
 
-export default function Login() {
+const Header = () => {
+    return (
+      <div style = {{color:'blue', fontSize: 50, textAlign:'center', marginTop:30}}>
+        ThaiEggHead.com
+      </div>
+    )
+}
+
+const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -43,3 +50,14 @@ export default function Login() {
     </div>
   );
 }
+
+const Login = () => {
+  return (
+    <div>
+      <Header/>
+      <LoginForm/>
+    </div>
+  )
+}
+
+export default Login;

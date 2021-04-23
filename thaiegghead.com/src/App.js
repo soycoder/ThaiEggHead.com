@@ -3,11 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from './pages/Login';
+import Navbar from './component/Navbar';
 
 function App() {
   return (
     <>
       {/* <Header/> */}
+      <Navbar/>
 
       <Router>
         <Switch>
