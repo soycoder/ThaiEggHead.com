@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from './pages/Login';
 import Navbar from './component/Navbar';
+import CreateForum from './component/CreateForum';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/create">
+            <CreateForum />
           </Route>
           {/* <Route path="/dashboard">
             <Dashboard />

@@ -6,7 +6,7 @@ import './App.css'
 // import Dropzone from 'react-dropzone'
 // console.log(ClassicEditor.builtinPlugins.map( plugin => plugin.pluginName ));
 
-export default class contact extends React.Component{
+export default class CreateForum extends React.Component{
 
     state ={
         title: '',
