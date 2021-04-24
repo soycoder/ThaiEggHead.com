@@ -4,12 +4,15 @@ import { Icon } from "@blueprintjs/core";
 
 import "../App.css";
 
+import { images, COLORS, FONTS, SIZES } from '../constants';
+
+
 const Profile = () => {
   return (
     <div style={{backgroundColor:"#dddddd"}}>
       <Container fluid style={{backgroundColor:"#fff"}}>
         <Image
-          src="https://images.freeimages.com/images/large-previews/338/sunset-over-lake-2-1377767.jpg"
+          src={images.pic_cover}
           fluid
           className="cover-profile"
         />
@@ -18,7 +21,7 @@ const Profile = () => {
             <Col xs={12} md={3}>
               <Image
                 className="pic-profile"
-                src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                src={images.pic_profile}
                 roundedCircle
               />
             </Col>
