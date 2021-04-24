@@ -5,7 +5,8 @@ import Profile from "./pages/Profile";
 import Login from './pages/Login';
 import CreateForum from './pages/CreateForum';
 import Navbar from './component/Navbar';
-
+import CreateForum from './pages/CreateForum';
+import Subject from './pages/Subject';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/create">
             <CreateForum />
+          </Route>
+          <Route path="/subject">
+            <Subject />
           </Route>
           {/* <Route path="/dashboard">
             <Dashboard />

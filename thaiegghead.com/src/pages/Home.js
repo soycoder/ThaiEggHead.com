@@ -15,7 +15,9 @@ const Home = () => {
             <li>
                 <NavLink to="/create">Create Forum</NavLink>
             </li>
-            
+            <li>
+                <NavLink to="/subject">Subject Page</NavLink>
+            </li>
         </div>
     )
 }
