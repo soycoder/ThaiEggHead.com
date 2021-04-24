@@ -2,9 +2,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 import CreateForum from './pages/CreateForum';
-import Navbar from './component/Navbar';
+import Navbar from './components/Navbar';
 import Subject from './pages/Subject';
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
           <Route path="/profile">
             <Profile />
           </Route>
-          <Route path="/login">
-            <Login />
+          <Route path="/SignUp">
+            <SignUp />
           </Route>
           <Route path="/create">
             <CreateForum />
