@@ -12,7 +12,9 @@ const Home = () => {
             <li>
                 <NavLink to="/profile">Profile Page</NavLink>
             </li>
-            
+            <li>
+                <NavLink to="/create">Create Forum</NavLink>
+            </li>
             
         </div>
     )

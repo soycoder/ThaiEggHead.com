@@ -3,8 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from './pages/Login';
+import CreateForum from './pages/CreateForum';
 import Navbar from './component/Navbar';
-import CreateForum from './component/CreateForum';
+
 
 function App() {
   return (
