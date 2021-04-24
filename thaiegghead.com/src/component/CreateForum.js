@@ -2,7 +2,7 @@ import React from 'react';
 import ClassicEditor  from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ReactHtmlParser from 'react-html-parser';
-import './App.css'
+import './styeCreateForum.css'
 // import Dropzone from 'react-dropzone'
 // console.log(ClassicEditor.builtinPlugins.map( plugin => plugin.pluginName ));
 
