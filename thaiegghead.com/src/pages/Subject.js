@@ -1,6 +1,6 @@
 import { ButtonGroup } from 'react-bootstrap';
 import '../App.css';
-import { images, COLORS, FONTS, SIZES } from '../constants';
+import { images } from '../constants';
 
 function App() {
   const buttonn = <button>create a custom Filter</button>
