@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ReactHtmlParser from "react-html-parser";
 
-import { Card, Container } from "react-bootstrap";
+import { Button } from "@blueprintjs/core";
+
+
+import { Card, Container, Modal } from "react-bootstrap";
 
 function CreateForum () {
   const [title, showTitle] = useState(null);
   const [body, showBody] = useState(null);
   const [tag, showtag] = useState(null);
   const [subject, showsubject] = useState(null);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+  const [save, setSave] = useState(false);
   const [submit, setSubmit] = useState(false);
+  
   const toggleChecked = () => setSubmit(value => !value);
 
   function getDataTitle(title){
@@ -32,7 +36,13 @@ function CreateForum () {
     showsubject(subject.target.value)
     console.log("Subject : "+subject.target.value)
   }
-
+ 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const toggleCheckedss = () => {
+    setSave(value => !value);
+    handleClose();
+  }
     return (
       <Container style={{ "margin-top": "20px" }}>
         <Card>
@@ -111,29 +121,42 @@ function CreateForum () {
 
               </div>
 
+            <Button submit={submit} onClick={()=>toggleChecked(!submit)}>Submit</Button>
+            <Button variant="primary" onClick={handleShow}>
+              Preview
+            </Button>
 
-            <button submit={submit} onClick={()=>toggleChecked(!submit)}>Submit</button>
-            <button onClick={()=>setShow(!show)}>Preview</button>
-            {console.log(submit)}
+            
+            {console.log("Submit "+submit)}
 
           </Card.Body>
         </Card>
 
-        {
-            !show?
-              <div> 
-                <h2>เรื่อง</h2>
-                <h4>{title}</h4>
-                <h2>เนื้อหา</h2>
-                <h4>{ReactHtmlParser(body)}</h4>
-                <h2>แท็ก</h2>
-                <h4>{tag}</h4>
-                <h2>หัวข้อ</h2>
-                <h4>{subject}</h4>
-              </div>  
-            :null          
-          }
-
+        <Modal show={show} onHide={handleClose} >
+          <Modal.Header closeButton>
+            <Modal.Title>ตัวอย่าง</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>{title}</h4>
+              <div dangerouslySetInnerHTML={{
+                __html: body
+                }}>
+              </div>
+            <h8>{tag}</h8>
+            <br/> 
+            <h8>{subject}</h8>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={toggleCheckedss} onChange={()=> toggleCheckedss(!save)}>
+              Save
+              {console.log("Save "+ save)}     
+            </Button>
+          </Modal.Footer>
+        </Modal>
+         
       </Container>
     );
   }
