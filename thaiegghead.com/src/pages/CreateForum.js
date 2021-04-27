@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
+import Select from 'react-select'
+
 import { Button } from "@blueprintjs/core";
 
 
@@ -28,14 +30,14 @@ function CreateForum () {
     console.log("Body : "+body)
   }
 
-  function getDataTag(tag){
-    showtag(tag.target.value)
-    console.log("Tag : "+tag.target.value)
-  }
-  function getDataSub(subject){
-    showsubject(subject.target.value)
-    console.log("Subject : "+subject.target.value)
-  }
+  // function getDataTag(tag){
+  //   showtag(tag.target.value)
+  //   console.log("Tag : "+tag.target.value)
+  // }
+  // function getDataSub(subject){
+  //   showsubject(subject.target.value)
+  //   console.log("Subject : "+subject.target.value)
+  // }
  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -43,6 +45,32 @@ function CreateForum () {
     setSave(value => !value);
     handleClose();
   }
+
+  const optionsTag=[
+    {label:'Science',value:'reScienceact'},
+    {label:'Law',value:'Law'},
+    {label:'Database',value:'Database'},
+    {label:'Art',value:'Art'},
+  ]
+  
+  const optionsSubject=[
+    {label:'วิทยาการคอมพิวเตอร์',value:'วิทยาการคอมพิวเตอร์'},
+    {label:'ศิลปกรรมศาสตร์',value:'ศิลปกรรมศาสตร์'},
+    {label:'วิศวะกรรมศาสตร์',value:'วิศวะกรรมศาสตร์'},
+  ]
+
+  function onChangeInputTag(value){
+    const tag = value;
+    <div dangerouslySetInnerHTML={{
+      __html: tag
+      }}>
+    </div>
+    // console.log(tag);
+  }
+  function onChangeInputSub(value){
+    console.log(value);
+  }
+
     return (
       <Container style={{ "margin-top": "20px" }}>
         <Card>
@@ -93,13 +121,14 @@ function CreateForum () {
                   แท็กเพื่ออธิบายว่าคำถามของคุณเกี่ยวกับอะไร
                 </h8>
                 <br></br>
-                <input type="text" name="tag" style={{width: '600px'}} placeholder="ตัวอย่าง (Programing, Database, Law, Art)" onChange={getDataTag} 
+                {/* <input type="text" name="tag" style={{width: '600px'}} placeholder="ตัวอย่าง (Programing, Database, Law, Art)" onChange={getDataTag} 
                   style={{
                     width: "100%",
                     "font-size": "12px",
                     height: "25px",
                   }} 
-                />
+                /> */}
+                <Select style={{width: '600px'}} isMulti={true} options={optionsTag} onChange={onChangeInputTag} defaultValue={[]} placeholder="ตัวอย่าง (Programing, Database, Law, Art)"/>
               </div>
 
               <div className="form-group">
@@ -111,14 +140,13 @@ function CreateForum () {
                   เพิ่มแท็กได้สูงสุด 5 แท็กเป็นแท็กที่อธิบายเกี่ยวกับสาขาวิชา
                 </h8>
                 <br></br>
-                <input type="text" name="subject" style={{width: '600px'}} placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)" onChange={getDataSub} 
+                {/* <input type="text" name="subject"   onChange={getDataSub} 
                   style={{
                     width: "100%",
                     "font-size": "12px",
                     height: "25px",
-                  }}
-                />
-
+                  }} /> */}
+                  <Select style={{width: '600px'}} isMulti={true} options={optionsSubject} onChange={onChangeInputSub} defaultValue={[]} placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)"/>
               </div>
 
             <Button submit={submit} onClick={()=>toggleChecked(!submit)}>Submit</Button>
@@ -156,6 +184,7 @@ function CreateForum () {
             </Button>
           </Modal.Footer>
         </Modal>
+        
          
       </Container>
     );
