@@ -3,6 +3,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from 'react-select'
 import { Button } from "@blueprintjs/core";
+import ReactDOM from 'react-dom'
 
 import { Card, Container, Modal } from "react-bootstrap";
 
@@ -27,15 +28,6 @@ function CreateForum() {
     console.log("Body : " + body)
   }
 
-  // function onChangeInputTag(tag){
-  // showtag(tag.target.value)
-  // console.log("Tag : "+tag.target.value)
-  // }
-  // function getDataSub(subject){
-  //   showsubject(subject.target.value)
-  //   console.log("Subject : "+subject.target.value)
-  // }
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const toggleCheckedss = () => {
@@ -55,16 +47,18 @@ function CreateForum() {
     { label: 'ศิลปกรรมศาสตร์', value: 'ศิลปกรรมศาสตร์' },
     { label: 'วิศวะกรรมศาสตร์', value: 'วิศวะกรรมศาสตร์' },
   ]
-
+  var myTag = "";
   function onChangeInputTag(tag) {
-    var myTag = JSON.stringify(tag);
+    myTag = "";
+    tag.map(o => myTag += o.label + " ");
+    console.log("myTag : " + myTag)
     showTag(myTag);
-    console.log("Tag : " + myTag)
   }
+  var mySub = "";
   function onChangeInputSub(subject) {
-    var mySub = JSON.stringify(subject);
-    showSubject(mySub);
+    subject.map(o => mySub += o.label + " ");
     console.log("Subject : " + mySub)
+    showSubject(mySub);
   }
 
   return (
@@ -159,9 +153,9 @@ function CreateForum() {
             }}>
             </div>
           </h5>
-          <h8>{tag}</h8>
+          <h9>{tag}</h9>
           <br />
-          <h8>{subject}</h8>
+          <h9>{subject}</h9>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
