@@ -6,6 +6,7 @@ const forumSchema = new mongoose.Schema(
     userID: String,
     title: String,
     postText: String,
+    listImage: Array,
     listSubject: Array,
     listTag: Array,
     listAnswer: Array,

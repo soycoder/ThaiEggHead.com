@@ -8,6 +8,7 @@ content-type: application/json
 {
     "userID": "1320235",
     "userName": "om.apisith",
+    "email":"om.apisith@gmail.com",
     "password": "knvlskfbndgbd4b4dbf",
     "firstName": "Apisith",
     "lastName": "Wongsorn",

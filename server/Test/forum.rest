@@ -11,6 +11,7 @@ content-type: application/json
     "title": "String",
     "postText": "String",
     "listSubject": [],
+    "listImage":[],
     "listTag": [],
     "listAnswer": [],
     "listComment": [],
@@ -30,7 +31,8 @@ content-type: application/json
 
 { 
     "forumID":"9846146545",
-    "listTag": ["sci","c lang"]
+    "listTag": ["sci","c lang"],
+    "listImage":["http://pngimg.com/uploads/chrome_logo/chrome_logo_PNG34.png"]
 }
 
 ###
