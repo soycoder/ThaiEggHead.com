@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
   res.send("Invalid Endport");
 });
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.html"));
+  res.sendFile(path.join(process.cwd(), "public/index.html"));
 });
 app.get("/", (req, res) => res.status(404).send("Not Found"));
 app.use("/*", (req, res) => res.status(422).send("Unsupported path entity"));

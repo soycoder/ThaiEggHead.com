@@ -11,6 +11,7 @@ content-type: application/json
     "password": "knvlskfbndgbd4b4dbf",
     "firstName": "Apisith",
     "lastName": "Wongsorn",
+    "imgURL": "",
     "gender": "Male",
     "birthDate": "5/1/2000",
     "bio": "Somewhere",
@@ -28,7 +29,8 @@ content-type: application/json
 
 { 
     "userID":"1320235",
-    "bio": "8000"
+    "bio": "8000",
+    "imgURL": "http://pngimg.com/uploads/chrome_logo/chrome_logo_PNG34.png"
 }
 
 ###
