@@ -1,6 +1,7 @@
 import express from "express";
 import logger from "morgan";
 import path from "path";
+import cors from "cors";
 import mongooseDbConnect from "./config/database.js";
 
 import { default as user } from "./routes/UserRouter.js";
@@ -19,6 +20,7 @@ app.use("/public", express.static(path.join(process.cwd(), "public")));
 app.use(logger("short"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors())
 app.use(errorHandler);
 mongooseDbConnect();
 
