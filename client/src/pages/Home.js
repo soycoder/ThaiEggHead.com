@@ -10,7 +10,7 @@ const Home = () => {
                 <NavLink to="/profile">Profile Page</NavLink>
             </li>
             <li>
-                <NavLink to="/create">Create Forum</NavLink>
+                <NavLink to="/CreateForum">Create Forum</NavLink>
             </li>
             <li>
                 <NavLink to="/subject">Subject Page</NavLink>
