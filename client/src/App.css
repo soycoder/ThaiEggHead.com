@@ -96,3 +96,13 @@
   border-style: solid;
   grid-area: menu;
 }
+.app-padding {
+  padding-top: 19px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+}
+.app-cycle {
+  border-radius: 50%!important;
+  color: black;
+}
