@@ -1,0 +1,33 @@
+# Comment
+GET http://localhost:5000/comments HTTP/1.1
+
+###
+POST http://localhost:5000/comments HTTP/1.1
+content-type: application/json
+
+{
+    "commentID": "8216",
+    "userID": "1320235",
+    "commentText": "String",
+    "createTime": "12/5/2021"
+}
+
+###
+GET  http://localhost:5000/comments/8216 HTTP/1.1
+
+###
+PUT  http://localhost:5000/comments/8216 HTTP/1.1
+content-type: application/json
+
+{ 
+    "commentID":"8216",
+    "commentText": "commentText something 2"
+}
+
+###
+DELETE http://localhost:5000/comments/8216 HTTP/1.1
+content-type: application/json
+
+{ 
+    "commentID":"8216"
+}

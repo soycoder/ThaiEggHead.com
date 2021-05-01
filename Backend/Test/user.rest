@@ -1,0 +1,42 @@
+# Forum
+GET http://localhost:5000/forums HTTP/1.1
+
+###
+POST http://localhost:5000/forums HTTP/1.1
+content-type: application/json
+
+{
+    "forumID": "9846146545",
+    "userID": "1320235",
+    "title": "String",
+    "postText": "String",
+    "listSubject": [],
+    "listTag": [],
+    "listAnswer": [],
+    "listComment": [],
+    "createTime": "12/5/2021",
+    "whoVoteLike": [],
+    "whoVoteDislike": [],
+    "view": 10,
+    "isSolution": "1325"
+}
+
+###
+GET  http://localhost:5000/forums/9846146545 HTTP/1.1
+
+###
+PUT  http://localhost:5000/forums/9846146545 HTTP/1.1
+content-type: application/json
+
+{ 
+    "forumID":"9846146545",
+    "listTag": ["sci","c lang"]
+}
+
+###
+DELETE http://localhost:5000/forums/9846146545 HTTP/1.1
+content-type: application/json
+
+{ 
+    "forumID":"9846146545"
+}
