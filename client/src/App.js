@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import SignUp from './pages/SignUp';
 import CreateForum from './pages/CreateForum';
 import Navbar from './components/Navbar';
 import Subject from './pages/Subject';
@@ -17,8 +16,10 @@ const App = () => (
       <Navbar />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/SignUp" exact component={SignUp} />
         <Route path="/Auth" exact component={Auth} />
+        <Route path="/CreateForum" exact component={CreateForum} />
+        <Route path="/Profile" exact component={Profile} />
+        <Route path="/Subject" exact component={Subject} />
       </Switch>
     </Container>
   </Router>

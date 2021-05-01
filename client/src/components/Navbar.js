@@ -75,7 +75,7 @@ const NavigationBar = () => {
             </div>
             <Button
               component={Link}
-              to="/SignUp"
+              to="/Auth"
               style={{ marginLeft: SIZES.padding }}
             >
               Sign in

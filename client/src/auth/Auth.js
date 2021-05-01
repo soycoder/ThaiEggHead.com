@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,6 @@ import * as actionType from '../constants/actionTypes';
 
 import useStyles from './styles'
 import Input from './Input';
-// import Icon from './icon';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
@@ -71,7 +70,7 @@ export const Auth = () => {
                     <GoogleLogin
                         clientId="436641540555-2rgolljs71og75k5n1qem3pfvfr8aqiu.apps.googleusercontent.com"
                         render={(renderProps) => (
-                        <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">
+                        <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} variant="contained">
                             Google Sign In
                         </Button>
                         )}
