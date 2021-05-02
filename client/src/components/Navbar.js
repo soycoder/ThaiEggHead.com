@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navbar } from "react-bootstrap";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { Text } from "@blueprintjs/core";
 import { Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 

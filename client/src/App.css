@@ -52,6 +52,10 @@
   border-radius: 30%;
 }
 
+.Navbar {
+  border-top: 3px solid #FFE529;
+}
+
 /* Subject page */
 
 .app-header {

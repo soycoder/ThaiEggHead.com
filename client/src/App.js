@@ -7,12 +7,9 @@ import Navbar from './components/Navbar';
 import Subject from './pages/Subject';
 import Auth from './auth/Auth'
 
-import { Container } from '@material-ui/core';
-
-
 const App = () => (
   <Router>
-    <Container maxWidth="lg">
+    <div>
       <Navbar />
       <Switch>
         <Route path="/" exact component={Home} />
@@ -21,7 +18,7 @@ const App = () => (
         <Route path="/Profile" exact component={Profile} />
         <Route path="/Subject" exact component={Subject} />
       </Switch>
-    </Container>
+    </div>
   </Router>
 );
 

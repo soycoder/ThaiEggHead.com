@@ -1,15 +1,72 @@
-import React, { useState } from 'react'
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import React, { useState, useEffect } from 'react'
+
+import { Avatar, Paper, Grid, Typography } from '@material-ui/core';
+import { Col, Container, Button, Row } from "react-bootstrap";
+import { Icon, IconSize, Intent } from "@blueprintjs/core";
+
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
 import { GoogleLogin } from 'react-google-login';
+import GoogleButton from 'react-google-button'
+
 import * as actionType from '../constants/actionTypes';
 
+import { useDencrypt } from "use-dencrypt-effect";
+
+import { FONTS, SIZES } from '../constants/theme'
+import { Card, Elevation } from "@blueprintjs/core";
 import useStyles from './styles'
 import Input from './Input';
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+const values = ["ชุมชนอุดมปัญญา", "สังคมแห่งการแบ่งปัน", "Thai Egghead.com"];
+
+const TextEffect = () => {
+    const { result, dencrypt } = useDencrypt();
+
+    useEffect(() => {
+        let i = 0;
+
+        const action = setInterval(() => {
+        dencrypt(values[i]);
+
+        i = i === values.length - 1 ? 0 : i + 1;
+        }, 3000);
+
+        return () => clearInterval(action);
+    }, []);
+
+    return <p style={FONTS.largeTitle}>"{result}" </p>;
+}
+
+const WelcomeAds = () =>{
+
+    return (
+        <Container>
+            <p style={FONTS.h1}>ร่วมเป็นส่วนหนึ่งของ</p>
+            <TextEffect></TextEffect>
+            <div style={{margin:30}}>
+                <Icon icon="chat" iconSize='20' style={{float:'left', marginRight:10, margin:7}}></Icon>
+                <p style={FONTS.h2}>
+                    ถาม-ตอบได้อย่างอิสระ
+                </p>
+
+                <Icon icon="crown" iconSize='20' style={{float:'left', marginRight:10, margin:7}}></Icon>
+                <p style={FONTS.h2}>
+                    สะสมคะแนน และเลื่อนยศ 
+                </p>
+
+                <Icon icon="inbox-search" iconSize='20' style={{float:'left', marginRight:10, margin:7}}></Icon>
+                <p style={FONTS.h2}>
+                    ค้นหาด้วยคำสำคัญ และกรองฟอรัมที่สนใจ
+                </p>
+            </div>
+            
+        </Container>
+        
+    );
+}
 
 export const Auth = () => {
     const [form, setForm] = useState(initialState);
@@ -49,9 +106,12 @@ export const Auth = () => {
 
 
     return (
-        <Container component="main" maxWidth="xs" >
-            <Paper className={classes.Avatar} elevation={3}>
-                <Typography component="h1" variant="h5">{ isSignup ? 'Sign up' : 'Sign in' }</Typography>
+        <>
+            <Card interactive={false} elevation={Elevation.TWO}>
+                <p style={{textAlign: 'center', fontFamily: "supermarket", fontSize: SIZES.h1}}>
+                    { isSignup ? 'Sign up' : 'Sign in' }
+                    </p>
+
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         { isSignup && (
@@ -64,31 +124,72 @@ export const Auth = () => {
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
                         { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
                     </Grid>
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                    <Button variant="light" className={classes.submit} block>
                         { isSignup ? 'Sign Up' : 'Sign In' }
                     </Button>
-                    <GoogleLogin
-                        clientId="436641540555-2rgolljs71og75k5n1qem3pfvfr8aqiu.apps.googleusercontent.com"
-                        render={(renderProps) => (
-                        <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} variant="contained">
-                            Google Sign In
-                        </Button>
-                        )}
-                        onSuccess={googleSuccess}
-                        onFailure={googleError}
-                        cookiePolicy="single_host_origin"
-                    />
                     <Grid container justify="flex-end">
                         <Grid item>
-                        <Button onClick={switchMode}>
+                        <Button onClick={switchMode} variant="link">
                             { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
                         </Button>
                         </Grid>
                     </Grid>
-                    </form> 
-            </Paper>
-        </Container>
+                    </form>
+            </Card>
+            <div style={{marginTop:30}}>
+                <GoogleLogin
+                    clientId="436641540555-2rgolljs71og75k5n1qem3pfvfr8aqiu.apps.googleusercontent.com"
+                    render={(renderProps) => (
+                    <GoogleButton type="light" onClick={renderProps.onClick} style={{width:'100%'}}>
+                        Google Sign In
+                    </GoogleButton>
+                    )}
+                    onSuccess={googleSuccess}
+                    onFailure={googleError}
+                    cookiePolicy="single_host_origin"
+                />
+            </div>
+            
+        </>
     )
 }
 
-export default Auth
+const AuthPage = () => {
+
+    return(
+        <Container style={{marginTop:40}}>
+
+            <Row style={{alignItems:'center'}}>
+                <Col xs="auto" md={8}>
+
+                    <Container >
+                        <Row>
+                            <Col>
+                                <WelcomeAds/>
+                            </Col>
+                        </Row>
+                        
+                    </Container>
+
+                </Col>
+
+                <Col>
+                    <Auth style={{width:'70%'}}/>
+                </Col>
+            </Row>
+        </Container>
+        //        <Container>
+        //        <Row>
+        //            <Col xs={8} md={6}>
+        //                <WelcomeAds/>
+        //            </Col>
+   
+        //            <Col xs={6} md={4}>
+        //                <Auth/>
+        //            </Col>
+        //        </Row>
+        //    </Container>
+    )
+}
+
+export default AuthPage

@@ -1,7 +1,8 @@
+
 export const COLORS = {
     // base colors
-    primary: "#5390ff", // Blue
-    secondary: "#cacfd9",   // Gray
+    primary: "#FFE529", 
+    secondary: "#cacfd9",   
 
     // colors
     black: "#1E1F20",
@@ -26,11 +27,6 @@ export const COLORS = {
 
     blue: "#5ACDFF",
     lightBlue: "#D4FCFF",
-
-    aiforthai: "#277e75",
-    aiforthai_light1: "#75a6a0",
-    aiforthai_light2: "#a4c3bf",
-    aiforthai_light3: "#cddddc"
     
 };
 export const SIZES = {
@@ -59,17 +55,17 @@ export const SIZES = {
 
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "Roboto-Black", fontSize: SIZES.largeTitle, lineHeight: 55 },
-    h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, lineHeight: 36 },
-    h2: { fontFamily: "Roboto-Bold", fontSize: SIZES.h2, lineHeight: 30 },
-    h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, lineHeight: 22 },
-    h4: { fontFamily: "Roboto-Bold", fontSize: SIZES.h4, lineHeight: 22 },
-    h5: { fontFamily: "Roboto-Bold", fontSize: SIZES.h5, lineHeight: 22 },
-    h6: { fontFamily: "Roboto-Bold", fontSize: SIZES.h6, lineHeight: 22 },
-    body1: { fontFamily: "Roboto-Regular", fontSize: SIZES.body1, lineHeight: 36 },
-    body2: { fontFamily: "Roboto-Regular", fontSize: SIZES.body2, lineHeight: 30 },
-    body3: { fontFamily: "Roboto-Regular", fontSize: SIZES.body3, lineHeight: 22 },
-    body4: { fontFamily: "Roboto-Regular", fontSize: SIZES.body4, lineHeight: 22 },
+    largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle},
+    h1: { fontFamily: "supermarket", fontSize: SIZES.h1  },
+    h2: { fontFamily: "supermarket", fontSize: SIZES.h2 },
+    h3: { fontFamily: "supermarket", fontSize: SIZES.h3 },
+    h4: { fontFamily: "supermarket", fontSize: SIZES.h4 },
+    h5: { fontFamily: "supermarket", fontSize: SIZES.h5 },
+    h6: { fontFamily: "supermarket", fontSize: SIZES.h6 },
+    body1: { fontFamily: "supermarket", fontSize: SIZES.body1 },
+    body2: { fontFamily: "supermarket", fontSize: SIZES.body2 },
+    body3: { fontFamily: "supermarket", fontSize: SIZES.body3 },
+    body4: { fontFamily: "supermarket", fontSize: SIZES.body4 },
 };
 
 const appTheme = { COLORS, SIZES, FONTS };
