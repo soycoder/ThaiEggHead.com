@@ -10,17 +10,29 @@ export const list = (req, res) => {
 };
 // add new user
 export const create = (req, res) => {
-  let user = new User(req.body);
-  user
-    .save()
-    .then(() => {
-      return res.send({ success: "Create Successfully" });
-    })
-    .catch(() =>
-      res.status(404).send({
-        errors: { global: "Cann't add new user userID " + userID },
+  User.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, post) {
+    // console.log(post);
+    let old_id = "";
+    if (post) old_id = post.userID;
+    else old_id = "0";
+
+    let data = req.body;
+    data["userID"] = parseInt(old_id) + 1;
+
+    // add new user with userID continue
+    let user = new User(data);
+
+    user
+      .save()
+      .then(() => {
+        return res.send({ success: "Create Successfully" });
       })
-    );
+      .catch(() =>
+        res.status(404).send({
+          errors: { global: "Cann't add new user userID " + userID },
+        })
+      );
+  });
 };
 
 // Find a single user with an sku

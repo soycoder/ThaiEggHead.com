@@ -8,19 +8,32 @@ export const list = (req, res) => {
       res.status(500).send({ errors: { global: "Server Error" } })
     );
 };
+
 // add new forum
 export const create = (req, res) => {
-  let forum = new Forum(req.body);
-  forum
-    .save()
-    .then(() => {
-      return res.send({ success: "Create Successfully" });
-    })
-    .catch(() =>
-      res.status(404).send({
-        errors: { global: "Cann't add new forum forumID " + forumID },
+  Forum.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, post) {
+    // console.log(post);
+    let old_id = "";
+    if (post) old_id = post.forumID;
+    else old_id = "0";
+
+    let data = req.body;
+    data["forumID"] = parseInt(old_id) + 1;
+
+    // add new forum with forumID continue
+
+    let forum = new Forum(req.body);
+    forum
+      .save()
+      .then(() => {
+        return res.send({ success: "Create Successfully" });
       })
-    );
+      .catch(() =>
+        res.status(404).send({
+          errors: { global: "Cann't add new forum forumID " + forumID },
+        })
+      );
+  });
 };
 
 // Find a single forum with an sku
@@ -59,7 +72,9 @@ export const put = (req, res) => {
     .then((forum) => {
       if (!forum) {
         return res.status(404).send({
-          errors: { global: "Forum not found with forumID " + req.params.forumID },
+          errors: {
+            global: "Forum not found with forumID " + req.params.forumID,
+          },
         });
       }
       res.send(forum);
@@ -67,7 +82,9 @@ export const put = (req, res) => {
     .catch((err) => {
       if (err.kind === "ObjectId") {
         return res.status(404).send({
-          errors: { global: "Forum not found with forumID " + req.params.forumID },
+          errors: {
+            global: "Forum not found with forumID " + req.params.forumID,
+          },
         });
       }
       return res.status(500).send({
@@ -88,7 +105,9 @@ export const remove = (req, res) => {
     })
     .catch(() => {
       return res.status(404).send({
-        errors: { global: "Forum not found with forumID " + req.params.forumID },
+        errors: {
+          global: "Forum not found with forumID " + req.params.forumID,
+        },
       });
     });
 };

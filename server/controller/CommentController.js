@@ -8,19 +8,31 @@ export const list = (req, res) => {
       res.status(500).send({ errors: { global: "Server Error" } })
     );
 };
+
 // add new comment
 export const create = (req, res) => {
-  let comment = new Comment(req.body);
-  comment
-    .save()
-    .then(() => {
-      return res.send({ success: "Create Successfully" });
-    })
-    .catch(() =>
-      res.status(404).send({
-        errors: { global: "Cann't add new comment commentID " + commentID },
+  Comment.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, post) {
+    // console.log(post);
+    let old_id = "";
+    if (post) old_id = post.commentID;
+    else old_id = "0";
+
+    let data = req.body;
+    data["commentID"] = parseInt(old_id) + 1;
+
+    // add new comment with commentID continue
+    let comment = new Comment(req.body);
+    comment
+      .save()
+      .then(() => {
+        return res.send({ success: "Create Successfully" });
       })
-    );
+      .catch(() =>
+        res.status(404).send({
+          errors: { global: "Cann't add new comment commentID " + commentID },
+        })
+      );
+  });
 };
 
 // Find a single comment with an sku
@@ -37,7 +49,9 @@ export const get = (req, res) => {
     })
     .catch((err) => {
       return res.status(500).send({
-        errors: { global: "Error retrieving Comment with commentID " + commentID },
+        errors: {
+          global: "Error retrieving Comment with commentID " + commentID,
+        },
       });
     });
 };
@@ -59,7 +73,9 @@ export const put = (req, res) => {
     .then((comment) => {
       if (!comment) {
         return res.status(404).send({
-          errors: { global: "Comment not found with commentID " + req.params.commentID },
+          errors: {
+            global: "Comment not found with commentID " + req.params.commentID,
+          },
         });
       }
       res.send(comment);
@@ -67,12 +83,15 @@ export const put = (req, res) => {
     .catch((err) => {
       if (err.kind === "ObjectId") {
         return res.status(404).send({
-          errors: { global: "Comment not found with commentID " + req.params.commentID },
+          errors: {
+            global: "Comment not found with commentID " + req.params.commentID,
+          },
         });
       }
       return res.status(500).send({
         errors: {
-          global: "Error updating Comment with commentID " + req.params.commentID,
+          global:
+            "Error updating Comment with commentID " + req.params.commentID,
         },
       });
     });
@@ -88,7 +107,9 @@ export const remove = (req, res) => {
     })
     .catch(() => {
       return res.status(404).send({
-        errors: { global: "Comment not found with commentID " + req.params.commentID },
+        errors: {
+          global: "Comment not found with commentID " + req.params.commentID,
+        },
       });
     });
 };

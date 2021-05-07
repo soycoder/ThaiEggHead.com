@@ -8,19 +8,32 @@ export const list = (req, res) => {
       res.status(500).send({ errors: { global: "Server Error" } })
     );
 };
+
 // add new answer
 export const create = (req, res) => {
-  let answer = new Answer(req.body);
-  answer
-    .save()
-    .then(() => {
-      return res.send({ success: "Create Successfully" });
-    })
-    .catch(() =>
-      res.status(404).send({
-        errors: { global: "Cann't add new answer answerID " + answerID },
+  Answer.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, post) {
+    // console.log(post);
+    let old_id = "";
+    if (post) old_id = post.answerID;
+    else old_id = "0";
+
+    let data = req.body;
+    data["answerID"] = parseInt(old_id) + 1;
+
+    //new answer with answerID continue 
+    let answer = new Answer(req.body);
+    
+    answer
+      .save()
+      .then(() => {
+        return res.send({ success: "Create Successfully" });
       })
-    );
+      .catch(() =>
+        res.status(404).send({
+          errors: { global: "Cann't add new answer answerID " + answerID },
+        })
+      );
+  });
 };
 
 // Find a single answer with an sku
@@ -59,7 +72,9 @@ export const put = (req, res) => {
     .then((answer) => {
       if (!answer) {
         return res.status(404).send({
-          errors: { global: "Answer not found with answerID " + req.params.answerID },
+          errors: {
+            global: "Answer not found with answerID " + req.params.answerID,
+          },
         });
       }
       res.send(answer);
@@ -67,7 +82,9 @@ export const put = (req, res) => {
     .catch((err) => {
       if (err.kind === "ObjectId") {
         return res.status(404).send({
-          errors: { global: "Answer not found with answerID " + req.params.answerID },
+          errors: {
+            global: "Answer not found with answerID " + req.params.answerID,
+          },
         });
       }
       return res.status(500).send({
@@ -88,7 +105,9 @@ export const remove = (req, res) => {
     })
     .catch(() => {
       return res.status(404).send({
-        errors: { global: "Answer not found with answerID " + req.params.answerID },
+        errors: {
+          global: "Answer not found with answerID " + req.params.answerID,
+        },
       });
     });
 };

@@ -6,7 +6,6 @@ POST http://localhost:5000/forums HTTP/1.1
 content-type: application/json
 
 {
-    "forumID": "9846146545",
     "userID": "1320235",
     "title": "String",
     "postText": "String",

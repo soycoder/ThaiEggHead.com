@@ -7,7 +7,6 @@ content-type: application/json
 
 
 {
-    "answerID": "9846",
     "userID": "1320235",
     "answerText": "String",
     "listComment": [],
