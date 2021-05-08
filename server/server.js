@@ -44,7 +44,11 @@ app.get("/", (req, res) => {
 app.get("/", (req, res) => res.status(404).send("Not Found"));
 app.use("/*", (req, res) => res.status(422).send("Unsupported path entity"));
 
-const port = 5000;
+// require('./config/databaseTest')();
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/api', fileRoutes.routes);
+
+const port = process.env.PORT || 4000;
 app.listen(port, function () {
   console.log(`start http server on ${port}`);
 });
