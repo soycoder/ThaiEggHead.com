@@ -12,7 +12,7 @@ function CreateForum() {
   const [save, setSave] = useState(false);
   const [submit, setSubmit] = useState(false);
 
-  // const toggleChecked = () => setSubmit(value => !value);
+  const toggleChecked = () => setSubmit(value => !value);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -37,17 +37,29 @@ function CreateForum() {
     getMultipleFilesList();
   }, []);
 
+  const mystyle = {
+    padding: "20px",
+    fontFamily: "RSU",
+    border: "2px solid #f8f9fa",
+  };
+
   return (
-    <Container style={{ "margin-top": "20px" }}>
-      <Card>
+  
+    <Container style={mystyle}>
+      <Card.Title>Create Forum</Card.Title>
+        {/* <Card.Body>
+          
+        </Card.Body> */}
+        <div className="container">
+          <br />
+            <FileUploadScreen getMultiple={() => getMultipleFilesList()} />
+          </div>
+        {/* <br /> */}
+      {/* <Card>
         <Card.Body>
           <Card.Title>Create Forum</Card.Title>
 
-          <div className="container">
-            <br />
-            <FileUploadScreen getMultiple={() => getMultipleFilesList()} />
-          </div>
-          <br />
+          
           
           <a href="http://localhost:3000/">
             <Button submit={submit} a href="https://google.com">โพส</Button>            
@@ -59,32 +71,31 @@ function CreateForum() {
 
           {console.log("Submit " + submit)}
         </Card.Body>
-      </Card>
+      </Card> */}
 
       {/* Show Preview */}
-      <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} >
+      {/* <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} >
         <Modal.Header closeButton>
           <Modal.Title>ตัวอย่าง</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body> */}
       
-          {multipleFiles.map((element, index) =>
+          {/* {multipleFiles.map((element, index) =>
             <div>
               <h0 style={{visibility: "hidden"}}>
                 {
                   count.push(index+1)
                 }
-              </h0>
-
+              </h0> */}
               {/* <h1>
                 {
-                  // console.log(element, index.value(1))
+                  // console.log(index)
                   // console.log(Math.max(...count))
                   // if(index==Math.max(...count)){}
                 }
               </h1> */}
               
-              <h3>{element.title}</h3>
+              {/* <h3>{element.title}</h3>
               <h5>
                 <div dangerouslySetInnerHTML={{
                   __html: element.body
@@ -100,16 +111,16 @@ function CreateForum() {
                 )}
               </div>
             </div>
-          )}
+          )} */}
 
-        </Modal.Body>
+        {/* </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={toggleCheckedss} onChange={() => toggleCheckedss(!save)}>
             ตกลง
             {console.log("Save " + save)}
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </Container>
   );
 }

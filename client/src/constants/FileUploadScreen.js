@@ -4,10 +4,12 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from 'react-select'
 import { Button } from "@blueprintjs/core";
+import { Card, Container, Modal } from "react-bootstrap";
 
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
+var count = [];
 const FileUploadScreen = (props) => {
     const [multipleFiles, setMultipleFiles] = useState('');
 
@@ -15,6 +17,17 @@ const FileUploadScreen = (props) => {
     const [body, setBody] = useState('');
     const [tag, showTag] = useState('');
     const [subject, showSubject] = useState('');
+    const [save, setSave] = useState(false);
+    const [submit, setSubmit] = useState(false);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const toggleCheckedss = () => {
+      setSave(value => !value);
+      handleClose();
+    }
+
 
     const [multipleProgress, setMultipleProgress] = useState(0);
 
@@ -53,6 +66,7 @@ const FileUploadScreen = (props) => {
         formData.append('subject', subject);
         for (let i = 0; i < multipleFiles.length; i++) {
             formData.append('files', multipleFiles[i]);
+
         }
         // for(var pair of formData.entries()) {
         //     console.log(pair[0]+ ', '+ pair[1]);
@@ -113,7 +127,18 @@ const FileUploadScreen = (props) => {
                     </h8>
                 <CKEditor
                     editor={ClassicEditor}
-                    onInit={(editor) => { }}
+                    data="  <p>  
+                                <br></br>
+                            </p>"
+                    onInit={(editor) => {
+                        editor.editing.view.change(writer => {
+                            writer.setStyle(
+                              "height",
+                              "500px",
+                              editor.editing.view.document.getRoot()
+                            );
+                          });
+                     }}
                     config={{
                         // ckfinder: {
                         toolbar: {
@@ -127,10 +152,12 @@ const FileUploadScreen = (props) => {
                                 'undo', 'redo'
                             ],
                         }
+                        
                     }}
                     onChange={handleChange}
-                    style={{ width: "100%" }}
+                    // style={{ config.height = '800px' }}
                 />
+                
             </div>
 
             <div className="form-group">
@@ -164,27 +191,56 @@ const FileUploadScreen = (props) => {
                     onChange={onChangeInputSub} defaultValue={[]}
                     placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)" />
             </div>
-            <Button type="button" onClick={() => UploadMultipleFiles()} className="btn btn-danger">Upload</Button>
-            {/* <div class="row">
-                <div class="col">
-                    <div style={{ width: '20%' }}>
-                        <CircularProgressbar
-                            value={multipleProgress}
-                            text={`${multipleProgress}%`}
-                            styles={buildStyles({
-                                rotation: 0.25,
-                                strokeLinecap: 'butt',
-                                textSize: '16px',
-                                pathTransitionDuration: 0.5,
-                                pathColor: `rgba(255, 136, 136, ${multipleProgress / 100})`,
-                                textColor: '#f88',
-                                trailColor: '#d6d6d6',
-                                backgroundColor: '#3e98c7',
-                            })}
-                        />
-                    </div>
-                </div>
-            </div> */}
+
+            <a href="http://localhost:3000/">
+                <Button submit={submit} a href="https://google.com">โพส</Button>     
+                {console.log("Submit " + submit)}       
+            </a>
+
+            <Button onClick={handleShow}>
+                ดูตัวอย่าง
+            </Button>
+            <br/>
+            <Button type="button" onClick={() => UploadMultipleFiles()} className="btn btn-danger">
+                Upload
+                
+            </Button>
+    
+ 
+
+            <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} >
+
+                <Modal.Header closeButton>
+                    <Modal.Title>ตัวอย่าง</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <h5>{title}</h5>
+                    <h5>
+                        <div dangerouslySetInnerHTML={{
+                        __html: body
+                        }}>
+                        </div>
+                    </h5>
+                    <h9>{tag}</h9>
+                    <br />
+                    <h9>{subject}</h9>
+                    <br />
+                    {
+                        console.log(multipleFiles)
+                    }
+                    {/* <img src={mulitpleFileOptions}></img> */}
+                
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="primary" onClick={toggleCheckedss} onChange={() => toggleCheckedss(!save)}>
+                        ตกลง
+                        {console.log("Save " + save)}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+            
         </div>
 
 
