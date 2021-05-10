@@ -47,80 +47,10 @@ function CreateForum() {
   
     <Container style={mystyle}>
       <Card.Title>Create Forum</Card.Title>
-        {/* <Card.Body>
-          
-        </Card.Body> */}
         <div className="container">
           <br />
             <FileUploadScreen getMultiple={() => getMultipleFilesList()} />
           </div>
-        {/* <br /> */}
-      {/* <Card>
-        <Card.Body>
-          <Card.Title>Create Forum</Card.Title>
-
-          
-          
-          <a href="http://localhost:3000/">
-            <Button submit={submit} a href="https://google.com">โพส</Button>            
-          </a>
-
-          <Button variant="primary" onClick={handleShow}>
-            ดูตัวอย่าง
-          </Button>
-
-          {console.log("Submit " + submit)}
-        </Card.Body>
-      </Card> */}
-
-      {/* Show Preview */}
-      {/* <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} >
-        <Modal.Header closeButton>
-          <Modal.Title>ตัวอย่าง</Modal.Title>
-        </Modal.Header>
-        <Modal.Body> */}
-      
-          {/* {multipleFiles.map((element, index) =>
-            <div>
-              <h0 style={{visibility: "hidden"}}>
-                {
-                  count.push(index+1)
-                }
-              </h0> */}
-              {/* <h1>
-                {
-                  // console.log(index)
-                  // console.log(Math.max(...count))
-                  // if(index==Math.max(...count)){}
-                }
-              </h1> */}
-              
-              {/* <h3>{element.title}</h3>
-              <h5>
-                <div dangerouslySetInnerHTML={{
-                  __html: element.body
-                }}>
-                </div>
-              </h5>
-              <h9>{element.tag}</h9>
-              <br />
-              <h9>{element.subject}</h9>
-              <div>
-                {element.files.map((file, index) =>
-                  <img src={`http://localhost:8080/${file.filePath}`} height="auto" className="card-img-top img-responsive" alt="img" />
-                )}
-              </div>
-            </div>
-          )} */}
-
-        {/* </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={toggleCheckedss} onChange={() => toggleCheckedss(!save)}>
-            ตกลง
-            {console.log("Save " + save)}
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
     </Container>
   );
 }

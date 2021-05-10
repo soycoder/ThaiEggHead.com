@@ -40,9 +40,12 @@ const FileUploadScreen = (props) => {
     ]
 
     const optionsSubject = [
-        { label: 'วิทยาการคอมพิวเตอร์', value: 'วิทยาการคอมพิวเตอร์' },
+        { label: 'นิติศาสตร์', value: 'นิติศาสตร์' },
         { label: 'ศิลปกรรมศาสตร์', value: 'ศิลปกรรมศาสตร์' },
-        { label: 'วิศวะกรรมศาสตร์', value: 'วิศวะกรรมศาสตร์' },
+        { label: 'สังคมสงเคราะห์ศาสตร์', value: 'สังคมสงเคราะห์ศาสตร์' },
+        { label: 'วิทยาลัยสหวิทยาการ', value: 'วิทยาลัยสหวิทยาการ' },
+        { label: 'สาธารณสุขศาสตร์', value: 'สาธารณสุขศาสตร์' },
+        { label: 'วิทยาศาสตร์และเทคโนโลยี', value: 'วิทยาศาสตร์และเทคโนโลยี' },
     ]
 
     const MultipleFileChange = (e) => {
@@ -104,6 +107,39 @@ const FileUploadScreen = (props) => {
         setTitle(title.target.value)
         console.log("Title : " + title.target.value)
     }
+	const [ selectedFiles, setSelectedFiles ] = useState([]);
+
+	const handleImageChange = (e) => {
+		// console.log(e.target.files[])
+		if (e.target.files) {
+			const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
+			// console.log("filesArray: ", filesArray);
+			setSelectedFiles((prevImages) => prevImages.concat(filesArray));
+			Array.from(e.target.files).map(
+				(file) => URL.revokeObjectURL(file) // avoid memory leak
+			);
+            // console.log("File "+e.target.files)
+		}
+	};
+    const [sourceImg, setSelectImg] = useState('');
+
+    const renderPhotos = (sourceImg) => {
+		return sourceImg.map((photo) => {
+			return (
+                <div id={photo}>
+                    {/* {console.log(photo)} */}
+                    <img  src={photo} style={{width: "400px" }} />
+                    <Button onClick={() => removePhotos(photo)}>X</Button>
+                    {/* {console.log(sourceImg)} */}
+                </div>
+            ) 
+		});
+	};
+    const removePhotos = (source) => {
+        console.log(source)
+        document.getElementById(source).remove();
+        // setSelectImg((oldState) => oldState.filter((item) => item.source !== source));		
+	};
 
     return (
         <div>
@@ -115,7 +151,6 @@ const FileUploadScreen = (props) => {
                     ของปัญหาหรือข้อมูลที่ต้องการแสดง
                     </h8>
                 <input type="text" onChange={getDataTitle} placeholder="กรุณาใส่หัวข้อที่ต้องการแสดง" className="form-control" />
-                {/* {console.log("Title : " + title)} */}
             </div>
 
             <div className="form-group">
@@ -155,14 +190,13 @@ const FileUploadScreen = (props) => {
                         
                     }}
                     onChange={handleChange}
-                    // style={{ config.height = '800px' }}
                 />
                 
             </div>
 
             <div className="form-group">
                 <label>Select Multiple Files</label>
-                <input onChange={(e) => MultipleFileChange(e)} class="form-control" type="file" id="formFileMultiple" multiple />
+                <input onChange={(e) => MultipleFileChange(e)} class="form-control" type="file" id="formFileMultiple" multiple onChange={handleImageChange} />
             </div>
 
             <div className="form-group">
@@ -203,10 +237,8 @@ const FileUploadScreen = (props) => {
             <br/>
             <Button type="button" onClick={() => UploadMultipleFiles()} className="btn btn-danger">
                 Upload
-                
             </Button>
-    
- 
+            <br/>
 
             <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} >
 
@@ -226,10 +258,11 @@ const FileUploadScreen = (props) => {
                     <br />
                     <h9>{subject}</h9>
                     <br />
-                    {
-                        console.log(multipleFiles)
-                    }
-                    {/* <img src={mulitpleFileOptions}></img> */}
+                    <div style={{ width: "50%" }}>
+                        {renderPhotos(selectedFiles)}
+                        
+                    </div>
+                    
                 
                 </Modal.Body>
 
