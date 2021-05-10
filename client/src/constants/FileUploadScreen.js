@@ -4,7 +4,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from 'react-select'
 import { Button } from "@blueprintjs/core";
-import { Card, Container, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
@@ -71,13 +71,6 @@ const FileUploadScreen = (props) => {
             formData.append('files', multipleFiles[i]);
 
         }
-        // for(var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', '+ pair[1]);
-        // }
-
-        // console.log("len "+multipleFiles.length);
-        // console.log("Text "+JSON.stringify(title));
-        // console.log("Body "+JSON.stringify(body));
         await multipleFilesUpload(formData, mulitpleFileOptions);
 
         props.getMultiple();
@@ -110,15 +103,12 @@ const FileUploadScreen = (props) => {
 	const [ selectedFiles, setSelectedFiles ] = useState([]);
 
 	const handleImageChange = (e) => {
-		// console.log(e.target.files[])
 		if (e.target.files) {
 			const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
-			// console.log("filesArray: ", filesArray);
 			setSelectedFiles((prevImages) => prevImages.concat(filesArray));
 			Array.from(e.target.files).map(
-				(file) => URL.revokeObjectURL(file) // avoid memory leak
+				(file) => URL.revokeObjectURL(file)
 			);
-            // console.log("File "+e.target.files)
 		}
 	};
     const [sourceImg, setSelectImg] = useState('');
@@ -127,10 +117,8 @@ const FileUploadScreen = (props) => {
 		return sourceImg.map((photo) => {
 			return (
                 <div id={photo}>
-                    {/* {console.log(photo)} */}
                     <img  src={photo} style={{width: "400px" }} />
                     <Button onClick={() => removePhotos(photo)}>X</Button>
-                    {/* {console.log(sourceImg)} */}
                 </div>
             ) 
 		});
@@ -138,7 +126,6 @@ const FileUploadScreen = (props) => {
     const removePhotos = (source) => {
         console.log(source)
         document.getElementById(source).remove();
-        // setSelectImg((oldState) => oldState.filter((item) => item.source !== source));		
 	};
 
     return (
@@ -240,7 +227,7 @@ const FileUploadScreen = (props) => {
             </Button>
             <br/>
 
-            <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} >
+            <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} size="lg">
 
                 <Modal.Header closeButton>
                     <Modal.Title>ตัวอย่าง</Modal.Title>
