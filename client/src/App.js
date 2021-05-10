@@ -16,7 +16,7 @@ const App = () => (
         <Route path="/Auth" exact component={Auth} />
         <Route path="/CreateForum" exact component={CreateForum} />
         <Route path="/Profile" exact component={Profile} />
-        <Route path="/Subject" exact component={Subject} />
+        <Route path="/Subject/:subject" exact component={Subject} />
       </Switch>
     </div>
   </Router>

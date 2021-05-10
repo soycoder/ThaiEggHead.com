@@ -106,7 +106,38 @@
   padding-bottom: 5px;
   padding-left: 15px;
 }
+.app-paddingContent {
+  padding-top: 19px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+}
+.app-paddingSubjIMG {
+  padding-top: 50px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  padding-left: 100px;
+}
+.app-subjectFont {
+  font-size: 40px;
+  color: aliceblue;
+  padding-top: 120px;
+  padding-left: 90px;
+}
 .app-cycle {
   border-radius: 50%!important;
   color: black;
+}
+.app-cycleSubject {
+  border-radius: 50%!important;
+  color: black;
+}
+.app-removeDot {
+  list-style-type: none;
+}
+.app-profile {
+  text-align: center;
+  color: rgb(148, 148, 148);
+  padding-top: 19px;
+  padding-right: 0px;
 }
