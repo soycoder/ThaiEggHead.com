@@ -1,11 +1,40 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Row, Col, Card, Container, ListGroup, Form } from 'react-bootstrap';
+import { Button, Row, Col, Card, Container, ListGroup, Form, Modal } from 'react-bootstrap';
 import {BrowserRouter, Route, Link, Switch, Router} from 'react-router-dom'
 import { images } from '../constants';
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+
+import FileUploadScreen from "../constants/FileUploadScreen";
+import { getMultipleFiles } from '../auth/apiFile';
 
 function App() {
+// Net เพิ่มส่วน ป๊อบอัพกรอกข้อมูล
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [multipleFiles, setMultipleFiles] = useState([]);
+
+  const getMultipleFilesList = async () => {
+    try {
+      const fileslist = await getMultipleFiles();
+      setMultipleFiles(fileslist);
+      console.log(multipleFiles);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getMultipleFilesList();
+  }, []);
+  const mystyle = {
+    padding: "20px",
+    fontFamily: "RSU",
+    border: "2px solid #f8f9fa",
+  };
+  //
+
   const [datas, setdatas] = useState({})
   const [comp, setcomp] = useState("คอมพิวเตอร์")
 
@@ -90,8 +119,17 @@ function App() {
               <Card.Subtitle className="mb-2 text-muted"><img src={images.pro_1} height="30" width="30" className="app-cycle"/> pop fever</Card.Subtitle>
               <Form>
                 <Form.Group>
-                  <Form.Control placeholder= "คุณกำลังติดปัญหาอะไรรึเปล่า ? ถามมาสิ" />
+                  <Form.Control placeholder= "คุณกำลังติดปัญหาอะไรรึเปล่า ? ถามมาสิ" onClick={handleShow} />
+                  <Modal show={show} onHide={handleClose} style={{ padding: "auto", width: "100%"}} size="lg" >          
+                    <Container style={mystyle}>
+                      <Card.Title>Create Forum</Card.Title>
+                      <FileUploadScreen getMultiple={() => getMultipleFilesList()} />
+                    </Container>
+                  </Modal>
+                  
                 </Form.Group>
+
+
               </Form>
             </Card>
             <p/>
