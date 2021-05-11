@@ -90,7 +90,7 @@ function App() {
       <Container>
         <Row>
           <Col>
-            <BrowserRouter>
+            {/* <BrowserRouter> */}
             <nav>
               <ul className="app-removeDot">
                 <li><Link to='/subject/sci'><img src={images.subj_1} height="23" width="23" className="app-cycle" /> Sciences</Link></li>
@@ -105,13 +105,14 @@ function App() {
                 <li><Link to='/subject/faa'><img src={images.subj_10} height="23" width="23" className="app-cycle"/> Fine and Applied Arts</Link></li>
                 <li><Link to='/subject/art'><img src={images.subj_11} height="23" width="23" className="app-cycle"/> Arts</Link></li>
                 <li><Link to='/subject/psyc'><img src={images.subj_12} height="23" width="23" className="app-cycle"/> Psychology</Link></li>
-                <Link to={{ pathname: '/Subject'}}>test</Link>
               </ul>
             </nav>
+{/*            
             <Switch>
-
+              <Route path="/subject/sci" component={Subject} />
             </Switch>
-            </BrowserRouter>
+         
+            </BrowserRouter> */}
           </Col>
 
           <Col xs={7}>
