@@ -119,7 +119,7 @@ function Sub() {
 
 function ForumCard(props) {
   let forum = props.data;
-  // console.log(forum);
+
   const [user, setUser] = useState({});
   const [pathUser, setPathUser] = useState("");
   useEffect(() => {
@@ -127,10 +127,10 @@ function ForumCard(props) {
       .then((res) => res.json())
       .then((res) => {
         setUser(res);
-        setPathUser(`/users/${user.googleID}`);
+        setPathUser(`/users/${res.googleID}`);
       });
   }, []);
-
+  console.log(user);
   return (
     <>
       <Card>
