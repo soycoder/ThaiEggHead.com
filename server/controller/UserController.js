@@ -8,6 +8,7 @@ export const list = (req, res) => {
       res.status(500).send({ errors: { global: "Server Error" } })
     );
 };
+
 // add new user
 export const create = (req, res) => {
   User.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, post) {

@@ -48,7 +48,7 @@ app.use("/*", (req, res) => res.status(422).send("Unsupported path entity"));
 // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // app.use('/api', fileRoutes.routes);
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 app.listen(port, function () {
   console.log(`start http server on ${port}`);
 });

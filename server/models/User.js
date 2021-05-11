@@ -3,6 +3,7 @@ let mongoose = mongooseDef.default;
 const userSchema = new mongoose.Schema(
   {
     userID: String,
+    googleID: String,
     userName: String,
     email: String,
     password: String,

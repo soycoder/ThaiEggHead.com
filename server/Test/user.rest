@@ -2,10 +2,13 @@
 GET http://localhost:5000/users HTTP/1.1
 
 ###
+
+###
 POST http://localhost:5000/users HTTP/1.1
 content-type: application/json
 
 {
+    "googleID": "5461",
     "userName": "om.apisith",
     "email":"om.apisith@gmail.com",
     "password": "knvlskfbndgbd4b4dbf",
