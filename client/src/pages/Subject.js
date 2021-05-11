@@ -31,7 +31,7 @@ function Sub() {
     fetch(`http://localhost:5000/forums?subject=${subject}`)
       .then((res) => res.json())
       .then((res) => setForumData(res));
-  },[]);
+  }, []);
   return (
     <div className="App">
       {/* <div className="app-content"></div> */}
@@ -70,9 +70,9 @@ function Sub() {
           <Row>
             <Col></Col>
             <Col xs={7}>
-              {forumData.map((forum) => 
-               (<ForumCard data={forum}></ForumCard>)
-              )}
+              {forumData.map((forum) => (
+                <ForumCard data={forum}></ForumCard>
+              ))}
             </Col>
 
             <Col>
@@ -119,11 +119,17 @@ function Sub() {
 
 function ForumCard(props) {
   let forum = props.data;
-  console.log(forum);
+  // console.log(forum);
   const [user, setUser] = useState({});
-  fetch(`http://localhost:5000/users/${forum.userID}`)
-    .then((res) => res.json())
-    .then((res) => setUser(res));
+  const [pathUser, setPathUser] = useState("");
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${forum.userID}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setUser(res);
+        setPathUser(`/users/${user.googleID}`);
+      });
+  }, []);
 
   return (
     <>
@@ -137,12 +143,11 @@ function ForumCard(props) {
               className="app-cycle"
             />
             <p />
-            {user.userName}
+            <Link to={pathUser}>{user.userName}</Link>
           </Col>
           <Col xs={10} className="app-paddingContent">
             <Card.Title>{forum.title}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
-              {" "}
               {forum.postText}
             </Card.Subtitle>
           </Col>
