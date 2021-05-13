@@ -5,6 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from 'react-select'
 import { Button } from "@blueprintjs/core";
 import { Modal } from "react-bootstrap";
+import Swal from 'sweetalert2'
 
 const FileUploadScreen = (props) => {
     const [multipleFiles, setMultipleFiles] = useState('');
@@ -124,7 +125,35 @@ const FileUploadScreen = (props) => {
         console.log("Subject : " + mySub)
         showSubject(mySub);
     }
-
+    function sweetAlert() {
+     Swal.fire({
+        title: 'Are you sure?',
+        text: 'คุณต้องการโพสหรือไม่',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33', 
+        confirmButtonText: 'Yes!'
+     })
+     .then((result) => {
+        if(result.value===true){
+                // Swal.fire({
+                //     title: "Success!",
+                //     text: "Redirecting in 2 seconds.",
+                //     type: "success",
+                //     timer: 2000,
+                //     showConfirmButton: false
+                //   }, function(){
+                //         window.location.href = "http://localhost:3000/";
+                //   });
+            console.log("result Valur "+result.value)
+       }
+       else{
+           result.value=false;
+            console.log("result Valur "+result.value)
+        }
+     })       
+    }
 
 
     return (
@@ -213,7 +242,7 @@ const FileUploadScreen = (props) => {
             </div>
 
             <a href="http://localhost:3000/">
-                <Button submit={submit} a href="https://google.com">โพส</Button>     
+                <Button submit={submit}>โพส</Button>     
                 {console.log("Submit " + submit)}       
             </a>
 
@@ -221,7 +250,7 @@ const FileUploadScreen = (props) => {
                 ดูตัวอย่าง
             </Button>
             <br/>
-            <Button type="button" onClick={() => UploadMultipleFiles()} className="btn btn-danger">
+            <Button type="button" onClick={() => UploadMultipleFiles()} className="btn btn-danger" onClick={sweetAlert}>
                 Upload
             </Button>
             <br/>

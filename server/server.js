@@ -45,7 +45,7 @@ app.get("/", (req, res) => res.status(404).send("Not Found"));
 app.use("/*", (req, res) => res.status(422).send("Unsupported path entity"));
 
 // require('./config/databaseTest')();
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join('uploads')));
 // app.use('/api', fileRoutes.routes);
 
 const port = process.env.PORT || 5000;
