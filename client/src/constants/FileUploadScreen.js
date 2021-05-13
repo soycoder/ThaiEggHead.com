@@ -6,10 +6,6 @@ import Select from 'react-select'
 import { Button } from "@blueprintjs/core";
 import { Modal } from "react-bootstrap";
 
-import 'react-circular-progressbar/dist/styles.css';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-
-var count = [];
 const FileUploadScreen = (props) => {
     const [multipleFiles, setMultipleFiles] = useState('');
 
@@ -47,10 +43,38 @@ const FileUploadScreen = (props) => {
         { label: 'สาธารณสุขศาสตร์', value: 'สาธารณสุขศาสตร์' },
         { label: 'วิทยาศาสตร์และเทคโนโลยี', value: 'วิทยาศาสตร์และเทคโนโลยี' },
     ]
-
+    
+    const [sourceImg, setSelectImg] = useState([]);
     const MultipleFileChange = (e) => {
         setMultipleFiles(e.target.files);
         setMultipleProgress(0);
+        if (e.target.files) {
+			const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file))
+			setSelectImg((prevImages) => prevImages.concat(filesArray));
+			Array.from(e.target.files).map(
+				(file) => URL.revokeObjectURL(file)
+			);
+		}
+    }
+
+    const [file, setFile] = useState([]);
+
+    function uploadSingleFile(e) {
+        setMultipleFiles(e.target.files);
+        setMultipleProgress(0);
+        if (e.target.files) {
+            const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file))
+            setFile((prevImages) => prevImages.concat(filesArray));
+            Array.from(e.target.files).map(
+                (file) => URL.revokeObjectURL(file)
+            );
+        }
+    }
+  
+    function deleteFile(e) {
+      const s = file.filter((item, index) => index !== e);
+      setFile(s);
+      console.log("S "+s);
     }
 
     const mulitpleFileOptions = {
@@ -60,6 +84,11 @@ const FileUploadScreen = (props) => {
             setMultipleProgress(percentage);
         }
     }
+    function getDataTitle(title) {
+        setTitle(title.target.value)
+        console.log("Title : " + title.target.value)
+    }
+    
 
     const UploadMultipleFiles = async () => {
         const formData = new FormData();
@@ -96,37 +125,7 @@ const FileUploadScreen = (props) => {
         showSubject(mySub);
     }
 
-    function getDataTitle(title) {
-        setTitle(title.target.value)
-        console.log("Title : " + title.target.value)
-    }
-	const [ selectedFiles, setSelectedFiles ] = useState([]);
 
-	const handleImageChange = (e) => {
-		if (e.target.files) {
-			const filesArray = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
-			setSelectedFiles((prevImages) => prevImages.concat(filesArray));
-			Array.from(e.target.files).map(
-				(file) => URL.revokeObjectURL(file)
-			);
-		}
-	};
-    const [sourceImg, setSelectImg] = useState('');
-
-    const renderPhotos = (sourceImg) => {
-		return sourceImg.map((photo) => {
-			return (
-                <div id={photo}>
-                    <img  src={photo} style={{width: "400px" }} />
-                    <Button onClick={() => removePhotos(photo)}>X</Button>
-                </div>
-            ) 
-		});
-	};
-    const removePhotos = (source) => {
-        console.log(source)
-        document.getElementById(source).remove();
-	};
 
     return (
         <div>
@@ -181,12 +180,12 @@ const FileUploadScreen = (props) => {
                 
             </div>
 
-            <div className="form-group">
+            <div className="form-group Input Image">
                 <label>Select Multiple Files</label>
-                <input onChange={(e) => MultipleFileChange(e)} class="form-control" type="file" id="formFileMultiple" multiple onChange={handleImageChange} />
+                <input onChange={(e) => MultipleFileChange(e)} onChange={uploadSingleFile} class="form-control" type="file" id="formFileMultiple" multiple />
             </div>
 
-            <div className="form-group">
+            <div className="form-group Preview">
                 <label style={{ "font-size": "24px" }}>แท็ก</label>
                 <br></br>
                 <h8 style={{ lineHeight: "90%" }}>
@@ -226,44 +225,52 @@ const FileUploadScreen = (props) => {
                 Upload
             </Button>
             <br/>
-
-            <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} size="lg">
-
-                <Modal.Header closeButton>
-                    <Modal.Title>ตัวอย่าง</Modal.Title>
-                </Modal.Header>
-
-                <Modal.Body>
-                    <h5>{title}</h5>
-                    <h5>
-                        <div dangerouslySetInnerHTML={{
-                        __html: body
-                        }}>
-                        </div>
-                    </h5>
-                    <h9>{tag}</h9>
-                    <br />
-                    <h9>{subject}</h9>
-                    <br />
-                    <div style={{ width: "50%" }}>
-                        {renderPhotos(selectedFiles)}
-                        
-                    </div>
-                    
-                
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="primary" onClick={toggleCheckedss} onChange={() => toggleCheckedss(!save)}>
-                        ตกลง
-                        {console.log("Save " + save)}
-                    </Button>
-                </Modal.Footer>
-            </Modal>
             
+            <div className="form-group Preview In Buttom">
+                <Modal show={show} onHide={handleClose} style={{ padding: "auto" }} size="lg">
+
+                    <Modal.Header closeButton>
+                        <Modal.Title>ตัวอย่าง</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <h5>{title}</h5>
+                        <h5>
+                            <div dangerouslySetInnerHTML={{
+                            __html: body
+                            }}>
+                            </div>
+                        </h5>
+
+                        <div className="form-group preview">
+                            {  Array.from(file).map((item, index) => {
+                                return (
+                                <div key={item}>
+                                    <img src={item} alt="" style={{width: "400px" }} />
+                                    <Button type="button" onClick={() => deleteFile(index)}>
+                                    delete
+                                    </Button>
+                                </div>
+                                );
+                            })}
+                        </div>
+
+                        <h9>{tag}</h9>
+                        <br />
+                        <h9>{subject}</h9>
+                        <br />                    
+                    
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={toggleCheckedss} onChange={() => toggleCheckedss(!save)}>
+                            ตกลง
+                            {console.log("Save " + save)}
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </div>
-
-
     );
 }
 
