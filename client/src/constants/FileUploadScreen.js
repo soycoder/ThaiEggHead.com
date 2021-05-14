@@ -146,6 +146,7 @@ const FileUploadScreen = (props) => {
                 //   }, function(){
                 //         window.location.href = "http://localhost:3000/";
                 //   });
+                UploadMultipleFiles()
             console.log("result Valur "+result.value)
        }
        else{
