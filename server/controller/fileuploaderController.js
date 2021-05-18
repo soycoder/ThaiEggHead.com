@@ -1,5 +1,5 @@
 // 'use strict';
-import MultipleFile from "../models/mulitipleFileSchema.js";
+import MultipleFile from "../models/Forum.js";
 
 export const multipleFileUpload = async (req, res, next) => {
     try{
@@ -15,10 +15,10 @@ export const multipleFileUpload = async (req, res, next) => {
         });
         const multipleFiles = new MultipleFile({
             title: req.body.title,
-            body: req.body.body,
-            tag: req.body.tag,
-            subject: req.body.subject,
-            files: filesArray 
+            postText: req.body.body,
+            listTag: req.body.tag,
+            listSubject: req.body.subject,
+            listImage: filesArray,
         });
         await multipleFiles.save();
         res.status(201).send('Files Uploaded Successfully');
