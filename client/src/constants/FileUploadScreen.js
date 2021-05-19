@@ -127,13 +127,14 @@ const FileUploadScreen = (props) => {
     }
     function sweetAlert() {
      Swal.fire({
-        title: 'Are you sure?',
-        text: 'คุณต้องการโพสหรือไม่',
+        title: 'คุณต้องการโพสหรือไม่',
+        // text: 'คุณต้องการโพสหรือไม่',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33', 
-        confirmButtonText: 'Yes!'
+        confirmButtonText: 'ยันยัน',
+        cancelButtonText: 'แก้ไข'
      })
      .then((result) => {
         if(result.value===true){
@@ -144,7 +145,7 @@ const FileUploadScreen = (props) => {
                 //     timer: 2000,
                 //     showConfirmButton: false
                 //   }, function(){
-                //         window.location.href = "http://localhost:3000/";
+                        // window.location.href = "http://localhost:3000/";
                 //   });
                 UploadMultipleFiles()
             console.log("result Valur "+result.value)
