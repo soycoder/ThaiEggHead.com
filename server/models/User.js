@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema(
     country: String,
     timeRegister: Date,
     score: Number,
+    educationList: [Object],
+    interestList: [Object],
   },
   { versionKey: false, timestamps: true }
 );

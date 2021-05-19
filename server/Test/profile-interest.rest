@@ -1,0 +1,36 @@
+# User
+GET http://localhost:5000/profile/interest HTTP/1.1
+
+###
+
+###
+POST http://localhost:5000/profile/interest HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Linkedin",
+    "site":"https://www.linkedin.com",
+    "imgURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png",
+    "since": "2010"
+}
+
+###
+GET  http://localhost:5000/profile/interest/1 HTTP/1.1
+
+###
+PUT  http://localhost:5000/profile/interest/1 HTTP/1.1
+content-type: application/json
+
+{ 
+    "interestID":"1",
+    "imgURL": "http://pngimg.com/uploads/chrome_logo/chrome_logo_PNG34.png"
+}
+
+###
+DELETE http://localhost:5000/profile/interest/1 HTTP/1.1
+content-type: application/json
+
+{ 
+    "interestID":"1"
+}
+
