@@ -36,7 +36,7 @@ export const create = (req, res) => {
   });
 };
 
-// Find a single answer with an sku
+// Find a single answer with an answerID
 export const get = (req, res) => {
   const answerID = req.params.answerID;
   Answer.findOne({ answerID: answerID })

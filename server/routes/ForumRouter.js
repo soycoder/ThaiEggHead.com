@@ -1,17 +1,11 @@
+// 'use strict';
 import express from "express";
-import {
-  create,
-  get,
-  list,
-  put,
-  remove,
-} from "../controller/ForumController.js";
+import upload from "../helpers/filehelper.js";
+import { create, get } from "../controller/ForumController.js";
 
-let router = express.Router();
-router.get("/", list);
-router.post("/", create);
-router.get("/:forumID", get);
-router.put("/:forumID", put);
-router.delete("/:forumID", remove);
+const router = express.Router();
+
+router.post('/', upload.array('files'), create);
+router.get('/', get);
 
 export default router;

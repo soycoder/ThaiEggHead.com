@@ -19,5 +19,5 @@ const mulitipleFileSchema = new Schema({
 }, {timestamps: true});
 
 // module.exports 
-let Forum = mongoose.model('MultipleFile', mulitipleFileSchema);
-export default Forum;
+let mulitipleFileSchema = mongoose.model('MultipleFile', mulitipleFileSchema);
+export default mulitipleFileSchema;

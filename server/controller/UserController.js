@@ -11,10 +11,10 @@ export const list = (req, res) => {
 
 // add new user
 export const create = (req, res) => {
-  User.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, post) {
-    // console.log(post);
+  User.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, _user) {
+    // console.log(_user);
     let old_id = "";
-    if (post) old_id = post.userID;
+    if (_user) old_id = _user.userID;
     else old_id = "0";
 
     let data = req.body;
@@ -30,7 +30,7 @@ export const create = (req, res) => {
       })
       .catch(() =>
         res.status(404).send({
-          errors: { global: "Cann't add new user userID " + userID },
+          errors: { global: "Can't add new user userID " + userID },
         })
       );
   });

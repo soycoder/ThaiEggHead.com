@@ -242,17 +242,17 @@ const FileUploadScreen = (props) => {
                     placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)" />
             </div>
 
-            <a href="http://localhost:3000/">
+            {/* <a href="http://localhost:3000/">
                 <Button submit={submit}>โพส</Button>     
                 {console.log("Submit " + submit)}       
-            </a>
+            </a> */}
 
             <Button onClick={handleShow}>
                 ดูตัวอย่าง
             </Button>
             <br/>
             <Button type="button" onClick={() => UploadMultipleFiles()} className="btn btn-danger" onClick={sweetAlert}>
-                Upload
+                โพสต์
             </Button>
             <br/>
             

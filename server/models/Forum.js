@@ -2,16 +2,28 @@ import * as mongooseDef from "mongoose";
 let mongoose = mongooseDef.default;
 const forumSchema = new mongoose.Schema(
   {
-    forumID: String,
-    userID: String,
-    title: String,
-    postText: String,
+    forumID: {
+      type: String,
+      unique: true,
+    },
+    userID: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    postText: {
+      type: String,
+      required: true,
+    },
     listImage: Array,
     listSubject: Array,
     listTag: Array,
     listAnswer: Array,
     listComment: Array,
-    createTime: Date,
     whoVoteLike: Array,
     whoVoteDislike: Array,
     view: Number,

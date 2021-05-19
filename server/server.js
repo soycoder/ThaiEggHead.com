@@ -8,6 +8,7 @@ import { default as user } from "./routes/UserRouter.js";
 import { default as forum } from "./routes/ForumRouter.js";
 import { default as answer } from "./routes/AnswerRouter.js";
 import { default as comment } from "./routes/CommentRouter.js";
+import { default as interest } from "./routes/Profile.InterestRouter.js";
 
 function errorHandler(err, req, res, next) {
   if (res.headersSent) {
@@ -15,6 +16,7 @@ function errorHandler(err, req, res, next) {
   }
   res.status(500).json({ error: err });
 }
+
 var app = express();
 // app.use("/public", express.static(path.join(process.cwd(), "public")));
 app.use(logger("short"));
@@ -34,6 +36,9 @@ app.use("/answers", answer);
 // REST for comment
 app.use("/comments", comment);
 
+// REST for Profile/interest
+app.use("/profile/interest", interest);
+
 
 app.get("/", (req, res) => {
   res.send("Invalid Endport");
@@ -46,7 +51,7 @@ app.use("/*", (req, res) => res.status(422).send("Unsupported path entity"));
 
 // require('./config/databaseTest')();
 app.use('/uploads', express.static(path.join('uploads')));
-// app.use('/api', fileRoutes.routes);
+// app.use('/api', fileRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, function () {
