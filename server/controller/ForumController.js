@@ -2,6 +2,25 @@
 // import MultipleFile from "../models/mulitipleFileSchema.js";
 import Forum from "../models/Forum.js";
 
+// Retrieve and return all products from the const Products.
+export const list = (req, res) => {
+  const filter = req.query.subject
+  console.log(filter);
+  if (!filter) {
+    Forum.find()
+    .then((result) => res.json(result))
+    .catch((err) =>
+      res.status(500).send({ errors: { global: "Server Error" } })
+    );
+  } else {
+    Forum.find({listSubject:{ $all:[filter]}})
+    .then((result) => res.json(result))
+    .catch((err) =>
+      res.status(500).send({ errors: { global: "Server Error" } })
+    );
+  }
+};
+
 // add new Forum
 export const create = async (req, res, next) => {
   try {
