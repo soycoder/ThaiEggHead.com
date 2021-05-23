@@ -4,7 +4,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from 'react-select'
 import { Button } from "@blueprintjs/core";
-import { Modal } from "react-bootstrap";
+import { Modal, Container, Row, Col } from "react-bootstrap";
 import Swal from 'sweetalert2'
 
 const FileUploadScreen = (props) => {
@@ -15,8 +15,7 @@ const FileUploadScreen = (props) => {
     const [tag, showTag] = useState('');
     const [subject, showSubject] = useState('');
     const [save, setSave] = useState(false);
-    const [submit, setSubmit] = useState(false);
-
+    
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -25,7 +24,7 @@ const FileUploadScreen = (props) => {
       handleClose();
     }
 
-
+    const [singleProgress, setSingleProgress] = useState(0);
     const [multipleProgress, setMultipleProgress] = useState(0);
 
     const optionsTag = [
@@ -45,6 +44,14 @@ const FileUploadScreen = (props) => {
         { label: 'วิทยาศาสตร์และเทคโนโลยี', value: 'วิทยาศาสตร์และเทคโนโลยี' },
     ]
     
+    const singleFileOptions = {
+        onUploadProgress: (progressEvent) => {
+            const {loaded, total} = progressEvent;
+            const percentage = Math.floor(((loaded / 1000) * 100) / (total / 1000));
+            setSingleProgress(percentage);
+        }
+    }
+
     const [sourceImg, setSelectImg] = useState([]);
     const MultipleFileChange = (e) => {
         setMultipleFiles(e.target.files);
@@ -60,7 +67,7 @@ const FileUploadScreen = (props) => {
 
     const [file, setFile] = useState([]);
 
-    function uploadSingleFile(e) {
+    function uploadMultipleFile(e) {
         setMultipleFiles(e.target.files);
         setMultipleProgress(0);
         if (e.target.files) {
@@ -89,7 +96,12 @@ const FileUploadScreen = (props) => {
         setTitle(title.target.value)
         console.log("Title : " + title.target.value)
     }
-    
+
+    const [add, setAdd] = useState(false);
+    const onAdd = () => {
+        setAdd(value => !value);
+        console.log(add);
+    }
 
     const UploadMultipleFiles = async () => {
         const formData = new FormData();
@@ -145,7 +157,7 @@ const FileUploadScreen = (props) => {
                 //     timer: 2000,
                 //     showConfirmButton: false
                 //   }, function(){
-                        // window.location.href = "http://localhost:3000/";
+                        window.location.href = "http://localhost:3000/";
                 //   });
                 UploadMultipleFiles()
             console.log("result Valur "+result.value)
@@ -156,9 +168,10 @@ const FileUploadScreen = (props) => {
         }
      })       
     }
-
+    
 
     return (
+        <Container>
         <div>
             <div className="form-group">
                 <label style={{ "font-size": "24px" }}>หัวข้อ</label>
@@ -213,7 +226,7 @@ const FileUploadScreen = (props) => {
 
             <div className="form-group Input Image">
                 <label>Select Multiple Files</label>
-                <input onChange={(e) => MultipleFileChange(e)} onChange={uploadSingleFile} class="form-control" type="file" id="formFileMultiple" multiple />
+                <input onChange={(e) => MultipleFileChange(e)} onChange={uploadMultipleFile} class="form-control" type="file" id="formFileMultiple" multiple />
             </div>
 
             <div className="form-group Preview">
@@ -224,9 +237,24 @@ const FileUploadScreen = (props) => {
                     แท็กเพื่ออธิบายว่าคำถามของคุณเกี่ยวกับอะไร
                 </h8>
                 <br></br>
-                <Select style={{ width: '600px' }} isMulti={true} options={optionsTag}
-                    onChange={onChangeInputTag} defaultValue={[]}
-                    placeholder="ตัวอย่าง (Programing, Database, Law, Art)" />
+                <div>
+                    
+                </div>
+                
+                    <Row>
+                        <Col xl={11}>
+                            <Select isMulti={true} options={optionsTag}
+                                onChange={onChangeInputTag} defaultValue={[]}
+                                placeholder="ตัวอย่าง (Programing, Database, Law, Art)" >
+                            </Select>                        
+                        </Col>
+
+                        <Col xl={1}>
+                            <Button onClick={onAdd}>+</Button>
+                        </Col>
+                    
+                    </Row>
+                
             </div>
 
             <div className="form-group">
@@ -243,18 +271,13 @@ const FileUploadScreen = (props) => {
                     placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)" />
             </div>
 
-            {/* <a href="http://localhost:3000/">
-                <Button submit={submit}>โพส</Button>     
-                {console.log("Submit " + submit)}       
-            </a> */}
-
-            <Button onClick={handleShow}>
-                ดูตัวอย่าง
-            </Button>
-            <br/>
             <Button type="button" onClick={() => UploadMultipleFiles()} className="btn btn-danger" onClick={sweetAlert}>
                 โพสต์
             </Button>
+            <Button onClick={handleShow}>
+                ดูตัวอย่าง
+            </Button> 
+
             <br/>
             
             <div className="form-group Preview In Buttom">
@@ -302,6 +325,7 @@ const FileUploadScreen = (props) => {
                 </Modal>
             </div>
         </div>
+        </Container>
     );
 }
 

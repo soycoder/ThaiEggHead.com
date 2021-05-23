@@ -39,3 +39,19 @@ export const getMultipleFiles = async () => {
     throw error;
   }
 };
+
+export const tagUpload = async (data, options) => {
+  try {
+      await axios.post(apiUrl + 'multipleFiles', data, options);
+  } catch (error) {
+      throw error;
+  }
+}
+export const getTagFiles = async () => {
+  try{
+      const {data} = await axios.get(apiUrl + 'getMultipleFiles');
+      return data;
+  }catch(error){
+      throw error;
+  }
+}
