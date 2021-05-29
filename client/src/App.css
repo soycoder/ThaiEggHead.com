@@ -6,12 +6,51 @@
 .container-fluid {
   padding: 0px;
 }
-.cover-profile {
-  width: 100%;
-  height: 250px;
+
+.display-flex {
+  display: flex !important;
 }
-.pic-profile {
+
+
+.profile-btn {
+  background: none;
+  border: none;
+  padding: 3px;
+  cursor: pointer;
+}
+.profile-btn:hover {
+  background: #d1d1d198;
+  border-radius: 50%;
+}
+
+.profile-photo-edit {
+  line-height: 0;
+  margin: 0;
   width: 100%;
+  height: 100%;
+}
+
+.cover-profile {
+  height: 250px;
+  -webkit-user-drag: none;
+  background-color: transparent;
+  position:relative;
+  border-color: #ffe529;
+}
+
+.img-cover-profile {
+  position:absolute;
+  height: 250px;
+  width: 100%;
+  -webkit-user-drag: none;
+  /* z-index: -2; */
+}
+
+.pic-profile {
+  width: 200px;
+  margin-top: -112px;
+  z-index: 4;
+  -webkit-user-drag: none;
 }
 
 .edu-card {
@@ -22,6 +61,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-user-drag: none;
 }
 
 .interest-card {
@@ -33,6 +73,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-user-drag: none;
 }
 
 /* Login Page */
@@ -53,13 +94,13 @@
 }
 
 .Navbar {
-  border-top: 3px solid #FFE529;
+  border-top: 3px solid #ffe529;
 }
 
 /* Subject page */
 
 .app-header {
-  border-top: 4px solid #FFEB35;
+  border-top: 4px solid #ffeb35;
   border-bottom: 1px solid #858585;
   height: 50px;
   display: flex;
@@ -76,8 +117,8 @@
 .app-grid {
   display: grid;
   grid-template-areas:
-    'blank main main main main menu'
-    'blank main main main main menu';
+    "blank main main main main menu"
+    "blank main main main main menu";
   grid-gap: 10px;
   padding: 10px;
 }
@@ -95,8 +136,8 @@
 }
 .app-menu {
   width: 270px;
-  height:100px;
-  border-color:rgb(219, 219, 219);
+  height: 100px;
+  border-color: rgb(219, 219, 219);
   border-style: solid;
   grid-area: menu;
 }
@@ -125,11 +166,11 @@
   padding-left: 90px;
 }
 .app-cycle {
-  border-radius: 50%!important;
+  border-radius: 50% !important;
   color: black;
 }
 .app-cycleSubject {
-  border-radius: 50%!important;
+  border-radius: 50% !important;
   color: black;
 }
 .app-removeDot {
@@ -143,23 +184,23 @@
 }
 
 .transparent_btn {
-	display: inline-block;
-	padding: 10px 14px;
-	color: #FFF;
-	border: 1px solid #FFF;
-	text-decoration: none;
-	font-size: 14px;
-	line-height: 120%;
-	background-color: rgba(255,255,255, 0);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-transition: background-color 300ms ease;
-	-moz-transition: background-color 300ms ease;
-	transition: background-color 300ms ease;
-	cursor: pointer;
+  display: inline-block;
+  padding: 10px 14px;
+  color: #fff;
+  border: 1px solid #fff;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 120%;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-transition: background-color 300ms ease;
+  -moz-transition: background-color 300ms ease;
+  transition: background-color 300ms ease;
+  cursor: pointer;
 }
 .transparent_btn:hover {
-	background-color: rgba(255,255,255, 0.3);
-	color: #FFF;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
