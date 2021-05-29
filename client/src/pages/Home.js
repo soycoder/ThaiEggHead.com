@@ -24,7 +24,7 @@ function App() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [datas, setdatas] = useState({});
+  const [datas, setdatas] = useState([]);
 
   const [multipleFiles, setMultipleFiles] = useState([]);
 
@@ -60,9 +60,9 @@ function App() {
         });
     }
 
-    fetch("http://localhost:5000/forums")
-      .then((response) => response.json())
-      .then((data) => setdatas(data));
+    fetch('http://localhost:5000/forums')
+    .then((res) => res.json())
+    .then((res) => setdatas(res));
   }, []);
 
   const mystyle = {
@@ -319,12 +319,18 @@ function App() {
                     </Form>
                   </Card>
                   <p />
+
                 </>
               ) : (
                 <></>
               )}
 
               {/* {datas && datas.length > 0 ? test2() : <p>wait</p>} */}
+              
+              {datas.map((forum) => (
+                <ForumCard data={forum}></ForumCard>
+              ))}
+
             </Col>
 
             <Col>
@@ -369,4 +375,46 @@ function App() {
   );
 }
 
+function ForumCard(props) {
+  let forum = props.data;
+  var n = forum.postText.length;
+    console.log(n, forum.postText)
+    if (n > 160){
+      var post = forum.postText.substr(0, 150)+"...";
+    }
+    else{
+      var post = forum.postText
+    }
+  const [user, setUser] = useState({});
+  const [pathUser, setPathUser] = useState("");
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${forum.userID}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setUser(res);
+        setPathUser(`/users/${res.googleID}`);
+      });
+  }, []);
+      return (
+        <div>
+            <Card>
+              <Row>
+                <Col xs={2} className="app-profile" ><img src={user.imgURL} height="30" width="30" className="app-cycle"/><p/>
+                  <Link to={pathUser}>{user.userName}</Link>
+                </Col>
+                <Col xs={9} className="app-paddingContent">
+                  <Card.Title >{forum.title}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted"> {
+                  <div dangerouslySetInnerHTML={{
+                    __html: post
+                    }}>
+                  </div>
+                  }</Card.Subtitle>
+                </Col>
+              </Row>
+            </Card>
+            <p/>
+        </div>  
+      );
+}
 export default App;

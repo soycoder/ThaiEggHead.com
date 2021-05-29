@@ -119,7 +119,14 @@ function Sub() {
 
 function ForumCard(props) {
   let forum = props.data;
-
+  var n = forum.postText.length;
+    console.log(n, forum.postText)
+    if (n > 160){
+      var post = forum.postText.substr(0, 150)+"...";
+    }
+    else{
+      var post = forum.postText
+    }
   const [user, setUser] = useState({});
   const [pathUser, setPathUser] = useState("");
   useEffect(() => {
@@ -130,7 +137,7 @@ function ForumCard(props) {
         setPathUser(`/users/${res.googleID}`);
       });
   }, []);
-  console.log(user);
+  // console.log(user);
   return (
     <>
       <Card>
@@ -148,7 +155,7 @@ function ForumCard(props) {
           <Col xs={10} className="app-paddingContent">
             <Card.Title>{forum.title}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
-              {forum.postText}
+              {post}
             </Card.Subtitle>
           </Col>
         </Row>
