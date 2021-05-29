@@ -98,7 +98,7 @@ function App() {
               </Row>
             </Card>
 
-            <Card>
+            {/* <Card>
               <Row>
                 <Col xs={2} className="app-profile">
                   <img
@@ -124,7 +124,7 @@ function App() {
                   </Card.Subtitle>
                 </Col>
               </Row>
-            </Card>
+            </Card> */}
             <p />
           </div>
         ))}

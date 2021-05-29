@@ -97,3 +97,45 @@ export const fileSizeFormatter = (bytes, decimal) => {
     parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + " " + sizes[index]
   );
 };
+
+
+// # Tag
+// add new Forum
+export const createTag = async (req, res, next) => {
+  try {
+    Forum.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, _forum) {
+      // Set ForumID
+      let old_id = "";
+      if (_forum) old_id = _forum.forumID;
+      else old_id = "0";
+
+      let data = req.body;
+      data["forumID"] = parseInt(old_id) + 1;
+
+      let filesArray = [];
+      req.files.forEach((element) => {
+        const file = {
+          fileName: element.originalname,
+          filePath: element.path,
+          fileType: element.mimetype,
+          fileSize: fileSizeFormatter(element.size, 2),
+        };
+        filesArray.push(file);
+      });
+      const forum = new Forum({
+        forumID: data["forumID"],
+        userID: req.body.userID,
+        title: req.body.title,
+        postText: req.body.body,
+        listTag: req.body.tag,
+        listSubject: req.body.subject,
+        listImage: filesArray,
+      });
+      forum.save().then(() => {
+        res.status(201).send("Files Uploaded Successfully");
+      });
+    });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
