@@ -1,6 +1,9 @@
 // 'use strict';
 // import MultipleFile from "../models/mulitipleFileSchema.js";
 import Forum from "../models/Forum.js";
+import Tag from "../models/Tag.js";
+
+// ! Forum
 
 // Retrieve and return all products from the const Products.
 export const list = (req, res) => {
@@ -99,39 +102,44 @@ export const fileSizeFormatter = (bytes, decimal) => {
 };
 
 
-// # Tag
-// add new Forum
+// ! Tag
+// Retrieve and return all products from the const Products.
+export const listTag = (req, res) => {
+  const filter = req.query.subject
+  console.log(filter);
+  if (!filter) {
+    Tag.find()
+    .then((result) => res.json(result))
+    .catch((err) =>
+      res.status(500).send({ errors: { global: "Server Error" } })
+    );
+  } else {
+    Tag.find({listSubject:{ $all:[filter]}})
+    .then((result) => res.json(result))
+    .catch((err) =>
+      res.status(500).send({ errors: { global: "Server Error" } })
+    );
+  }
+};
+
+// add new Tag
 export const createTag = async (req, res, next) => {
   try {
-    Forum.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, _forum) {
-      // Set ForumID
+    Tag.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, _tag) {
+      // Set tagID
       let old_id = "";
-      if (_forum) old_id = _forum.forumID;
+      if (_tag) old_id = _tag.tagID;
       else old_id = "0";
 
       let data = req.body;
-      data["forumID"] = parseInt(old_id) + 1;
+      data["tagID"] = parseInt(old_id) + 1;
 
-      let filesArray = [];
-      req.files.forEach((element) => {
-        const file = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-          fileSize: fileSizeFormatter(element.size, 2),
-        };
-        filesArray.push(file);
+      const tag = new Tag({
+        tagID: data["tagID"],
+        name: req.body.name,
+        
       });
-      const forum = new Forum({
-        forumID: data["forumID"],
-        userID: req.body.userID,
-        title: req.body.title,
-        postText: req.body.body,
-        listTag: req.body.tag,
-        listSubject: req.body.subject,
-        listImage: filesArray,
-      });
-      forum.save().then(() => {
+      tag.save().then(() => {
         res.status(201).send("Files Uploaded Successfully");
       });
     });

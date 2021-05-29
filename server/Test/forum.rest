@@ -46,3 +46,18 @@ content-type: application/json
 { 
     "forumID":"9846146545"
 }
+
+### Tag
+
+### 
+GET http://localhost:5000/forums/tag HTTP/1.1
+content-type: application/json
+
+
+### 
+POST http://localhost:5000/forums/tag HTTP/1.1
+content-type: application/json
+
+{
+    "name": "com-sci"
+}
