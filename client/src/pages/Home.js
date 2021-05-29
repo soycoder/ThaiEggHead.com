@@ -97,6 +97,34 @@ function App() {
                 </Col>
               </Row>
             </Card>
+
+            <Card>
+              <Row>
+                <Col xs={2} className="app-profile">
+                  <img
+                    src={images.pro_2}
+                    height="30"
+                    width="30"
+                    className="app-cycle"
+                  />
+                  <p />
+                  Urisa
+                </Col>
+                <Col xs={9} className="app-paddingContent">
+                  <Card.Title>{subject.title}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {" "}
+                    {
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: subject.postText,
+                        }}
+                      ></div>
+                    }
+                  </Card.Subtitle>
+                </Col>
+              </Row>
+            </Card>
             <p />
           </div>
         ))}
