@@ -12,12 +12,10 @@ const forumSchema = new mongoose.Schema(
       // unique: true,
     },
     title: {
-      type: String,
-      required: true,
+      type: String
     },
     postText: {
-      type: String,
-      required: true,
+      type: String
     },
     listImage: Array,
     listSubject: Array,

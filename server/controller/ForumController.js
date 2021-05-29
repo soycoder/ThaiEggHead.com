@@ -7,20 +7,20 @@ import Tag from "../models/Tag.js";
 
 // Retrieve and return all products from the const Products.
 export const list = (req, res) => {
-  const filter = req.query.subject
+  const filter = req.query.subject;
   console.log(filter);
   if (!filter) {
     Forum.find()
-    .then((result) => res.json(result))
-    .catch((err) =>
-      res.status(500).send({ errors: { global: "Server Error" } })
-    );
+      .then((result) => res.json(result))
+      .catch((err) =>
+        res.status(500).send({ errors: { global: "Server Error" } })
+      );
   } else {
-    Forum.find({listSubject:{ $all:[filter]}})
-    .then((result) => res.json(result))
-    .catch((err) =>
-      res.status(500).send({ errors: { global: "Server Error" } })
-    );
+    Forum.find({ listSubject: { $all: [filter] } })
+      .then((result) => res.json(result))
+      .catch((err) =>
+        res.status(500).send({ errors: { global: "Server Error" } })
+      );
   }
 };
 
@@ -37,15 +37,17 @@ export const create = async (req, res, next) => {
       data["forumID"] = parseInt(old_id) + 1;
 
       let filesArray = [];
-      req.files.forEach((element) => {
-        const file = {
-          fileName: element.originalname,
-          filePath: element.path,
-          fileType: element.mimetype,
-          fileSize: fileSizeFormatter(element.size, 2),
-        };
-        filesArray.push(file);
-      });
+      if (req.files) {
+        req.files.forEach((element) => {
+          const file = {
+            fileName: element.originalname,
+            filePath: element.path,
+            fileType: element.mimetype,
+            fileSize: fileSizeFormatter(element.size, 2),
+          };
+          filesArray.push(file);
+        });
+      }
       const forum = new Forum({
         forumID: data["forumID"],
         userID: req.body.userID,
@@ -101,24 +103,23 @@ export const fileSizeFormatter = (bytes, decimal) => {
   );
 };
 
-
 // ! Tag
 // Retrieve and return all products from the const Products.
 export const listTag = (req, res) => {
-  const filter = req.query.subject
+  const filter = req.query.subject;
   console.log(filter);
   if (!filter) {
     Tag.find()
-    .then((result) => res.json(result))
-    .catch((err) =>
-      res.status(500).send({ errors: { global: "Server Error" } })
-    );
+      .then((result) => res.json(result))
+      .catch((err) =>
+        res.status(500).send({ errors: { global: "Server Error" } })
+      );
   } else {
-    Tag.find({listSubject:{ $all:[filter]}})
-    .then((result) => res.json(result))
-    .catch((err) =>
-      res.status(500).send({ errors: { global: "Server Error" } })
-    );
+    Tag.find({ listSubject: { $all: [filter] } })
+      .then((result) => res.json(result))
+      .catch((err) =>
+        res.status(500).send({ errors: { global: "Server Error" } })
+      );
   }
 };
 
@@ -137,7 +138,6 @@ export const createTag = async (req, res, next) => {
       const tag = new Tag({
         tagID: data["tagID"],
         name: req.body.name,
-        
       });
       tag.save().then(() => {
         res.status(201).send("Files Uploaded Successfully");

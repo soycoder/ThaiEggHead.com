@@ -3,7 +3,7 @@ GET http://localhost:5000/forums HTTP/1.1
 
 ###
 
-GET http://localhost:5000/forums?subject=comsci HTTP/1.1
+GET http://localhost:5000/forums?subject=sci HTTP/1.1
 
 ###
 
@@ -13,21 +13,12 @@ content-type: application/json
 {
     "userID": "1",
     "title": "#1 test",
-    "postText": "",
-    "listSubject": ["law","sci"],
-    "listImage":[],
-    "listTag": [],
-    "listAnswer": [],
-    "listComment": [],
-    "createTime": "12/5/2021",
-    "whoVoteLike": [],
-    "whoVoteDislike": [],
-    "view": 10,
-    "isSolution": "1325"
+    "postText": "rgnrgnrngnrg",
+    "listSubject": ["law","sci"]
 }
 
 ###
-GET  http://localhost:5000/forums/9846146545 HTTP/1.1
+GET  http://localhost:5000/forums/3 HTTP/1.1
 
 ###
 PUT  http://localhost:5000/forums/9846146545 HTTP/1.1
