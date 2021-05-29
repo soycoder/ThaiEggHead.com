@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import CreateForum from './pages/CreateForum';
+import CreateForum from './components/CreateForum';
 import Navbar from './components/Navbar';
 import Subject from './pages/Subject';
 import Auth from './auth/Auth'

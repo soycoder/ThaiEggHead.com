@@ -55,6 +55,25 @@ export const get = (req, res) => {
     });
 };
 
+// Find a single user with an sku
+export const getByGoogleID = (req, res) => {
+  const googleID = req.params.googleID;
+  User.findOne({ googleID: googleID })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({
+          errors: { global: "User not found with googleID " + googleID },
+        });
+      }
+      res.json(user); // default status = 200
+    })
+    .catch((err) => {
+      return res.status(500).send({
+        errors: { global: "Error retrieving User with googleID " + googleID },
+      });
+    });
+};
+
 // Update a user identified by the userID in the request
 export const put = (req, res) => {
   // Validate Request

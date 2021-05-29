@@ -33,8 +33,8 @@ content-type: application/json
 { 
     "userID":"1",
     "bio": "8000",
-    "imgURL": "http://pngimg.com/uploads/chrome_logo/chrome_logo_PNG34.png",
-    "googleID": "5461"
+    "imgURL": "https://lh3.googleusercontent.com/a/AATXAJz5rVtFRsck9IPitC0UIrNrNEvKoTv1dYcRLryN=s96-c",
+    "googleID": "109585993819534771568"
 }
 
 ###

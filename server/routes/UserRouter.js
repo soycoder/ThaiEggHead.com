@@ -2,6 +2,7 @@ import express from "express";
 import {
   create,
   get,
+  getByGoogleID,
   list,
   put,
   remove,
@@ -10,6 +11,7 @@ import {
 let router = express.Router();
 router.get("/", list);
 router.post("/", create);
+router.get("/google/:googleID", getByGoogleID);
 router.get("/:userID", get);
 router.put("/:userID", put);
 router.delete("/:userID", remove);

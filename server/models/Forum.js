@@ -8,8 +8,8 @@ const forumSchema = new mongoose.Schema(
     },
     userID: {
       type: String,
-      required: true,
-      unique: true,
+      // required: true,
+      // unique: true,
     },
     title: {
       type: String,
