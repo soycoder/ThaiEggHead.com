@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { Avatar, Paper, Grid, Typography } from '@material-ui/core';
+import { Avatar, Paper, Grid, Typography, colors } from '@material-ui/core';
 import { Col, Container, Button, Row } from "react-bootstrap";
 import { Icon, IconSize, Intent } from "@blueprintjs/core";
 
@@ -109,29 +109,30 @@ export const Auth = () => {
         <>
             <Card interactive={false} elevation={Elevation.TWO}>
                 <p style={{textAlign: 'center', fontFamily: "supermarket", fontSize: SIZES.h1}}>
-                    { isSignup ? 'Sign up' : 'Sign in' }
+                    { isSignup ? 'ลงทะเบียน' : 'เข้าสู่ระบบ' }
                     </p>
 
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         { isSignup && (
                         <>
-                        <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
-                        <Input name="lastName" label="Last Name" handleChange={handleChange} half />
+                        <Input name="displayName" label="Display Name" handleChange={handleChange} autoFocus/>
                         </>
                         )}
-                        <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
+                        <Input name="email" label="Email" handleChange={handleChange} type="email" />
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-                        { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
+                        { isSignup && <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange} type="password" /> }
                     </Grid>
-                    <Button variant="light" className={classes.submit} block>
-                        { isSignup ? 'Sign Up' : 'Sign In' }
+                    <Button variant="outline-warning" size="sm" className={classes.submit} block style={{fontFamily: "supermarket", fontSize: SIZES.h3}}>
+                            { isSignup ? 'ลงทะเบียน' : 'เข้าสู่ระบบ' }
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                        <Button onClick={switchMode} variant="link">
-                            { isSignup ? 'Already have an account? Sign in' : "Don't have an account? Sign Up" }
-                        </Button>
+                            <Button onClick={switchMode} variant="link" size='sm'>
+                                <p className='text-dark' style={{fontFamily: "supermarket", fontSize: SIZES.h3}}>
+                                    { isSignup ? 'มีบัญชีอยู่แล้วหรอ? เข้าสู่ระบบ' : "ยังไม่มีบัญชีหรอ? ลงทะเบียน" }   
+                                </p>
+                            </Button>
                         </Grid>
                     </Grid>
                     </form>
