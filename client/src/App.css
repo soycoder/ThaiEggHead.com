@@ -18,7 +18,7 @@
   padding: 3px;
   cursor: pointer;
 }
-.profile-btn:hover {
+.icon.profile-btn:hover {
   background: #d1d1d198;
   border-radius: 50%;
 }

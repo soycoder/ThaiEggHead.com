@@ -97,7 +97,7 @@ const Profile = () => {
                   </Card.Body>
                 </Col>
                 <Col xs={1} md={1}>
-                  <button className="profile-btn">
+                  <button className="icon profile-btn">
                     <Icon icon="edit" iconSize="20" intent="primary" />
                   </button>
                 </Col>
@@ -169,11 +169,11 @@ const Profile = () => {
                 {/* Modal For Edit Education */}
               </Col>
               <Col md={1}>
-                <button className="profile-btn">
+                <button className="icon profile-btn">
                   <Icon icon="plus" iconSize="20" intent="primary" />
                 </button>
                 <br />
-                <button className="profile-btn" onClick={() => setEducationShow(true)}>
+                <button className="icon profile-btn" onClick={() => setEducationShow(true)}>
                   <Icon icon="edit" iconSize="20" intent="primary" />
                 </button>
               </Col>
