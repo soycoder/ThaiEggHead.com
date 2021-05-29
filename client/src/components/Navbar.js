@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Navbar } from "react-bootstrap";
+import { Navbar, Nav, Image } from "react-bootstrap";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
-import "../App.css";
+import "./styles.css";
 
 import * as actionType from "../constants/actionTypes";
 import { images, SIZES } from "../constants";
@@ -31,23 +31,27 @@ const NavigationBar = () => {
 
   return (
     <div className="Navbar">
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="/">
-          ThaiEggHead
-          <img
-            src={images.logo}
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="ThaiEggHead"
-          />
+      <Navbar expand="lg" bg="dark" variant="dark" >
+        <Navbar.Brand href="/" style={{marginLeft:70}}>
+          <div>
+            <img
+              src={images.logo}
+              width="70"
+              height="70"
+              alt="ThaiEggHead"
+              style={{position:'absolute',marginTop:-7}}
+            />
+            <div style={{fontFamily: "supermarket", fontSize: 30, marginLeft:75}}>
+              ThaiEggHead
+            </div>
+          </div>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
         {user ? (
           <Navbar.Collapse className="justify-content-end">
             <div className="bp3-input-group .modifier">
-              <span className="bp3-icon bp3-icon-search"></span>
+              <span className="bp3-icon bp3-icon-search "></span>
               <input
                 className="bp3-input"
                 type="search"
@@ -55,14 +59,19 @@ const NavigationBar = () => {
                 dir="auto"
               />
             </div>
-            <div style={{ marginLeft: SIZES.padding }}>{user?.result.name}</div>
 
-            <Button onClick={logout} style={{ marginLeft: SIZES.padding }}>
+            <Avatar alt={user?.result.name} src={user?.result.imageUrl} style={{ marginLeft: SIZES.padding, width: 35, height: 35 }}>{user?.result.name.charAt(0)}</Avatar>
+            <div style={{ marginLeft: SIZES.padding/2, color: "white" }}>{user?.result.name}</div>
+
+            <Button onClick={logout} style={{ marginLeft: SIZES.padding/2, color:"white" }}>
               Logout
             </Button>
           </Navbar.Collapse>
         ) : (
           <Navbar.Collapse className="justify-content-end">
+            <Nav className="mr-auto">
+              <Nav.Link href="#features">About us</Nav.Link>
+            </Nav>
             <div className="bp3-input-group .modifier">
               <span className="bp3-icon bp3-icon-search"></span>
               <input
@@ -75,14 +84,9 @@ const NavigationBar = () => {
             <Button
               component={Link}
               to="/Auth"
-              style={{ marginLeft: SIZES.padding }}
-            >
-              Sign in
-            </Button>
-            <Button
-              component={Link}
-              to="/Auth"
-              style={{ marginLeft: SIZES.padding2 }}
+              style={{ marginLeft: SIZES.padding2*2, marginRight: SIZES.padding3*4, borderRadius: 19}}
+              variant="contained" color="secondary"
+              size="mediem"
             >
               Join us
             </Button>
