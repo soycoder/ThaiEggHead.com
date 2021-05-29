@@ -39,7 +39,7 @@ const NavigationBar = () => {
               width="70"
               height="70"
               alt="ThaiEggHead"
-              style={{position:'absolute',marginTop:-7}}
+              style={{position:'absolute',marginTop:-7,zIndex:200}}
             />
             <div style={{fontFamily: "supermarket", fontSize: 30, marginLeft:75}}>
               ThaiEggHead
