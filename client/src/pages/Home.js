@@ -3,20 +3,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Row,
   Col,
-  Card,
   Container,
   ListGroup,
+  Card,
   Form,
   Modal,
+  Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ListItem } from "react";
 
 import CreateForum from "../components/CreateForum";
+import ForumCard from "../components/ForumCard";
 import { getMultipleFiles } from "../auth/apiFile";
 
-function App() {
+import "./styles.css";
+
+function Home() {
   // Initial User Profile
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
@@ -24,29 +28,78 @@ function App() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [datas, setdatas] = useState({});
+  const [datas, setdatas] = useState([]);
 
   const [multipleFiles, setMultipleFiles] = useState([]);
 
-  // const getMultipleFilesList = async () => {
-  //   try {
-  //     const fileslist = await getMultipleFiles();
-  //     setMultipleFiles(fileslist);
-  //     console.log(multipleFiles);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getMultipleFilesList();
-  // }, []);
+  const subjectNavigate = [
+    {
+      subjectName: "Sciences",
+      link: "/subject/sci",
+      img: images.subj_1,
+    },
+    {
+      subjectName: "Law",
+      link: "/subject/law",
+      img: images.subj_2,
+    },
+    {
+      subjectName: "Social Administration",
+      link: "/subject/sa",
+      img: images.subj_3,
+    },
+    {
+      subjectName: "Political Science",
+      link: "/subject/ps",
+      img: images.subj_4,
+    },
+    {
+      subjectName: "Engineering",
+      link: "/subject/eg",
+      img: images.subj_5,
+    },
+    {
+      subjectName: "Communication Arts",
+      link: "/subject/ca",
+      img: images.subj_6,
+    },
+    {
+      subjectName: "Social Work",
+      link: "/subject/sw",
+      img: images.subj_7,
+    },
+    {
+      subjectName: "Education",
+      link: "/subject/law",
+      img: images.subj_8,
+    },
+    {
+      subjectName: "Commerce and Accountancy",
+      link: "/subject/cca",
+      img: images.subj_9,
+    },
+    {
+      subjectName: "Fine and Applied Arts",
+      link: "/subject/faa",
+      img: images.subj_10,
+    },
+    {
+      subjectName: "Arts",
+      link: "/subject/art",
+      img: images.subj_11,
+    },
+    {
+      subjectName: "Psychology",
+      link: "/subject/psyc",
+      img: images.subj_12,
+    },
+  ]
 
   useEffect(() => {
     const token = user?.token;
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-    if (user) {
+    if (!user) {
       fetch(`http://localhost:5000/users/google/${user.result.googleId}`)
         .then((res) => res.json())
         .then((res) => {
@@ -60,9 +113,9 @@ function App() {
         });
     }
 
-    fetch("http://localhost:5000/forums")
-      .then((response) => response.json())
-      .then((data) => setdatas(data));
+    fetch('http://localhost:5000/forums')
+    .then((res) => res.json())
+    .then((res) => setdatas(res));
   }, []);
 
   const mystyle = {
@@ -70,264 +123,114 @@ function App() {
     fontFamily: "RSU",
     border: "2px solid #f8f9fa",
   };
-  //
-
-  const test2 = () => {
-    return (
-      <div>
-        {datas.map((item) => (
-          <div>
-            <Card>
-              <Row>
-                <Col xs={2} className="app-profile">
-                  <img
-                    src={images.pro_2}
-                    height="30"
-                    width="30"
-                    className="app-cycle"
-                  />
-                  <p />
-                  {item}
-                </Col>
-                <Col xs={9} className="app-paddingContent">
-                  <Card.Title>{item.title}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    {item.postText}
-                  </Card.Subtitle>
-                </Col>
-              </Row>
-            </Card>
-
-            {/* <Card>
-              <Row>
-                <Col xs={2} className="app-profile">
-                  <img
-                    src={images.pro_2}
-                    height="30"
-                    width="30"
-                    className="app-cycle"
-                  />
-                  <p />
-                  Urisa
-                </Col>
-                <Col xs={9} className="app-paddingContent">
-                  <Card.Title>{subject.title}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    {" "}
-                    {
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: subject.postText,
-                        }}
-                      ></div>
-                    }
-                  </Card.Subtitle>
-                </Col>
-              </Row>
-            </Card> */}
-            <p />
-          </div>
-        ))}
-      </div>
+  
+  const LeftNavigate = (props) => {
+    const data = props.data;
+    const listSubject = data.map((subject) => 
+        <li>
+          <Link to={subject.link} style={{textDecoration: 'black'}}>
+            <Button className="btn-subjectnav" variant="light" block>
+              <img
+                src={subject.img}
+                height="23"
+                width="23"
+                className="app-cycle"
+                style={{marginRight:5}}
+              />
+              {subject.subjectName}
+            </Button>
+          </Link>
+        </li>
     );
-  };
+    return (
+      <ul className="ul-navsubject">
+        {listSubject}
+      </ul>
+    );
+  }
 
+  const UserQuestionCard = () => {
+    if(user){
+      return(
+        <Card className="app-padding" style={{marginBottom:10}}>
+          <Card.Subtitle className="card-username">
+            <img
+              src={user?.result.imageUrl}
+              height="20"
+              width="20"
+              className="app-cycle mr-2"
+            />
+            {user?.result.name}
+          </Card.Subtitle>
+
+          <Form>
+            <Form.Group>  
+              <Form.Control
+                placeholder="คุณกำลังติดปัญหาอะไรรึเปล่า ? ถามมาสิ"
+                onClick={handleShow}
+              />
+              <Modal
+                show={show}
+                onHide={handleClose}
+                style={{ padding: "auto", width: "100%" }}
+                size="lg"
+              >
+                <Container style={mystyle}>
+                  {/* <Card.Title>Create Forum</Card.Title> */}
+                  <CreateForum />
+                </Container>
+              </Modal>
+            </Form.Group>
+          </Form>
+        </Card>
+      )
+    }else{
+      return(
+        <div>Please Login</div>
+      )
+    }
+  } 
+  
+  const AnouncingCard = () => {
+    return(
+      <Card style={{marginBottom:10}}>
+        <Card.Body>
+          <Card.Text className="card-title">Announcing ThaiEggHead World Meetup Week 2021
+          </Card.Text>
+          <Card.Text className="card-subtitle">
+            Join us June 18-25
+          </Card.Text>
+          <Button variant="primary" className="btn-learnmore">Learn more</Button>
+        </Card.Body>
+      </Card>
+    )
+  }
+      
   return (
     <div>
       <body style={{ backgroundColor: "#F3F3F3" }}>
         <br />
         <br />
-        <Container>
-          <Row>
-            <Col>
-              {/* <BrowserRouter> */}
-              <nav>
-                <ul className="app-removeDot">
-                  <li>
-                    <Link to="/subject/sci">
-                      <img
-                        src={images.subj_1}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Sciences
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/law">
-                      <img
-                        src={images.subj_2}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Law
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/sa">
-                      <img
-                        src={images.subj_3}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Social Administration
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/ps">
-                      <img
-                        src={images.subj_4}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Political Science
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/eg">
-                      <img
-                        src={images.subj_5}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Engineering
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/ca">
-                      <img
-                        src={images.subj_6}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Communication Arts
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/sw">
-                      <img
-                        src={images.subj_7}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Social Work
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/ed">
-                      <img
-                        src={images.subj_8}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Education
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/caa">
-                      <img
-                        src={images.subj_9}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Commerce and <br /> Accountancy
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/faa">
-                      <img
-                        src={images.subj_10}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Fine and Applied Arts
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/art">
-                      <img
-                        src={images.subj_11}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Arts
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/subject/psyc">
-                      <img
-                        src={images.subj_12}
-                        height="23"
-                        width="23"
-                        className="app-cycle"
-                      />{" "}
-                      Psychology
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-              {/*            
-            <Switch>
-              <Route path="/subject/sci" component={Subject} />
-            </Switch>
-         
-            </BrowserRouter> */}
+        <Container fluid="xl">
+          <Row xs={1} md={3}>
+
+            <Col md="auto" >
+              <h5 style={{marginLeft:54}}>Space</h5>
+              <LeftNavigate data={subjectNavigate}/>
             </Col>
 
-            <Col xs={7}>
-              {user ? (
-                <>
-                  <Card className="app-padding">
-                    <Card.Subtitle className="mb-2 text-muted">
-                      <img
-                        src={images.pro_1}
-                        height="30"
-                        width="30"
-                        className="app-cycle mr-2"
-                      />
-                      {/* {user.result.name} */}
-                    </Card.Subtitle>
-                    <Form>
-                      <Form.Group>
-                        <Form.Control
-                          placeholder="คุณกำลังติดปัญหาอะไรรึเปล่า ? ถามมาสิ"
-                          onClick={handleShow}
-                        />
-                        <Modal
-                          show={show}
-                          onHide={handleClose}
-                          style={{ padding: "auto", width: "100%" }}
-                          size="lg"
-                        >
-                          <Container style={mystyle}>
-                            {/* <Card.Title>Create Forum</Card.Title> */}
-                            <CreateForum />
-                          </Container>
-                        </Modal>
-                      </Form.Group>
-                    </Form>
-                  </Card>
-                  <p />
-                </>
-              ) : (
-                <></>
-              )}
+            <Col md={6}>
 
-              {/* {datas && datas.length > 0 ? test2() : <p>wait</p>} */}
+              <AnouncingCard/>
+              <UserQuestionCard/>
+
+              {datas.map((forum) => (
+                <ForumCard data={forum}></ForumCard>
+                ))}
+
             </Col>
 
-            <Col>
+            <Col md="auto">
               <Card style={{ width: "13rem" }}>
                 <Card.Header>Custom Filter</Card.Header>
                 <Card.Body>
@@ -369,4 +272,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
