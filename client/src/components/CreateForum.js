@@ -5,6 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from "react-select";
 import { Modal, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
+import SelectTag from "./SelectTag"
 
 const FileUploadScreen = (props) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -256,14 +257,7 @@ const FileUploadScreen = (props) => {
           เพิ่มแท็กได้สูงสุด 5 แท็กเพื่ออธิบายว่าคำถามของคุณเกี่ยวกับอะไร
         </h8>
         <br></br>
-        <Select
-          style={{ width: "600px" }}
-          isMulti={true}
-          options={optionsTag}
-          onChange={onChangeInputTag}
-          defaultValue={[]}
-          placeholder="ตัวอย่าง (Programing, Database, Law, Art)"
-        />
+        <SelectTag />
       </div>
 
       <div className="form-group">
