@@ -214,7 +214,7 @@ function Home() {
         <Container fluid="xl">
           <Row xs={1} md={3}>
 
-            <Col md="auto" >
+            <Col md="auto">
               <h5 style={{marginLeft:54}}>Space</h5>
               <LeftNavigate data={subjectNavigate}/>
             </Col>

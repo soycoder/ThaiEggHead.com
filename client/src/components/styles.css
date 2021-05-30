@@ -97,3 +97,25 @@ body {
   border-radius: 19px;
   margin-bottom: 5px;
 }
+
+.nav-subject{
+  position: fixed;
+  display: block;
+}
+
+.btn-more{
+  background-color: transparent;
+  position:absolute; 
+  left:94%; 
+  top:10px;
+}
+
+.btn-morestyle{
+  background-color: transparent;
+  color: gray;
+  border: hidden;
+}
+
+.fixed {
+  position: fixed;
+}

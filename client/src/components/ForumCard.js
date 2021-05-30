@@ -6,8 +6,11 @@ import {
   OverlayTrigger,
   Card,
   Badge,
+  DropdownButton,
+  Dropdown,
+  ButtonGroup
 } from "react-bootstrap";
-import { Button } from "@blueprintjs/core";
+import { Button, Icon } from "@blueprintjs/core";
 
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -111,6 +114,20 @@ function ForumCard(props) {
                 <img class="co-logo" src={user[0].img} />
                 <div class="co-name"><a href="#">{user[0].displayName}</a></div>
                 <div class="time"><a href="#">{user[0].date}</a> · <i class="fa fa-globe"></i></div>
+                <div className="btn-more">
+                  <Dropdown>
+                    <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
+                      <Icon icon="more"/>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item href="#/action-1">Report</Dropdown.Item>
+                      <Dropdown.Item href="#/action-1">block</Dropdown.Item>
+                      <Dropdown.Divider />
+                      <Dropdown.Item href="#/action-2">Bookmark</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </div>
+                
               </div>
               <div class="content">
               <Card.Title >{forum.title}</Card.Title>
