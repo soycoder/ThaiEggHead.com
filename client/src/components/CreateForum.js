@@ -142,10 +142,11 @@ const FileUploadScreen = (props) => {
         //     timer: 2000,
         //     showConfirmButton: false
         //   }, function(){
-        // window.location.href = "http://localhost:3000/";
+       
         //   });
         UploadMultipleFiles();
-        console.log("result Valur " + result.value);
+        console.log("result Valur " + result.value); 
+        window.location.href = "http://localhost:3000/";
       } else {
         result.value = false;
         console.log("result Valur " + result.value);
