@@ -1,30 +1,22 @@
-import { ButtonGroup } from "react-bootstrap";
 import "../App.css";
 import { images } from "../constants";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
-  Button,
   Row,
   Col,
   Card,
   Container,
   ListGroup,
-  Form,
 } from "react-bootstrap";
 import {
-  BrowserRouter,
-  Route,
   Link,
-  Switch,
-  useLocation,
 } from "react-router-dom";
-import App from "./Home";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 function Sub() {
   let { subject } = useParams();
-  const buttonn = <button>create a custom Filter</button>;
+  // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
 
   useEffect(() => {

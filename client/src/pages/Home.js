@@ -10,7 +10,7 @@ import {
   Modal,
   Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
 import React, { useState, useEffect, ListItem } from "react";
 
@@ -128,35 +128,25 @@ function Home() {
     const data = props.data;
     const listSubject = data.map((subject) => 
         <li>
-          <Link to={subject.link}>
-            <Button variant="light">
+          <Link to={subject.link} style={{textDecoration: 'black'}}>
+            <Button className="btn-subjectnav" variant="light" block>
               <img
                 src={subject.img}
                 height="23"
                 width="23"
                 className="app-cycle"
+                style={{marginRight:5}}
               />
-            {subject.subjectName}
+              {subject.subjectName}
             </Button>
           </Link>
         </li>
     );
     return (
-      <ul>
+      <ul className="ul-navsubject">
         {listSubject}
       </ul>
     );
-
-    // <Link to={subject.link}>
-    //         <img
-    //           src={subject.img}
-    //           height="23"
-    //           width="23"
-    //           className="app-cycle"
-    //         />
-    //         {subject.subjectName}
-    //       </Link>
-
   }
 
   const UserQuestionCard = () => {
@@ -199,7 +189,6 @@ function Home() {
         <div>Please Login</div>
       )
     }
-      
   } 
   
   const AnouncingCard = () => {
@@ -222,25 +211,26 @@ function Home() {
       <body style={{ backgroundColor: "#F3F3F3" }}>
         <br />
         <br />
-        <Container>
-          <Row>
-            <Col>
+        <Container fluid="xl">
+          <Row xs={1} md={3}>
+
+            <Col md="auto" >
+              <h5 style={{marginLeft:54}}>Space</h5>
               <LeftNavigate data={subjectNavigate}/>
             </Col>
 
-            <Col xs={7}>
+            <Col md={6}>
+
               <AnouncingCard/>
               <UserQuestionCard/>
 
-              {/* {datas && datas.length > 0 ? test2() : <p>wait</p>} */}
-              
               {datas.map((forum) => (
                 <ForumCard data={forum}></ForumCard>
-              ))}
+                ))}
 
             </Col>
 
-            <Col>
+            <Col md="auto">
               <Card style={{ width: "13rem" }}>
                 <Card.Header>Custom Filter</Card.Header>
                 <Card.Body>

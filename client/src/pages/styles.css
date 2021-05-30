@@ -29,3 +29,22 @@
     border-radius: 20px;
     font-weight: bold;
 }
+
+.btn-subjectnav{
+    display: flex;
+    align-items: stretch;
+    background-color: transparent;
+    border: transparent;
+    color: rgb(71, 66, 66);
+    font: 11px;
+}
+
+.ul-navsubject{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.div-subjectnav{
+    flex-direction: column;
+    font-size: 10px;
+}

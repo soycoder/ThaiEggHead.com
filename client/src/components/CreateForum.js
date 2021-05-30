@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLocation } from "react";
+import React, { useState, useEffect } from "react";
 import { multipleFilesUpload } from "../auth/apiFile";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -15,7 +15,6 @@ const FileUploadScreen = (props) => {
   const [tag, showTag] = useState("");
   const [subject, showSubject] = useState("");
   const [save, setSave] = useState(false);
-  const [submit, setSubmit] = useState(false);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

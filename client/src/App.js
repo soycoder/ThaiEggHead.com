@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -21,37 +21,5 @@ const App = () => (
     </div>
   </Router>
 );
-
-// function App() {
-//   return (
-//     <>
-//       {/* <Header/> */}
-//       <Navbar/>
-
-//       <Router>
-//         <Switch>
-//           <Route exact path="/">
-//             <Home />
-//           </Route>
-//           <Route path="/profile">
-//             <Profile />
-//           </Route>
-//           <Route path="/SignUp">
-//             <SignUp />
-//           </Route>
-//           <Route path="/create">
-//             <CreateForum />
-//           </Route>
-//           <Route path="/subject">
-//             <Subject />
-//           </Route>
-//           {/* <Route path="/dashboard">
-//             <Dashboard />
-//           </Route> */}
-//         </Switch>
-//       </Router>
-//     </>
-//   );
-// }
 
 export default App;

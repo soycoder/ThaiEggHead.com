@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-import { Avatar, Paper, Grid, Typography, colors } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Col, Container, Button, Row } from "react-bootstrap";
-import { Icon, IconSize, Intent } from "@blueprintjs/core";
+import { Icon } from "@blueprintjs/core";
 
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
