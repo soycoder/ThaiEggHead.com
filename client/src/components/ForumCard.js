@@ -2,10 +2,12 @@ import "../App.css";
 import "./styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
-  Row,
-  Col,
+  Tooltip,
+  OverlayTrigger,
   Card,
+  Badge,
 } from "react-bootstrap";
+import { Button } from "@blueprintjs/core";
 
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -45,7 +47,7 @@ function ForumCard(props) {
     const ListSubjectTag = (props) => {
       const list = props.data;
       const subjectTag = list.map((subject) =>
-          <span class="bp3-tag .modifier" style={{backgroundColor:COLORS.gray, color:COLORS.white, marginRight:5}}>{subject}</span>   
+          <Badge variant="primary">{subject}</Badge> 
       );
       return(
         <div className="tag">
@@ -57,7 +59,8 @@ function ForumCard(props) {
     const ListTag = (props) => {
       const list = props.data;
       const subjectTag = list.map((subject) =>
-          <span class="bp3-tag .modifier" style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}>{subject}</span>   
+          <Badge variant="info">{subject}</Badge>
+          // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
       return(
         <div className="tag">
@@ -65,9 +68,42 @@ function ForumCard(props) {
         </div>
       )
     }
-
+    
+    const ButtomOption = () => {
+      return(
+        <div style={{marginLeft:10}}>
+          <OverlayTrigger
+            key={'top'}
+            placement={'top'}
+            overlay={
+              <Tooltip id={`tooltip-${'top'}`}>
+                Upvote
+              </Tooltip>
+            }
+          >
+            <Button className="bp3-minimal comment" icon="thumbs-up">
+              {10}
+            </Button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            key={'top'}
+            placement={'top'}
+            overlay={
+              <Tooltip id={`tooltip-${'top'}`}>
+                Comment
+              </Tooltip>
+            }
+          >
+            <Button className="bp3-minimal comment" icon="comment">
+              {124}
+            </Button>
+          </OverlayTrigger>
+        </div>
+        
+      )
+    }
     return (
-      <div>
+      <div style={{marginBottom:10}}>
           <Card>
             <div>
               <div class="header">
@@ -84,8 +120,11 @@ function ForumCard(props) {
                   </div>
               </div>
             </div>
-            <ListSubjectTag data={forum.listSubject}/>
-            <ListTag data={forum.listTag}/>
+            <div className="card-tag">
+              <ListSubjectTag data={forum.listSubject}/>
+              <ListTag data={forum.listTag}/>
+            </div>
+            <ButtomOption/>
           </Card>
       </div>  
     );
