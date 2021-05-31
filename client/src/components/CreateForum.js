@@ -27,21 +27,19 @@ const FileUploadScreen = (props) => {
 
   const [multipleProgress, setMultipleProgress] = useState(0);
 
-  const optionsTag = [
-    { label: "Science", value: "Scienceact" },
-    { label: "Law", value: "Law" },
-    { label: "Database", value: "Database" },
-    { label: "DataTeat", value: "DataTeat" },
-    { label: "Art", value: "Art" },
-  ];
-
   const optionsSubject = [
-    { label: "นิติศาสตร์", value: "นิติศาสตร์" },
-    { label: "ศิลปกรรมศาสตร์", value: "ศิลปกรรมศาสตร์" },
-    { label: "สังคมสงเคราะห์ศาสตร์", value: "สังคมสงเคราะห์ศาสตร์" },
-    { label: "วิทยาลัยสหวิทยาการ", value: "วิทยาลัยสหวิทยาการ" },
-    { label: "สาธารณสุขศาสตร์", value: "สาธารณสุขศาสตร์" },
-    { label: "วิทยาศาสตร์และเทคโนโลยี", value: "วิทยาศาสตร์และเทคโนโลยี" },
+    { label: "Arts", value: "Arts" },
+    { label: "Communication Arts", value: "Communication Arts" },
+    { label: "Commerce and Accountancy", value: "Commerce and Accountancy" },
+    { label: "Education", value: "Education" },
+    { label: "Engineering", value: "Engineering" },
+    { label: "Fine and Applied Arts", value: "Fine and Applied Arts" },
+    { label: "Law", value: "Law" },
+    { label: "Psychology", value: "Psychology" },
+    { label: "Political Science", value: "Political Science" },
+    { label: "Social Administration", value: "Social Administration" },
+    { label: "Social Work", value: "Social Work" },
+    { label: "Social Administration", value: "Social Administration" },
   ];
 
   const [sourceImg, setSelectImg] = useState([]);
@@ -112,15 +110,15 @@ const FileUploadScreen = (props) => {
 
   var myTag = "";
   function onChangeInputTag(tag) {
-    myTag = "";
     tag.map((o) => (myTag += o.label + " "));
     console.log("myTag : " + myTag);
     showTag(myTag);
   }
+  
   var mySub = "";
   function onChangeInputSub(subject) {
     subject.map((o) => (mySub += o.label + " "));
-    console.log("Subject : " + mySub);
+    console.log("subject: "+mySub+", ");
     showSubject(mySub);
   }
   function sweetAlert() {
@@ -135,15 +133,6 @@ const FileUploadScreen = (props) => {
       cancelButtonText: "แก้ไข",
     }).then((result) => {
       if (result.value === true) {
-        // Swal.fire({
-        //     title: "Success!",
-        //     text: "Redirecting in 2 seconds.",
-        //     type: "success",
-        //     timer: 2000,
-        //     showConfirmButton: false
-        //   }, function(){
-       
-        //   });
         UploadMultipleFiles();
         console.log("result Valur " + result.value); 
         window.location.href = "http://localhost:3000/";
@@ -167,7 +156,7 @@ const FileUploadScreen = (props) => {
 
           _result["userID"] = res.userID;
           _user["result"] = _result;
-          //   console.log(_user);
+            // console.log(_user);
           setUser("User " + _user);
         });
     }
@@ -276,12 +265,7 @@ const FileUploadScreen = (props) => {
           placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)"
         />
       </div>
-
-      {/* <a href="http://localhost:3000/">
-                <Button submit={submit}>โพส</Button>     
-                {console.log("Submit " + submit)}       
-            </a> */}
-
+      
       <Button onClick={handleShow} className="btn-secondary">
         ดูตัวอย่าง
       </Button>
@@ -330,8 +314,8 @@ const FileUploadScreen = (props) => {
               })}
             </div>
 
-            <h9>{tag}</h9>
-            <br />
+            {/* <h9>{SelectTag.label}</h9>
+            <br /> */}
             <h9>{subject}</h9>
             <br />
           </Modal.Body>
@@ -343,7 +327,7 @@ const FileUploadScreen = (props) => {
               onChange={() => toggleCheckedss(!save)}
             >
               ตกลง
-              {console.log("Save " + save)}
+              {/* {console.log("Save " + save)} */}
             </Button>
           </Modal.Footer>
         </Modal>
