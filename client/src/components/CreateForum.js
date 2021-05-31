@@ -5,35 +5,30 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from "react-select";
 import { Modal, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
-import SelectTag from "./SelectTag"
+import SelectTag from "./SelectTag";
+import { useHistory } from "react-router-dom";
 
 const FileUploadScreen = (props) => {
+  let history = useHistory();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [multipleFiles, setMultipleFiles] = useState("");
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [tag, showTag] = useState("");
+  const [tag, setTag] = useState("");
+  const [listTag, setListTag] = useState([])
   const [subject, showSubject] = useState("");
-  const [save, setSave] = useState(false);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const toggleCheckedss = () => {
-    setSave((value) => !value);
-    handleClose();
+    if(show)
+      setShow(!show);
+    // handleClose();
   };
 
   const [multipleProgress, setMultipleProgress] = useState(0);
-
-  const optionsTag = [
-    { label: "Science", value: "Scienceact" },
-    { label: "Law", value: "Law" },
-    { label: "Database", value: "Database" },
-    { label: "DataTeat", value: "DataTeat" },
-    { label: "Art", value: "Art" },
-  ];
 
   const optionsSubject = [
     { label: "นิติศาสตร์", value: "นิติศาสตร์" },
@@ -89,12 +84,20 @@ const FileUploadScreen = (props) => {
     console.log("Title : " + title.target.value);
   }
 
+  const generateList = (str) => {
+    let arr = str.split(" ");
+    console.log('tag ', arr);
+    return arr;
+  };
+
   const UploadMultipleFiles = async () => {
     const formData = new FormData();
     formData.append("userID", user.userID);
     formData.append("title", title);
     formData.append("body", body);
-    formData.append("tag", tag);
+    for (let i = 0; i < listTag.length; i++) {
+      formData.append("tag", listTag[i]);
+    }
     formData.append("subject", subject);
     for (let i = 0; i < multipleFiles.length; i++) {
       formData.append("files", multipleFiles[i]);
@@ -110,12 +113,13 @@ const FileUploadScreen = (props) => {
     console.log("Body : " + body);
   };
 
-  var myTag = "";
   function onChangeInputTag(tag) {
-    myTag = "";
+    let myTag = "";
     tag.map((o) => (myTag += o.label + " "));
     console.log("myTag : " + myTag);
-    showTag(myTag);
+    setListTag(generateList(myTag));
+    console.log("Tag : " + listTag);
+    setTag(myTag);
   }
   var mySub = "";
   function onChangeInputSub(subject) {
@@ -133,6 +137,7 @@ const FileUploadScreen = (props) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "ยันยัน",
       cancelButtonText: "แก้ไข",
+      onConfirm: props.action
     }).then((result) => {
       if (result.value === true) {
         // Swal.fire({
@@ -142,11 +147,12 @@ const FileUploadScreen = (props) => {
         //     timer: 2000,
         //     showConfirmButton: false
         //   }, function(){
-       
+
         //   });
+        
         UploadMultipleFiles();
-        console.log("result Valur " + result.value); 
-        window.location.href = "http://localhost:3000/";
+        console.log("result Valur " + result.value);
+        history.push("/");
       } else {
         result.value = false;
         console.log("result Valur " + result.value);
@@ -164,10 +170,9 @@ const FileUploadScreen = (props) => {
       fetch(`http://localhost:5000/users/google/${_result.googleId}`)
         .then((res) => res.json())
         .then((res) => {
-
           _result["userID"] = res.userID;
           _user["result"] = _result;
-          //   console.log(_user);
+          console.log(_user);
           setUser("User " + _user);
         });
     }
@@ -257,7 +262,7 @@ const FileUploadScreen = (props) => {
           เพิ่มแท็กได้สูงสุด 5 แท็กเพื่ออธิบายว่าคำถามของคุณเกี่ยวกับอะไร
         </h8>
         <br></br>
-        <SelectTag />
+        <SelectTag updateTagList={onChangeInputTag} />
       </div>
 
       <div className="form-group">
@@ -288,7 +293,6 @@ const FileUploadScreen = (props) => {
 
       <Button
         type="button"
-        onClick={() => UploadMultipleFiles()}
         className="ml-3 btn btn-primary"
         onClick={sweetAlert}
       >
@@ -339,11 +343,9 @@ const FileUploadScreen = (props) => {
           <Modal.Footer>
             <Button
               variant="primary"
-              onClick={toggleCheckedss}
-              onChange={() => toggleCheckedss(!save)}
+              onClick={()=>{toggleCheckedss()}}
             >
               ตกลง
-              {console.log("Save " + save)}
             </Button>
           </Modal.Footer>
         </Modal>
