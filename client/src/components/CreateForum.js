@@ -88,9 +88,12 @@ const FileUploadScreen = (props) => {
   };
   function getDataTitle(title) {
     setTitle(title.target.value);
+    // console.log("Title : " + title.target.value);
   }
 
   const generateList = (str) => {
+    // let arr = str.split(" ");
+    // console.log('tag ', arr);
     return str;
   };
 
@@ -111,24 +114,30 @@ const FileUploadScreen = (props) => {
     }
     await multipleFilesUpload(formData, mulitpleFileOptions);
 
+    // props.getMultiple();
   };
 
   const handleChange = (e, editor) => {
     const body = editor.getData();
     setBody(body);
+    console.log("Body : " + body);
   };
 
   function onChangeInputTag(tag) {
     let myTag = [];
     tag.map((o) => (myTag.push(o.label)));
+    // console.log("myTag : " + myTag);
     setListTag(generateList(myTag));
+    // console.log("Tag : " + listTag);
     setTag(myTag);
   }
   
   function onChangeInputSub(subject) {
     let mySubject = [];
     subject.map((o) => (mySubject.push(o.label)));
+    // console.log("subject: "+mySubject+", ");
     setListSubject(generateList(mySubject))
+    // console.log("subject : " + listsubject);    
     showSubject(mySubject);
   }
 
