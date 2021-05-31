@@ -20,7 +20,7 @@ const SelectTag = (props) => {
           value: d.tagID,
           label: d.name,
         }));
-        console.log(options);
+        // console.log(options);
         setOption(options);
       });
 

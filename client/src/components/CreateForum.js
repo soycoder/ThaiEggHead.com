@@ -18,6 +18,7 @@ const FileUploadScreen = (props) => {
   const [tag, setTag] = useState("");
   const [listTag, setListTag] = useState([])
   const [subject, showSubject] = useState("");
+  const [listsubject, setListSubject] = useState([])
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -75,7 +76,7 @@ const FileUploadScreen = (props) => {
   function deleteFile(e) {
     const s = file.filter((item, index) => index !== e);
     setFile(s);
-    console.log("S " + s);
+    // console.log("S " + s);
   }
 
   const mulitpleFileOptions = {
@@ -87,13 +88,10 @@ const FileUploadScreen = (props) => {
   };
   function getDataTitle(title) {
     setTitle(title.target.value);
-    console.log("Title : " + title.target.value);
   }
 
   const generateList = (str) => {
-    let arr = str.split(" ");
-    console.log('tag ', arr);
-    return arr;
+    return str;
   };
 
   const UploadMultipleFiles = async () => {
@@ -104,36 +102,36 @@ const FileUploadScreen = (props) => {
     for (let i = 0; i < listTag.length; i++) {
       formData.append("tag", listTag[i]);
     }
-    formData.append("subject", subject);
+    // formData.append("subject", subject);
+    for (let i = 0; i < listsubject.length; i++) {
+      formData.append("subject", listsubject[i]);
+    }
     for (let i = 0; i < multipleFiles.length; i++) {
       formData.append("files", multipleFiles[i]);
     }
     await multipleFilesUpload(formData, mulitpleFileOptions);
 
-    // props.getMultiple();
   };
 
   const handleChange = (e, editor) => {
     const body = editor.getData();
     setBody(body);
-    console.log("Body : " + body);
   };
 
   function onChangeInputTag(tag) {
-    let myTag = "";
-    tag.map((o) => (myTag += o.label + " "));
-    console.log("myTag : " + myTag);
+    let myTag = [];
+    tag.map((o) => (myTag.push(o.label)));
     setListTag(generateList(myTag));
-    console.log("Tag : " + listTag);
     setTag(myTag);
   }
   
-  var mySub = "";
   function onChangeInputSub(subject) {
-    subject.map((o) => (mySub += o.label + " "));
-    console.log("subject: "+mySub+", ");
-    showSubject(mySub);
+    let mySubject = [];
+    subject.map((o) => (mySubject.push(o.label)));
+    setListSubject(generateList(mySubject))
+    showSubject(mySubject);
   }
+
   function sweetAlert() {
     Swal.fire({
       title: "คุณต้องการโพสหรือไม่",
@@ -148,11 +146,11 @@ const FileUploadScreen = (props) => {
     }).then((result) => {
       if (result.value === true) {
         UploadMultipleFiles();
-        console.log("result Valur " + result.value);
+        // console.log("result Valur " + result.value);
         history.push("/");
       } else {
         result.value = false;
-        console.log("result Valur " + result.value);
+        // console.log("result Valur " + result.value);
       }
     });
   }
@@ -200,9 +198,9 @@ const FileUploadScreen = (props) => {
         </h8>
         <CKEditor
           editor={ClassicEditor}
-          data="<p>  
-                    <br></br>
-                </p>"
+          // data="<p>  
+          //           <br></br>
+          //       </p>"
           onInit={(editor) => {
             editor.editing.view.change((writer) => {
               writer.setStyle(
@@ -220,8 +218,6 @@ const FileUploadScreen = (props) => {
                 "|",
                 "bold",
                 "italic",
-                "|",
-                "link",
                 "|",
                 "bulletedList",
                 "numberedList",
