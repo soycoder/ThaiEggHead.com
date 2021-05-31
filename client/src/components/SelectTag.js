@@ -4,11 +4,19 @@ import Select from "react-select/creatable";
 const SelectTag = (props) => {
   const [option, setOption] = useState([]);
 
+  const optionsTag = [
+    { name: "Art", tagID: "Art" },
+    { name: "Database", tagID: "Database" },
+    { name: "Science", tagID: "Scienceact" },
+    { name: "Law", tagID: "Law" },    
+  ];
+
   useEffect(() => {
     fetch(`http://localhost:5000/forums/tag`)
       .then((res) => res.json())
       .then((res) => {
-        let options = res.map((d) => ({
+        let array = optionsTag.concat(res);
+        let options = array.map((d) => ({
           value: d.tagID,
           label: d.name,
         }));
