@@ -8,13 +8,17 @@ import {
   Badge,
   DropdownButton,
   Dropdown,
-  ButtonGroup
+  Image
 } from "react-bootstrap";
 import { Button, Icon } from "@blueprintjs/core";
 
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { COLORS, images } from "../constants"
+
+function CommentCard() {
+
+}
 
 function ForumCard(props) {
 
@@ -38,6 +42,8 @@ function ForumCard(props) {
     const [user, setUser] = useState(dummyUser);
     const [pathUser, setPathUser] = useState("");
     
+    console.log(forum.listImage[0]?.filePath);
+
     useEffect(() => {
       fetch(`http://localhost:5000/profile/${forum.userID}`)
         .then((res) => res.json())
@@ -62,7 +68,7 @@ function ForumCard(props) {
     const ListTag = (props) => {
       const list = props.data;
       const subjectTag = list.map((subject) =>
-          <Badge variant="info">{subject}</Badge>
+          <Badge variant="info" style={{marginLeft:4}}>{subject}</Badge>
           // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
       return(
@@ -102,7 +108,6 @@ function ForumCard(props) {
             </Button>
           </OverlayTrigger>
         </div>
-        
       )
     }
     return (
@@ -121,7 +126,7 @@ function ForumCard(props) {
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="#/action-1">Report</Dropdown.Item>
-                      <Dropdown.Item href="#/action-1">block</Dropdown.Item>
+                      <Dropdown.Item href="#/action-1">Block</Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item href="#/action-2">Bookmark</Dropdown.Item>
                     </Dropdown.Menu>
@@ -130,11 +135,16 @@ function ForumCard(props) {
                 
               </div>
               <div class="content">
-              <Card.Title >{forum.title}</Card.Title>
-                <div dangerouslySetInnerHTML={{
-                    __html: post
-                    }}>
-                  </div>
+                <Card.Title >{forum.title}</Card.Title>
+                  <div dangerouslySetInnerHTML={{
+                      __html: post
+                      }}/>
+                {
+                  forum.listImage[0]?.filePath ? (
+                  <Image src={"http://localhost:5000/" + forum.listImage[0]?.filePath} fluid className="forum-img" />
+                  ) : (<></>)
+                }
+    
               </div>
             </div>
             <div className="card-tag">
