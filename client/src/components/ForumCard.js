@@ -12,7 +12,7 @@ import {
   Form,
   Button as Button2
 } from "react-bootstrap";
-import { Button, Icon, InputGroup } from "@blueprintjs/core";
+import { Button, Icon, InputGroup, Text } from "@blueprintjs/core";
 import React, { useState, useEffect } from "react";
 import { images } from "../constants"
 
@@ -37,6 +37,7 @@ function ForumCard(props) {
   const Question = () => {
 
     const [user, setUser] = useState(dummyUser);
+    const [isViewMore, setIsViewMore] = useState(false);
   
     var n = forum.postText.length;
       if (n > 160){
@@ -141,6 +142,10 @@ function ForumCard(props) {
       setIsShowComment(!isShowComment)
     }
 
+    const handleClickViewMore = () => {
+      setIsViewMore(!isViewMore)
+    }
+
     return (
           <>
             <div>
@@ -156,9 +161,22 @@ function ForumCard(props) {
               </div>
               <div class="content">
                 <Card.Title >{forum.title}</Card.Title>
-                  <div dangerouslySetInnerHTML={{
-                      __html: post
+                <div>
+                  {isViewMore?(<>
+                    <div dangerouslySetInnerHTML={{
+                      __html: forum.postText
                       }}/>
+                    <Button className="btn-viewmore bp3-minimal bp3-small" onClick={() => handleClickViewMore()}>(ดูน้อยลง)</Button>
+                      </>
+                  ):(<>
+                    <div dangerouslySetInnerHTML={{__html: post}}/>
+                    <Button className="btn-viewmore bp3-minimal bp3-small" onClick={() => handleClickViewMore()}>(ดูเพิ่มเติม)</Button>
+                                          
+                      </>
+                    )}
+                
+                </div>
+                  
                 {
                   forum.listImage[0]?.filePath ? (
                   <Image src={"http://localhost:5000/" + forum.listImage[0]?.filePath} fluid className="forum-img" />
@@ -203,7 +221,6 @@ function ForumCard(props) {
           </Button>
         </OverlayTrigger> 
       )
-     
     }
 
     const ReplyBotton = () => {
