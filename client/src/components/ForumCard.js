@@ -77,7 +77,7 @@ function ForumCard(props) {
     const ListSubjectTag = (props) => {
       const list = props.data;
       const subjectTag = list.map((subject) =>
-          <Badge variant="primary">{subject}</Badge> 
+          <Badge variant="primary" style={{marginLeft:4}}>{subject}</Badge> 
       );
       return(
         <div className="tag">
@@ -101,7 +101,7 @@ function ForumCard(props) {
     
     const ButtomOption = () => {
       return(
-        <div style={{marginLeft:10}}>
+        <div style={{marginLeft:10, marginBottom:5}}>
           <UpvoteBotton upvote={10}/>
 
           {/* Comment Btn */}
@@ -161,16 +161,16 @@ function ForumCard(props) {
               </div>
               <div class="content">
                 <Card.Title >{forum.title}</Card.Title>
-                <div>
+                <div style={{marginBottom:5}}>
                   {isViewMore?(<>
                     <div dangerouslySetInnerHTML={{
                       __html: forum.postText
                       }}/>
-                    <Button className="btn-viewmore bp3-minimal bp3-small" onClick={() => handleClickViewMore()}>(ดูน้อยลง)</Button>
+                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(ดูน้อยลง)</Button>
                       </>
                   ):(<>
                     <div dangerouslySetInnerHTML={{__html: post}}/>
-                    <Button className="btn-viewmore bp3-minimal bp3-small" onClick={() => handleClickViewMore()}>(ดูเพิ่มเติม)</Button>
+                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(ดูเพิ่มเติม)</Button>
                                           
                       </>
                     )}
