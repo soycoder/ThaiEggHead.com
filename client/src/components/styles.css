@@ -18,10 +18,20 @@ body {
 
 .header {
   margin: 15px;
-  margin-bottom:20px;
+  margin-bottom:10px;
 }
 
 .co-logo {
+  /*display:block;*/
+  float:left;
+  margin-right:8px;
+  border-radius: 50% !important;
+
+  width:40px;
+  height:40px;
+}
+
+.co-logo2 {
   /*display:block;*/
   float:left;
   margin-right:8px;
@@ -81,6 +91,16 @@ body {
   line-height: 1.38;
 }
 
+.answerlist-content{
+  clear:both;
+  margin-left: 63px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  font-family: Helvetica, sans-serif;
+  font-size:14px;
+  line-height: 1.38;
+}
+
 .tag{
   margin-left: 10px;
   margin-bottom: 15px;
@@ -94,10 +114,16 @@ body {
 }
 
 .comment{
-  width: 60px;
+  max-width: 150px;
   border-radius: 19px;
-  margin-bottom: 5px;
 }
+
+.comment2{
+  max-width: 150px;
+  border-radius: 19px;
+  margin-left: -10px;
+}
+
 
 .nav-subject{
   position: fixed;
@@ -125,4 +151,46 @@ body {
   object-fit: cover;
   width: 100%;
   max-height: 400px;
+}
+
+.answer-box{
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.answer-pad{
+  background-color: rgba(247,247,248,255);
+}
+
+.btn-answer{
+  height: 33px;
+  color: white;
+  font-size: 14px;
+  border-radius: 20px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.input-answer{
+  width: 67%;
+  border: none;
+}
+
+.main-card{
+  border-radius: 0px;
+}
+
+.answerlist-card{
+  background-color: rgba(247,247,248,255);
+  border-left:none;
+  border-right:none;
+  border-bottom:none;
+  border-radius: 0px;
+}
+
+.answerlist-content-text{
+  margin-bottom: 10px;
 }

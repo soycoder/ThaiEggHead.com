@@ -22,7 +22,7 @@ import "./styles.css";
 
 function Home() {
   // Initial User Profile
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage?.getItem("profile")));
 
   // Net เพิ่มส่วน ป๊อบอัพกรอกข้อมูล
   const [show, setShow] = useState(false);
