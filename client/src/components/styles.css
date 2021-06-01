@@ -41,6 +41,16 @@ body {
   height:40px;
 }
 
+.co-logo-comment {
+  /*display:block;*/
+  float:left;
+  margin-right:8px;
+  border-radius: 50% !important;
+
+  width:25px;
+  height:25px;
+}
+
 .co-name > a {
   font-family: Helvetica;
   font-size:14px;
@@ -189,8 +199,22 @@ body {
   border-right:none;
   border-bottom:none;
   border-radius: 0px;
+  margin-bottom: 20px;
 }
 
 .answerlist-content-text{
   margin-bottom: 10px;
+}
+
+.commentlist-content-text{
+  margin-left: 15px;
+}
+
+.commentlist-content{
+  margin-left: 63px;
+  margin-right: 10px;
+  font-family: Helvetica, sans-serif;
+  font-size:14px;
+  line-height: 1.38;
+  border-left: 3px solid rgba(230,231,232,255);
 }

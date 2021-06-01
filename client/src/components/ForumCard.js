@@ -178,7 +178,12 @@ function ForumCard(props) {
 
   const Answer = () => {
 
+    const dummyComment = [{
+      comment:"NOPE"
+    }]
+
     const [isLoadingAnswer, setIsLoadingAnswer] = useState(true);
+    const [comment, setComment] = useState(dummyComment)
     const [user, setUser] = useState(JSON.parse(localStorage?.getItem("profile")));
     const [userAnswer, setUserAnswer] = useState(dummyUser);
     
@@ -220,7 +225,6 @@ function ForumCard(props) {
     }
 
     const AnswerForm = () => {
-  
       return(
         <div>
           <div className="answer-box">
@@ -232,7 +236,43 @@ function ForumCard(props) {
                       />
             <Button2 variant="primary" className="btn-answer">Add answer</Button2>
           </div>
-              
+        </div>
+      )
+    }
+
+    const CommentList = () => {
+      return(
+        <div class="commentlist-content">
+            <HeaderUserComment/>
+            <div class="commentlist-content-text">
+              The first one kind of happened where I live for a couple of weeks.
+            </div>
+        </div>
+      )
+    }
+
+    const HeaderUserComment = () => {
+      return(
+        <div class="header">
+          <div class="options"><i class="fa fa-chevron-down"></i></div>
+          <img class="co-logo-comment" src={userAnswer[1].img} />
+          <div class="co-name"><a href="#">{userAnswer[1].displayName}</a></div>
+          <div class="time"><a href="#">{userAnswer[1].date}</a> · <i class="fa fa-globe"></i></div>
+          <div className="btn-more">
+          </div>
+        </div>
+      )
+    }
+
+    const HeaderUserAnswer = () => {
+      return(
+        <div class="header">
+          <div class="options"><i class="fa fa-chevron-down"></i></div>
+          <img class="co-logo" src={userAnswer[0].img} />
+          <div class="co-name"><a href="#">{userAnswer[0].displayName}</a></div>
+          <div class="time"><a href="#">{userAnswer[0].date}</a> · <i class="fa fa-globe"></i></div>
+          <div className="btn-more">
+          </div>
         </div>
       )
     }
@@ -241,16 +281,7 @@ function ForumCard(props) {
       return(
         <Card className="answerlist-card">
           <div>
-            <div class="header">
-              <div class="options"><i class="fa fa-chevron-down"></i></div>
-              <img class="co-logo" src={userAnswer[0].img} />
-              <div class="co-name"><a href="#">{userAnswer[0].displayName}</a></div>
-              <div class="time"><a href="#">{userAnswer[0].date}</a> · <i class="fa fa-globe"></i></div>
-              <div className="btn-more">
-              </div>
-              
-            </div>
-
+            <HeaderUserAnswer/>
             <div class="answerlist-content">
                 <div class="answerlist-content-text">
                   The first one kind of happened where I live for a couple of weeks.
@@ -258,8 +289,10 @@ function ForumCard(props) {
                 <UpvoteBotton upvote={0}/>
                 <ReplyBotton />
             </div>
-            
           </div>
+
+          {comment? (<><CommentList/><CommentList/></>):(<></>)}
+        
         </Card>
       )
     }
