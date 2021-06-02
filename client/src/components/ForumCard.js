@@ -20,6 +20,11 @@ function ForumCard(props) {
 
   let forum = props.data;
   const [isShowComment, setIsShowComment] = useState(false);
+  const [isViewMore, setIsViewMore] = useState(false);
+  
+  const handleClickComment = () => {
+    setIsShowComment(!isShowComment)
+  }
 
   const dummyUser = [
         {
@@ -37,7 +42,7 @@ function ForumCard(props) {
   const Question = () => {
 
     const [user, setUser] = useState(dummyUser);
-    const [isViewMore, setIsViewMore] = useState(false);
+    
   
     var n = forum.postText.length;
       if (n > 160){
@@ -138,10 +143,6 @@ function ForumCard(props) {
       )
     }
 
-    const handleClickComment = () => {
-      setIsShowComment(!isShowComment)
-    }
-
     const handleClickViewMore = () => {
       setIsViewMore(!isViewMore)
     }
@@ -166,11 +167,11 @@ function ForumCard(props) {
                     <div dangerouslySetInnerHTML={{
                       __html: forum.postText
                       }}/>
-                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(ดูน้อยลง)</Button>
+                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(แสดงน้อยลง)</Button>
                       </>
                   ):(<>
                     <div dangerouslySetInnerHTML={{__html: post}}/>
-                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(ดูเพิ่มเติม)</Button>
+                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(แสดงเพิ่มเติม)</Button>
                                           
                       </>
                     )}
@@ -201,7 +202,8 @@ function ForumCard(props) {
     }]
 
     const [isLoadingAnswer, setIsLoadingAnswer] = useState(true);
-    const [comment, setComment] = useState(dummyComment)
+    const [isShowCommentForm, setIsShowCommentForm] = useState(false);
+    const [comment, setComment] = useState(dummyComment);
     const [user, setUser] = useState(JSON.parse(localStorage?.getItem("profile")));
     const [userAnswer, setUserAnswer] = useState(dummyUser);
     
@@ -234,7 +236,7 @@ function ForumCard(props) {
             </Tooltip>
           }
         >
-          <Button className="bp3-minimal comment2" icon="chat" style={{marginLeft:5}}>
+          <Button className="bp3-minimal comment2" icon="chat" style={{marginLeft:5}} onClick={() => handleClickCommentForm()}>
             Reply
           </Button>
         </OverlayTrigger> 
@@ -266,6 +268,10 @@ function ForumCard(props) {
             </div>
         </div>
       )
+    }
+
+    const handleClickCommentForm = () => {
+      setIsShowCommentForm(!isShowCommentForm)
     }
 
     const HeaderUserComment = () => {
@@ -303,8 +309,23 @@ function ForumCard(props) {
                 <div class="answerlist-content-text">
                   The first one kind of happened where I live for a couple of weeks.
                 </div>
-                <UpvoteBotton upvote={0}/>
-                <ReplyBotton />
+                
+                {isShowCommentForm? (
+                  <div style={{display: 'flex'}}>
+                    <InputGroup
+                          onChange={{}}
+                          placeholder="Add a comment..."
+                          className="input-answer"
+                      />
+                    <Button2 variant="primary" className="btn-answer">Reply</Button2>
+                  </div>
+                ):(
+                  <>
+                    <UpvoteBotton upvote={0}/>
+                    <ReplyBotton />                  
+                  </>
+                )}
+                
             </div>
           </div>
 
