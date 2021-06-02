@@ -9,8 +9,9 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import ForumCard from "../components/ForumCard";
+import Select from "react-select"
 
 function Sub() {
   let { subject } = useParams();
@@ -23,23 +24,54 @@ function Sub() {
       .then((res) => setForumData(res));
   }, []);
 
-  const [tag, setTag] = useState("");
+  var [tag, setTag] = useState("");
+  const [value, getValue]=useState([]);
   // console.log(forumData)
   var newArray = forumData.filter(function(ele){
-    var i;
+    var i, j;
     var n = ele.listTag.length;
-    for(i=0; i<n; i++){
-      console.log(n)
-      if(ele.listTag[i] === tag){
-        return ele.listTag;
-      }
-      else if (tag === ""){
-        return newArray = forumData;
+    var nn = value.length;
+    console.log(tag, value)
+    console.log(nn);
+    for(i=0; i<=nn; i++){
+      for(j=0; j<n; j++){
+        // console.log(n);
+        if(nn != 0){
+          tag=value[i]
+        }
+        console.log(tag);
+        if(ele.listTag[j] === tag){
+          return ele.listTag;
+        }
+        else if (tag === ""){
+          return newArray = forumData;
+        }
       }
     }
   });
   console.log(newArray)
 
+  const Tag = [
+    { label: "java", value: "java" },
+    { label: "php", value: "php" },
+    { label: "law", value: "law" },
+    { label: "c++", value: "c++" },
+    { label: "js", value: "js" },
+    { label: "c", value: "c" },
+    { label: "python", value: "python" },
+    { label: "r", value: "r" },
+    { label: "Database", value: "Database" },
+    { label: "HCI", value: "HCI" },
+    { label: "ui", value: "ui" }
+  ];
+
+  
+  var handle = (e) => {
+    getValue(Array.isArray(e)?e.map(x=>x.label):[]);
+    
+  }
+  // console.log(value);
+  
   return (
     <div className="App">
       {/* <div className="app-content"></div> */}
@@ -97,6 +129,11 @@ function Sub() {
                       placeholder="Enter tag"
                     />
                   </form>
+                  <br />
+                  <div >
+                    <Select isMulti options={Tag} onChange={handle}></Select>
+                  </div>
+                        
                 </Card.Body>
               </Card>
               <br />
@@ -133,5 +170,4 @@ function Sub() {
     </div>
   );
 }
-
 export default Sub;
