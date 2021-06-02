@@ -6,7 +6,7 @@ const tagSchema = new mongoose.Schema(
       type: String,
     },
     name: {
-      type: Array,
+      type: String,
       required: true,
     },
   },

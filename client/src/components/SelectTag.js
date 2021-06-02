@@ -37,10 +37,6 @@ const SelectTag = (props) => {
         placeholder="ตัวอย่าง (Programing, Database, Law, Art)"
         isClearable
       />
-
-      {/* {
-            this.state.value === null ? "" : this.state.value.map(v => <h4>{v.label} { (v.__isNew__)? "true": "false"}</h4>)
-        } */}
     </div>
   );
 };
