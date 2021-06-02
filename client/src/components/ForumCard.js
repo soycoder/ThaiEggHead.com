@@ -12,7 +12,7 @@ import {
   Form,
   Button as Button2
 } from "react-bootstrap";
-import { Button, Icon, InputGroup, Text } from "@blueprintjs/core";
+import { Button, Icon, InputGroup } from "@blueprintjs/core";
 import React, { useState, useEffect } from "react";
 import { images } from "../constants"
 
