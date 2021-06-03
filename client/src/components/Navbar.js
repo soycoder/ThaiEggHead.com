@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Navbar, Nav, Dropdown } from "react-bootstrap";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Avatar, Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { Switch, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
 
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
@@ -22,10 +24,50 @@ const NavigationBar = ({ isAuthenticated }) => {
     user = decoded;
   }
 
+  const ProfileOption = () => {
+    return (
+      <Dropdown style={{ marginLeft: 20 }}>
+        <Dropdown.Toggle
+          variant="light"
+          className="btn-morestyle"
+          bsPrefix="p-0"
+        >
+          <img class="img-user" src={user?.result.imageUrl} />
+        </Dropdown.Toggle>
+        <Dropdown.Menu style={{ width: 250 }}>
+          <Dropdown.Item href="profile/1" className="menu-text">
+            <div>
+              <img class="img-user2" src={user?.result.imageUrl} />
+              {user?.result.name}
+            </div>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item href="#/action-1" className="menu-text">
+            Bookmark
+          </Dropdown.Item>
+          <Dropdown.Item href="#/action-1" className="menu-text">
+            Your content
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item href="#/action-2" className="menu-text">
+            Settings
+          </Dropdown.Item>
+          <Dropdown.Item href="#/action-2" className="menu-text">
+            Help
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item onClick={logout} className="menu-text">
+            Sign out
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  };
+
   return (
     <div className="Navbar">
-      <Navbar expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand style={{ marginLeft: 70 }}>
+      <Navbar expand="lg" bg="dark" variant="dark" className="Navbar2">
+        <Navbar.Brand style={{ marginLeft: 250 }}>
           <Link to="/">
             <div>
               <img
@@ -54,9 +96,11 @@ const NavigationBar = ({ isAuthenticated }) => {
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-
         {user ? (
-          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Collapse
+            className="justify-content-end"
+            style={{ marginRight: 250 }}
+          >
             <div className="bp3-input-group .modifier">
               <span className="bp3-icon bp3-icon-search "></span>
               <input
@@ -67,23 +111,7 @@ const NavigationBar = ({ isAuthenticated }) => {
               />
             </div>
 
-            <Avatar
-              alt={user.firstName}
-              src={user.imgURL}
-              style={{ marginLeft: SIZES.padding, width: 35, height: 35 }}
-            >
-              {/* {user?.result.name.charAt(0)} */}
-            </Avatar>
-            <div style={{ marginLeft: SIZES.padding / 2, color: "white" }}>
-              {user.firstName + " " + user.lastName}
-            </div>
-
-            <Button
-              onClick={() => auth.logout()}
-              style={{ marginLeft: SIZES.padding / 2, color: "white" }}
-            >
-              Logout
-            </Button>
+            <ProfileOption />
           </Navbar.Collapse>
         ) : (
           <Navbar.Collapse className="justify-content-end">

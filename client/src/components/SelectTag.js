@@ -4,15 +4,23 @@ import Select from "react-select/creatable";
 const SelectTag = (props) => {
   const [option, setOption] = useState([]);
 
+  const optionsTag = [
+    { name: "Art", tagID: "Art" },
+    { name: "Database", tagID: "Database" },
+    { name: "Science", tagID: "Scienceact" },
+    { name: "Law", tagID: "Law" },    
+  ];
+
   useEffect(() => {
     fetch(`http://localhost:5000/forums/tag`)
       .then((res) => res.json())
       .then((res) => {
-        let options = res.map((d) => ({
+        let array = optionsTag.concat(res);
+        let options = array.map((d) => ({
           value: d.tagID,
           label: d.name,
         }));
-        console.log(options);
+        // console.log(options);
         setOption(options);
       });
 
@@ -29,10 +37,6 @@ const SelectTag = (props) => {
         placeholder="ตัวอย่าง (Programing, Database, Law, Art)"
         isClearable
       />
-
-      {/* {
-            this.state.value === null ? "" : this.state.value.map(v => <h4>{v.label} { (v.__isNew__)? "true": "false"}</h4>)
-        } */}
     </div>
   );
 };

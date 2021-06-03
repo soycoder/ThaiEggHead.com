@@ -8,11 +8,10 @@ import {
   Container,
   ListGroup,
 } from "react-bootstrap";
-import {
-  Link,
-} from "react-router-dom";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
+import ForumCard from "../components/ForumCard";
+import Select from "react-select"
 
 function Sub() {
   let { subject } = useParams();
@@ -24,6 +23,64 @@ function Sub() {
       .then((res) => res.json())
       .then((res) => setForumData(res));
   }, []);
+
+  var [tag, setTag] = useState("");
+  const [value, getValue]=useState([]);
+  // console.log(forumData)
+  var newArray = forumData.filter(function(ele){
+    var i, j;
+    var n = ele.listTag.length;
+    var nn = value.length;
+    console.log(tag, value)
+    console.log(nn);
+    for(i=0; i<=nn; i++){
+      for(j=0; j<n; j++){
+        // console.log(n);
+        if(nn != 0){
+          tag=value[i]
+        }
+        console.log(tag);
+        if(ele.listTag[j] === tag){
+          return ele.listTag;
+        }
+        else if (tag === ""){
+          return newArray = forumData;
+        }
+      }
+    }
+  });
+  console.log(newArray)
+
+  const Tag = [
+    { name: "Art", tagID: "Art" },
+    { name: "Database", tagID: "Database" },
+    { name: "Science", tagID: "Scienceact" },
+    { name: "Law", tagID: "Law" },
+  ];
+
+  const [optionTag, setOptionTag] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/forums/tag`)
+      .then((res) => res.json())
+      .then((res) => {
+        let array = Tag.concat(res);
+        let options = array.map((d) => ({
+          value: d.tagID,
+          label: d.name,
+        }));
+        // console.log(options);
+        setOptionTag(options);
+      });
+
+    
+  }, []);
+  
+  var handle = (e) => {
+    getValue(Array.isArray(e)?e.map(x=>x.label):[]);
+    
+  }
+  // console.log(value);
+  
   return (
     <div className="App">
       {/* <div className="app-content"></div> */}
@@ -62,9 +119,10 @@ function Sub() {
           <Row>
             <Col></Col>
             <Col xs={7}>
-              {forumData.map((forum) => (
+              {newArray.map((forum) => (
                 <ForumCard data={forum}></ForumCard>
               ))}
+              {/* {Tag()} */}
             </Col>
 
             <Col>
@@ -72,6 +130,19 @@ function Sub() {
                 <Card.Header>Custom Filter</Card.Header>
                 <Card.Body>
                   <Card.Link href="#">Create a custom filter</Card.Link>
+                  <form>
+                    {/* <input name="tag" id="tag" /> */}
+                    <input 
+                      type="tag"
+                      onChange={e => setTag(e.target.value)}
+                      placeholder="Enter tag"
+                    />
+                  </form>
+                  <br />
+                  <div >
+                    <Select isMulti options={optionTag} onChange={handle}></Select>
+                  </div>
+                        
                 </Card.Body>
               </Card>
               <br />
@@ -108,53 +179,4 @@ function Sub() {
     </div>
   );
 }
-
-function ForumCard(props) {
-  let forum = props.data;
-  var n = forum.postText.length;
-    console.log(n, forum.postText)
-    if (n > 160){
-      var post = forum.postText.substr(0, 150)+"...";
-    }
-    else{
-      var post = forum.postText
-    }
-  const [user, setUser] = useState({});
-  const [pathUser, setPathUser] = useState("");
-  useEffect(() => {
-    fetch(`http://localhost:5000/users/${forum.userID}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-        setPathUser(`/users/${res.googleID}`);
-      });
-  }, []);
-  // console.log(user);
-  return (
-    <>
-      <Card>
-        <Row>
-          <Col xs={2} className="app-profile">
-            <img
-              src={user.imgURL}
-              height="30"
-              width="30"
-              className="app-cycle"
-            />
-            <p />
-            <Link to={pathUser}>{user.userName}</Link>
-          </Col>
-          <Col xs={10} className="app-paddingContent">
-            <Card.Title>{forum.title}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              {post}
-            </Card.Subtitle>
-          </Col>
-        </Row>
-      </Card>
-      <p />
-    </>
-  );
-}
-
 export default Sub;

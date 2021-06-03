@@ -22,7 +22,7 @@ import "./styles.css";
 
 function Home() {
   // Initial User Profile
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage?.getItem("profile")));
 
   // Net เพิ่มส่วน ป๊อบอัพกรอกข้อมูล
   const [show, setShow] = useState(false);
@@ -31,6 +31,20 @@ function Home() {
   const [datas, setdatas] = useState([]);
 
   const [multipleFiles, setMultipleFiles] = useState([]);
+  const [tag, setTag] = useState("");
+
+  var newArray = datas.filter(function(ele){
+    var i;
+    var n = ele.listTag.length;
+    for(i=0; i<n; i++){
+      if(ele.listTag[i] === tag){
+        return ele.listTag;
+      }
+      else if (tag === ""){
+        return newArray = datas;
+      }
+    }
+  });
 
   const subjectNavigate = [
     {
@@ -223,7 +237,7 @@ function Home() {
               <AnouncingCard/>
               <UserQuestionCard/>
 
-              {datas.map((forum) => (
+              {newArray.map((forum) => (
                 <ForumCard data={forum}></ForumCard>
                 ))}
 
@@ -234,6 +248,13 @@ function Home() {
                 <Card.Header>Custom Filter</Card.Header>
                 <Card.Body>
                   <Card.Link href="#">Create a custom filter</Card.Link>
+                  <form>
+                    <input 
+                      type="tag"
+                      onChange={e => setTag(e.target.value)}
+                      placeholder="Enter tag"
+                    />
+                  </form>
                 </Card.Body>
               </Card>
               <br />
