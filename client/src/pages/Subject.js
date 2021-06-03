@@ -52,19 +52,28 @@ function Sub() {
   console.log(newArray)
 
   const Tag = [
-    { label: "java", value: "java" },
-    { label: "php", value: "php" },
-    { label: "law", value: "law" },
-    { label: "c++", value: "c++" },
-    { label: "js", value: "js" },
-    { label: "c", value: "c" },
-    { label: "python", value: "python" },
-    { label: "r", value: "r" },
-    { label: "Database", value: "Database" },
-    { label: "HCI", value: "HCI" },
-    { label: "ui", value: "ui" }
+    { name: "Art", tagID: "Art" },
+    { name: "Database", tagID: "Database" },
+    { name: "Science", tagID: "Scienceact" },
+    { name: "Law", tagID: "Law" },
   ];
 
+  const [optionTag, setOptionTag] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/forums/tag`)
+      .then((res) => res.json())
+      .then((res) => {
+        let array = Tag.concat(res);
+        let options = array.map((d) => ({
+          value: d.tagID,
+          label: d.name,
+        }));
+        // console.log(options);
+        setOptionTag(options);
+      });
+
+    
+  }, []);
   
   var handle = (e) => {
     getValue(Array.isArray(e)?e.map(x=>x.label):[]);
@@ -131,7 +140,7 @@ function Sub() {
                   </form>
                   <br />
                   <div >
-                    <Select isMulti options={Tag} onChange={handle}></Select>
+                    <Select isMulti options={optionTag} onChange={handle}></Select>
                   </div>
                         
                 </Card.Body>

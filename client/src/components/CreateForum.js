@@ -56,22 +56,11 @@ const FileUploadScreen = (props) => {
       );
       setSelectImg((prevImages) => prevImages.concat(filesArray));
       Array.from(e.target.files).map((file) => URL.revokeObjectURL(file));
+      setFile((prevImages) => prevImages.concat(filesArray));
     }
   };
 
   const [file, setFile] = useState([]);
-
-  function uploadSingleFile(e) {
-    setMultipleFiles(e.target.files);
-    setMultipleProgress(0);
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files).map((file) =>
-        URL.createObjectURL(file)
-      );
-      setFile((prevImages) => prevImages.concat(filesArray));
-      Array.from(e.target.files).map((file) => URL.revokeObjectURL(file));
-    }
-  }
 
   function deleteFile(e) {
     const s = file.filter((item, index) => index !== e);
@@ -88,12 +77,9 @@ const FileUploadScreen = (props) => {
   };
   function getDataTitle(title) {
     setTitle(title.target.value);
-    // console.log("Title : " + title.target.value);
   }
 
   const generateList = (str) => {
-    // let arr = str.split(" ");
-    // console.log('tag ', arr);
     return str;
   };
 
@@ -106,7 +92,6 @@ const FileUploadScreen = (props) => {
       formData.append("tag", listTag[i]);
       console.log(listTag)
     }
-    // formData.append("subject", subject);
     for (let i = 0; i < listsubject.length; i++) {
       formData.append("subject", listsubject[i]);
     }
@@ -114,7 +99,6 @@ const FileUploadScreen = (props) => {
       formData.append("files", multipleFiles[i]);
     }
     await multipleFilesUpload(formData, mulitpleFileOptions);
-    // props.getMultiple();
   };
 
   const handleChange = (e, editor) => {
@@ -131,35 +115,21 @@ const FileUploadScreen = (props) => {
     tag.map((o) => (myTag.push(o.label)));
     tag.map((o) => (o.__isNew__) === "true" ? null : (o.__isNew__)? (Tag.push((o.label))) : null);
     setNewTag(Tag)
-    // console.log("aa "+Tag);
-    console.log(newTag)
-    console.log(newTag.length)
     setListTag(generateList(myTag));
-    setTag(myTag);console.log("New Tag : " + newTag);       
+    setTag(myTag);    
   }
 
   function sentTag() {
     for (let i = 0; i < newTag.length; i++) {
       axios
-        .post("http://localhost:5000/forums/tag", { tagID: "newTag", name: newTag[i] })
-        .then(response => {
-          console.log("response: ", response)
-        })
-        .catch(err => {
-          console.error(err)
-      })      
+        .post("http://localhost:5000/forums/tag", { tagID: "newTag", name: newTag[i] })    
     }
-    // console.log(newTag[1])
-
-
   }
 
   function onChangeInputSub(subject) {
     let mySubject = [];
     subject.map((o) => (mySubject.push(o.label)));
-    // console.log("subject: "+mySubject+", ");
     setListSubject(generateList(mySubject))
-    // console.log("subject : " + listsubject);    
     showSubject(mySubject);
   }
 
@@ -177,19 +147,16 @@ const FileUploadScreen = (props) => {
     }).then((result) => {
       if (result.value === true) {
         UploadMultipleFiles();
-        // console.log("result Valur " + result.value);
         sentTag();
         history.push("/");
       } else {
         result.value = false;
-        // console.log("result Valur " + result.value);
       }
     });
   }
 
   useEffect(() => {
     const token = user?.token;
-
     setUser(JSON.parse(localStorage.getItem("profile")));
     if (user) {
       let _user = user;
@@ -199,7 +166,6 @@ const FileUploadScreen = (props) => {
         .then((res) => {
           _result["userID"] = res.userID;
           _user["result"] = _result;
-          // console.log(_user);
           setUser("User " + _user);
         });
     }
@@ -230,9 +196,6 @@ const FileUploadScreen = (props) => {
         </h8>
         <CKEditor
           editor={ClassicEditor}
-          // data="<p>  
-          //           <br></br>
-          //       </p>"
           onInit={(editor) => {
             editor.editing.view.change((writer) => {
               writer.setStyle(
@@ -250,7 +213,7 @@ const FileUploadScreen = (props) => {
                 "bold",
                 "italic",
                 "|",
-                // "uploadImage",
+                "uploadImage",
                 "bulletedList",
                 "numberedList",
                 "todoList",
@@ -263,9 +226,28 @@ const FileUploadScreen = (props) => {
                 "redo",
               ],
             },
-            // ckfinder: {
-            //   uploadUrl: "/uploads",
-            // },
+            ckfinder: {
+              uploadUrl: '/upload', 
+              withCredentials: true,
+              headers: {
+                  'X-CSRF-TOKEN': 'CSFR-Token',
+                  Authorization: 'Bearer <JSON Web Token>'
+              }
+            },                        
+            image: {
+               // Configure the available styles.
+               styles: [
+                   'alignLeft', 'alignCenter', 'alignRight'
+               ],            
+               toolbar: [
+                   'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+                   '|',
+                   'resizeImage',
+                   '|',
+                   'imageTextAlternative'
+               ]
+           }            
+            
           }}
           onChange={handleChange}
         />
@@ -275,7 +257,6 @@ const FileUploadScreen = (props) => {
         <label>เพิ่มรูป (รองรับแบบหลายรูป)</label>
         <input
           onChange={(e) => MultipleFileChange(e)}
-          onChange={uploadSingleFile}
           className="form-control"
           type="file"
           id="formFileMultiple"
@@ -363,7 +344,7 @@ const FileUploadScreen = (props) => {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="primary">
+            <Button variant="primary" onClick={()=>{toggleCheckedss()}}>
               ตกลง
             </Button>
           </Modal.Footer>
