@@ -1,50 +1,57 @@
-import React, { useState, useEffect } from "react";
-import { Navbar, Nav, Image } from "react-bootstrap";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Avatar, Button } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+
+import { AuthContext } from "../context/AuthContext";
+import jwt_decode from "jwt-decode";
 
 import "./styles.css";
 
-import * as actionType from "../constants/actionTypes";
-import { images, SIZES } from "../constants";
+import { images, SIZES, COLORS } from "../constants";
 
-const NavigationBar = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const location = useLocation();
+const NavigationBar = ({ isAuthenticated }) => {
+  const auth = useContext(AuthContext);
 
-  const logout = () => {
-    dispatch({ type: actionType.LOGOUT });
+  var { token } = auth?.authState;
+  var decoded;
+  var user;
 
-    history.push("/auth");
-
-    setUser(null);
-  };
-
-  useEffect(() => {
-    const token = user?.token;
-
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  if (isAuthenticated) {
+    decoded = jwt_decode(token);
+    user = decoded;
+  }
 
   return (
     <div className="Navbar">
-      <Navbar expand="lg" bg="dark" variant="dark" >
-        <Navbar.Brand href="/" style={{marginLeft:70}}>
-          <div>
-            <img
-              src={images.logo}
-              width="70"
-              height="70"
-              alt="ThaiEggHead"
-              style={{position:'absolute',marginTop:-7,zIndex:200}}
-            />
-            <div style={{fontFamily: "supermarket", fontSize: 30, marginLeft:75}}>
-              ThaiEggHead
+      <Navbar expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand style={{ marginLeft: 70 }}>
+          <Link to="/">
+            <div>
+              <img
+                className="noselect nodrag"
+                src={images.logo}
+                width="70"
+                height="70"
+                alt="ThaiEggHead"
+                style={{
+                  position: "absolute",
+                  marginTop: -7,
+                  zIndex: 200,
+                }}
+              />
+              <div
+                className="text-logo noselect"
+                style={{
+                  fontFamily: "supermarket",
+                  fontSize: 30,
+                  marginLeft: 75,
+                }}
+              >
+                ThaiEggHead
+              </div>
             </div>
-          </div>
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -60,10 +67,21 @@ const NavigationBar = () => {
               />
             </div>
 
-            <Avatar alt={user?.result.name} src={user?.result.imageUrl} style={{ marginLeft: SIZES.padding, width: 35, height: 35 }}>{user?.result.name.charAt(0)}</Avatar>
-            <div style={{ marginLeft: SIZES.padding/2, color: "white" }}>{user?.result.name}</div>
+            <Avatar
+              alt={user.firstName}
+              src={user.imgURL}
+              style={{ marginLeft: SIZES.padding, width: 35, height: 35 }}
+            >
+              {/* {user?.result.name.charAt(0)} */}
+            </Avatar>
+            <div style={{ marginLeft: SIZES.padding / 2, color: "white" }}>
+              {user.firstName + " " + user.lastName}
+            </div>
 
-            <Button onClick={logout} style={{ marginLeft: SIZES.padding/2, color:"white" }}>
+            <Button
+              onClick={() => auth.logout()}
+              style={{ marginLeft: SIZES.padding / 2, color: "white" }}
+            >
               Logout
             </Button>
           </Navbar.Collapse>
@@ -83,9 +101,14 @@ const NavigationBar = () => {
             </div>
             <Button
               component={Link}
-              to="/Auth"
-              style={{ marginLeft: SIZES.padding2*2, marginRight: SIZES.padding3*4, borderRadius: 19}}
-              variant="contained" color="secondary"
+              to="/auth"
+              style={{
+                marginLeft: SIZES.padding2 * 2,
+                marginRight: SIZES.padding3 * 4,
+                borderRadius: 19,
+              }}
+              variant="contained"
+              color="secondary"
               size="mediem"
             >
               Join us

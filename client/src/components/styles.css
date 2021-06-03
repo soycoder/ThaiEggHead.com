@@ -4,113 +4,115 @@
   border-radius: 19px;
   padding-left: 20px;
   padding-right: 20px;
-  }
+}
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-  background-color:#e9ebee;
+  background-color: #e9ebee;
 }
 
 .header {
   margin: 15px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .co-logo {
   /*display:block;*/
-  float:left;
-  margin-right:8px;
+  float: left;
+  margin-right: 8px;
   border-radius: 50% !important;
 
-  width:40px;
-  height:40px;
+  width: 40px;
+  height: 40px;
 }
 
 .co-name > a {
   font-family: Helvetica;
-  font-size:14px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 1.38;
   color: #365899;
-  text-decoration:none;
-  
-  margin-bottom:2px;
+  text-decoration: none;
+
+  margin-bottom: 2px;
 }
 
 .co-name > a:hover {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
 .time {
   font-family: Helvetica;
-  font-size:12px;
+  font-size: 12px;
   color: #90949c;
 }
 
 .time > a {
   color: #90949c;
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .time > a:hover {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
 .options {
   font-family: Helvetica;
-  font-size:12px;
+  font-size: 12px;
   color: #e5e5e5;
-  float:right;
+  float: right;
 }
 
 .options:hover {
   color: black; /* Fallback */
-  color: rgba(0, 0, 0, .30);
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .content {
-  clear:both;
+  clear: both;
   margin: 15px;
   font-family: Helvetica, sans-serif;
-  font-size:14px;
+  font-size: 14px;
   line-height: 1.38;
 }
 
-.tag{
+.tag {
   margin-left: 10px;
   margin-bottom: 15px;
   display: inline;
 }
 
-.card-tag{
+.card-tag {
   margin-bottom: 10px;
   margin-left: 5px;
 }
 
-.comment{
+.comment {
   width: 60px;
   border-radius: 19px;
   margin-bottom: 5px;
 }
 
-.nav-subject{
+.nav-subject {
   position: fixed;
   display: block;
 }
 
-.btn-more{
+.btn-more {
   background-color: transparent;
-  position:absolute; 
-  left:94%; 
-  top:10px;
+  position: absolute;
+  left: 94%;
+  top: 10px;
 }
 
-.btn-morestyle{
+.btn-morestyle {
   background-color: transparent;
   color: gray;
   border: hidden;
@@ -118,4 +120,26 @@ body {
 
 .fixed {
   position: fixed;
+}
+
+.text-logo {
+  color: #ffffff;
+  -webkit-user-drag: none;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.noselect {
+  -webkit-user-select: none; /* Safari */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  -moz-user-select: none; /* Old versions of Firefox */
+  user-select: none; /* Non-prefixed version*/
+}
+
+.nodrag {
+  -webkit-user-drag: none;
 }

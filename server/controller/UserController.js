@@ -1,3 +1,9 @@
+import jsonwebtoken from "jsonwebtoken";
+import bcrypt from "bcrypt";
+
+import { jwtSecret } from "../config/jwtConfig.js";
+import { isBlank, logError, validatorEmail } from "../util/util.js";
+
 import User from "../models/User.js";
 
 // Retrieve and return all products from the const Products.
@@ -9,30 +15,87 @@ export const list = (req, res) => {
     );
 };
 
+// Check Sign in
+export let checkSignin = (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password)
+    return res.status(422).json(logError("Required fields"));
+  else {
+    User.findOne({ email: email })
+      .then((user) => {
+        if (!user) {
+          return res.status(404).json(logError(err || "Not found email"));
+        } else {
+          if (user.validPassword(password)) {
+            return res.json({ user: user.toAuthJSON() });
+          } else {
+            return res.status(401).json(logError("-Invalid credential"));
+          }
+        }
+      })
+      .catch((err) => res.status(401).json(logError(err)));
+  }
+};
+
 // add new user
 export const create = (req, res) => {
   User.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, _user) {
-    // console.log(_user);
+    console.log(_user);
     let old_id = "";
     if (_user) old_id = _user.userID;
     else old_id = "0";
 
-    let data = req.body;
-    data["userID"] = parseInt(old_id) + 1;
+    let userID = parseInt(old_id) + 1;
 
-    // add new user with userID continue
-    let user = new User(data);
+    let { firstName, lastName, email, password, role, bio, googleID, imgURL } =
+      req.body;
 
-    user
-      .save()
-      .then(() => {
-        return res.send({ success: "Create Successfully" });
-      })
-      .catch(() =>
-        res.status(404).send({
-          errors: { global: "Can't add new user userID " + userID },
-        })
-      );
+    if (!firstName || !lastName || !email || !password)
+      return res.status(422).json(logError("Invalid user registration info."));
+    if (!validatorEmail(email))
+      return res.status(422).json(logError("Invalid email address."));
+
+    role = isBlank(role)
+      ? "user"
+      : role === "admin" || role === "user"
+      ? role
+      : "user";
+
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(password, salt, (err, hash) => {
+        if (err) return res.status(400).json(logError(err));
+
+        var newUser = new User({
+          userID,
+          firstName,
+          lastName,
+          email,
+          password: hash,
+          role,
+          bio,
+          googleID,
+          imgURL,
+        });
+
+        // Save User in the database
+        User.init().then(function () {
+          // avoid dup by wait until finish building index
+          newUser
+            .save()
+            .then((user) => {
+              return res.json({
+                success: true,
+                message: "User Registered",
+                user: newUser.toNewRegisterJSON(),
+              });
+            })
+            .catch((err) => {
+              return res.status(400).json(logError(err));
+            });
+        });
+      });
+    });
   });
 };
 

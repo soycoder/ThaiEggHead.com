@@ -96,10 +96,9 @@ function Home() {
   ]
 
   useEffect(() => {
-    const token = user?.token;
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-    if (!user) {
+    if (user) {
       fetch(`http://localhost:5000/users/google/${user.result.googleId}`)
         .then((res) => res.json())
         .then((res) => {

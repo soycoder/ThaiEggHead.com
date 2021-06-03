@@ -3,24 +3,29 @@ GET http://localhost:5000/users HTTP/1.1
 
 ###
 
+GET http://localhost:5000/users/google/109585993819534771568 HTTP/1.1
+
+
 ###
-POST http://localhost:5000/users HTTP/1.1
+POST http://localhost:5000/users/register HTTP/1.1
 content-type: application/json
 
 {
-    "googleID": "5461",
-    "userName": "om.apisith",
-    "email":"om.apisith@gmail.com",
-    "password": "knvlskfbndgbd4b4dbf",
+    "email":"apis12@gmail.com",
+    "password": "12345678",
     "firstName": "Apisith",
     "lastName": "Wongsorn",
-    "imgURL": "",
-    "gender": "Male",
-    "birthDate": "5/1/2000",
     "bio": "Somewhere",
-    "country": "TH",
-    "timeRegister": "5/1/2021",
-    "score": 3
+    "role": "user"
+}
+
+###
+POST http://localhost:5000/users/signin HTTP/1.1
+content-type: application/json
+
+{
+    "email":"apisith.won@dome.tu.ac.th",
+    "password": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjE3MTllYjk1N2Y2OTU2YjU4MThjMTk2OGZmMTZkZmY3NzRlNzA4ZGUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNDM2NjQxNTQwNTU1LTJyZ29sbGpzNzFvZzc1azVuMXFlbTNwZnZmcjhhcWl1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNDM2NjQxNTQwNTU1LTJyZ29sbGpzNzFvZzc1azVuMXFlbTNwZnZmcjhhcWl1LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA5NTg1OTkzODE5NTM0NzcxNTY4IiwiaGQiOiJkb21lLnR1LmFjLnRoIiwiZW1haWwiOiJhcGlzaXRoLndvbkBkb21lLnR1LmFjLnRoIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJ1UmdQMk9TNVJBcmlONDhtTWVIOHF3IiwibmFtZSI6IkFQSVNJVEggV09OR1NPUk4iLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFUWEFKejVyVnRGUnNjazlJUGl0QzBVSXJOck5FdktvVHYxZFljUkxyeU49czk2LWMiLCJnaXZlbl9uYW1lIjoiQVBJU0lUSCIsImZhbWlseV9uYW1lIjoiV09OR1NPUk4iLCJsb2NhbGUiOiJlbiIsImlhdCI6MTYyMjcxNjg2OSwiZXhwIjoxNjIyNzIwNDY5LCJqdGkiOiI3MmI0M2Y0Mzg3ZTBiM2MyZWRjNjc4MzY4N2VhNmU4YjQ2ZmNhMDFjIn0.WYsquyWuY4TYA2QVkAPA_tE6ZwVcEaL0G-x6olsjkejOG2BGVIqoivC3BxP5lzdAniGM52eiDb_SE51DBAH1tO1LMeq6NzZ__ELlN8JKu6ZUCUs3PpjUdYRxcH-Kygkgq_q85YQ-UYzBK-kb0IR6diJMH5lz50QYtyOXHrfx9BKYtPgO7-8hveaYJBSNyYvh0VBx_lfn18U-mVEMlt6WG53sOa9ZqVKT_QPdbgRFpS0V8G_kgTJxhHOz1Vf3EFlsF_IpCGLXtO8kqj84NSnewPRFhv4ZzR9PIQR9XssuKCOtCaXR1hIw6eGXfNbJrH-iz32IImQMV4CQvlAr4qylaA"
 }
 
 ###
