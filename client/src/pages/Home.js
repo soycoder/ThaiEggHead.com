@@ -14,7 +14,7 @@ import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
 import React, { useState, useEffect, useContext } from "react";
 
-import CreateForum from "../components/CreateForum";
+import CreateForumCard from "../components/CreateForumCard";
 import ForumCard from "../components/ForumCard";
 import { getMultipleFiles } from "../auth/apiFile";
 
@@ -173,13 +173,17 @@ function Home({ isAuthenticated }) {
       return (
         <Card className="app-padding" style={{ marginBottom: 10 }}>
           <Card.Subtitle className="card-username">
-            <img
-              src={user?.imgURL}
-              height="20"
-              width="20"
-              className="app-cycle mr-2"
-            />
-            {user.firstName+" "+user.lastName}
+            <Link to={`/profile/${user.userID}`}>
+              <img
+                class="co-logo"
+                src={user.imgURL ? user.imgURL : images.pic_profile}
+              />
+            </Link>
+            <div class="co-name">
+              <Link to={`/profile/${user.userID}`}>
+                {user.firstName ? user.firstName + " " + user.lastName : ""}
+              </Link>
+            </div>
           </Card.Subtitle>
 
           <Form>
@@ -196,7 +200,11 @@ function Home({ isAuthenticated }) {
               >
                 <Container style={mystyle}>
                   {/* <Card.Title>Create Forum</Card.Title> */}
-                  <CreateForum />
+                  {isAuthenticated ? (
+                    <CreateForumCard isAuthenticated={auth.isAuthenticated()} />
+                  ) : (
+                    <Redirect to="/auth" />
+                  )}
                 </Container>
               </Modal>
             </Form.Group>

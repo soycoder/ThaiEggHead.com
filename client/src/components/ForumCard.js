@@ -10,48 +10,45 @@ import {
   Dropdown,
   Image,
   Form,
-  Button as Button2
+  Button as Button2,
 } from "react-bootstrap";
 import { Button, Icon, InputGroup } from "@blueprintjs/core";
 import React, { useState, useEffect } from "react";
-import { images } from "../constants"
+import { images } from "../constants";
+import { Link } from "react-router-dom";
 
 function ForumCard(props) {
-
   let forum = props.data;
 
   const [isShowComment, setIsShowComment] = useState(false);
   const [isViewMore, setIsViewMore] = useState(false);
-  
+
   const handleClickComment = () => {
-    setIsShowComment(!isShowComment)
-  }
+    setIsShowComment(!isShowComment);
+  };
 
   const dummyUser = [
-        {
-          displayName:"PupeePupee",
-          img:images.pro_1,
-          date:"Thammasat University - 25 May"
-        },
-        {
-          displayName:"Jendeu is da best",
-          img:images.pro_2,
-          date:"1h ago"
-        }
-      ]
-    
-  const Question = () => {
+    {
+      displayName: "PupeePupee",
+      img: images.pro_1,
+      date: "Thammasat University - 25 May",
+    },
+    {
+      displayName: "Jendeu is da best",
+      img: images.pro_2,
+      date: "1h ago",
+    },
+  ];
 
+  const Question = () => {
     const [user, setUser] = useState(dummyUser);
-    
-  
+
     var n = forum.postText.length;
-      if (n > 160){
-        var post = forum.postText.substr(0, 150)+"...";
-      }
-      else{
-        var post = forum.postText
-      }
+    if (n > 160) {
+      var post = forum.postText.substr(0, 150) + "...";
+    } else {
+      var post = forum.postText;
+    }
 
     useEffect(() => {
       fetch(`http://localhost:5000/users/${forum.userID}`)
@@ -62,76 +59,74 @@ function ForumCard(props) {
     }, []);
 
     const UpvoteBotton = (props) => {
-      return(
+      return (
         <OverlayTrigger
-          key={'top'}
-          placement={'top'}
-          overlay={
-            <Tooltip id={`tooltip-${'top'}`}>
-              Upvote
-            </Tooltip>
-          }
+          key={"top"}
+          placement={"top"}
+          overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
         >
           <Button className="bp3-minimal comment" icon="thumbs-up">
-          {props.upvote}
+            {props.upvote}
           </Button>
-        </OverlayTrigger> 
-      ) 
-    }
+        </OverlayTrigger>
+      );
+    };
 
     const ListSubjectTag = (props) => {
       const list = props.data;
-      const subjectTag = list.map((subject) =>
-          <Badge variant="primary" style={{marginLeft:4}}>{subject}</Badge> 
-      );
-      return(
-        <div className="tag">
-          {subjectTag}
-        </div>
-      )
-    }
+      const subjectTag = list.map((subject) => (
+        <Badge bg="primary" style={{ marginLeft: 4 }}>
+          {subject}
+        </Badge>
+      ));
+      return <div className="tag">{subjectTag}</div>;
+    };
 
     const ListTag = (props) => {
       const list = props.data;
-      const subjectTag = list.map((subject) =>
-          <Badge variant="info" style={{marginLeft:4}}>{subject}</Badge>
-          // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
+      const subjectTag = list.map(
+        (subject) => (
+          <Badge bg="info" style={{ marginLeft: 4 }}>
+            {subject}
+          </Badge>
+        )
+        // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
-      return(
-        <div className="tag">
-          {subjectTag}
-        </div>
-      )
-    }
-    
+      return <div className="tag">{subjectTag}</div>;
+    };
+
     const ButtomOption = () => {
-      return(
-        <div style={{marginLeft:10, marginBottom:5}}>
-          <UpvoteBotton upvote={10}/>
+      return (
+        <div style={{ marginLeft: 10, marginBottom: 5 }}>
+          <UpvoteBotton upvote={10} />
 
           {/* Comment Btn */}
           <OverlayTrigger
-            key={'top'}
-            placement={'top'}
-            overlay={
-              <Tooltip id={`tooltip-${'top'}`}>
-                Comment
-              </Tooltip>
-            }
+            key={"top"}
+            placement={"top"}
+            overlay={<Tooltip id={`tooltip-${"top"}`}>Comment</Tooltip>}
           >
-            <Button className="bp3-minimal comment" icon="comment" onClick={() => handleClickComment()}>
+            <Button
+              className="bp3-minimal comment"
+              icon="comment"
+              onClick={() => handleClickComment()}
+            >
               {124}
             </Button>
           </OverlayTrigger>
         </div>
-      )
-    }
+      );
+    };
 
     const MoreButton = () => {
-      return(
+      return (
         <Dropdown>
-          <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
-            <Icon icon="more"/>
+          <Dropdown.Toggle
+            variant="light"
+            className="btn-morestyle"
+            bsPrefix="p-0"
+          >
+            <Icon icon="more" />
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">Report</Dropdown.Item>
@@ -140,220 +135,262 @@ function ForumCard(props) {
             <Dropdown.Item href="#/action-2">Bookmark</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-      )
-    }
+      );
+    };
 
     const handleClickViewMore = () => {
-      setIsViewMore(!isViewMore)
-    }
+      setIsViewMore(!isViewMore);
+    };
 
     return (
-          <>
-            <div>
-              <div class="header">
-                <div class="options"><i class="fa fa-chevron-down"></i></div>
-                <img class="co-logo" src={user.imgURL} />
-                <div class="co-name"><a href="#">{user.firstName + " "+ user.lastName}</a></div>
-                <div class="time"><a href="#">{forum.createdAt}</a> · <i class="fa fa-globe"></i></div>
-                <div className="btn-more">
-                  <MoreButton/>
-                </div>
-                
-              </div>
-              <div class="content">
-                <Card.Title >{forum.title}</Card.Title>
-                <div style={{marginBottom:5}}>
-                  {isViewMore?(<>
-                    <div dangerouslySetInnerHTML={{
-                      __html: forum.postText
-                      }}/>
-                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(แสดงน้อยลง)</Button>
-                      </>
-                  ):(<>
-                    <div dangerouslySetInnerHTML={{__html: post}}/>
-                    <Button className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary" onClick={() => handleClickViewMore()}>(แสดงเพิ่มเติม)</Button>
-                                          
-                      </>
-                    )}
-                
-                </div>
-                  
-                {
-                  forum.listImage[0]?.filePath ? (
-                  <Image src={"http://localhost:5000/" + forum.listImage[0]?.filePath} fluid className="forum-img" />
-                  ) : (<></>)
-                }
-    
-              </div>
+      <>
+        <div>
+          <div class="header">
+            <div class="options">
+              <i class="fa fa-chevron-down"></i>
             </div>
-            <div className="card-tag">
-              <ListSubjectTag data={forum.listSubject}/>
-              <ListTag data={forum.listTag}/>
+            <Link to={`/profile/${user.userID}`}>
+              <img class="co-logo" src={user.imgURL?user.imgURL:images.pic_profile} />
+            </Link>
+            <div class="co-name">
+              <Link to={`/profile/${user.userID}`}>
+                {user.firstName?user.firstName + " " + user.lastName:""}
+              </Link>
             </div>
-            <ButtomOption/>
-          </> 
+            <div class="time">
+              <div class="noselect">{forum.createdAt}</div> · <i class="fa fa-globe"></i>
+            </div>
+            <div className="btn-more">
+              <MoreButton />
+            </div>
+          </div>
+          <div class="content">
+            <Card.Title>{forum.title}</Card.Title>
+            <div style={{ marginBottom: 5 }}>
+              {isViewMore ? (
+                <>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: forum.postText,
+                    }}
+                  />
+                  <Button
+                    className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
+                    onClick={() => handleClickViewMore()}
+                  >
+                    (แสดงน้อยลง)
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <div dangerouslySetInnerHTML={{ __html: post }} />
+                  <Button
+                    className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
+                    onClick={() => handleClickViewMore()}
+                  >
+                    (แสดงเพิ่มเติม)
+                  </Button>
+                </>
+              )}
+            </div>
+
+            {forum.listImage[0]?.filePath ? (
+              <Image
+                src={"http://localhost:5000/" + forum.listImage[0]?.filePath}
+                fluid
+                className="forum-img"
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+        <div className="card-tag">
+          <ListSubjectTag data={forum.listSubject} />
+          <ListTag data={forum.listTag} />
+        </div>
+        <ButtomOption />
+      </>
     );
-  }
+  };
 
   const Answer = () => {
-
-    const dummyComment = [{
-      comment:"NOPE"
-    }]
+    const dummyComment = [
+      {
+        comment: "NOPE",
+      },
+    ];
 
     const [isLoadingAnswer, setIsLoadingAnswer] = useState(true);
     const [isShowCommentForm, setIsShowCommentForm] = useState(false);
     const [comment, setComment] = useState(dummyComment);
-    const [user, setUser] = useState(JSON.parse(localStorage?.getItem("profile")));
+    const [user, setUser] = useState(
+      JSON.parse(localStorage?.getItem("profile"))
+    );
     const [userAnswer, setUserAnswer] = useState(dummyUser);
-    
+
     const UpvoteBotton = (props) => {
-      return(
+      return (
         <OverlayTrigger
-          key={'top'}
-          placement={'top'}
-          overlay={
-            <Tooltip id={`tooltip-${'top'}`}>
-              Upvote
-            </Tooltip>
-          }
+          key={"top"}
+          placement={"top"}
+          overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
         >
           <Button className="bp3-minimal comment2" icon="thumbs-up">
             Upvote · {props.upvote}
           </Button>
-        </OverlayTrigger> 
-      )
-    }
+        </OverlayTrigger>
+      );
+    };
 
     const ReplyBotton = () => {
-      return(
+      return (
         <OverlayTrigger
-          key={'top'}
-          placement={'top'}
-          overlay={
-            <Tooltip id={`tooltip-${'top'}`}>
-              Upvote
-            </Tooltip>
-          }
+          key={"top"}
+          placement={"top"}
+          overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
         >
-          <Button className="bp3-minimal comment2" icon="chat" style={{marginLeft:5}} onClick={() => handleClickCommentForm()}>
+          <Button
+            className="bp3-minimal comment2"
+            icon="chat"
+            style={{ marginLeft: 5 }}
+            onClick={() => handleClickCommentForm()}
+          >
             Reply
           </Button>
-        </OverlayTrigger> 
-      )      
-    }
+        </OverlayTrigger>
+      );
+    };
 
     const AnswerForm = () => {
-      return(
+      return (
         <div>
           <div className="answer-box">
             <img class="co-logo2" src={user?.result.imageUrl} />
             <InputGroup
-                          onChange={{}}
-                          placeholder="Add a answer..."
-                          className="input-answer"
-                      />
-            <Button2 variant="primary" className="btn-answer">Add answer</Button2>
+              onChange={{}}
+              placeholder="Add a answer..."
+              className="input-answer"
+            />
+            <Button2 variant="primary" className="btn-answer">
+              Add answer
+            </Button2>
           </div>
         </div>
-      )
-    }
+      );
+    };
 
     const CommentList = () => {
-      return(
+      return (
         <div class="commentlist-content">
-            <HeaderUserComment/>
-            <div class="commentlist-content-text">
-              The first one kind of happened where I live for a couple of weeks.
-            </div>
+          <HeaderUserComment />
+          <div class="commentlist-content-text">
+            The first one kind of happened where I live for a couple of weeks.
+          </div>
         </div>
-      )
-    }
+      );
+    };
 
     const handleClickCommentForm = () => {
-      setIsShowCommentForm(!isShowCommentForm)
-    }
+      setIsShowCommentForm(!isShowCommentForm);
+    };
 
     const HeaderUserComment = () => {
-      return(
+      return (
         <div class="header">
-          <div class="options"><i class="fa fa-chevron-down"></i></div>
-          <img class="co-logo-comment" src={userAnswer[1].img} />
-          <div class="co-name"><a href="#">{userAnswer[1].displayName}</a></div>
-          <div class="time"><a href="#">{userAnswer[1].date}</a> · <i class="fa fa-globe"></i></div>
-          <div className="btn-more">
+          <div class="options">
+            <i class="fa fa-chevron-down"></i>
           </div>
+          <img class="co-logo-comment" src={userAnswer[1].img} />
+          <div class="co-name">
+            <a href="#">{userAnswer[1].displayName}</a>
+          </div>
+          <div class="time">
+            <a href="#">{userAnswer[1].date}</a> · <i class="fa fa-globe"></i>
+          </div>
+          <div className="btn-more"></div>
         </div>
-      )
-    }
+      );
+    };
 
     const HeaderUserAnswer = () => {
-      return(
+      return (
         <div class="header">
-          <div class="options"><i class="fa fa-chevron-down"></i></div>
-          <img class="co-logo" src={userAnswer[0].img} />
-          <div class="co-name"><a href="#">{userAnswer[0].displayName}</a></div>
-          <div class="time"><a href="#">{userAnswer[0].date}</a> · <i class="fa fa-globe"></i></div>
-          <div className="btn-more">
+          <div class="options">
+            <i class="fa fa-chevron-down"></i>
           </div>
+          <img class="co-logo" src={userAnswer[0].img} />
+          <div class="co-name">
+            <a href="#">{userAnswer[0].displayName}</a>
+          </div>
+          <div class="time">
+            <a href="#">{userAnswer[0].date}</a> · <i class="fa fa-globe"></i>
+          </div>
+          <div className="btn-more"></div>
         </div>
-      )
-    }
+      );
+    };
 
     const AnswerList = () => {
-      return(
+      return (
         <Card className="answerlist-card">
           <div>
-            <HeaderUserAnswer/>
+            <HeaderUserAnswer />
             <div class="answerlist-content">
-                <div class="answerlist-content-text">
-                  The first one kind of happened where I live for a couple of weeks.
+              <div class="answerlist-content-text">
+                The first one kind of happened where I live for a couple of
+                weeks.
+              </div>
+
+              {isShowCommentForm ? (
+                <div style={{ display: "flex" }}>
+                  <InputGroup
+                    onChange={{}}
+                    placeholder="Add a comment..."
+                    className="input-answer"
+                  />
+                  <Button2 variant="primary" className="btn-answer">
+                    Reply
+                  </Button2>
                 </div>
-                
-                {isShowCommentForm? (
-                  <div style={{display: 'flex'}}>
-                    <InputGroup
-                          onChange={{}}
-                          placeholder="Add a comment..."
-                          className="input-answer"
-                      />
-                    <Button2 variant="primary" className="btn-answer">Reply</Button2>
-                  </div>
-                ):(
-                  <>
-                    <UpvoteBotton upvote={0}/>
-                    <ReplyBotton />                  
-                  </>
-                )}
-                
+              ) : (
+                <>
+                  <UpvoteBotton upvote={0} />
+                  <ReplyBotton />
+                </>
+              )}
             </div>
           </div>
 
-          {comment? (<><CommentList/><CommentList/></>):(<></>)}
-        
+          {comment ? (
+            <>
+              <CommentList />
+              <CommentList />
+            </>
+          ) : (
+            <></>
+          )}
         </Card>
-      )
-    }
-      
+      );
+    };
+
     return (
       <div className="answer-pad">
-            <AnswerForm/>
-            <AnswerList/>
-      </div>  
-    ); 
-  }
+        <AnswerForm />
+        <AnswerList />
+      </div>
+    );
+  };
 
   // Main Render
-  return(
-      <div style={{marginBottom:10}}>
-          <Card className="main-card">
-            <Question/>
-            { isShowComment? (
-            <Answer/>):(<></>)
-            }
-          </Card>
-      </div>     
-  )
+  return (
+    <div style={{ marginBottom: 10 }}>
+      <Card className="main-card">
+        <Question />
+        {isShowComment ? <Answer /> : <></>}
+      </Card>
+    </div>
+  );
 }
 
 export default ForumCard;

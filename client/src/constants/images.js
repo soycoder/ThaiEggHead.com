@@ -2,7 +2,7 @@ import logo from "./../assets/images/egghead-logo.png";
 import bg from "./../assets/images/bg2.jpg";
 import bi from "./../assets/images/binary.jpg";
 import pic_cover from "./../assets/images/example-cover.jfif"
-import pic_profile from "./../assets/images/example-profile.jfif"
+import pic_profile from "./../assets/images/example-profile.jpg"
 import subj_1 from "./../assets/images/subject/1.jpg"
 import subj_2 from "./../assets/images/subject/2.jpg"
 import subj_3 from "./../assets/images/subject/3.png"

@@ -1,31 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { multipleFilesUpload } from "../auth/apiFile";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Select from "react-select";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Form, Badge } from "react-bootstrap";
 import Swal from "sweetalert2";
 import SelectTag from "./SelectTag";
 import { useHistory } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
-const FileUploadScreen = (props) => {
+import { theme } from "../constants";
+
+import { AuthContext } from "../context/AuthContext";
+import jwt_decode from "jwt-decode";
+
+const FileUploadScreen = ({ isAuthenticated }) => {
   let history = useHistory();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  // Initial User Profile
+  const auth = useContext(AuthContext);
+
+  var { token } = auth?.authState;
+  var decoded;
+  var user;
+
+  if (isAuthenticated) {
+    decoded = jwt_decode(token);
+    user = decoded;
+    // alert(JSON.stringify(user));
+  }
+
   const [multipleFiles, setMultipleFiles] = useState("");
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [listTag, setListTag] = useState([])
-  const [subject, showSubject] = useState("");
-  const [listsubject, setListSubject] = useState([])
+  const [listTag, setListTag] = useState([]);
+  const [listSubject, setListSubject] = useState([]);
+  const [newTag, setNewTag] = useState([]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const toggleCheckedss = () => {
-    if (show)
-      setShow(!show);
+    if (show) setShow(!show);
     // handleClose();
   };
 
@@ -79,58 +95,55 @@ const FileUploadScreen = (props) => {
     setTitle(title.target.value);
   }
 
-  const generateList = (str) => {
-    return str;
-  };
-
   const UploadMultipleFiles = async () => {
-    const formData = new FormData();
-    formData.append("userID", user.userID);
-    formData.append("title", title);
-    formData.append("body", body);
-    for (let i = 0; i < listTag.length; i++) {
-      formData.append("tag", listTag[i]);
-      console.log(listTag)
+    if (isAuthenticated) {
+      const formData = new FormData();
+      formData.append("userID", user.userID);
+      formData.append("title", title);
+      formData.append("body", body);
+      for (let i = 0; i < listTag.length; i++) {
+        formData.append("tag", listTag[i]);
+      }
+      for (let i = 0; i < listSubject.length; i++) {
+        formData.append("subject", listSubject[i]);
+      }
+      for (let i = 0; i < multipleFiles.length; i++) {
+        formData.append("files", multipleFiles[i]);
+      }
+      await multipleFilesUpload(formData, mulitpleFileOptions);
+    } else {
+      alert("กรุณา Log in อีกครั้ง'");
+      auth.logout();
     }
-    for (let i = 0; i < listsubject.length; i++) {
-      formData.append("subject", listsubject[i]);
-    }
-    for (let i = 0; i < multipleFiles.length; i++) {
-      formData.append("files", multipleFiles[i]);
-    }
-    await multipleFilesUpload(formData, mulitpleFileOptions);
   };
 
   const handleChange = (e, editor) => {
     const body = editor.getData();
     setBody(body);
-    console.log("Body : " + body);
+    // console.log("Body : " + body);
   };
-  
-  const [tag, setTag] = useState([]);
-  const [newTag, setNewTag] = useState([]);
+
   function onChangeInputTag(tag) {
     let myTag = [];
-    let Tag = [];
-    tag.map((o) => (myTag.push(o.label)));
-    tag.map((o) => (o.__isNew__) === "true" ? null : (o.__isNew__)? (Tag.push((o.label))) : null);
-    setNewTag(Tag)
-    setListTag(generateList(myTag));
-    setTag(myTag);    
+    let temp_newTag = [];
+    tag.map((o) => myTag.push(o.label));
+    tag.map((o) => (o.__isNew__ === "true" ? temp_newTag.push(o.label) : null));
+    setNewTag(temp_newTag);
+    setListTag(myTag);
   }
 
   function sentTag() {
     for (let i = 0; i < newTag.length; i++) {
-      axios
-        .post("http://localhost:5000/forums/tag", { tagID: "newTag", name: newTag[i] })    
+      axios.post("http://localhost:5000/forums/tag", {
+        name: newTag[i],
+      });
     }
   }
 
   function onChangeInputSub(subject) {
     let mySubject = [];
-    subject.map((o) => (mySubject.push(o.label)));
-    setListSubject(generateList(mySubject))
-    showSubject(mySubject);
+    subject.map((o) => mySubject.push(o.label));
+    setListSubject(mySubject);
   }
 
   function sweetAlert() {
@@ -143,7 +156,7 @@ const FileUploadScreen = (props) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "ยันยัน",
       cancelButtonText: "แก้ไข",
-      onConfirm: props.action
+      // onConfirm: props.action,
     }).then((result) => {
       if (result.value === true) {
         UploadMultipleFiles();
@@ -155,45 +168,69 @@ const FileUploadScreen = (props) => {
     });
   }
 
+  const ListSubjectTag = (props) => {
+    let list = props.data;
+    let _Subject = list.map((subject) => (
+      <Badge bg="primary" style={{ marginLeft: 4 }}>
+        {subject}
+      </Badge>
+    ));
+    return <div className="tag">{_Subject}</div>;
+  };
+
+  const ListTag = (props) => {
+    let list = props.data;
+    let _Tag = list.map(
+      (tag) => (
+        <Badge bg="info" style={{ marginLeft: 4 }}>
+          {tag}
+        </Badge>
+      )
+      // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
+    );
+    return <div className="tag">{_Tag}</div>;
+  };
+
   useEffect(() => {
-    const token = user?.token;
-    setUser(JSON.parse(localStorage.getItem("profile")));
-    if (user) {
-      let _user = user;
-      let _result = _user.result;
-      fetch(`http://localhost:5000/users/google/${_result.googleId}`)
-        .then((res) => res.json())
-        .then((res) => {
-          _result["userID"] = res.userID;
-          _user["result"] = _result;
-          setUser("User " + _user);
-        });
-    }
+    // const token = user?.token;
+    // setUser(JSON.parse(localStorage.getItem("profile")));
+    // if (user) {
+    //   let _user = user;
+    //   let _result = _user.result;
+    //   fetch(`http://localhost:5000/users/google/${_result.googleId}`)
+    //     .then((res) => res.json())
+    //     .then((res) => {
+    //       _result["userID"] = res.userID;
+    //       _user["result"] = _result;
+    //       setUser("User " + _user);
+    //     });
+    // }
   }, []);
 
   return (
-    <div>
-      <div className="form-group">
-        <label style={{ "font-size": "24px" }}>หัวข้อ</label>
+    <Form className="mb-3">
+      <Form.Group className="mb-3">
+        <Form.Label style={theme.FONTS.h1}>หัวข้อ</Form.Label>
         <br />
-        <h8 style={{ lineHeight: "90%" }}>
+        <Form.Text style={theme.FONTS.h4} className="text-muted">
           หัวข้อที่แสดงถึง เนื้อหา ใจความสำคัญ ของปัญหาหรือข้อมูลที่ต้องการแสดง
-        </h8>
-        <input
+        </Form.Text>
+        <Form.Control
+          style={theme.FONTS.body3}
           type="text"
           onChange={getDataTitle}
           placeholder="กรุณาใส่หัวข้อที่ต้องการแสดง"
-          className="form-control"
+          required
         />
-      </div>
+      </Form.Group>
 
-      <div className="form-group">
-        <label style={{ "font-size": "24px" }}>เนื้อหา</label>
-        <br></br>
-        <h8 style={{ lineHeight: "90%" }}>
+      <Form.Group className="mb-3">
+        <Form.Label style={theme.FONTS.h1}>เนื้อหา</Form.Label>
+        <br />
+        <Form.Text style={theme.FONTS.h4} className="text-muted">
           เนื้อหาแสดงถึง ข้อมูล หรือปัญหา
           สาระของเรื่องที่ต้องการอธิบายเพื่อให้เกิดความเข้าใจ
-        </h8>
+        </Form.Text>
         <CKEditor
           editor={ClassicEditor}
           onInit={(editor) => {
@@ -227,130 +264,150 @@ const FileUploadScreen = (props) => {
               ],
             },
             ckfinder: {
-              uploadUrl: '/upload', 
+              uploadUrl: "/upload",
               withCredentials: true,
               headers: {
-                  'X-CSRF-TOKEN': 'CSFR-Token',
-                  Authorization: 'Bearer <JSON Web Token>'
-              }
-            },                        
+                "X-CSRF-TOKEN": "CSFR-Token",
+                Authorization: "Bearer <JSON Web Token>",
+              },
+            },
             image: {
-               // Configure the available styles.
-               styles: [
-                   'alignLeft', 'alignCenter', 'alignRight'
-               ],            
-               toolbar: [
-                   'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
-                   '|',
-                   'resizeImage',
-                   '|',
-                   'imageTextAlternative'
-               ]
-           }            
-            
+              // Configure the available styles.
+              styles: ["alignLeft", "alignCenter", "alignRight"],
+              toolbar: [
+                "imageStyle:alignLeft",
+                "imageStyle:alignCenter",
+                "imageStyle:alignRight",
+                "|",
+                "resizeImage",
+                "|",
+                "imageTextAlternative",
+              ],
+            },
           }}
           onChange={handleChange}
         />
-      </div>
+      </Form.Group>
 
-      <div className="form-group Input Image">
-        <label>เพิ่มรูป (รองรับแบบหลายรูป)</label>
-        <input
+      <Form.Group className="mb-3">
+        <Form.Label style={theme.FONTS.h1}>เพิ่มรูป </Form.Label>
+        <br />
+        <Form.Text style={theme.FONTS.h4} className="text-muted text-end">
+          (รองรับแบบหลายรูป)
+        </Form.Text>
+        <Form.Control
+          style={theme.FONTS.body3}
           onChange={(e) => MultipleFileChange(e)}
-          className="form-control"
           type="file"
           id="formFileMultiple"
           multiple
         />
-      </div>
+      </Form.Group>
 
-      <div className="form-group Preview">
-        <label style={{ "font-size": "24px" }}>แท็ก</label>
-        <br></br>
-        <h8 style={{ lineHeight: "90%" }}>
-          เพิ่มแท็ก : แท็กเพื่ออธิบายว่าคำถามของคุณเกี่ยวกับอะไร
-        </h8>
-        <br></br>
-        <SelectTag updateTagList={onChangeInputTag} />
-      </div>
+      <Form.Group className="mb-3">
+        <Form.Label style={theme.FONTS.h1}>แท็ก</Form.Label>
+        <br />
+        <Form.Text style={theme.FONTS.h4} className="text-muted text-end">
+          เพิ่มแท็กเพื่ออธิบายว่าคำถามของคุณเกี่ยวกับอะไร
+        </Form.Text>
 
-      <div className="form-group">
-        <label style={{ "font-size": "24px" }}>สาขาวิชาที่เกี่ยวข้อง</label>
-        <br></br>
-        <h8 style={{ lineHeight: "90%" }}>
-          เพิ่มแท็ก : แท็กเป็นแท็กที่อธิบายเกี่ยวกับสาขาวิชา
-        </h8>
-        <br></br>
+        <SelectTag style={theme.FONTS.body3} updateTagList={onChangeInputTag} />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label style={theme.FONTS.h1}>สาขาวิชาที่เกี่ยวข้อง </Form.Label>
+        <br />
+        <Form.Text style={theme.FONTS.h4} className="text-muted text-end">
+          เพิ่มแท็กที่อธิบายถึงสาขาวิชา
+        </Form.Text>
         <Select
-          style={{ width: "600px" }}
+          style={theme.FONTS.body3}
           isMulti={true}
           options={optionsSubject}
           onChange={onChangeInputSub}
           defaultValue={[]}
           placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)"
         />
-      </div>
+      </Form.Group>
 
-      <Button onClick={handleShow} className="btn-secondary">
+      <Button
+        style={theme.FONTS.h3}
+        onClick={handleShow}
+        className="btn-secondary"
+      >
         ดูตัวอย่าง
       </Button>
 
       <Button
+        style={theme.FONTS.h3}
         type="button"
-        className="ml-3 btn btn-primary"
+        className="ms-3 btn btn-primary"
         onClick={sweetAlert}
       >
         โพสต์
       </Button>
       <br />
 
-      <div className="form-group Preview In Buttom">
+      <div className="form-group">
         <Modal
           show={show}
           onHide={handleClose}
           style={{ padding: "auto" }}
-          size="lg"
+          size="xl"
         >
           <Modal.Header closeButton>
-            <Modal.Title>ตัวอย่าง</Modal.Title>
+            <Modal.Title style={theme.FONTS.h1}>ตัวอย่าง</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <h5>{title}</h5>
-            <h5>
+            <div style={theme.FONTS.h2}>{title}</div>
+            <hr/>
+            <div style={{ fontFamily: "supermarket" }}>
               <div
                 dangerouslySetInnerHTML={{
                   __html: body,
                 }}
               ></div>
-            </h5>
-
+            </div>
+            <ListTag data={listTag} />
+            <br />
+            <ListSubjectTag data={listSubject} />
+            <br />
+            <div style={theme.FONTS.h2} className="mt-3">
+              รูปแนบ
+            </div>
             <div className="form-group preview">
               {Array.from(file).map((item, index) => {
                 return (
                   <div key={item}>
                     <img src={item} alt="" style={{ width: "400px" }} />
-                    <Button type="button" onClick={() => deleteFile(index)}>
-                      delete
+                    <Button
+                      type="button"
+                      className="btn-danger"
+                      onClick={() => deleteFile(index)}
+                    >
+                      ลบ
                     </Button>
                   </div>
                 );
               })}
             </div>
-            <h9>{tag + "  "}</h9>
-            <br />
-            <h9>{subject}</h9>
-            <br />
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="primary" onClick={()=>{toggleCheckedss()}}>
+            <Button
+              style={theme.FONTS.h3}
+              variant="primary"
+              onClick={() => {
+                toggleCheckedss();
+              }}
+            >
               ตกลง
             </Button>
           </Modal.Footer>
         </Modal>
       </div>
-    </div>
+    </Form>
   );
 };
 
