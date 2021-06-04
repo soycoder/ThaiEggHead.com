@@ -7,18 +7,25 @@ import {
   Card,
   Container,
   ListGroup,
-  Button
+  Button,
+  Tooltip,
+  OverlayTrigger,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState,} from "react";
 import ForumCard from "../components/ForumCard";
 import Select from "react-select"
-import { Keys } from "@blueprintjs/core";
+import { Button as Button2 } from "@blueprintjs/core";
+import Avatar from 'react-avatar';
 
 function Sub() {
   let { subject } = useParams();
   // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
+
+  const SubjectData = new Map();
+  SubjectData.set("sci", "วิทยาศาสตร์ และเทคโนโลยี")
+  
 
   useEffect(() => {
     fetch(`http://localhost:5000/forums?subject=${subject}`)
@@ -33,8 +40,6 @@ function Sub() {
 
   function tagData (){
     forumData.map((dataTag) =>
-      // console.log(dataTag.listTag[0])
-      // t = dataTag.listTag[0]
 
       {
         for (i=0; i<dataTag.listTag.length; i++){
@@ -43,65 +48,18 @@ function Sub() {
           }
       }
         arrayTag = t.split(" ")
-        // const count = {}
-        // const result = []
-        // arrayTag.forEach(item =>{
-        //   if (count[item]) {
-        //     count[item] +=1
-        //     return
-        //   }
-        //   count[item] = 1
-        // })
 
-        // for (let prop in count){
-        //   if (count[prop] >=2){
-        //     result.push(prop)
-        //   }
-        // }
-        // console.log(count)
-
-//////////////////////////////////////////
-        // let unique = [];
-        // arrayTag.forEach(element => {
-        //   if (!unique.includes(element)){
-        //       unique.push(element)
-        //   }
-        // })
-
-        // for (j=0; j<unique.length; j++){
-        //   filledArray[j] = {id: j, name: unique[j]};
-          
-        // }
-        // const count = {}
-        // arrayTag.forEach(function(i) { count[i] = (count[i]||0) + 1;});
-        // console.log(count);
-
-        // console.log(arrayTag)
       }
     )
     return(
-      // filledArray
       arrayTag
     )
   }
   {tagData()}
-  // console.log(arrayTag)
 
   const count = {}
   arrayTag.forEach(function(i) { count[i] = (count[i]||0) + 1;});
   console.log(count);
-
-  // let unique = [];
-  //   arrayTag.forEach(element => {
-  //     if (!unique.includes(element)){
-  //         unique.push(element)
-  //       }
-  //     })
-
-  // for (j=0; j<unique.length; j++){
-  //     filledArray[j] = unique[j]; 
-  // }
-  // console.log(filledArray)
 
   var key = [];
   var sumTag = [];
@@ -114,11 +72,6 @@ function Sub() {
     key[j] = {name: key[j], num: sumTag[j]};
   }
   console.log(key)
-  // var ll = ""
-  // ll = filledArray[1].toString()
-  // console.log(ll)
-  // console.log(count.ll);
-
 
   var [tag, setTag] = useState("");
   const [value, getValue]=useState([]);
@@ -174,116 +127,223 @@ function Sub() {
 
   var handle = (e) => {
     getValue(Array.isArray(e)?e.map(x=>x.label):[]);
-    
+  }
+
+  const HeaderImage = () =>{
+    return (
+        <img className="subject-img-bg" src="http://trumpwallpapers.com/wp-content/uploads/Science-Wallpaper-42-1920x1080-1.jpg"/>
+    )
+  }
+
+  const SubjectHeaderCard = () => {
+    return(
+      <Card style={{marginBottom:10}}>
+        <Card.Body>
+          <div className="subject-header">
+            <Avatar className="subject-img" size="100" round={false}/>
+            <h1>{SubjectData.get(subject)}</h1>
+            <Button2 className="bp3-minimal bp3-intent-primary" id="follow" icon="add-to-artifact">
+                Follow 123K
+              </Button2>            
+          </div>
+        </Card.Body>
+      </Card>
+    )
+  }
+
+  const FilterCard = () => {
+    return(
+      <Card style={{ width: "13rem" }}>
+        <Card.Header>Custom Filter</Card.Header>
+        <Card.Body>
+          <Card.Link href="#">Create a custom filter</Card.Link>
+          <form>
+            {/* <input name="tag" id="tag" /> */}
+            <input 
+              type="tag"
+              onChange={e => setTag(e.target.value)}
+              placeholder="Enter tag"
+            />
+          </form>
+          <br />
+          <div >
+            <Select isMulti options={optionTag} onChange={handle}></Select>
+          </div>
+                
+        </Card.Body>
+      </Card>
+    )
+  }
+
+  const IgnoreTag = () => {
+    return(
+      <Card>
+        <Card.Header>Ignored Tags</Card.Header>
+        <Card.Body>
+          <Card.Link href="#">Add an ignored tag</Card.Link>
+        </Card.Body>
+      </Card>
+    )
+  }
+
+  const SpaceRec = () => {
+    return(
+      <Card style={{ width: "13rem" }}>
+        <ListGroup variant="flush">
+          <ListGroup.Item>Spaces to follow</ListGroup.Item>
+          <ListGroup.Item></ListGroup.Item>
+          <ListGroup.Item></ListGroup.Item>
+          <ListGroup.Item></ListGroup.Item>
+          <ListGroup.Item></ListGroup.Item>
+          <ListGroup.Item></ListGroup.Item>
+          <ListGroup.Item></ListGroup.Item>
+        </ListGroup>
+      </Card>
+    )
   }
   // console.log(value);
   return (
-    <div className="App">
-      {/* <div className="app-content"></div> */}
-      <div>
-        <Row>
-          <Col>
-            <Card>
-              <Card.Img src={images.bg} height="240" width="30" />
-              <Card.ImgOverlay>
-                <Row>
-                  <Col xs={2}>
-                    <div className="app-paddingSubjIMG">
-                      <Card.Img
-                        src={images.subj_1}
-                        height="200"
-                        width="50"
-                        style={{ width: "13rem" }}
-                        className="app-cycleSubject"
-                      />
-                    </div>
-                  </Col>
-                  <Col xs={10} className="app-subjectFont">
-                    Science and Technology
-                    <h4>วิทยาศาสตร์และเทคโนโลยี</h4>
-                  </Col>
-                </Row>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-      <body style={{ backgroundColor: "#F3F3F3" }}>
-        <br />
-        <br />
-        <Container>
-          <Row>
-            <Col></Col>
-            <Col xs={7}>
+    <div>
+      <HeaderImage/>
+
+      <Container fluid="xl">
+            
+          <Row className="justify-content-md-center">
+
+          <Col md={2}>
               {newArray.map((forum) => (
-                <ForumCard data={forum}></ForumCard>
-              ))}
-              {/* {Tag()} */}
+                    <ForumCard data={forum}></ForumCard>
+                  ))}
+
             </Col>
 
-            <Col>
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>Custom Filter</Card.Header>
-                <Card.Body>
-                  <Card.Link href="#">Create a custom filter</Card.Link>
-                  <form>
-                    {/* <input name="tag" id="tag" /> */}
-                    <input 
-                      type="tag"
-                      onChange={e => setTag(e.target.value)}
-                      placeholder="Enter tag"
-                    />
-                  </form>
-                  <br />
-                  <div >
-                    <Select isMulti options={optionTag} onChange={handle}></Select>
-                  </div>
-                        
-                </Card.Body>
-              </Card>
-              <br />
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>
-                  Watched Tags
-                <Card.Link href="#">Edit</Card.Link>
-                </Card.Header>
-                <Card.Body>                
-                  <div>
-                    {key.map(item => {
-                      // console.log(filledArray)
-                      return (
-                        <div>
-                          <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
-                        </div>
-                      )
-                    })}           
-                  </div>
-                </Card.Body>
-              </Card>
-              <br />
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>Ignored Tags</Card.Header>
-                <Card.Body>
-                  <Card.Link href="#">Add an ignored tag</Card.Link>
-                </Card.Body>
-              </Card>
-              <br />
-              <Card style={{ width: "13rem" }}>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>Spaces to follow</ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                </ListGroup>
-              </Card>
+            <Col md={6}>
+              <SubjectHeaderCard/>
+              {newArray.map((forum) => (
+                    <ForumCard data={forum}></ForumCard>
+                  ))}
+
+            </Col>
+                
+            <Col md={2}>
+              <FilterCard/>
+              <IgnoreTag/>
+              <SpaceRec/>
             </Col>
           </Row>
         </Container>
-      </body>
     </div>
   );
+
+  const old = () => {
+    <div className="App">
+          {/* <div className="app-content"></div> */}
+          <div>
+            <Row>
+              <Col>
+                <Card>
+                  <Card.Img src={images.bg} height="240" width="30" />
+                  <Card.ImgOverlay>
+                    <Row>
+                      <Col xs={2}>
+                        <div className="app-paddingSubjIMG">
+                          <Card.Img
+                            src={images.subj_1}
+                            height="200"
+                            width="50"
+                            style={{ width: "13rem" }}
+                            className="app-cycleSubject"
+                          />
+                        </div>
+                      </Col>
+                      <Col xs={10} className="app-subjectFont">
+                        Science and Technology
+                        <h4>วิทยาศาสตร์และเทคโนโลยี</h4>
+                      </Col>
+                    </Row>
+                  </Card.ImgOverlay>
+                </Card>
+              </Col>
+            </Row>
+          </div>
+          <body style={{ backgroundColor: "#F3F3F3" }}>
+            <br />
+            <br />
+            <Container>
+              <Row>
+                <Col></Col>
+                <Col xs={7}>
+                  {newArray.map((forum) => (
+                    <ForumCard data={forum}></ForumCard>
+                  ))}
+                  {/* {Tag()} */}
+                </Col>
+    
+                <Col>
+                  <Card style={{ width: "13rem" }}>
+                    <Card.Header>Custom Filter</Card.Header>
+                    <Card.Body>
+                      <Card.Link href="#">Create a custom filter</Card.Link>
+                      <form>
+                        {/* <input name="tag" id="tag" /> */}
+                        <input 
+                          type="tag"
+                          onChange={e => setTag(e.target.value)}
+                          placeholder="Enter tag"
+                        />
+                      </form>
+                      <br />
+                      <div >
+                        <Select isMulti options={optionTag} onChange={handle}></Select>
+                      </div>
+                            
+                    </Card.Body>
+                  </Card>
+                  <br />
+                  <Card style={{ width: "13rem" }}>
+                    <Card.Header>
+                      Watched Tags
+                    <Card.Link href="#">Edit</Card.Link>
+                    </Card.Header>
+                    <Card.Body>                
+                      <div>
+                        {key.map(item => {
+                          // console.log(filledArray)
+                          return (
+                            <div>
+                              <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
+                            </div>
+                          )
+                        })}           
+                      </div>
+                    </Card.Body>
+                  </Card>
+                  <br />
+                  <Card style={{ width: "13rem" }}>
+                    <Card.Header>Ignored Tags</Card.Header>
+                    <Card.Body>
+                      <Card.Link href="#">Add an ignored tag</Card.Link>
+                    </Card.Body>
+                  </Card>
+                  <br />
+                  <Card style={{ width: "13rem" }}>
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>Spaces to follow</ListGroup.Item>
+                      <ListGroup.Item></ListGroup.Item>
+                      <ListGroup.Item></ListGroup.Item>
+                      <ListGroup.Item></ListGroup.Item>
+                      <ListGroup.Item></ListGroup.Item>
+                      <ListGroup.Item></ListGroup.Item>
+                      <ListGroup.Item></ListGroup.Item>
+                    </ListGroup>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
+          </body>
+        </div>
+    }
 }
 export default Sub;
+
+
