@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { Grid } from "@material-ui/core";
 import { Col, Container, Button, Row, Modal } from "react-bootstrap";
@@ -15,12 +15,10 @@ import useStyles from "./styles";
 
 import { Player } from "@lottiefiles/react-lottie-player";
 
-// Newer
-import { useContext } from "react";
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../context/AuthContext";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 const LoginSchema = Yup.object().shape({
@@ -149,7 +147,7 @@ const Signin = (props) => {
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit} className={classes.form}>
-            <Grid container >
+            <Grid container>
               {loginSuccess && <div> Login Success {loginSuccess}</div>}
               {loginError && <div> Login Error: {loginError} </div>}
               <br />
@@ -174,7 +172,7 @@ const Signin = (props) => {
                 <ErrorMessage name="email" />
               </div>
 
-              <div class="form-floating mb-2 col-12">
+              <div className="form-floating mb-2 col-12">
                 <input
                   type="password"
                   className="form-control"
@@ -337,7 +335,7 @@ const Register = (props) => {
                   <ErrorMessage name="email" />
                 </div>
 
-                <div class="form-floating mb-2 col-12">
+                <div className="form-floating mb-2 col-12">
                   <input
                     type="password"
                     className="form-control"
@@ -481,19 +479,14 @@ export const Auth = () => {
         <Grid container justify="flex-end">
           <Grid item>
             <span onClick={switchMode} variant="link" size="sm">
-              <Link
+              <p
                 className="text-dark"
-                style={{
-                  fontFamily: "supermarket",
-                  fontSize: SIZES.h3,
-                  color: "grey !important",
-                  "&:hover": { color: "blue !important" },
-                }}
+                style={{ fontFamily: "supermarket", fontSize: SIZES.h3 }}
               >
                 {isSignup
                   ? "มีบัญชีอยู่แล้วเหรอ? เข้าสู่ระบบ"
                   : "ยังไม่มีบัญชีเหรอ? ลงทะเบียน"}
-              </Link>
+              </p>
             </span>
           </Grid>
         </Grid>

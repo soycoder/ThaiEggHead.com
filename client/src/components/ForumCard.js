@@ -53,7 +53,7 @@ function ForumCard(props) {
       }
 
     useEffect(() => {
-      fetch(`http://localhost:5000/profile/${forum.userID}`)
+      fetch(`http://localhost:5000/users/${forum.userID}`)
         .then((res) => res.json())
         .then((res) => {
           setUser(res);
@@ -152,9 +152,9 @@ function ForumCard(props) {
             <div>
               <div class="header">
                 <div class="options"><i class="fa fa-chevron-down"></i></div>
-                <img class="co-logo" src={user[1].img} />
-                <div class="co-name"><a href="#">{user[1].displayName}</a></div>
-                <div class="time"><a href="#">{user[1].date}</a> · <i class="fa fa-globe"></i></div>
+                <img class="co-logo" src={user.imgURL} />
+                <div class="co-name"><a href="#">{user.firstName + " "+user.lastName}</a></div>
+                <div class="time"><a href="#">{forum.createdAt}</a> · <i class="fa fa-globe"></i></div>
                 <div className="btn-more">
                   <MoreButton/>
                 </div>

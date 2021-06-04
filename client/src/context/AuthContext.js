@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
       userInfo,
       expiresAt,
     });
+    alert("setAuthInfo");
   };
 
   const logout = () => {
