@@ -361,7 +361,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
 
           <Modal.Body>
             <div style={theme.FONTS.h2}>{title}</div>
-            <hr/>
+            <hr />
             <div style={{ fontFamily: "supermarket" }}>
               <div
                 dangerouslySetInnerHTML={{

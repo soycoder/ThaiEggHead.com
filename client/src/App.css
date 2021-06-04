@@ -204,3 +204,6 @@
   font-size: 11px;
   margin-top: 3px;
 }
+.mdb-dataTables_paginate{
+  display: none;
+}
