@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 
 function ForumCard(props) {
   let forum = props.data;
+
   const [isShowComment, setIsShowComment] = useState(false);
   const [isViewMore, setIsViewMore] = useState(false);
 
@@ -54,7 +55,6 @@ function ForumCard(props) {
         .then((res) => res.json())
         .then((res) => {
           setUser(res);
-          // setPathUser(`/profile/${res.googleID}`);
         });
     }, []);
 

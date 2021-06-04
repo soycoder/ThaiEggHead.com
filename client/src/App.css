@@ -53,17 +53,6 @@
   -webkit-user-drag: none;
 }
 
-.edu-card {
-  display: inline;
-  height: 50px;
-}
-.edu-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  -webkit-user-drag: none;
-}
-
 .interest-card {
   display: inline-flex;
   height: 50px;
