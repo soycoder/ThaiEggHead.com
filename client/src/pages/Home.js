@@ -25,7 +25,6 @@ import "./styles.css";
 
 function Home({ isAuthenticated }) {
   // Initial User Profile
-  // const [user, setUser] = useState(JSON.parse(localStorage?.getItem("profile")));
   const auth = useContext(AuthContext);
 
   var { token } = auth?.authState;

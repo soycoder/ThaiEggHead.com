@@ -19,6 +19,7 @@ import { images } from "../constants"
 function ForumCard(props) {
 
   let forum = props.data;
+
   const [isShowComment, setIsShowComment] = useState(false);
   const [isViewMore, setIsViewMore] = useState(false);
   
@@ -57,7 +58,6 @@ function ForumCard(props) {
         .then((res) => res.json())
         .then((res) => {
           setUser(res);
-          // setPathUser(`/profile/${res.googleID}`);
         });
     }, []);
 
@@ -153,7 +153,7 @@ function ForumCard(props) {
               <div class="header">
                 <div class="options"><i class="fa fa-chevron-down"></i></div>
                 <img class="co-logo" src={user.imgURL} />
-                <div class="co-name"><a href="#">{user.firstName + " "+user.lastName}</a></div>
+                <div class="co-name"><a href="#">{user.firstName + " "+ user.lastName}</a></div>
                 <div class="time"><a href="#">{forum.createdAt}</a> · <i class="fa fa-globe"></i></div>
                 <div className="btn-more">
                   <MoreButton/>

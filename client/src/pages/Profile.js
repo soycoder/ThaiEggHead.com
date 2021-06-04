@@ -1,17 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { Card, Col, Container, Image, Row, Modal, Nav } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from "react";
+import { Card, Col, Container, Image, Row, Modal, Nav, Badge } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Icon } from "@blueprintjs/core";
 import "../App.css";
 import Avatar from 'react-avatar';
 import AvatarCropper from '../components/ProfileImage'
 
+import { AuthContext } from "../context/AuthContext";
+import jwt_decode from "jwt-decode";
+
 import { images, COLORS, FONTS, SIZES } from "../constants";
 
-const Profile = () => {
+const Profile = ({ isAuthenticated }) => {
   const dummyUser = {
     imgURL: images.pro_1
   }
+
+  const auth = useContext(AuthContext);
+
+  var { token } = auth?.authState;
+  var decoded;
+  var user;
+
+  if (isAuthenticated) {
+    decoded = jwt_decode(token);
+    user = decoded;
+  }
+ 
   //HANDLE VAL
   const [lgShow, setLgShow] = useState(false);
 
@@ -29,7 +44,6 @@ const Profile = () => {
   const [phone, setPhone] = useState("N/A")
   const [organization, setOrganization] = useState("Thammasat University")
   const [eggHeadScore, setEggHeadScore] = useState(125)
-
   const [education, setEducation] = useState([{
     place: "Thammasat University",
     degree: "Bachelor of Science - BS, Computer Science",
@@ -42,6 +56,14 @@ const Profile = () => {
     img: "https://upload.wikimedia.org/wikipedia/th/thumb/4/44/MIT_Seal.svg/1200px-MIT_Seal.svg.png"
   }])
 
+  const [questionHistory, setQuestionHistory] = useState({
+    head: "Can you share some screenshots worth of 1243.3k+ upvotes?",
+    tag: ["messages", "function "]
+  },{
+    head: "Have you ever come back to your vehicle only to find something quite unexpected?",
+    tag: ["messages", "function "]
+  }
+  )
   const [numAnswer, setNumAnswer] = useState(0)
   const [numQuestion, setNumQuestion] = useState(0)
   const [numComment, setNumComment] = useState(0)
@@ -256,6 +278,17 @@ const Profile = () => {
 
   }
   
+  const NonIdealState = () => {
+    return(
+      <div class="bp3-non-ideal-state">
+        <div class="bp3-non-ideal-state-visual">
+          <span class="bp3-icon bp3-icon-folder-open"></span>
+        </div>
+        <h4 class="bp3-heading">Empty</h4>
+        <div>You haven't answered any questions yet.</div>
+      </div>
+    )
+  }
 
   const handleNavSelect = (eventKey) => setCurrSelectNav(eventKey);
 
@@ -336,12 +369,47 @@ const Profile = () => {
     )
   }
 
+  const HistoryCard = (props) => {
+
+    const Card = (props) => {
+      console.log(props.data);
+      for (const [key, value] of Object.entries(props.data)) {
+        console.log(`${key}: ${value}`);
+      }
+
+      return(
+        <Card className="app-padding" style={{ marginBottom: 10 }}>
+            <Card.Subtitle className="card-username">
+              asd
+            </Card.Subtitle>
+            {/* <ListTag data={q.tag}/> */}
+        </Card>
+      )
+    }
+
+    const ListTag = (props) => {
+      const list = props.data;
+      const subjectTag = list.map((subject) =>
+          <Badge variant="info" style={{marginLeft:4}}>{subject}</Badge>
+          // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
+      );
+      return(
+        <div className="tag">
+          {subjectTag}
+        </div>
+      )
+    }
+
+    return(
+      <Card data={props}/>
+    )
+  }
+
   const ContentDisplay = () => {
     
     const EducationCard = (props) => {
       return (
-        <Card.Body style={{marginTop:-30}}>
-          <Row>
+        <Card.Body style={{margin:-20}}>
             <Col md={11}>
               <Row className="edu-card">
                 <Col md={2} className="edu-logo">
@@ -361,7 +429,6 @@ const Profile = () => {
                 </Col>
               </Row>
             </Col>
-          </Row>
         </Card.Body>
       );
     };
@@ -415,18 +482,19 @@ const Profile = () => {
     }else if(currSelectNav==2){
       return(
         <div>
+          {/* <HistoryCard data={questionHistory}/> */}
         </div>
       )
     }else if(currSelectNav==3){
       return(
         <div>
-          Hello3
+          <NonIdealState/>
         </div>
       )
     }else {
       return(
         <div>
-          Hello4
+          <NonIdealState/>
         </div>
       )
     }
@@ -445,8 +513,7 @@ const Profile = () => {
                     
                     </Col>
                     <Col md={8}>
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            
+                        <div class="tab-content profile-tab" id="myTabContent">                          
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <Row class="row">
                                             <Col md={6} >
@@ -499,7 +566,7 @@ const Profile = () => {
                     </Col>
                 </Row>
             </Container>
-            <ProfileOld/>           
+            {/* <ProfileOld/>            */}
         </div>
   )
   
