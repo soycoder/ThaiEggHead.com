@@ -18,10 +18,10 @@ const ProfileOption = (props) => {
   return (
     <Dropdown style={{ marginLeft: 20 }}>
       <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
-        <Avatar
+        {/* <Avatar
           src={props.user.imgURL}
           style={{ marginLeft: SIZES.padding, width: 35, height: 35 }}
-        ></Avatar>
+        ></Avatar> */}
         <img className="img-user" src={props.user?.imgURL} />
       </Dropdown.Toggle>
       <Dropdown.Menu style={{ width: 250 }}>
@@ -70,7 +70,7 @@ const NavigationBar = ({ isAuthenticated }) => {
     <div className="Navbar">
       <Navbar expand="lg" bg="dark" variant="dark" className="Navbar2">
         <Navbar.Brand style={{ marginLeft: 250 }}>
-          {/* <Link to="/"> */}
+          <Link to="/">
           <div>
             <img
               className="noselect nodrag"
@@ -95,7 +95,7 @@ const NavigationBar = ({ isAuthenticated }) => {
               ThaiEggHead
             </div>
           </div>
-          {/* </Link> */}
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         {user ? (

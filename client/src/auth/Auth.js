@@ -193,7 +193,6 @@ const Signin = (props) => {
 
             <div className="d-grid gap-2">
               <Button
-                type="submit"
                 disabled={loginLoading}
                 className="col-12 mt-3 mb-3"
                 block
@@ -363,7 +362,6 @@ const Register = (props) => {
                   style={{ fontFamily: "supermarket", fontSize: SIZES.h3 }}
                   variant="outline-warning"
                   size="lg"
-                  type="submit"
                 >
                   ลงทะเบียน
                 </Button>

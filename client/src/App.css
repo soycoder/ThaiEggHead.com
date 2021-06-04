@@ -46,6 +46,36 @@
   /* z-index: -2; */
 }
 
+.pic-profile {
+  width: 200px;
+  margin-top: -112px;
+  z-index: 4;
+  -webkit-user-drag: none;
+}
+
+.edu-card {
+  display: inline;
+  height: 50px;
+}
+.edu-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-drag: none;
+}
+
+.interest-card {
+  display: inline-flex;
+  height: 50px;
+  width: 50%;
+}
+.interest-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-drag: none;
+}
+
 /* Login Page */
 
 .Login {

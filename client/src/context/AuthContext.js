@@ -21,6 +21,8 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem("token", token);
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
     localStorage.setItem("expiresAt", expiresAt);
+    localStorage.setItem("status", "true");
+
 
     setAuthState({
       token,
@@ -28,14 +30,15 @@ const AuthProvider = ({ children }) => {
       expiresAt,
     });
     alert("setAuthInfo");
+    console.log({ token, userInfo, expiresAt });
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("expiresAt");
-    setAuthState({});
-    history.push("/auth");
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("userInfo");
+    // localStorage.removeItem("expiresAt");
+    // setAuthState({});
+    // history.push("/auth");
   };
 
   const isAuthenticated = () => {
