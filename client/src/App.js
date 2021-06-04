@@ -7,7 +7,7 @@ import { FetchProvider } from "./context/FetchContext";
 
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import CreateForum from "./components/CreateForum";
+import CreateForum from "./pages/CreateForum";
 import Navbar from "./components/Navbar";
 import Subject from "./pages/Subject";
 import Auth from "./auth/Auth";
@@ -72,7 +72,7 @@ const AppRoutes = () => {
     <>
       <Navbar isAuthenticated={auth.isAuthenticated()}/>
       <Switch>
-        <AuthenticatedRoute path="/CreateForum">
+        <AuthenticatedRoute path="/create/forum">
           <CreateForum isAuthenticated={auth.isAuthenticated()} />
         </AuthenticatedRoute>
 

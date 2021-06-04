@@ -13,8 +13,6 @@ import "./styles.css";
 import { images, SIZES, COLORS } from "../constants";
 
 const ProfileOption = (props) => {
-  const auth = useContext(AuthContext);
-
   return (
     <Dropdown style={{ marginLeft: 20 }}>
       <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
@@ -22,14 +20,22 @@ const ProfileOption = (props) => {
           src={props.user.imgURL}
           style={{ marginLeft: SIZES.padding, width: 35, height: 35 }}
         ></Avatar> */}
-        <img className="img-user" src={props.user?.imgURL} />
+        <img
+          className="img-user"
+          src={props.user.imgURL ? props.user.imgURL : images.pic_profile}
+        />
       </Dropdown.Toggle>
       <Dropdown.Menu style={{ width: 250 }}>
-        <Dropdown.Item href="profile/1" className="menu-text">
-          <div>
-            <img className="img-user2" src={props.user?.imgURL} />
-            {props.user?.firstName + " " + props.user?.lastName}
-          </div>
+        <Dropdown.Item className="menu-text">
+          <Link to={`/profile/${props.user.userID}`}>
+            <div class="co-name">
+              <img
+                className="img-user2"
+                src={props.user.imgURL ? props.user.imgURL : images.pic_profile}
+              />
+              {props.user.firstName + " " + props.user.lastName}
+            </div>
+          </Link>
         </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item href="#/action-1" className="menu-text">
@@ -46,7 +52,7 @@ const ProfileOption = (props) => {
           Help
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item onClick={auth.logout()} className="menu-text">
+        <Dropdown.Item onClick={props.auth.logout} className="menu-text">
           Sign out
         </Dropdown.Item>
       </Dropdown.Menu>
@@ -71,30 +77,30 @@ const NavigationBar = ({ isAuthenticated }) => {
       <Navbar expand="lg" bg="dark" variant="dark" className="Navbar2">
         <Navbar.Brand style={{ marginLeft: 250 }}>
           <Link to="/">
-          <div>
-            <img
-              className="noselect nodrag"
-              src={images.logo}
-              width="70"
-              height="70"
-              alt="ThaiEggHead"
-              style={{
-                position: "absolute",
-                marginTop: -7,
-                zIndex: 200,
-              }}
-            />
-            <div
-              className="text-logo noselect"
-              style={{
-                fontFamily: "supermarket",
-                fontSize: 30,
-                marginLeft: 75,
-              }}
-            >
-              ThaiEggHead
+            <div>
+              <img
+                className="noselect nodrag"
+                src={images.logo}
+                width="70"
+                height="70"
+                alt="ThaiEggHead"
+                style={{
+                  position: "absolute",
+                  marginTop: -7,
+                  zIndex: 200,
+                }}
+              />
+              <div
+                className="text-logo noselect"
+                style={{
+                  fontFamily: "supermarket",
+                  fontSize: 30,
+                  marginLeft: 75,
+                }}
+              >
+                ThaiEggHead
+              </div>
             </div>
-          </div>
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -113,7 +119,7 @@ const NavigationBar = ({ isAuthenticated }) => {
               />
             </div>
 
-            <ProfileOption user={user}  />
+            <ProfileOption user={user} auth={auth} />
           </Navbar.Collapse>
         ) : (
           <Navbar.Collapse className="justify-content-end">
