@@ -253,7 +253,7 @@ function Sub() {
                       // console.log(filledArray)
                       return (
                         <div>
-                          <Button variant="outline-info">{item.name}</Button>{" x "}{item.num}
+                          <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
                         </div>
                       )
                     })}           
