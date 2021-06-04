@@ -7,11 +7,13 @@ import {
   Card,
   Container,
   ListGroup,
+  Button
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useState,} from "react";
 import ForumCard from "../components/ForumCard";
 import Select from "react-select"
+import { Keys } from "@blueprintjs/core";
 
 function Sub() {
   let { subject } = useParams();
@@ -24,15 +26,109 @@ function Sub() {
       .then((res) => setForumData(res));
   }, []);
 
+  var t = " "
+  var i, j
+  var arrayTag = []
+  var filledArray = []
+
+  function tagData (){
+    forumData.map((dataTag) =>
+      // console.log(dataTag.listTag[0])
+      // t = dataTag.listTag[0]
+
+      {
+        for (i=0; i<dataTag.listTag.length; i++){
+          if(dataTag.listTag[i] !== " "){
+            t = t +" "+ dataTag.listTag[i]
+          }
+      }
+        arrayTag = t.split(" ")
+        // const count = {}
+        // const result = []
+        // arrayTag.forEach(item =>{
+        //   if (count[item]) {
+        //     count[item] +=1
+        //     return
+        //   }
+        //   count[item] = 1
+        // })
+
+        // for (let prop in count){
+        //   if (count[prop] >=2){
+        //     result.push(prop)
+        //   }
+        // }
+        // console.log(count)
+
+//////////////////////////////////////////
+        // let unique = [];
+        // arrayTag.forEach(element => {
+        //   if (!unique.includes(element)){
+        //       unique.push(element)
+        //   }
+        // })
+
+        // for (j=0; j<unique.length; j++){
+        //   filledArray[j] = {id: j, name: unique[j]};
+          
+        // }
+        // const count = {}
+        // arrayTag.forEach(function(i) { count[i] = (count[i]||0) + 1;});
+        // console.log(count);
+
+        // console.log(arrayTag)
+      }
+    )
+    return(
+      // filledArray
+      arrayTag
+    )
+  }
+  {tagData()}
+  // console.log(arrayTag)
+
+  const count = {}
+  arrayTag.forEach(function(i) { count[i] = (count[i]||0) + 1;});
+  console.log(count);
+
+  // let unique = [];
+  //   arrayTag.forEach(element => {
+  //     if (!unique.includes(element)){
+  //         unique.push(element)
+  //       }
+  //     })
+
+  // for (j=0; j<unique.length; j++){
+  //     filledArray[j] = unique[j]; 
+  // }
+  // console.log(filledArray)
+
+  var key = [];
+  var sumTag = [];
+  key = Object.keys(count)
+  sumTag = Object.values(count)
+  console.log(key)
+  console.log(sumTag)
+
+  for (j=0; j<key.length; j++){
+    key[j] = {name: key[j], num: sumTag[j]};
+  }
+  console.log(key)
+  // var ll = ""
+  // ll = filledArray[1].toString()
+  // console.log(ll)
+  // console.log(count.ll);
+
+
   var [tag, setTag] = useState("");
   const [value, getValue]=useState([]);
-  // console.log(forumData)
+   console.log(tag)
   var newArray = forumData.filter(function(ele){
     var i, j;
     var n = ele.listTag.length;
     var nn = value.length;
-    console.log(tag, value)
-    console.log(nn);
+    // console.log(tag, value)
+    // console.log(nn);
     for(i=0; i<=nn; i++){
       for(j=0; j<n; j++){
         // console.log(n);
@@ -75,12 +171,12 @@ function Sub() {
     
   }, []);
   
+
   var handle = (e) => {
     getValue(Array.isArray(e)?e.map(x=>x.label):[]);
     
   }
   // console.log(value);
-  
   return (
     <div className="App">
       {/* <div className="app-content"></div> */}
@@ -149,9 +245,20 @@ function Sub() {
               <Card style={{ width: "13rem" }}>
                 <Card.Header>
                   Watched Tags
-                  <Card.Link href="#">Edit</Card.Link>
+                <Card.Link href="#">Edit</Card.Link>
                 </Card.Header>
-                <Card.Body></Card.Body>
+                <Card.Body>                
+                  <div>
+                    {key.map(item => {
+                      // console.log(filledArray)
+                      return (
+                        <div>
+                          <Button variant="outline-info">{item.name}</Button>{" x "}{item.num}
+                        </div>
+                      )
+                    })}           
+                  </div>
+                </Card.Body>
               </Card>
               <br />
               <Card style={{ width: "13rem" }}>
