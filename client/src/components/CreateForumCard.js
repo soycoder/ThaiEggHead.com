@@ -127,7 +127,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
     let myTag = [];
     let temp_newTag = [];
     tag.map((o) => myTag.push(o.label));
-    tag.map((o) => (o.__isNew__ === "true" ? temp_newTag.push(o.label) : null));
+    tag.map((o) => (o.__isNew__ === true ? temp_newTag.push(o.label) : null));
     setNewTag(temp_newTag);
     setListTag(myTag);
   }
