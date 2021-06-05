@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema(
     firstName: String,
     lastName: String,
     imgURL: String,
+    avatar: {image: Buffer, contentType: String},
     gender: String,
     birthDate: Date,
     bio: String,

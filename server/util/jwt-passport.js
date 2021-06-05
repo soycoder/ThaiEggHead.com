@@ -3,7 +3,7 @@ import passport from "passport";
 import passportJWT from 'passport-jwt';
 const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;
-import userModel from '../model/User.js';
+import userModel from '../models/User.js';
 import { jwtSecret, ROLES } from '../config/jwtConfig.js';
 import { logError } from "./util.js";
 
