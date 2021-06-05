@@ -147,10 +147,6 @@ function Sub() {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
-            <div style={{marginLeft:20}} >
-              <h2 style={theme.FONTS.h2}>{SubjectData.get(subject)[0]}</h2>
-              <h5 style={theme.FONTS.h5}>{SubjectData.get(subject)[1]}</h5>
             <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
             <div style={{ marginLeft: 20 }}>
               <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
@@ -171,10 +167,6 @@ function Sub() {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
-            <div style={{marginLeft:20}}>
-              <h2 style={theme.FONTS.h2}>{SubjectData.get(subject)[0]}</h2>
-              <h5 style={theme.FONTS.h5}>{SubjectData.get(subject)[1]}</h5>
             <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
             <div style={{ marginLeft: 20 }}>
               <h2>{SubjectData.get(subject)[0]}</h2>
@@ -191,8 +183,6 @@ function Sub() {
   }
 
   const TagSum = () => {
-    return(
-      <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
     return (
       <Card >
         <Card.Header>
@@ -218,8 +208,8 @@ function Sub() {
   const SpaceRec = () => {
     return (
       <Card>
-      <ListGroup variant="flush" style={theme.FONTS.Spacesfollow}>
-          <ListGroup.Item style={theme.FONTS.filter}>Spaces to follow</ListGroup.Item>
+        <ListGroup variant="flush">
+          <ListGroup.Item>Spaces to follow</ListGroup.Item>
           <ListGroup.Item></ListGroup.Item>
           <ListGroup.Item></ListGroup.Item>
           <ListGroup.Item></ListGroup.Item>
@@ -241,16 +231,6 @@ function Sub() {
 
           <Col md={3}>
 
-          <Card>
-            <Card.Header className="fontETC" style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529"}}>Leader Board</Card.Header>
-            <Card.Body>
-              <div className="fontETC">
-                <LeaderBoard />
-              </div>
-            </Card.Body>
-            <Card.Footer className="fontETC" style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
-         </Card>
-          
             <Card>
               <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
               <Card.Body>
