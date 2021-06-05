@@ -22,7 +22,7 @@ function QuestionPage() {
     var arrayforum = []
 
     useEffect(() => {
-        fetch("http://localhost:5000/forums/9846146556")
+        fetch("http://localhost:5000/forums/9846146546")
           .then((res) => res.json())
           .then((res) => setForumData(res));
             console.log("123")

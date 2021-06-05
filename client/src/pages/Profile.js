@@ -68,19 +68,23 @@ const Profile = ({ isAuthenticated }) => {
   const [numQuestion, setNumQuestion] = useState(0)
   const [numComment, setNumComment] = useState(0)
 
+  const [userData, setUserData] = useState({});
+  const [userForum, setUserForum] = useState({});
+  const [userAnswer, setUserAnswer] = useState({});
   //UTILITY
   const [currSelectNav, setCurrSelectNav] = useState(1);
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/users/${id}`)
-  //     .then((res) => res.json())
-  //     .then((res) => setData(res));
-  //   fetch(`http://localhost:5000/forums?userID=${id}`)
-  //     .then((res) => res.json())
-  //     .then((res) => setForum(res));
-  //   fetch(`http://localhost:5000/answers?userID=${id}`)
-  //     .then((res) => res.json())
-  //     .then((res) => setAnswer(res));
-  // }, []); 
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${id}`)
+      .then((res) => res.json())
+      .then((res) => setUserData(res));
+    fetch(`http://localhost:5000/forums?userID=${id}`)
+      .then((res) => res.json())
+      .then((res) => setUserForum(res));
+    fetch(`http://localhost:5000/answers?userID=${id}`)
+      .then((res) => res.json())
+      .then((res) => setUserAnswer(res));
+  }, []); 
+  
 
   const ProfileOld = () => {
     let { id } = useParams();
@@ -352,11 +356,8 @@ const Profile = ({ isAuthenticated }) => {
         <Col md={6}>
             <div class="profile-head">
                 <h3>
-                    {displayName}
+                  {`${userData.firstName} ${userData.lastName}`}
                 </h3>
-                <h5>
-                    {userName}
-                </h5>
                 <p class="proile-rating">EggHead Score : <span>{eggHeadScore}</span></p>
                 <Navs/>
                 <ContentDisplay/>

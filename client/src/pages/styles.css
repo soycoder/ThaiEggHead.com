@@ -212,3 +212,21 @@
 .co-name > a:hover {
   text-decoration: underline;
 }
+
+.user-image-small{
+    /*display:block;*/
+    float: left;
+    margin-right: 8px;
+    border-radius: 50% !important;
+  
+    width: 20px;
+    height: 20px;
+}
+
+.user-name-small a{
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.5;
+    color: gray;
+    text-decoration: none;
+}
