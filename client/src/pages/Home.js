@@ -25,6 +25,7 @@ import jwt_decode from "jwt-decode";
 
 import "./styles.css";
 import Select from "react-select"
+import { theme } from "../constants";
 
 function Home({ isAuthenticated }) {
   // Initial User Profile
@@ -200,7 +201,7 @@ function Home({ isAuthenticated }) {
     const data = props.data;
     const listSubject = data.map((subject) => (
       <li>
-        <Link to={subject.link} style={{ textDecoration: "black" }}>
+        <Link to={subject.link} style={{ textDecoration: "black" }} >
           <Button className="btn-subjectnav" variant="light" block>
             <img
               src={subject.img}
@@ -209,7 +210,10 @@ function Home({ isAuthenticated }) {
               className="subject-img"
               style={{ marginRight: 5 }}
             />
-            {subject.subjectName}
+            <div style={theme.FONTS.leftBar2}>
+              {subject.subjectName}
+            </div>
+            
           </Button>
         </Link>
       </li>
@@ -235,9 +239,9 @@ function Home({ isAuthenticated }) {
             </div>
           </Card.Subtitle>
 
-          <Form>
+          <Form >
             <Form.Group>
-              <Form.Control
+              <Form.Control style={theme.FONTS.post}
                 placeholder="คุณกำลังติดปัญหาอะไรรึเปล่า ? ถามมาสิ"
                 onClick={handleShow}
               />
@@ -269,11 +273,11 @@ function Home({ isAuthenticated }) {
     return (
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
-          <Card.Text className="card-title">
+          <Card.Text className="card-title" style={theme.FONTS.body2}>
             ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
-          <Card.Text className="card-subtitle">สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
-          <Button variant="primary" className="btn-learnmore">
+          <Card.Text className="card-subtitle" style={theme.FONTS.body3}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
+          <Button variant="primary" className="btn-learnmore" style={theme.FONTS.body4}>
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
@@ -296,7 +300,7 @@ function Home({ isAuthenticated }) {
         <Container fluid="xl">
           <Row xs={1} md={3}>
             <Col md="auto">
-              <h5 style={{ marginLeft: 54 }}>พื้นที่ความรู้</h5>
+              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.leftBar1}>พื้นที่ความรู้</h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>
 
@@ -314,7 +318,7 @@ function Home({ isAuthenticated }) {
             </Col>
 
             <Col md="auto">
-              <Card style={{ width: "13rem" }}>
+              <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
                 <Card.Header>Custom Filter</Card.Header>
                 <Card.Body>
                   {/* <Card.Link href="#">Create a custom filter</Card.Link> */}
@@ -332,7 +336,7 @@ function Home({ isAuthenticated }) {
                 </Card.Body>
               </Card>
               <br />
-              <Card style={{ width: "13rem" }}>
+              <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
                 <Card.Header>
                   Watched Tags
                   <Card.Link href="#">Edit</Card.Link>
@@ -342,7 +346,7 @@ function Home({ isAuthenticated }) {
                     {key.map(item => {
                       return (
                         <div>
-                          <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
+                          <Button variant="outline-info" className="app-fontSizeTag" style={theme.FONTS.filter}>{item.name}</Button>{" x "}{item.num}
                         </div>
                       )
                     })}
@@ -358,7 +362,7 @@ function Home({ isAuthenticated }) {
               </Card> */}
               <br />
               <Card style={{ width: "13rem" }}>
-                <ListGroup variant="flush">
+                <ListGroup variant="flush" style={theme.FONTS.Spacesfollow}>
                   <ListGroup.Item>Spaces to follow</ListGroup.Item>
                   <ListGroup.Item></ListGroup.Item>
                   <ListGroup.Item></ListGroup.Item>

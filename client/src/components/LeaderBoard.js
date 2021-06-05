@@ -7,31 +7,31 @@ export default function WithoutInfo() {
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
-        label: 'Rank',
+        label: 'ระดับ',
         field: 'rank',
         sort: 'disabled',
       },
       {
-        label: 'Name',
+        label: 'ชื่อผู้ใช้',
         field: 'name',
         sort: 'disabled',
       },
       {
-        label: 'Score',
+        label: 'EggHeadScore',
         field: 'score',
       }
     ],
     rows: [     
-      { rank: 1, name: 'Ootsuki Hibiki', score: 11880 },
-      { rank: 2, name: 'Eimi Fukada', score: 9109 },
-      { rank: 3, name: 'Yui Aragaki', score: 8967 },
-      { rank: 4, name: 'Chinatsu Izawa', score: 8773 },
-      { rank: 5, name: 'Reon Kadena', score: 8713 }, 
-      { rank: 7, name: 'Haruka Sanada', score: 8441 },
-      { rank: 8, name: 'Rio Kitajima', score: 8422 },       
+      { rank: 1, name: 'NetteN', score: 11880 },
+      { rank: 2, name: 'Eimi', score: 9109 },
+      { rank: 3, name: 'Yui' , score: 8967 },
+      { rank: 4, name: 'Izawa', score: 8773 },
+      { rank: 5, name: 'Reon', score: 8713 }, 
+      { rank: 7, name: 'Haruka' , score: 8441 },
+      { rank: 8, name: 'Rio', score: 8422 },       
       { rank: 9, name: 'Tsubomi', score: 8343 },
-      { rank: 6, name: 'Harumi Asano', score: 8519 },
-      { rank: 10, name: 'Ren Aizawa', score: 8317 }
+      { rank: 6, name: 'Harumi', score: 8519 },
+      { rank: 10, name: 'Ren', score: 8317 }
     ],
   });
 

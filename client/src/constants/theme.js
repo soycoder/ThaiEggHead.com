@@ -55,17 +55,42 @@ export const SIZES = {
 
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle},
+    largeTitle: { fontFamily: "Motorway", fontSize: SIZES.largeTitle},
     h1: { fontFamily: "IconicText", fontSize: SIZES.h1  },
     h2: { fontFamily: "Motorway", fontSize: SIZES.h2 },
     h3: { fontFamily: "Motorway", fontSize: SIZES.h3 },
     h4: { fontFamily: "Motorway", fontSize: SIZES.h4 },
     h5: { fontFamily: "Motorway", fontSize: SIZES.h5 },
     h6: { fontFamily: "Motorway", fontSize: SIZES.h6 },
+
     body1: { fontFamily: "Motorway", fontSize: SIZES.body1 },
     body2: { fontFamily: "Motorway", fontSize: SIZES.body2 },
     body3: { fontFamily: "Motorway", fontSize: SIZES.body3 },
     body4: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+
+    leftBar1: { fontFamily: "Motorway", fontSize: SIZES.h2 },
+    leftBar2: { fontFamily: "Motorway", fontSize: SIZES.h3 },
+
+    login: { fontFamily: "Motorway", fontSize: SIZES.h3 },
+
+    filter: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+    Spacesfollow: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+
+    LeaderBord: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+
+    nav: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+
+    name: { fontFamily: "Motorway", fontSize: SIZES.body3 },
+    time: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+    score: { fontFamily: "Motorway", fontSize: SIZES.body3 },
+
+    title: { fontFamily: "Motorway", fontSize: SIZES.h1 },
+    title1: { fontFamily: "Motorway", fontSize: SIZES.h3 },
+    title2: { fontFamily: "Motorway", fontSize: SIZES.h4 },
+    body: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+    tag: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+    subject: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+    post: { fontFamily: "Motorway", fontSize: SIZES.h3 },
 };
 
 const appTheme = { COLORS, SIZES, FONTS };
