@@ -19,7 +19,8 @@ import { Button as Button2 } from "@blueprintjs/core";
 import Avatar from 'react-avatar';
 import LeaderBoard from '../components/LeaderBoard';
 import Moment from 'react-moment';
-// import * '../App.css'
+
+import { theme } from "../constants";
 
 function Sub() {
   let { subject } = useParams();
@@ -143,7 +144,7 @@ function Sub() {
           <div className="subject-header">
             <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
             <div style={{marginLeft:20}}>
-              <h2>{SubjectData.get(subject)[0]}</h2>
+              <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
               <h5>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K
@@ -204,16 +205,16 @@ function Sub() {
       <Card>
         <Card.Header>Custom Filter</Card.Header>
         <Card.Body>
-          <Card.Link href="#">Create a custom filter</Card.Link>
+          {/* <Card.Link href="#">Create a custom filter</Card.Link>
           <form>
-            {/* <input name="tag" id="tag" /> */}
+            
             <input
               type="tag"
               onChange={e => setTag(e.target.value)}
               placeholder="Enter tag"
             />
           </form>
-          <br />
+          <br /> */}
           <div >
             <Select isMulti options={optionTag} onChange={handle}></Select>
           </div>
@@ -223,16 +224,16 @@ function Sub() {
     )
   }
 
-  const IgnoreTag = () => {
-    return (
-      <Card>
-        <Card.Header>Ignored Tags</Card.Header>
-        <Card.Body>
-          <Card.Link href="#">Add an ignored tag</Card.Link>
-        </Card.Body>
-      </Card>
-    )
-  }
+  // const IgnoreTag = () => {
+  //   return (
+  //     <Card>
+  //       <Card.Header>Ignored Tags</Card.Header>
+  //       <Card.Body>
+  //         <Card.Link href="#">Add an ignored tag</Card.Link>
+  //       </Card.Body>
+  //     </Card>
+  //   )
+  // }
 
   const SpaceRec = () => {
     return (
@@ -285,7 +286,7 @@ function Sub() {
             {/* <AboutSubjectCard/> */}
             <FilterCard />
             <TagSum/>
-            <IgnoreTag />
+            {/* <IgnoreTag /> */}
             <SpaceRec />
           </Col>
         </Row>

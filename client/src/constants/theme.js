@@ -57,15 +57,15 @@ export const SIZES = {
 export const FONTS = {
     largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle},
     h1: { fontFamily: "IconicText", fontSize: SIZES.h1  },
-    h2: { fontFamily: "supermarket", fontSize: SIZES.h2 },
-    h3: { fontFamily: "supermarket", fontSize: SIZES.h3 },
-    h4: { fontFamily: "supermarket", fontSize: SIZES.h4 },
-    h5: { fontFamily: "supermarket", fontSize: SIZES.h5 },
-    h6: { fontFamily: "supermarket", fontSize: SIZES.h6 },
-    body1: { fontFamily: "supermarket", fontSize: SIZES.body1 },
-    body2: { fontFamily: "supermarket", fontSize: SIZES.body2 },
-    body3: { fontFamily: "supermarket", fontSize: SIZES.body3 },
-    body4: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    h2: { fontFamily: "Motorway", fontSize: SIZES.h2 },
+    h3: { fontFamily: "Motorway", fontSize: SIZES.h3 },
+    h4: { fontFamily: "Motorway", fontSize: SIZES.h4 },
+    h5: { fontFamily: "Motorway", fontSize: SIZES.h5 },
+    h6: { fontFamily: "Motorway", fontSize: SIZES.h6 },
+    body1: { fontFamily: "Motorway", fontSize: SIZES.body1 },
+    body2: { fontFamily: "Motorway", fontSize: SIZES.body2 },
+    body3: { fontFamily: "Motorway", fontSize: SIZES.body3 },
+    body4: { fontFamily: "Motorway", fontSize: SIZES.body4 },
 };
 
 const appTheme = { COLORS, SIZES, FONTS };

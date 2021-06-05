@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Avatar, Button } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { Switch, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
 
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
@@ -153,7 +151,7 @@ const NavigationBar = ({ isAuthenticated }) => {
   }
   return (
     <div className="Navbar">
-      <Navbar expand="lg" bg="dark" variant="dark" className="Navbar2">
+      <Navbar expand="lg" bg="dark" variant="dark" className="navbar">
         <BrandLogo/>
           
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

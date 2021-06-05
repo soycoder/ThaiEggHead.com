@@ -28,6 +28,9 @@
   font-size: 12px;
   border-radius: 20px;
   font-weight: bold;
+  background-color: #ffe529;
+  border: #948620;
+  color: #212529;
 }
 
 .btn-subjectnav {
@@ -182,6 +185,10 @@
     border-radius: 20px;
 }
 
+.subject-img-cicle{
+  border-radius: 20% !important;
+} 
+
 .subject-img-bg{
     object-fit: cover;
     width: 100%;
@@ -248,4 +255,14 @@
 
 .btn-closestyle:hover{
   background-color: rgb(76, 80, 92);
+}
+
+.subject-img{
+  border-radius: 30% !important;
+}
+
+.event-img{
+  position: absolute;
+  left: 74%;
+  top: -10px;
 }
