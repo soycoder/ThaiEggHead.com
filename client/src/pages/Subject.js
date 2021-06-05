@@ -28,7 +28,7 @@ function Sub() {
   const [forumData, setForumData] = useState([]);
 
   const SubjectData = new Map();
-  SubjectData.set("sci", ["วิทยาศาสตร์ และเทคโนโลยี","Science and Technology"])
+  SubjectData.set("sci", ["วิทยาศาสตร์ และเทคโนโลยี", "Science and Technology"])
 
 
   useEffect(() => {
@@ -72,11 +72,11 @@ function Sub() {
 
   for (j = 0; j < key.length; j++) {
     // if (key[j] != "") {
-      key[j] = { name: key[j], num: sumTag[j] };
+    key[j] = { name: key[j], num: sumTag[j] };
     // }
-    
+
   }
-  
+
   key.shift()
   console.log(key)
 
@@ -147,15 +147,15 @@ function Sub() {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
-            <div style={{marginLeft:20}}>
+            <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
+            <div style={{ marginLeft: 20 }}>
               <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
               <h5>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K
                 </Button2>
             </div>
-            
+
           </div>
         </Card.Body>
       </Card>
@@ -167,15 +167,15 @@ function Sub() {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
-            <div style={{marginLeft:20}}>
+            <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
+            <div style={{ marginLeft: 20 }}>
               <h2>{SubjectData.get(subject)[0]}</h2>
               <h5>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K
                 </Button2>
             </div>
-            
+
           </div>
         </Card.Body>
       </Card>
@@ -183,7 +183,7 @@ function Sub() {
   }
 
   const TagSum = () => {
-    return(
+    return (
       <Card >
         <Card.Header>
           Watched Tags
@@ -204,41 +204,6 @@ function Sub() {
       </Card>
     )
   }
-
-  const FilterCard = () => {
-    return (
-      <Card>
-        <Card.Header>Custom Filter</Card.Header>
-        <Card.Body>
-          {/* <Card.Link href="#">Create a custom filter</Card.Link>
-          <form>
-            
-            <input
-              type="tag"
-              onChange={e => setTag(e.target.value)}
-              placeholder="Enter tag"
-            />
-          </form>
-          <br /> */}
-          <div >
-            <Select isMulti options={optionTag} onChange={handle}></Select>
-          </div>
-
-        </Card.Body>
-      </Card>
-    )
-  }
-
-  // const IgnoreTag = () => {
-  //   return (
-  //     <Card>
-  //       <Card.Header>Ignored Tags</Card.Header>
-  //       <Card.Body>
-  //         <Card.Link href="#">Add an ignored tag</Card.Link>
-  //       </Card.Body>
-  //     </Card>
-  //   )
-  // }
 
   const SpaceRec = () => {
     return (
@@ -266,17 +231,17 @@ function Sub() {
 
           <Col md={3}>
 
-          <Card>
-            <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529"}}>Leader Board</Card.Header>
-            <Card.Body>
-              <div className="leader">
-                <LeaderBoard />
-              </div>
-              
-            </Card.Body>
-            <Card.Footer style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
-          </Card>
-          
+            <Card>
+              <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
+              <Card.Body>
+                <div className="leader">
+                  <LeaderBoard />
+                </div>
+
+              </Card.Body>
+              <Card.Footer style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
+            </Card>
+
           </Col>
 
           <Col md={6}>
@@ -289,14 +254,22 @@ function Sub() {
 
           <Col md={2}>
             {/* <AboutSubjectCard/> */}
-            <FilterCard />
-            <TagSum/>
+            <Card>
+              <Card.Header>Custom Filter</Card.Header>
+              <Card.Body>
+                <div >
+                  <Select isMulti options={optionTag} onChange={handle}></Select>
+                </div>
+              </Card.Body>
+            </Card>
+            <TagSum />
             {/* <IgnoreTag /> */}
             <SpaceRec />
           </Col>
         </Row>
       </Container>
     </div>
+
   );
 
   const old = () => {

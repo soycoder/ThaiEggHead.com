@@ -48,18 +48,6 @@ function Home({ isAuthenticated }) {
 
   const [multipleFiles, setMultipleFiles] = useState([]);
 
-  // var newArray = datas.filter(function (ele) {
-  //   var i;
-  //   var n = ele.listTag.length;
-  //   for (i = 0; i < n; i++) {
-  //     if (ele.listTag[i] === tag) {
-  //       return ele.listTag;
-  //     } else if (tag === "") {
-  //       return (newArray = datas);
-  //     }
-  //   }
-  // });
-
   const subjectNavigate = [
     {
       subjectName: "วิทยาศาสตร์ และเทคโนโลยี",
@@ -343,15 +331,6 @@ function Home({ isAuthenticated }) {
               <Card style={{ width: "13rem" }}>
                 <Card.Header>Custom Filter</Card.Header>
                 <Card.Body>
-                  {/* <Card.Link href="#">Create a custom filter</Card.Link> */}
-                  {/* <form>
-                    <input
-                      type="tag"
-                      onChange={(e) => setTag(e.target.value)}
-                      placeholder="Enter tag"
-                    />
-                  </form> */}
-                  
                   <div >
                     <Select isMulti options={optionTag} onChange={handle}></Select>
                   </div>
@@ -375,13 +354,6 @@ function Home({ isAuthenticated }) {
                   </div>
                 </Card.Body>
               </Card>
-              {/* <br />
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>Ignored Tags</Card.Header>
-                <Card.Body>
-                  <Card.Link href="#">Add an ignored tag</Card.Link>
-                </Card.Body>
-              </Card> */}
               <br />
               <Card style={{ width: "13rem" }}>
                 <ListGroup variant="flush">
