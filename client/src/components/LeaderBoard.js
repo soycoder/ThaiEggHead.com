@@ -5,6 +5,11 @@ export default function WithoutInfo() {
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
+        label: 'Rank',
+        field: 'rank',
+        sort: 'disabled',
+      },
+      {
         label: 'Name',
         field: 'name',
         sort: 'disabled',
@@ -31,24 +36,14 @@ export default function WithoutInfo() {
 
   return <MDBDataTableV5
     data={datatable}
-    // entries={5}
-
     hover
+    entries={5}
+    // entriesOptions={[5,10]}
+    pagesAmount={4}
     info={false}
-    // searching={false}
-    // searchBottom={false}
-    // info={false}
     striped
     bordered
+    // paging={false}
 
-    // sortRows={['score']}
-    paging={false}
-  // pagination={false}
-  // page-item={false}
-  // pagesAmount={false}
-  // paginationLabel={false}
-
-
-  // sortable={false}
   />;
 }
