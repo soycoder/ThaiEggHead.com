@@ -25,6 +25,7 @@ import jwt_decode from "jwt-decode";
 
 import "./styles.css";
 import Select from "react-select"
+import { theme } from "../constants";
 
 function Home({ isAuthenticated }) {
   // Initial User Profile

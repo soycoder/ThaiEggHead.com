@@ -7,7 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
 
 import "./styles.css";
-
+import { theme } from "../constants";
 import { images, SIZES, COLORS } from "../constants";
 
 const ProfileOption = (props) => {
@@ -133,6 +133,7 @@ const NavigationBar = ({ isAuthenticated }) => {
                   fontSize: 30,
                   marginLeft: 75,
                 }}
+                
               >
                 ThaiEggHead
               </div>
@@ -140,7 +141,7 @@ const NavigationBar = ({ isAuthenticated }) => {
           </Link>
           
         </Navbar.Brand>
-        <Nav className="mr-auto">
+        <Nav className="mr-auto" style={theme.FONTS.nav}>
           <Nav.Link href="#features">About us</Nav.Link>
           <Nav.Link href="#features">Home</Nav.Link>
           <Nav.Link href="#features">Discovery</Nav.Link>

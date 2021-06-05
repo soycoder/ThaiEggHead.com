@@ -16,6 +16,7 @@ import { Button, Icon, InputGroup } from "@blueprintjs/core";
 import React, { useState, useEffect } from "react";
 import { images } from "../constants";
 import { Link } from "react-router-dom";
+import { theme } from "../constants";
 
 function ForumCard(props) {
   let forum = props.data;
@@ -78,7 +79,7 @@ function ForumCard(props) {
           placement={"top"}
           overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
         >
-          <Button className="bp3-minimal comment" icon="thumbs-up">
+          <Button className="bp3-minimal comment" icon="thumbs-up" >
             {props.upvote}
           </Button>
         </OverlayTrigger>
@@ -92,7 +93,7 @@ function ForumCard(props) {
           {subject}
         </Badge>
       ));
-      return <div className="tag">{subjectTag}</div>;
+      return <div className="tag" style={theme.FONTS.tag}>{subjectTag}</div>;
     };
 
     const ListTag = (props) => {
@@ -105,7 +106,7 @@ function ForumCard(props) {
         )
         // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
-      return <div className="tag">{subjectTag}</div>;
+      return <div className="tag" style={theme.FONTS.subject}>{subjectTag}</div>;
     };
 
     const ButtomOption = () => {
@@ -166,12 +167,12 @@ function ForumCard(props) {
               <img class="co-logo" src={user.imgURL ? user.imgURL : images.pic_profile} />
             </Link>
             <div class="co-name">
-              <Link to={`/profile/${user.userID}`}>
+              <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
               </Link>
             </div>
             <div class="time">
-              <div class="noselect">{forum.createdAt}</div> · <i class="fa fa-globe"></i>
+              <div class="noselect" style={theme.FONTS.time}>{forum.createdAt}</div> · <i class="fa fa-globe"></i>
             </div>
             <div className="btn-more">
               <MoreButton />
@@ -180,7 +181,7 @@ function ForumCard(props) {
           <div class="content">
             {/* <Card.Title>{forum.title}</Card.Title> */}
             <Link to={`question/${forum.forumID}`} style={{ textDecoration: "black" }}>
-              <Card.Title>{forum.title}</Card.Title>
+              <Card.Title style={theme.FONTS.body3}>{forum.title}</Card.Title>
             </Link>
 
             <div style={{ marginBottom: 5 }}>
@@ -198,7 +199,10 @@ function ForumCard(props) {
                       className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
                       onClick={() => handleClickViewMore()}
                     >
-                      (แสดงน้อยลง)
+                      <div style={theme.FONTS.h4}> 
+                        (แสดงน้อยลง)
+                      </div>
+                      
                     </Button>
                   ) : (
                     <></>
@@ -238,13 +242,14 @@ function ForumCard(props) {
                     <>
                       {objImage.map(item => {
                         return (
-                          <>
+                          <div>
                           <Image
                             src={"http://localhost:5000/" + item.path}
                             fluid
                             className="forum-img"
                           />
-                          </>
+                          <br />
+                          </div>
                         )
                       })}
                     </>
@@ -287,7 +292,7 @@ function ForumCard(props) {
           placement={"top"}
           overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
         >
-          <Button className="bp3-minimal comment2" icon="thumbs-up">
+          <Button className="bp3-minimal comment2" icon="thumbs-up" style={theme.FONTS.body4}>
             Upvote · {props.upvote}
           </Button>
         </OverlayTrigger>
@@ -306,6 +311,7 @@ function ForumCard(props) {
             icon="chat"
             style={{ marginLeft: 5 }}
             onClick={() => handleClickCommentForm()}
+            style={theme.FONTS.body4}
           >
             Reply
           </Button>
@@ -323,7 +329,7 @@ function ForumCard(props) {
               placeholder="Add a answer..."
               className="input-answer"
             />
-            <Button2 variant="primary" className="btn-answer">
+            <Button2 variant="primary" className="btn-answer" style={theme.FONTS.h4}>
               Add answer
             </Button2>
           </div>
@@ -335,7 +341,7 @@ function ForumCard(props) {
       return (
         <div class="commentlist-content">
           <HeaderUserComment />
-          <div class="commentlist-content-text">
+          <div class="commentlist-content-text" style={theme.FONTS.h4}>
             The first one kind of happened where I live for a couple of weeks.
           </div>
         </div>
@@ -348,16 +354,16 @@ function ForumCard(props) {
 
     const HeaderUserComment = () => {
       return (
-        <div class="header">
+        <div class="header" >
           <div class="options">
             <i class="fa fa-chevron-down"></i>
           </div>
           <img class="co-logo-comment" src={userAnswer[1].img} />
           <div class="co-name">
-            <a href="#">{userAnswer[1].displayName}</a>
+            <a href="#" style={theme.FONTS.body3}>{userAnswer[1].displayName}</a>
           </div>
           <div class="time">
-            <a href="#">{userAnswer[1].date}</a> · <i class="fa fa-globe"></i>
+            <a href="#" style={theme.FONTS.body5}>{userAnswer[1].date}</a> · <i class="fa fa-globe"></i>
           </div>
           <div className="btn-more"></div>
         </div>
@@ -372,10 +378,10 @@ function ForumCard(props) {
           </div>
           <img class="co-logo" src={userAnswer[0].img} />
           <div class="co-name">
-            <a href="#">{userAnswer[0].displayName}</a>
+            <a href="#" style={theme.FONTS.name}>{userAnswer[0].displayName}</a>
           </div>
-          <div class="time">
-            <a href="#">{userAnswer[0].date}</a> · <i class="fa fa-globe"></i>
+          <div class="time" >
+            <a href="#" style={theme.FONTS.time}>{userAnswer[0].date}</a> · <i class="fa fa-globe"></i>
           </div>
           <div class="best-answer"><Icon icon="pin" /> Best Answer</div>
         </div>
@@ -429,24 +435,24 @@ function ForumCard(props) {
         );
       } else {
         return (
-          <Card className="answerlist-card">
-            <div>
-              <HeaderUserAnswer />
-              <div class="answerlist-content">
-                <div class="answerlist-content-text">
-                  The first one kind of happened where I live for a couple of
-                  weeks.
+        <Card className="answerlist-card">
+          <div>
+            <HeaderUserAnswer />
+            <div class="answerlist-content">
+              <div class="answerlist-content-text" style={theme.FONTS.h4}>
+                The first one kind of happened where I live for a couple of
+                weeks.
               </div>
 
-                {isShowCommentForm ? (
-                  <div style={{ display: "flex" }}>
-                    <InputGroup
-                      onChange={{}}
-                      placeholder="Add a comment..."
-                      className="input-answer"
-                    />
-                    <Button2 variant="primary" className="btn-answer">
-                      Reply
+              {isShowCommentForm ? (
+                <div style={{ display: "flex" }} >
+                  <InputGroup
+                    onChange={{}}
+                    placeholder="Add a comment..."
+                    className="input-answer"
+                  />
+                  <Button2 variant="primary" className="btn-answer">
+                    Reply
                   </Button2>
                   </div>
                 ) : (

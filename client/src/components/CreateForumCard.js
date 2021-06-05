@@ -194,8 +194,8 @@ const FileUploadScreen = ({ isAuthenticated }) => {
   const editorConfiguration = {
     // plugins: [ ],
     toolbar: [ 
-      'heading',
-      '|',
+      // 'heading',
+      // '|',
       'bold',
       'italic',
       '|',
