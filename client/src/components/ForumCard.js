@@ -21,6 +21,15 @@ import { theme } from "../constants";
 function ForumCard(props) {
   let forum = props.data;
 
+  var numImage = forum.listImage;
+  var i
+  var objImage = []
+  if (numImage.length > 0) {
+    for (i = 0; i < numImage.length; i++) {
+      objImage[i] = { path: numImage[i].filePath };
+    }
+  }
+
   const [isShowComment, setIsShowComment] = useState(false);
   const [isViewMore, setIsViewMore] = useState(false);
 
@@ -185,7 +194,7 @@ function ForumCard(props) {
                     id="body-forum-text" />
 
                   {!props.isReadLong ? (
-                                      
+
                     <Button
                       className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
                       onClick={() => handleClickViewMore()}
@@ -196,7 +205,7 @@ function ForumCard(props) {
                       
                     </Button>
                   ) : (
-                    <></>  
+                    <></>
                   )}
 
                 </>
@@ -206,24 +215,52 @@ function ForumCard(props) {
                     <div id="body-forum-text" onClick={() => handleClickViewMore()} dangerouslySetInnerHTML={{ __html: post }} />
                   ) : (
                     <div
-                    dangerouslySetInnerHTML={{
-                      __html: forum.postText,
-                    }}
-                    id="body-forum-text" />  
+                      dangerouslySetInnerHTML={{
+                        __html: forum.postText,
+                      }}
+                      id="body-forum-text" />
                   )}
                 </>
               )}
             </div>
-
-            {forum.listImage[0]?.filePath ? (
-              <Image
-                src={"http://localhost:5000/" + forum.listImage[0]?.filePath}
-                fluid
-                className="forum-img"
-              />
-            ) : (
-              <></>
-            )}
+            <>
+              {!props.isReadLong ? (
+                <>
+                  {forum.listImage[0]?.filePath ? (
+                    <Image
+                      src={"http://localhost:5000/" + forum.listImage[0]?.filePath}
+                      fluid
+                      className="forum-img"
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </>
+              ) : (
+                <>
+                  {forum.listImage[0]?.filePath ? (
+                    <>
+                      {objImage.map(item => {
+                        return (
+                          <>
+                          <Image
+                            src={"http://localhost:5000/" + item.path}
+                            fluid
+                            className="forum-img"
+                          />
+                          <div>
+                            <br />
+                          </div>
+                          </>
+                        )
+                      })}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
+            </>
           </div>
         </div>
         <div className="card-tag">
@@ -348,15 +385,15 @@ function ForumCard(props) {
           <div class="time" >
             <a href="#" style={theme.FONTS.time}>{userAnswer[0].date}</a> · <i class="fa fa-globe"></i>
           </div>
-          <div class="best-answer" style={theme.FONTS.body3}><Icon icon="pin"/> Best Answer</div>
+          <div class="best-answer"><Icon icon="pin" /> Best Answer</div>
         </div>
       );
     };
 
     const AnswerList = () => {
-      let isBestAnswer=true
+      let isBestAnswer = true
 
-      if(isBestAnswer){
+      if (isBestAnswer) {
         return (
           <Card className="answerlist-card">
             <div>
@@ -367,7 +404,7 @@ function ForumCard(props) {
                 </div>
 
                 {/* <div class="best-answer">Best Answer</div> */}
-  
+
                 {isShowCommentForm ? (
                   <div style={{ display: "flex" }}>
                     <InputGroup
@@ -387,7 +424,7 @@ function ForumCard(props) {
                 )}
               </div>
             </div>
-  
+
             {comment ? (
               <>
                 <CommentList />
@@ -398,7 +435,7 @@ function ForumCard(props) {
             )}
           </Card>
         );
-      }else{
+      } else {
         return (
         <Card className="answerlist-card">
           <div>
@@ -419,28 +456,28 @@ function ForumCard(props) {
                   <Button2 variant="primary" className="btn-answer">
                     Reply
                   </Button2>
-                </div>
-              ) : (
-                <>
-                  <UpvoteBotton upvote={0} />
-                  <ReplyBotton />
-                </>
-              )}
+                  </div>
+                ) : (
+                  <>
+                    <UpvoteBotton upvote={0} />
+                    <ReplyBotton />
+                  </>
+                )}
+              </div>
             </div>
-          </div>
 
-          {comment ? (
-            <>
-              <CommentList />
-              <CommentList />
-            </>
-          ) : (
-            <></>
-          )}
-        </Card>
-      );
+            {comment ? (
+              <>
+                <CommentList />
+                <CommentList />
+              </>
+            ) : (
+              <></>
+            )}
+          </Card>
+        );
       }
-      
+
     };
 
     return (
