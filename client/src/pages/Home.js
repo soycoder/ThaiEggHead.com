@@ -222,7 +222,7 @@ function Home({ isAuthenticated }) {
               className="subject-img"
               style={{ marginRight: 5 }}
             />
-            <div style={theme.FONTS.body3}>
+            <div style={theme.FONTS.home3}>
               {subject.subjectName}
             </div>
             
@@ -285,11 +285,11 @@ function Home({ isAuthenticated }) {
     return (
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
-          <Card.Text className="card-title" style={theme.FONTS.body2}>
+          <Card.Text className="card-title" style={theme.FONTS.home2}>
             ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
-          <Card.Text className="card-subtitle" style={theme.FONTS.body3}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
-          <Button variant="primary" className="btn-learnmore" style={theme.FONTS.body4}>
+          <Card.Text className="card-subtitle" style={theme.FONTS.home3}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
+          <Button variant="primary" className="btn-learnmore" style={theme.FONTS.homebody2}>
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
@@ -312,7 +312,7 @@ function Home({ isAuthenticated }) {
         <Container fluid="xl">
           <Row xs={1} md={3}>
             <Col md="auto" >
-              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.body2}>พื้นที่ความรู้</h5>
+              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.home2}>พื้นที่ความรู้</h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>
 
@@ -329,7 +329,7 @@ function Home({ isAuthenticated }) {
               ))}
             </Col>
 
-            <Col md="auto">
+            <Col md={2}>
               <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
                 <Card.Header>Filter</Card.Header>
                 <Card.Body>

@@ -18,6 +18,8 @@ import { images } from "../constants";
 import { Link } from "react-router-dom";
 import { theme } from "../constants";
 
+import ReactHtmlParser from "react-html-parser";
+
 function ForumCard(props) {
   let forum = props.data;
 
@@ -181,17 +183,19 @@ function ForumCard(props) {
           <div class="content">
             {/* <Card.Title>{forum.title}</Card.Title> */}
             <Link to={`question/${forum.forumID}`} style={{ textDecoration: "black" }}>
-              <Card.Title style={theme.FONTS.body3}>{forum.title}</Card.Title>
+              <Card.Title style={theme.FONTS.bodyTitle}>{forum.title}</Card.Title>
             </Link>
 
             <div style={{ marginBottom: 5 }}>
               {isViewMore ? (
                 <>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: forum.postText,
+                  
+                  {/* <div dangerouslySetInnerHTML={{
+                      __html: `<div style={{color:'blue'}}>${forum.postText}</div>`,
                     }}
-                    id="body-forum-text" />
+                    id="body-forum-text" /> */}
+                    {/* {parse('<div style={{color:'blue'}}>{forum.postText}</div>')} */}
+                    <div>{ReactHtmlParser(this.state.myContent)}</div>
 
                   {!props.isReadLong ? (
 
