@@ -17,6 +17,8 @@ import React, { useState, useEffect } from "react";
 import { images } from "../constants";
 import { Link } from "react-router-dom";
 
+import Moment from "react-moment";
+
 function ForumCard(props) {
   let forum = props.data;
 
@@ -50,8 +52,7 @@ function ForumCard(props) {
       } else {
         var post = forum.postText;
       }
-    }
-    else {
+    } else {
       post = forum.postText;
     }
     useEffect(() => {
@@ -154,15 +155,30 @@ function ForumCard(props) {
               <i class="fa fa-chevron-down"></i>
             </div>
             <Link to={`/profile/${user.userID}`}>
-              <img class="co-logo" src={user.imgURL ? user.imgURL : images.pic_profile} />
+              <img
+                class="co-logo"
+                src={user.imgURL ? user.imgURL : images.pic_profile}
+              />
             </Link>
             <div class="co-name">
               <Link to={`/profile/${user.userID}`}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
               </Link>
             </div>
-            <div class="time">
-              <div class="noselect">{forum.createdAt}</div> · <i class="fa fa-globe"></i>
+            <div class="time noselect">
+              <div>
+                <Moment
+                  element="span"
+                  data={forum.createdAt}
+                  locale="th"
+                  format="DD/MM/YYYY"
+                />
+                {" "}·{" "}
+                <Moment fromNow locale="th">
+                  {forum.createdAt}
+                </Moment>
+              </div>
+              {/* <i class="fa fa-globe"></i> */}
             </div>
             <div className="btn-more">
               <MoreButton />
@@ -170,7 +186,10 @@ function ForumCard(props) {
           </div>
           <div class="content">
             {/* <Card.Title>{forum.title}</Card.Title> */}
-            <Link to={`question/${forum.forumID}`} style={{ textDecoration: "black" }}>
+            <Link
+              to={`question/${forum.forumID}`}
+              style={{ textDecoration: "black" }}
+            >
               <Card.Title>{forum.title}</Card.Title>
             </Link>
 
@@ -181,10 +200,10 @@ function ForumCard(props) {
                     dangerouslySetInnerHTML={{
                       __html: forum.postText,
                     }}
-                    id="body-forum-text" />
+                    id="body-forum-text"
+                  />
 
                   {!props.isReadLong ? (
-                                      
                     <Button
                       className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
                       onClick={() => handleClickViewMore()}
@@ -192,20 +211,24 @@ function ForumCard(props) {
                       (แสดงน้อยลง)
                     </Button>
                   ) : (
-                    <></>  
+                    <></>
                   )}
-
                 </>
               ) : (
                 <>
                   {!props.isReadLong ? (
-                    <div id="body-forum-text" onClick={() => handleClickViewMore()} dangerouslySetInnerHTML={{ __html: post }} />
+                    <div
+                      id="body-forum-text"
+                      onClick={() => handleClickViewMore()}
+                      dangerouslySetInnerHTML={{ __html: post }}
+                    />
                   ) : (
                     <div
-                    dangerouslySetInnerHTML={{
-                      __html: forum.postText,
-                    }}
-                    id="body-forum-text" />  
+                      dangerouslySetInnerHTML={{
+                        __html: forum.postText,
+                      }}
+                      id="body-forum-text"
+                    />
                   )}
                 </>
               )}
