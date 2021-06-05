@@ -43,13 +43,17 @@ function ForumCard(props) {
   const Question = () => {
     const [user, setUser] = useState(dummyUser);
 
-    var n = forum.postText.length;
-    if (n > 160) {
-      var post = forum.postText.substr(0, 150) + "...";
-    } else {
-      var post = forum.postText;
+    if (!props.isReadLong) {
+      var n = forum.postText.length;
+      if (n > 160) {
+        var post = forum.postText.substr(0, 150) + "...";
+      } else {
+        var post = forum.postText;
+      }
     }
-
+    else {
+      post = forum.postText;
+    }
     useEffect(() => {
       fetch(`http://localhost:5000/users/${forum.userID}`)
         .then((res) => res.json())
@@ -150,11 +154,11 @@ function ForumCard(props) {
               <i class="fa fa-chevron-down"></i>
             </div>
             <Link to={`/profile/${user.userID}`}>
-              <img class="co-logo" src={user.imgURL?user.imgURL:images.pic_profile} />
+              <img class="co-logo" src={user.imgURL ? user.imgURL : images.pic_profile} />
             </Link>
             <div class="co-name">
               <Link to={`/profile/${user.userID}`}>
-                {user.firstName?user.firstName + " " + user.lastName:""}
+                {user.firstName ? user.firstName + " " + user.lastName : ""}
               </Link>
             </div>
             <div class="time">
@@ -165,7 +169,11 @@ function ForumCard(props) {
             </div>
           </div>
           <div class="content">
-            <Card.Title>{forum.title}</Card.Title>
+            {/* <Card.Title>{forum.title}</Card.Title> */}
+            <Link to={`question/${forum.forumID}`} style={{ textDecoration: "black" }}>
+              <Card.Title>{forum.title}</Card.Title>
+            </Link>
+
             <div style={{ marginBottom: 5 }}>
               {isViewMore ? (
                 <>
@@ -173,18 +181,32 @@ function ForumCard(props) {
                     dangerouslySetInnerHTML={{
                       __html: forum.postText,
                     }}
-                    id="body-forum-text"/>
+                    id="body-forum-text" />
 
-                  <Button
-                    className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
-                    onClick={() => handleClickViewMore()}
-                  >
-                    (แสดงน้อยลง)
-                  </Button>
+                  {!props.isReadLong ? (
+                                      
+                    <Button
+                      className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
+                      onClick={() => handleClickViewMore()}
+                    >
+                      (แสดงน้อยลง)
+                    </Button>
+                  ) : (
+                    <></>  
+                  )}
+
                 </>
               ) : (
                 <>
-                  <div id="body-forum-text" onClick={() => handleClickViewMore()} dangerouslySetInnerHTML={{ __html: post }} />
+                  {!props.isReadLong ? (
+                    <div id="body-forum-text" onClick={() => handleClickViewMore()} dangerouslySetInnerHTML={{ __html: post }} />
+                  ) : (
+                    <div
+                    dangerouslySetInnerHTML={{
+                      __html: forum.postText,
+                    }}
+                    id="body-forum-text" />  
+                  )}
                 </>
               )}
             </div>

@@ -22,12 +22,13 @@ function QuestionPage() {
     var arrayforum = []
 
     useEffect(() => {
-        fetch("http://localhost:5000/forums/9846146556")
+        fetch(`http://localhost:5000/forums/${question}`)
           .then((res) => res.json())
           .then((res) => setForumData(res));
             console.log("123")
       }, []);
 
+    console.log(question)
     // console.log(question)
     console.log(forumData)
     // arrayforum[0] = forumData
@@ -43,7 +44,7 @@ function QuestionPage() {
           <Row>
             {/* <Col></Col> */}
             <Col xs lg="8">
-            {forumData?(<ForumCard data={forumData} />):(<Spinner animation="border"></Spinner>)}
+            {forumData?(<ForumCard data={forumData} isReadLong={true}/>):(<Spinner animation="border"></Spinner>)}
 
             {/* {forumData.map((forum) => (
                 

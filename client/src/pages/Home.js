@@ -13,6 +13,7 @@ import {
 import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
 import React, { useState, useEffect, useContext } from "react";
+import { Icon } from "@blueprintjs/core";
 
 import CreateForumCard from "../components/CreateForumCard";
 import ForumCard from "../components/ForumCard";
@@ -40,6 +41,8 @@ function Home({ isAuthenticated }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [datas, setdatas] = useState([]);
+
+  const [isShowAnounce, setIsShowAnounce] = useState(true)
 
   const [multipleFiles, setMultipleFiles] = useState([]);
   const [tag, setTag] = useState("");
@@ -155,15 +158,15 @@ function Home({ isAuthenticated }) {
   const UserQuestionCard = () => {
     if (isAuthenticated) {
       return (
-        <Card className="app-padding" style={{ marginBottom: 10 }}>
+        <Card style={{ marginBottom: 10, padding:15 }}>
           <Card.Subtitle className="card-username">
             <Link to={`/profile/${user.userID}`}>
               <img
-                class="co-logo"
+                class="user-image-small"
                 src={user.imgURL ? user.imgURL : images.pic_profile}
               />
             </Link>
-            <div class="co-name">
+            <div class="user-name-small">
               <Link to={`/profile/${user.userID}`}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
               </Link>
@@ -211,6 +214,7 @@ function Home({ isAuthenticated }) {
           <Button variant="primary" className="btn-learnmore">
             Learn more
           </Button>
+          <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
         </Card.Body>
       </Card>
     );
@@ -229,7 +233,11 @@ function Home({ isAuthenticated }) {
             </Col>
 
             <Col md={6}>
-              <AnouncingCard />
+
+              {isShowAnounce? (
+                <AnouncingCard />
+              ) : (<></>)}
+              
               <UserQuestionCard />
 
               {newArray.map((forum) => (

@@ -81,6 +81,9 @@ const Profile = ({ isAuthenticated }) => {
   const [numQuestion, setNumQuestion] = useState(0);
   const [numComment, setNumComment] = useState(0);
 
+  const [userData, setUserData] = useState({});
+  const [userForum, setUserForum] = useState({});
+  const [userAnswer, setUserAnswer] = useState({});
   //UTILITY
   const [currSelectNav, setCurrSelectNav] = useState(1);
   useEffect(() => {
