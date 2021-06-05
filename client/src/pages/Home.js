@@ -46,19 +46,18 @@ function Home({ isAuthenticated }) {
   const [isShowAnounce, setIsShowAnounce] = useState(true)
 
   const [multipleFiles, setMultipleFiles] = useState([]);
-  const [tag, setTag] = useState("");
 
-  var newArray = datas.filter(function (ele) {
-    var i;
-    var n = ele.listTag.length;
-    for (i = 0; i < n; i++) {
-      if (ele.listTag[i] === tag) {
-        return ele.listTag;
-      } else if (tag === "") {
-        return (newArray = datas);
-      }
-    }
-  });
+  // var newArray = datas.filter(function (ele) {
+  //   var i;
+  //   var n = ele.listTag.length;
+  //   for (i = 0; i < n; i++) {
+  //     if (ele.listTag[i] === tag) {
+  //       return ele.listTag;
+  //     } else if (tag === "") {
+  //       return (newArray = datas);
+  //     }
+  //   }
+  // });
 
   const subjectNavigate = [
     {
@@ -151,6 +150,7 @@ function Home({ isAuthenticated }) {
       });
   }, []);
 
+  var [tag, setTag] = useState("");
   const [value, getValue] = useState([]);
   var handle = (e) => {
     getValue(Array.isArray(e) ? e.map(x => x.label) : []);
@@ -188,6 +188,32 @@ function Home({ isAuthenticated }) {
   for (j = 0; j < key.length; j++) {
     key[j] = { name: key[j], num: sumTag[j] };
   }
+
+  key.shift()
+
+
+  var newArray = datas.filter(function (ele) {
+    var i, j;
+    var n = ele.listTag.length;
+    var nn = value.length;
+    // console.log(tag, value)
+    // console.log(nn);
+    for (i = 0; i <= nn; i++) {
+      for (j = 0; j < n; j++) {
+        // console.log(n);
+        if (nn != 0) {
+          tag = value[i]
+        }
+        console.log(tag);
+        if (ele.listTag[j] === tag) {
+          return ele.listTag;
+        }
+        else if (tag === "") {
+          return newArray = datas;
+        }
+      }
+    }
+  });
 
   const mystyle = {
     padding: "20px",

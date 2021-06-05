@@ -44,12 +44,12 @@ function Sub() {
   function tagData() {
     forumData.map((dataTag) => {
       for (i = 0; i < dataTag.listTag.length; i++) {
-        if (dataTag.listTag[i] !== " ") {
+        if (dataTag.listTag[i] != " ") {
           t = t + " " + dataTag.listTag[i]
         }
       }
       arrayTag = t.split(" ")
-
+      console.log(arrayTag)
     }
     )
     return (
@@ -70,8 +70,13 @@ function Sub() {
   console.log(sumTag)
 
   for (j = 0; j < key.length; j++) {
-    key[j] = { name: key[j], num: sumTag[j] };
+    // if (key[j] != "") {
+      key[j] = { name: key[j], num: sumTag[j] };
+    // }
+    
   }
+  
+  key.shift()
   console.log(key)
 
   var [tag, setTag] = useState("");
