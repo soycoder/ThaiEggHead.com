@@ -23,6 +23,7 @@ import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
 
 import "./styles.css";
+import Select from "react-select"
 
 function Home({ isAuthenticated }) {
   // Initial User Profile
@@ -128,6 +129,66 @@ function Home({ isAuthenticated }) {
       .then((res) => setdatas(res));
   }, []);
 
+  const Tag = [
+    { name: "Art", tagID: "Art" },
+    { name: "Database", tagID: "Database" },
+    { name: "Science", tagID: "Scienceact" },
+    { name: "Law", tagID: "Law" },
+  ];
+
+  const [optionTag, setOptionTag] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/forums/tag`)
+      .then((res) => res.json())
+      .then((res) => {
+        let array = Tag.concat(res);
+        let options = array.map((d) => ({
+          value: d.tagID,
+          label: d.name,
+        }));
+        // console.log(options);
+        setOptionTag(options);
+      });
+  }, []);
+
+  const [value, getValue] = useState([]);
+  var handle = (e) => {
+    getValue(Array.isArray(e) ? e.map(x => x.label) : []);
+  }
+
+  var i, j
+  var t = " "
+  var arrayTag = []
+  function tagData() {
+    datas.map((dataTag) => {
+      for (i = 0; i < dataTag.listTag.length; i++) {
+        if (dataTag.listTag[i] !== " ") {
+          t = t + " " + dataTag.listTag[i]
+        }
+      }
+      arrayTag = t.split(" ")
+
+    }
+    )
+    return (
+      arrayTag
+    )
+  }
+  { tagData() }
+
+  const count = {}
+  arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
+  console.log(count);
+
+  var key = [];
+  var sumTag = [];
+  key = Object.keys(count)
+  sumTag = Object.values(count)
+
+  for (j = 0; j < key.length; j++) {
+    key[j] = { name: key[j], num: sumTag[j] };
+  }
+
   const mystyle = {
     padding: "20px",
     fontFamily: "RSU",
@@ -142,9 +203,9 @@ function Home({ isAuthenticated }) {
           <Button className="btn-subjectnav" variant="light" block>
             <img
               src={subject.img}
-              height="30"
-              width="30"
-              className="subject-img-cicle"
+              height="23"
+              width="23"
+              className="app-cycle"
               style={{ marginRight: 5 }}
             />
             {subject.subjectName}
@@ -158,7 +219,7 @@ function Home({ isAuthenticated }) {
   const UserQuestionCard = () => {
     if (isAuthenticated) {
       return (
-        <Card style={{ marginBottom: 10, padding:15 }}>
+        <Card style={{ marginBottom: 10, padding: 15 }}>
           <Card.Subtitle className="card-username">
             <Link to={`/profile/${user.userID}`}>
               <img
@@ -234,10 +295,10 @@ function Home({ isAuthenticated }) {
 
             <Col md={6}>
 
-              {isShowAnounce? (
+              {isShowAnounce ? (
                 <AnouncingCard />
               ) : (<></>)}
-              
+
               <UserQuestionCard />
 
               {newArray.map((forum) => (
@@ -249,14 +310,18 @@ function Home({ isAuthenticated }) {
               <Card style={{ width: "13rem" }}>
                 <Card.Header>Custom Filter</Card.Header>
                 <Card.Body>
-                  <Card.Link href="#">Create a custom filter</Card.Link>
-                  <form>
+                  {/* <Card.Link href="#">Create a custom filter</Card.Link> */}
+                  {/* <form>
                     <input
                       type="tag"
                       onChange={(e) => setTag(e.target.value)}
                       placeholder="Enter tag"
                     />
-                  </form>
+                  </form> */}
+                  
+                  <div >
+                    <Select isMulti options={optionTag} onChange={handle}></Select>
+                  </div>
                 </Card.Body>
               </Card>
               <br />
@@ -265,15 +330,25 @@ function Home({ isAuthenticated }) {
                   Watched Tags
                   <Card.Link href="#">Edit</Card.Link>
                 </Card.Header>
-                <Card.Body></Card.Body>
+                <Card.Body>
+                  <div>
+                    {key.map(item => {
+                      return (
+                        <div>
+                          <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </Card.Body>
               </Card>
-              <br />
+              {/* <br />
               <Card style={{ width: "13rem" }}>
                 <Card.Header>Ignored Tags</Card.Header>
                 <Card.Body>
                   <Card.Link href="#">Add an ignored tag</Card.Link>
                 </Card.Body>
-              </Card>
+              </Card> */}
               <br />
               <Card style={{ width: "13rem" }}>
                 <ListGroup variant="flush">
