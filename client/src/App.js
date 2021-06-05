@@ -11,7 +11,7 @@ import CreateForum from "./pages/CreateForum";
 import Navbar from "./components/Navbar";
 import Subject from "./pages/Subject";
 import Auth from "./auth/Auth";
-import Question from "./pages/Question";
+import QuestionPage from "./pages/QuestionPage";
 
 // const App = () => (
 //   <Router>
@@ -46,7 +46,7 @@ const UnauthenticatedRoutes = ({ isAuthenticated }) => (
           <Subject isAuthenticated={isAuthenticated} />
         </Route>
         <Route path="/question/:question">
-          <Question isAuthenticated={isAuthenticated} />
+          <QuestionPage isAuthenticated={isAuthenticated} />
         </Route>
       </Suspense>
     </Switch>
