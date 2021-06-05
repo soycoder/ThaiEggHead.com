@@ -3,10 +3,10 @@ import bg from "./../assets/images/bg2.jpg";
 import bi from "./../assets/images/binary.jpg";
 import pic_cover from "./../assets/images/example-cover.jfif"
 import pic_profile from "./../assets/images/example-profile.jpg"
-import subj_1 from "./../assets/images/subject/1.jpg"
-import subj_2 from "./../assets/images/subject/2.jpg"
+import subj_1 from "./../assets/images/subject/1.png"
+import subj_2 from "./../assets/images/subject/2.png"
 import subj_3 from "./../assets/images/subject/3.png"
-import subj_4 from "./../assets/images/subject/4.jpg"
+import subj_4 from "./../assets/images/subject/4.png"
 import subj_5 from "./../assets/images/subject/5.png"
 import subj_6 from "./../assets/images/subject/6.jpg"
 import subj_7 from "./../assets/images/subject/7.png"

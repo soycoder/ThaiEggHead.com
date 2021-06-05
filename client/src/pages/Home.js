@@ -142,9 +142,9 @@ function Home({ isAuthenticated }) {
           <Button className="btn-subjectnav" variant="light" block>
             <img
               src={subject.img}
-              height="23"
-              width="23"
-              className="app-cycle"
+              height="30"
+              width="30"
+              className="subject-img-cicle"
               style={{ marginRight: 5 }}
             />
             {subject.subjectName}

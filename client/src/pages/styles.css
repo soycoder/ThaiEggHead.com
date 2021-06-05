@@ -182,6 +182,10 @@
     border-radius: 20px;
 }
 
+.subject-img-cicle{
+  border-radius: 20% !important;
+} 
+
 .subject-img-bg{
     object-fit: cover;
     width: 100%;
