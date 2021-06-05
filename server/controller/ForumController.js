@@ -10,18 +10,32 @@ export const list = (req, res) => {
   const filter = req.query.subject;
   console.log(filter);
   if (!filter) {
-    Forum.find().sort({ createdAt: -1 })
+    Forum.find()
+      .sort({ createdAt: -1 })
       .then((result) => res.json(result))
       .catch((err) =>
         res.status(500).send({ errors: { global: "Server Error" } })
       );
   } else {
-    Forum.find({ listSubject: { $all: [filter] } }).sort({ createdAt: -1 })
+    Forum.find({ listSubject: { $all: [filter] } })
+      .sort({ createdAt: -1 })
       .then((result) => res.json(result))
       .catch((err) =>
         res.status(500).send({ errors: { global: "Server Error" } })
       );
   }
+};
+
+// listEachUser
+export const listEachUser = (req, res) => {
+  let userID = req.params.userID;
+
+  Forum.find({ userID: userID })
+    .sort({ createdAt: -1 })
+    .then((result) => res.json(result))
+    .catch((err) =>
+      res.status(500).send({ errors: { global: "Server Error" } })
+    );
 };
 
 // add new Forum

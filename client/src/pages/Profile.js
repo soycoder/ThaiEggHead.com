@@ -9,7 +9,7 @@ import {
   Nav,
   Badge,
 } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Icon } from "@blueprintjs/core";
 import "../App.css";
 import Avatar from "react-avatar";
@@ -43,7 +43,7 @@ const Profile = ({ isAuthenticated }) => {
   //FORUM DATA
   let { id } = useParams();
   const [userData, setUserData] = useState(dummyUser);
-  const [forum, setForum] = useState({});
+  const [forum, setForum] = useState([]);
   const [answer, setAnswer] = useState({});
 
   //INFO DISPLAY
@@ -78,10 +78,9 @@ const Profile = ({ isAuthenticated }) => {
       tag: ["messages", "function "],
     }
   );
-  const [numAnswer, setNumAnswer] = useState(0);
   const [numQuestion, setNumQuestion] = useState(0);
+  const [numAnswer, setNumAnswer] = useState(0);
   const [numComment, setNumComment] = useState(0);
-
 
   //UTILITY
   const [currSelectNav, setCurrSelectNav] = useState(1);
@@ -89,14 +88,17 @@ const Profile = ({ isAuthenticated }) => {
     fetch(`http://localhost:5000/users/${id}`)
       .then((res) => res.json())
       .then((res) => setUserData(res));
-    //   fetch(`http://localhost:5000/forums?userID=${id}`)
-    //     .then((res) => res.json())
-    //     .then((res) => setForum(res));
+    fetch(`http://localhost:5000/forums/user/${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setForum(res);
+        setNumQuestion(res.length);
+        // console.log(forum);
+      });
     //   fetch(`http://localhost:5000/answers?userID=${id}`)
     //     .then((res) => res.json())
     //     .then((res) => setAnswer(res));
   }, []);
-
 
   const Interests = () => {
     return (
@@ -160,7 +162,7 @@ const Profile = ({ isAuthenticated }) => {
   const ProfileImg = () => {
     return (
       <div class="profile-img">
-        {userData.imgURL? (
+        {userData.imgURL ? (
           <Avatar
             size="200"
             src={userData.imgURL}
@@ -170,7 +172,7 @@ const Profile = ({ isAuthenticated }) => {
         ) : (
           <Avatar
             size="200"
-            name={userData.firstName+" "+userData.lastName}
+            name={userData.firstName + " " + userData.lastName}
             round={true}
             onClick={handleImgSelect}
           />
@@ -231,47 +233,52 @@ const Profile = ({ isAuthenticated }) => {
             <ContentDisplay />
           </div>
         </Col>
-        <Col md={2}>
-          <input
-            type="submit"
-            class="profile-edit-btn"
-            name="btnAddMore"
-            value="Edit Profile"
-          />
-        </Col>
+        {user.userID === id ? (
+          <Col md={2}>
+            <input
+              type="submit"
+              class="profile-edit-btn"
+              name="btnAddMore"
+              value="Edit Profile"
+            />
+          </Col>
+        ) : null}
       </>
     );
   };
 
-  const HistoryCard = (props) => {
-    const Card = (props) => {
-      console.log(props.data);
-      for (const [key, value] of Object.entries(props.data)) {
-        console.log(`${key}: ${value}`);
-      }
-
-      return (
-        <Card className="app-padding" style={{ marginBottom: 10 }}>
-          <Card.Subtitle className="card-username">asd</Card.Subtitle>
-          {/* <ListTag data={q.tag}/> */}
-        </Card>
-      );
-    };
-
+  const HistoryCard = () => {
     const ListTag = (props) => {
-      const list = props.data;
-      const subjectTag = list.map(
-        (subject) => (
-          <Badge bg="info" style={{ marginLeft: 4 }}>
-            {subject}
-          </Badge>
-        )
+      const _list = props.data.listSubject;
+      // console.log(_list);
+
+      const subjectTag = _list.map(
+        (subject) => {
+          
+          return (
+            <Badge bg="info" style={{ marginLeft: 4 }}>
+              {/* <Link to={`/subject/${}`}>{subject}</Link> */}
+            </Badge>
+          );
+        }
         // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
       return <div className="tag">{subjectTag}</div>;
     };
-
-    return <Card data={props} />;
+    return (
+      <>
+        {forum.map((item) => {
+          return (
+            <Card className="app-padding" style={{ marginBottom: 5 }}>
+              <Link to={`/question/${item.forumID}`}>
+                <Card.Subtitle>📌{" " + item.title}</Card.Subtitle>
+              </Link>
+              <ListTag data={item} />
+            </Card>
+          );
+        })}
+      </>
+    );
   };
 
   const ContentDisplay = () => {
@@ -350,7 +357,11 @@ const Profile = ({ isAuthenticated }) => {
         </div>
       );
     } else if (currSelectNav == 2) {
-      return <div>{/* <HistoryCard data={questionHistory}/> */}</div>;
+      return (
+        <div>
+          <HistoryCard />
+        </div>
+      );
     } else if (currSelectNav == 3) {
       return (
         <div>
@@ -370,7 +381,7 @@ const Profile = ({ isAuthenticated }) => {
     <div class="container emp-profile">
       <Container method="post">
         <Row class="Row">
-          <ProfileHead />
+          <ProfileHead data={forum} />
         </Row>
 
         <Row class="row">
