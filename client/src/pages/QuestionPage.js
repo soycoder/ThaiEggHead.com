@@ -15,24 +15,25 @@ import ForumCard from "../components/ForumCard";
 import Select from "react-select"
 import { Keys } from "@blueprintjs/core";
 
-function Question() {
+function QuestionPage() {
     let { question } = useParams();
-    const [forumData, setForumData] = useState([]);
-    var oneForum = []
+    const [forumData, setForumData] = useState({});
+    var arrayforum = []
 
     useEffect(() => {
-        fetch(`http://localhost:5000/forums/=${question}`)
+        fetch("http://localhost:5000/forums/9846146556")
           .then((res) => res.json())
           .then((res) => setForumData(res));
-          
+            console.log("123")
       }, []);
 
     // console.log(question)
-
+    console.log(forumData)
+    // arrayforum[0] = forumData
+    // console.log(arrayforum)
     // oneForum[0] = forumData[12]
     // console.log(oneForum)
-    console.log(forumData)
-
+   
     return (
     <div className="App">
         <body>
@@ -41,7 +42,12 @@ function Question() {
           <Row>
             {/* <Col></Col> */}
             <Col xs lg="8">
-                <ForumCard data={forumData} isReadLong={true}></ForumCard>
+            {forumData?(<ForumCard data={forumData} />):(<></>)}
+          
+            {/* {forumData.map((forum) => (
+                
+                <ForumCard data={forum} />
+            ))} */}
             </Col>
             <Col >
             
@@ -90,5 +96,9 @@ function Question() {
         </body>
     </div>
   );
+
+  
+
+
 }
-export default Question;
+export default QuestionPage;
