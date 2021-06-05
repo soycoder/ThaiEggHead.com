@@ -205,16 +205,16 @@ function Sub() {
       <Card>
         <Card.Header>Custom Filter</Card.Header>
         <Card.Body>
-          <Card.Link href="#">Create a custom filter</Card.Link>
+          {/* <Card.Link href="#">Create a custom filter</Card.Link>
           <form>
-            {/* <input name="tag" id="tag" /> */}
+            
             <input
               type="tag"
               onChange={e => setTag(e.target.value)}
               placeholder="Enter tag"
             />
           </form>
-          <br />
+          <br /> */}
           <div >
             <Select isMulti options={optionTag} onChange={handle}></Select>
           </div>
@@ -224,16 +224,16 @@ function Sub() {
     )
   }
 
-  const IgnoreTag = () => {
-    return (
-      <Card>
-        <Card.Header>Ignored Tags</Card.Header>
-        <Card.Body>
-          <Card.Link href="#">Add an ignored tag</Card.Link>
-        </Card.Body>
-      </Card>
-    )
-  }
+  // const IgnoreTag = () => {
+  //   return (
+  //     <Card>
+  //       <Card.Header>Ignored Tags</Card.Header>
+  //       <Card.Body>
+  //         <Card.Link href="#">Add an ignored tag</Card.Link>
+  //       </Card.Body>
+  //     </Card>
+  //   )
+  // }
 
   const SpaceRec = () => {
     return (
@@ -286,7 +286,7 @@ function Sub() {
             {/* <AboutSubjectCard/> */}
             <FilterCard />
             <TagSum/>
-            <IgnoreTag />
+            {/* <IgnoreTag /> */}
             <SpaceRec />
           </Col>
         </Row>
