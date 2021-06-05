@@ -11,16 +11,6 @@
   display: flex !important;
 }
 
-/* Font Management */
-
-p #body-forum-text{
-  font-size: 20px;
-  font-family: "CSChatThai" !important;
-}
-
-* {
-  /* font-family: "Kanit-Regular"; */
-}
 
 .profile-btn {
   background: none;
@@ -214,9 +204,26 @@ p #body-forum-text{
   font-size: 11px;
   margin-top: 3px;
 }
+
+.table{
+  /* font-family: 'Supermarket'; */
+  text-align:center;
+  /* align:center; */
+}
 .mdb-dataTables_paginate{
   display: none;
 }
 .mdb-datatable-entries{
   display: none;
 }
+.mdb-dataTable-head{
+  color: white;
+  background-color: #212529;
+}
+
+
+.fontETC{
+  font-family: 'Supermarket';
+}
+
+
