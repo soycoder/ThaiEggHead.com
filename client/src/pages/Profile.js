@@ -22,7 +22,8 @@ import { images, COLORS, FONTS, SIZES } from "../constants";
 
 const Profile = ({ isAuthenticated }) => {
   const dummyUser = {
-    imgURL: images.pro_1,
+    firstName: "",
+    LastName: "",
   };
 
   const auth = useContext(AuthContext);
@@ -41,14 +42,14 @@ const Profile = ({ isAuthenticated }) => {
 
   //FORUM DATA
   let { id } = useParams();
-  const [data, setData] = useState(dummyUser);
+  const [userData, setUserData] = useState(dummyUser);
   const [forum, setForum] = useState({});
   const [answer, setAnswer] = useState({});
 
   //INFO DISPLAY
-  const [displayName, setDisplayName] = useState("PupeePupee");
-  const [userName, setUserName] = useState("Yoskorn Lertratanakham");
-  const [email, setEmail] = useState("yoskon.ler@dome.tu.ac.th");
+  // const [displayName, setDisplayName] = useState("PupeePupee");
+  // const [userName, setUserName] = useState("Yoskorn Lertratanakham");
+  // const [email, setEmail] = useState("yoskon.ler@dome.tu.ac.th");
   const [phone, setPhone] = useState("N/A");
   const [organization, setOrganization] = useState("Thammasat University");
   const [eggHeadScore, setEggHeadScore] = useState(125);
@@ -81,15 +82,13 @@ const Profile = ({ isAuthenticated }) => {
   const [numQuestion, setNumQuestion] = useState(0);
   const [numComment, setNumComment] = useState(0);
 
-  const [userData, setUserData] = useState({});
-  const [userForum, setUserForum] = useState({});
-  const [userAnswer, setUserAnswer] = useState({});
+
   //UTILITY
   const [currSelectNav, setCurrSelectNav] = useState(1);
   useEffect(() => {
     fetch(`http://localhost:5000/users/${id}`)
       .then((res) => res.json())
-      .then((res) => setData(res));
+      .then((res) => setUserData(res));
     //   fetch(`http://localhost:5000/forums?userID=${id}`)
     //     .then((res) => res.json())
     //     .then((res) => setForum(res));
@@ -98,156 +97,6 @@ const Profile = ({ isAuthenticated }) => {
     //     .then((res) => setAnswer(res));
   }, []);
 
-  const ProfileOld = () => {
-    let { id } = useParams();
-    const [data, setData] = useState({});
-    const [forum, setForum] = useState({});
-    const [answer, setAnswer] = useState({});
-
-    // Photo Edit
-    const [lgShow, setLgShow] = useState(false);
-
-    // Education Edit
-    const [educationShow, setEducationShow] = useState(false);
-
-    useEffect(() => {
-      fetch(`http://localhost:5000/users/${id}`)
-        .then((res) => res.json())
-        .then((res) => setData(res));
-      fetch(`http://localhost:5000/forums?userID=${id}`)
-        .then((res) => res.json())
-        .then((res) => setForum(res));
-      fetch(`http://localhost:5000/answers?userID=${id}`)
-        .then((res) => res.json())
-        .then((res) => setAnswer(res));
-    }, []);
-
-    function dateToString(d) {
-      return `${d.slice(8, 10)}/${d.slice(5, 7)}/${d.slice(0, 4)}`;
-    }
-    return (
-      <div style={{ backgroundColor: "#dddddd" }}>
-        <Container fluid style={{ backgroundColor: "#fff" }}>
-          {/* <input type="file" id="myfile" name="myfile"  > */}
-          <div className="cover-profile">
-            <Image src={images.pic_cover} fluid className="img-cover-profile" />
-          </div>
-
-          {/* </input> */}
-          <Container>
-            <Row xs={12} md={9} className="display-flex mt-3">
-              <Col xs={12} md={3}>
-                <button
-                  className="profile-btn profile-photo-edit"
-                  onClick={() => setLgShow(true)}
-                >
-                  <Image
-                    className="pic-profile"
-                    src={data.imgURL}
-                    roundedCircle
-                  />
-                </button>
-                {/* Modal For Edit Pic */}
-                <Modal
-                  size="lg"
-                  show={lgShow}
-                  onHide={() => setLgShow(false)}
-                  aria-labelledby="example-modal-sizes-title-lg"
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title
-                      id="example-modal-sizes-title-lg"
-                      style={FONTS.h1}
-                    >
-                      แก้ไข/รูปโปรไฟล์
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>...</Modal.Body>
-                </Modal>
-                {/* Modal For Edit Pic */}
-              </Col>
-              <Col xs={12} md={9}>
-                <Row>
-                  <Col xs={11} md={11}>
-                    <Card.Title
-                      style={FONTS.h1}
-                    >{`${data.firstName} ${data.lastName}`}</Card.Title>
-                    <Card.Subtitle style={FONTS.h2}>
-                      @{data.userName}
-                    </Card.Subtitle>
-                    <Card.Body style={FONTS.body3}>
-                      {data.birthDate ? (
-                        <p>{dateToString(data.birthDate)}</p>
-                      ) : (
-                        <p>{"-"}</p>
-                      )}
-                      {data.bio && data.bio.length > 0 ? (
-                        <p>{data.bio}</p>
-                      ) : (
-                        <p>{"-"}</p>
-                      )}
-                    </Card.Body>
-                  </Col>
-                  <Col xs={1} md={1}>
-                    <button className="icon profile-btn">
-                      <Icon icon="edit" iconSize="20" intent="primary" />
-                    </button>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Container>
-        </Container>
-        <br />
-
-        <Container>
-          {/* #1 */}
-          <Card>
-            <Card.Body>
-              <Card.Title style={FONTS.h2}>Activity</Card.Title>
-              {/* <Card.Subtitle className="mb-2 text-muted">
-                Card Subtitle
-              </Card.Subtitle> */}
-              <Row style={FONTS.h3}>
-                <Col className="text-center">
-                  ตั้งกระทู้คำถาม
-                  <br />
-                  {forum.length}
-                  <br />
-                  คร้ัง
-                </Col>
-                <Col className="text-center">
-                  ตอบคำถาม
-                  <br />
-                  {answer.length}
-                  <br />
-                  คร้ัง
-                </Col>
-                {/* <Col className="text-center">
-                  ได้รับรับรางวัลคำตอบที่ดีที่สุด
-                  <br />
-                  {10}
-                  <br />
-                  คร้ัง
-                </Col> */}
-              </Row>
-            </Card.Body>
-          </Card>
-          <br />
-          {/* #2 */}
-          <Card></Card>
-          <br />
-          {/* #3 */}
-          <Card>
-            <Card.Body>
-              <Card.Title style={FONTS.h2}>Interests</Card.Title>
-              <Interests />
-            </Card.Body>
-          </Card>
-        </Container>
-      </div>
-    );
-  };
 
   const Interests = () => {
     return (
@@ -311,17 +160,17 @@ const Profile = ({ isAuthenticated }) => {
   const ProfileImg = () => {
     return (
       <div class="profile-img">
-        {data.imgURL? (
+        {userData.imgURL? (
           <Avatar
             size="200"
-            src={data.imgURL}
+            src={userData.imgURL}
             round={true}
             onClick={handleImgSelect}
           />
         ) : (
           <Avatar
             size="200"
-            name={data.firstName+" "+data.lastName}
+            name={userData.firstName+" "+userData.lastName}
             round={true}
             onClick={handleImgSelect}
           />
@@ -373,7 +222,7 @@ const Profile = ({ isAuthenticated }) => {
         </Col>
         <Col md={6}>
           <div class="profile-head">
-            <h3>{data.firstName + " " + data.lastName}</h3>
+            <h3>{userData.firstName + " " + userData.lastName}</h3>
             {/* <h5>{userName}</h5> */}
             <p class="proile-rating">
               EggHead Score : <span>{eggHeadScore}</span>
@@ -462,7 +311,7 @@ const Profile = ({ isAuthenticated }) => {
               <label>Email</label>
             </Col>
             <Col md={6}>
-              <p>{data.email}</p>
+              <p>{userData.email}</p>
             </Col>
           </Row>
           <Row class="row">
@@ -470,7 +319,7 @@ const Profile = ({ isAuthenticated }) => {
               <label>Name</label>
             </Col>
             <Col md={6}>
-              <p>{data.firstName + " " + data.lastName}</p>
+              <p>{userData.firstName + " " + userData.lastName}</p>
             </Col>
           </Row>
           <Row class="row">
@@ -638,7 +487,7 @@ export default Profile;
 //               >
 //                 <Image
 //                   className="pic-profile"
-//                   src={data.imgURL}
+//                   src={userData.imgURL}
 //                   roundedCircle
 //                 />
 //               </button>
@@ -666,18 +515,18 @@ export default Profile;
 //                 <Col xs={11} md={11}>
 //                   <Card.Title
 //                     style={FONTS.h1}
-//                   >{`${data.firstName} ${data.lastName}`}</Card.Title>
+//                   >{`${userData.firstName} ${userData.lastName}`}</Card.Title>
 //                   <Card.Subtitle style={FONTS.h2}>
-//                     @{data.userName}
+//                     @{userData.userName}
 //                   </Card.Subtitle>
 //                   <Card.Body style={FONTS.body3}>
-//                     {data.birthDate ? (
-//                       <p>{dateToString(data.birthDate)}</p>
+//                     {userData.birthDate ? (
+//                       <p>{dateToString(userData.birthDate)}</p>
 //                     ) : (
 //                       <p>{"-"}</p>
 //                     )}
-//                     {data.bio && data.bio.length > 0 ? (
-//                       <p>{data.bio}</p>
+//                     {userData.bio && userData.bio.length > 0 ? (
+//                       <p>{userData.bio}</p>
 //                     ) : (
 //                       <p>{"-"}</p>
 //                     )}
