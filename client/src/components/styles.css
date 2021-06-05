@@ -279,4 +279,10 @@ a:hover {
   font-size: 14px;
 }
 
+.searchbar {
+  width: 30%;
+  justify-self: center;
+}
+
+
 

@@ -11,6 +11,16 @@
   display: flex !important;
 }
 
+/* Font Management */
+
+p #body-forum-text{
+  font-size: 20px;
+  font-family: "CSChatThai" !important;
+}
+
+* {
+  /* font-family: "Kanit-Regular"; */
+}
 
 .profile-btn {
   background: none;

@@ -1,5 +1,5 @@
 import "../App.css";
-import { images } from "../constants";
+import { images, FONTS } from "../constants";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Row,
@@ -26,7 +26,7 @@ function Sub() {
   const [forumData, setForumData] = useState([]);
 
   const SubjectData = new Map();
-  SubjectData.set("sci", "วิทยาศาสตร์ และเทคโนโลยี")
+  SubjectData.set("sci", ["วิทยาศาสตร์ และเทคโนโลยี","Science and Technology"])
 
 
   useEffect(() => {
@@ -140,11 +140,58 @@ function Sub() {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar className="subject-img" size="100" round={false} />
-            <h1>{SubjectData.get(subject)}</h1>
-            <Button2 className="bp3-minimal bp3-intent-primary" id="follow" icon="add-to-artifact">
-              Follow 123K
-              </Button2>
+            <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
+            <div style={{marginLeft:20}}>
+              <h2>{SubjectData.get(subject)[0]}</h2>
+              <h5>{SubjectData.get(subject)[1]}</h5>
+              <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
+                Follow 123K
+                </Button2>
+            </div>
+            
+          </div>
+        </Card.Body>
+      </Card>
+    )
+  }
+
+  const AboutSubjectCard = () => {
+    return (
+      <Card style={{ marginBottom: 10 }}>
+        <Card.Body>
+          <div className="subject-header">
+            <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
+            <div style={{marginLeft:20}}>
+              <h2>{SubjectData.get(subject)[0]}</h2>
+              <h5>{SubjectData.get(subject)[1]}</h5>
+              <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
+                Follow 123K
+                </Button2>
+            </div>
+            
+          </div>
+        </Card.Body>
+      </Card>
+    )
+  }
+
+  const TagSum = () => {
+    return(
+      <Card >
+        <Card.Header>
+          Watched Tags
+            <Card.Link href="#">Edit</Card.Link>
+        </Card.Header>
+        <Card.Body>
+          <div>
+            {key.map(item => {
+              // console.log(filledArray)
+              return (
+                <div>
+                  <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
+                </div>
+              )
+            })}
           </div>
         </Card.Body>
       </Card>
@@ -153,19 +200,31 @@ function Sub() {
 
   const FilterCard = () => {
     return (
-      <Card style={{ width: "15rem", height:"auto" }}>
-        <Card.Header style={{ textAlign: 'center', backgroundColor: "red", color:"#FFFFFF"}}>Leader Board</Card.Header>
+      <Card>
+        <Card.Header>Custom Filter</Card.Header>
         <Card.Body>
-          <LeaderBoard />
+          <Card.Link href="#">Create a custom filter</Card.Link>
+          <form>
+            {/* <input name="tag" id="tag" /> */}
+            <input
+              type="tag"
+              onChange={e => setTag(e.target.value)}
+              placeholder="Enter tag"
+            />
+          </form>
+          <br />
+          <div >
+            <Select isMulti options={optionTag} onChange={handle}></Select>
+          </div>
+
         </Card.Body>
-        <Card.Footer style={{ textAlign: 'center' }}>To Day : <Moment format="DD/MM/YYYY" /></Card.Footer>
       </Card>
     )
   }
 
   const IgnoreTag = () => {
     return (
-      <Card style={{ width: "15rem" }}>
+      <Card>
         <Card.Header>Ignored Tags</Card.Header>
         <Card.Body>
           <Card.Link href="#">Add an ignored tag</Card.Link>
@@ -176,7 +235,7 @@ function Sub() {
 
   const SpaceRec = () => {
     return (
-      <Card style={{ width: "15rem" }}>
+      <Card>
         <ListGroup variant="flush">
           <ListGroup.Item>Spaces to follow</ListGroup.Item>
           <ListGroup.Item></ListGroup.Item>
@@ -198,11 +257,16 @@ function Sub() {
 
         <Row className="justify-content-md-center">
 
-          <Col md={2}>
-            {newArray.map((forum) => (
-              <ForumCard data={forum}></ForumCard>
-            ))}
+          <Col md={3}>
 
+          <Card>
+            <Card.Header style={{ textAlign: 'center', backgroundColor: "red", color:"#FFFFFF"}}>Leader Board</Card.Header>
+            <Card.Body>
+              <LeaderBoard />
+            </Card.Body>
+            <Card.Footer style={{ textAlign: 'center' }}>To Day : <Moment format="DD/MM/YYYY" /></Card.Footer>
+          </Card>
+          
           </Col>
 
           <Col md={6}>
@@ -214,7 +278,9 @@ function Sub() {
           </Col>
 
           <Col md={2}>
+            {/* <AboutSubjectCard/> */}
             <FilterCard />
+            <TagSum/>
             <IgnoreTag />
             <SpaceRec />
           </Col>

@@ -72,9 +72,47 @@ const NavigationBar = ({ isAuthenticated }) => {
     user = decoded;
   }
 
-  return (
-    <div className="Navbar">
-      <Navbar expand="lg" bg="dark" variant="dark" className="Navbar2">
+  const NavUser = () => {
+    return(
+      <Navbar.Collapse
+        className="justify-content-end"
+        style={{ marginRight: 250 }}
+      >
+        <div class="bp3-input-group searchbar">
+          <span class="bp3-icon bp3-icon-search"></span>
+          <input type="text" class="bp3-input" placeholder="Search" />
+          <button class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right" ></button>
+        </div>
+
+        <ProfileOption user={user} auth={auth} />
+      </Navbar.Collapse>
+    )
+  }
+
+  const NavNonUser = () => {
+    return(
+      <Navbar.Collapse className="justify-content-end">
+        <Button
+          component={Link}
+          to="/auth"
+          style={{
+            marginLeft: SIZES.padding2 * 2,
+            marginRight: SIZES.padding3 * 4,
+            borderRadius: 19,
+          }}
+          variant="contained"
+          color="secondary"
+          size="mediem"
+        >
+          Join us
+        </Button>
+      </Navbar.Collapse>
+    )
+  }
+
+  const BrandLogo = () => {
+    return(
+      <>
         <Navbar.Brand style={{ marginLeft: 250 }}>
           <Link to="/">
             <div>
@@ -102,55 +140,28 @@ const NavigationBar = ({ isAuthenticated }) => {
               </div>
             </div>
           </Link>
+          
         </Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link href="#features">About us</Nav.Link>
+          <Nav.Link href="#features">Home</Nav.Link>
+          <Nav.Link href="#features">Discovery</Nav.Link>
+          <Nav.Link href="#features">Context</Nav.Link>
+        </Nav>
+      </>
+    )
+  }
+  return (
+    <div className="Navbar">
+      <Navbar expand="lg" bg="dark" variant="dark" className="Navbar2">
+        <BrandLogo/>
+          
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        {user ? (
-          <Navbar.Collapse
-            className="justify-content-end"
-            style={{ marginRight: 250 }}
-          >
-            <div className="bp3-input-group .modifier">
-              <span className="bp3-icon bp3-icon-search "></span>
-              <input
-                className="bp3-input"
-                type="search"
-                placeholder="Search input"
-                dir="auto"
-              />
-            </div>
-
-            <ProfileOption user={user} auth={auth} />
-          </Navbar.Collapse>
-        ) : (
-          <Navbar.Collapse className="justify-content-end">
-            <Nav className="mr-auto">
-              <Nav.Link href="#features">About us</Nav.Link>
-            </Nav>
-            <div className="bp3-input-group .modifier">
-              <span className="bp3-icon bp3-icon-search"></span>
-              <input
-                className="bp3-input"
-                type="search"
-                placeholder="Search input"
-                dir="auto"
-              />
-            </div>
-            <Button
-              component={Link}
-              to="/auth"
-              style={{
-                marginLeft: SIZES.padding2 * 2,
-                marginRight: SIZES.padding3 * 4,
-                borderRadius: 19,
-              }}
-              variant="contained"
-              color="secondary"
-              size="mediem"
-            >
-              Join us
-            </Button>
-          </Navbar.Collapse>
-        )}
+          {user ? (
+            <NavUser/>
+          ) : (
+            <NavNonUser/>
+          )}
       </Navbar>
     </div>
   );

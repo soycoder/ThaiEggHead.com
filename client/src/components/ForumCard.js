@@ -173,7 +173,8 @@ function ForumCard(props) {
                     dangerouslySetInnerHTML={{
                       __html: forum.postText,
                     }}
-                  />
+                    id="body-forum-text"/>
+
                   <Button
                     className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
                     onClick={() => handleClickViewMore()}
@@ -183,13 +184,7 @@ function ForumCard(props) {
                 </>
               ) : (
                 <>
-                  <div dangerouslySetInnerHTML={{ __html: post }} />
-                  <Button
-                    className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
-                    onClick={() => handleClickViewMore()}
-                  >
-                    (แสดงเพิ่มเติม)
-                  </Button>
+                  <div id="body-forum-text" onClick={() => handleClickViewMore()} dangerouslySetInnerHTML={{ __html: post }} />
                 </>
               )}
             </div>
