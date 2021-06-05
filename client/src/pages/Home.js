@@ -185,11 +185,9 @@ function Home({ isAuthenticated }) {
     var i, j;
     var n = ele.listTag.length;
     var nn = value.length;
-    // console.log(tag, value)
-    // console.log(nn);
+
     for (i = 0; i <= nn; i++) {
       for (j = 0; j < n; j++) {
-        // console.log(n);
         if (nn != 0) {
           tag = value[i]
         }
@@ -329,7 +327,7 @@ function Home({ isAuthenticated }) {
 
             <Col md="auto">
               <Card style={{ width: "13rem" }}>
-                <Card.Header>Custom Filter</Card.Header>
+                <Card.Header>Filter</Card.Header>
                 <Card.Body>
                   <div >
                     <Select isMulti options={optionTag} onChange={handle}></Select>
@@ -337,17 +335,16 @@ function Home({ isAuthenticated }) {
                 </Card.Body>
               </Card>
               <br />
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>
-                  Watched Tags
-                  <Card.Link href="#">Edit</Card.Link>
-                </Card.Header>
+              <Card>
+                <Card.Header className="card-header">
+                  Tags ทั้งหมด 
+                </Card.Header>  
                 <Card.Body>
-                  <div>
+                  <div >
                     {key.map(item => {
                       return (
                         <div>
-                          <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
+                          <Button variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
                         </div>
                       )
                     })}
@@ -356,15 +353,7 @@ function Home({ isAuthenticated }) {
               </Card>
               <br />
               <Card style={{ width: "13rem" }}>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>Spaces to follow</ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                </ListGroup>
+                <div>Hotest Question</div>
               </Card>
             </Col>
           </Row>

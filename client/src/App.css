@@ -28,6 +28,7 @@ p #body-forum-text{
   padding: 3px;
   cursor: pointer;
 }
+
 .icon.profile-btn:hover {
   background: #d1d1d198;
   border-radius: 50%;
@@ -208,11 +209,6 @@ p #body-forum-text{
 .transparent_btn:hover {
   background-color: rgba(255, 255, 255, 0.3);
   color: #fff;
-}
-
-.app-fontSizeTag {
-  font-size: 11px;
-  margin-top: 3px;
 }
 
 .table{
