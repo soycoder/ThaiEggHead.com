@@ -277,7 +277,12 @@ function Home({ isAuthenticated }) {
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
-          
+          <img
+              src={images.logo_event}
+              height="130"
+              width="130"
+              className="event-img"
+            />
         </Card.Body>
       </Card>
     );

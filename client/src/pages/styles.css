@@ -260,3 +260,9 @@
 .subject-img{
   border-radius: 30% !important;
 }
+
+.event-img{
+  position: absolute;
+  left: 74%;
+  top: -10px;
+}
