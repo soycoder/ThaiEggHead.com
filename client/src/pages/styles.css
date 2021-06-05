@@ -28,6 +28,9 @@
   font-size: 12px;
   border-radius: 20px;
   font-weight: bold;
+  background-color: #ffe529;
+  border: #948620;
+  color: #212529;
 }
 
 .btn-subjectnav {
