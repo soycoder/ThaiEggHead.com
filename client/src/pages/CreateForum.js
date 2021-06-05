@@ -3,11 +3,11 @@ import CreateForumCard from "../components/CreateForumCard";
 import { Container } from "react-bootstrap";
 
 
-function CreateForum() {
+function CreateForum({ isAuthenticated }) {
   return (
     <>
       <Container>
-        <CreateForumCard />
+        <CreateForumCard isAuthenticated={ isAuthenticated }/>
       </Container>
     </>
   );
