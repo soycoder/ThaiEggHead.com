@@ -1,10 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Col, Container, Image, Row, Modal, Nav, Badge } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  Image,
+  Row,
+  Modal,
+  Nav,
+  Badge,
+} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { Icon } from "@blueprintjs/core";
 import "../App.css";
-import Avatar from 'react-avatar';
-import AvatarCropper from '../components/ProfileImage'
+import Avatar from "react-avatar";
+import AvatarCropper from "../components/ProfileImage";
 
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
@@ -13,8 +22,8 @@ import { images, COLORS, FONTS, SIZES } from "../constants";
 
 const Profile = ({ isAuthenticated }) => {
   const dummyUser = {
-    imgURL: images.pro_1
-  }
+    imgURL: images.pro_1,
+  };
 
   const auth = useContext(AuthContext);
 
@@ -26,10 +35,9 @@ const Profile = ({ isAuthenticated }) => {
     decoded = jwt_decode(token);
     user = decoded;
   }
- 
+
   //HANDLE VAL
   const [lgShow, setLgShow] = useState(false);
-
 
   //FORUM DATA
   let { id } = useParams();
@@ -38,49 +46,54 @@ const Profile = ({ isAuthenticated }) => {
   const [answer, setAnswer] = useState({});
 
   //INFO DISPLAY
-  const [displayName, setDisplayName] = useState("PupeePupee")
-  const [userName, setUserName] = useState("Yoskorn Lertratanakham")
-  const [email, setEmail] = useState("yoskon.ler@dome.tu.ac.th")
-  const [phone, setPhone] = useState("N/A")
-  const [organization, setOrganization] = useState("Thammasat University")
-  const [eggHeadScore, setEggHeadScore] = useState(125)
-  const [education, setEducation] = useState([{
-    place: "Thammasat University",
-    degree: "Bachelor of Science - BS, Computer Science",
-    since: "2018 - 2021",
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Emblem_of_Thammasat_University.svg/1024px-Emblem_of_Thammasat_University.svg.png"
-  },{
-    place: "Massachusetts Institute of Technology",
-    degree: "Bachelor of Technology - BS, Computer Science",
-    since: "2012 - 2017",
-    img: "https://upload.wikimedia.org/wikipedia/th/thumb/4/44/MIT_Seal.svg/1200px-MIT_Seal.svg.png"
-  }])
+  const [displayName, setDisplayName] = useState("PupeePupee");
+  const [userName, setUserName] = useState("Yoskorn Lertratanakham");
+  const [email, setEmail] = useState("yoskon.ler@dome.tu.ac.th");
+  const [phone, setPhone] = useState("N/A");
+  const [organization, setOrganization] = useState("Thammasat University");
+  const [eggHeadScore, setEggHeadScore] = useState(125);
+  const [education, setEducation] = useState([
+    {
+      place: "Thammasat University",
+      degree: "Bachelor of Science - BS, Computer Science",
+      since: "2018 - 2021",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Emblem_of_Thammasat_University.svg/1024px-Emblem_of_Thammasat_University.svg.png",
+    },
+    {
+      place: "Massachusetts Institute of Technology",
+      degree: "Bachelor of Technology - BS, Computer Science",
+      since: "2012 - 2017",
+      img: "https://upload.wikimedia.org/wikipedia/th/thumb/4/44/MIT_Seal.svg/1200px-MIT_Seal.svg.png",
+    },
+  ]);
 
-  const [questionHistory, setQuestionHistory] = useState({
-    head: "Can you share some screenshots worth of 1243.3k+ upvotes?",
-    tag: ["messages", "function "]
-  },{
-    head: "Have you ever come back to your vehicle only to find something quite unexpected?",
-    tag: ["messages", "function "]
-  }
-  )
-  const [numAnswer, setNumAnswer] = useState(0)
-  const [numQuestion, setNumQuestion] = useState(0)
-  const [numComment, setNumComment] = useState(0)
+  const [questionHistory, setQuestionHistory] = useState(
+    {
+      head: "Can you share some screenshots worth of 1243.3k+ upvotes?",
+      tag: ["messages", "function "],
+    },
+    {
+      head: "Have you ever come back to your vehicle only to find something quite unexpected?",
+      tag: ["messages", "function "],
+    }
+  );
+  const [numAnswer, setNumAnswer] = useState(0);
+  const [numQuestion, setNumQuestion] = useState(0);
+  const [numComment, setNumComment] = useState(0);
 
   //UTILITY
   const [currSelectNav, setCurrSelectNav] = useState(1);
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/users/${id}`)
-  //     .then((res) => res.json())
-  //     .then((res) => setData(res));
-  //   fetch(`http://localhost:5000/forums?userID=${id}`)
-  //     .then((res) => res.json())
-  //     .then((res) => setForum(res));
-  //   fetch(`http://localhost:5000/answers?userID=${id}`)
-  //     .then((res) => res.json())
-  //     .then((res) => setAnswer(res));
-  // }, []); 
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${id}`)
+      .then((res) => res.json())
+      .then((res) => setData(res));
+    //   fetch(`http://localhost:5000/forums?userID=${id}`)
+    //     .then((res) => res.json())
+    //     .then((res) => setForum(res));
+    //   fetch(`http://localhost:5000/answers?userID=${id}`)
+    //     .then((res) => res.json())
+    //     .then((res) => setAnswer(res));
+  }, []);
 
   const ProfileOld = () => {
     let { id } = useParams();
@@ -219,9 +232,7 @@ const Profile = ({ isAuthenticated }) => {
           </Card>
           <br />
           {/* #2 */}
-          <Card>
-  
-          </Card>
+          <Card></Card>
           <br />
           {/* #3 */}
           <Card>
@@ -274,12 +285,10 @@ const Profile = ({ isAuthenticated }) => {
     );
   };
 
-  const handleImage = () => {
+  const handleImage = () => {};
 
-  }
-  
   const NonIdealState = () => {
-    return(
+    return (
       <div class="bp3-non-ideal-state">
         <div class="bp3-non-ideal-state-visual">
           <span class="bp3-icon bp3-icon-folder-open"></span>
@@ -287,19 +296,34 @@ const Profile = ({ isAuthenticated }) => {
         <h4 class="bp3-heading">Empty</h4>
         <div>You haven't answered any questions yet.</div>
       </div>
-    )
-  }
+    );
+  };
 
   const handleNavSelect = (eventKey) => setCurrSelectNav(eventKey);
 
   const handleImgSelect = () => {
-    setLgShow(true)
-  }
+    setLgShow(true);
+  };
 
   const ProfileImg = () => {
-    return(
+    return (
       <div class="profile-img">
-        <Avatar size="200" name={userName} round={true} onClick={handleImgSelect}/>
+        {data.imgURL? (
+          <Avatar
+            size="200"
+            src={data.imgURL}
+            round={true}
+            onClick={handleImgSelect}
+          />
+        ) : (
+          <Avatar
+            size="200"
+            name={data.firstName+" "+data.lastName}
+            round={true}
+            onClick={handleImgSelect}
+          />
+        )}
+
         <Modal
           size="lg"
           show={lgShow}
@@ -307,25 +331,20 @@ const Profile = ({ isAuthenticated }) => {
           aria-labelledby="example-modal-sizes-title-lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title
-              id="example-modal-sizes-title-lg"
-              style={FONTS.h1}
-            >
+            <Modal.Title id="example-modal-sizes-title-lg" style={FONTS.h1}>
               แก้ไข/รูปโปรไฟล์
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-
-            <AvatarCropper/>
-
+            <AvatarCropper data={user} />
           </Modal.Body>
-        </Modal> 
+        </Modal>
       </div>
-    )
-  }
+    );
+  };
 
   const Navs = () => {
-    return(
+    return (
       <Nav variant="tabs" onSelect={handleNavSelect}>
         <Nav.Item>
           <Nav.Link eventKey={1}>Profile</Nav.Link>
@@ -340,236 +359,233 @@ const Profile = ({ isAuthenticated }) => {
           <Nav.Link eventKey={4}>{numComment} Comment</Nav.Link>
         </Nav.Item>
       </Nav>
-    )
-  }
+    );
+  };
 
   const ProfileHead = () => {
-    return(
+    return (
       <>
         <Col md={4}>
-            <ProfileImg/>
+          <ProfileImg />
         </Col>
         <Col md={6}>
-            <div class="profile-head">
-                <h3>
-                    {displayName}
-                </h3>
-                <h5>
-                    {userName}
-                </h5>
-                <p class="proile-rating">EggHead Score : <span>{eggHeadScore}</span></p>
-                <Navs/>
-                <ContentDisplay/>
-            </div>
+          <div class="profile-head">
+            <h3>{data.firstName + " " + data.lastName}</h3>
+            {/* <h5>{userName}</h5> */}
+            <p class="proile-rating">
+              EggHead Score : <span>{eggHeadScore}</span>
+            </p>
+            <Navs />
+            <ContentDisplay />
+          </div>
         </Col>
         <Col md={2}>
-            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+          <input
+            type="submit"
+            class="profile-edit-btn"
+            name="btnAddMore"
+            value="Edit Profile"
+          />
         </Col>
       </>
-    )
-  }
+    );
+  };
 
   const HistoryCard = (props) => {
-
     const Card = (props) => {
       console.log(props.data);
       for (const [key, value] of Object.entries(props.data)) {
         console.log(`${key}: ${value}`);
       }
 
-      return(
+      return (
         <Card className="app-padding" style={{ marginBottom: 10 }}>
-            <Card.Subtitle className="card-username">
-              asd
-            </Card.Subtitle>
-            {/* <ListTag data={q.tag}/> */}
+          <Card.Subtitle className="card-username">asd</Card.Subtitle>
+          {/* <ListTag data={q.tag}/> */}
         </Card>
-      )
-    }
+      );
+    };
 
     const ListTag = (props) => {
       const list = props.data;
-      const subjectTag = list.map((subject) =>
-          <Badge variant="info" style={{marginLeft:4}}>{subject}</Badge>
-          // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
+      const subjectTag = list.map(
+        (subject) => (
+          <Badge bg="info" style={{ marginLeft: 4 }}>
+            {subject}
+          </Badge>
+        )
+        // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
-      return(
-        <div className="tag">
-          {subjectTag}
-        </div>
-      )
-    }
+      return <div className="tag">{subjectTag}</div>;
+    };
 
-    return(
-      <Card data={props}/>
-    )
-  }
+    return <Card data={props} />;
+  };
 
   const ContentDisplay = () => {
-    
     const EducationCard = (props) => {
       return (
-        <Card.Body style={{margin:-20}}>
-            <Col md={11}>
-              <Row className="edu-card">
-                <Col md={2} className="edu-logo">
-                  <Image
-                    style={{ height: "80px" }}
-                    src={props.data.img}
-                  />
-                </Col>
-                <Col md={10}>
-                  <Card.Body>
-                    <Card.Title>{props.data.place}</Card.Title>
-                    <Card.Text>
-                      {props.data.degree}
-                    </Card.Text>
-                    <Card.Text className="text-muted">{props.data.since}</Card.Text>
-                  </Card.Body>
-                </Col>
-              </Row>
-            </Col>
+        <Card.Body style={{ margin: -20 }}>
+          <Col md={11}>
+            <Row className="edu-card">
+              <Col md={2} className="edu-logo">
+                <Image style={{ height: "80px" }} src={props.data.img} />
+              </Col>
+              <Col md={10}>
+                <Card.Body>
+                  <Card.Title>{props.data.place}</Card.Title>
+                  <Card.Text>{props.data.degree}</Card.Text>
+                  <Card.Text className="text-muted">
+                    {props.data.since}
+                  </Card.Text>
+                </Card.Body>
+              </Col>
+            </Row>
+          </Col>
         </Card.Body>
       );
     };
 
-    if(currSelectNav==1){
-      return(
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    if (currSelectNav == 1) {
+      return (
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
           <Row class="row">
-              <Col md={6}>
-                  <label>Email</label>
-              </Col>
-              <Col md={6} >
-                  <p>{email}</p>
-              </Col>
+            <Col md={6}>
+              <label>Email</label>
+            </Col>
+            <Col md={6}>
+              <p>{data.email}</p>
+            </Col>
           </Row>
           <Row class="row">
-              <Col md={6} >
-                  <label>Name</label>
-              </Col>
-              <Col md={6}>
-                  <p>{userName}</p>
-              </Col>
+            <Col md={6}>
+              <label>Name</label>
+            </Col>
+            <Col md={6}>
+              <p>{data.firstName + " " + data.lastName}</p>
+            </Col>
           </Row>
           <Row class="row">
-              <Col md={6} >
-                  <label>Phone Number</label>
-              </Col>
-              <Col md={6} >
-                  <p>{phone}</p>
-              </Col>
+            <Col md={6}>
+              <label>Phone Number</label>
+            </Col>
+            <Col md={6}>
+              <p>{phone}</p>
+            </Col>
           </Row>
           <Row class="row">
-              <Col md={6}>
-                  <label>Organization</label>
-              </Col>
-              <Col md={6}>
-                  <p>{organization}</p>
-              </Col>
+            <Col md={6}>
+              <label>Organization</label>
+            </Col>
+            <Col md={6}>
+              <p>{organization}</p>
+            </Col>
           </Row>
           <Row class="row">
-              <Col md={11}>
-                  <br/>
-                  <label>Education</label>
-              </Col>
-              <EducationCard data={education[0]}/>
-              <EducationCard data={education[1]}/>
+            <Col md={11}>
+              <br />
+              <label>Education</label>
+            </Col>
+            {education.map((item) => (
+              <EducationCard data={item} />
+            ))}
           </Row>
-          
-      </div>
-      )
-    }else if(currSelectNav==2){
-      return(
-        <div>
-          {/* <HistoryCard data={questionHistory}/> */}
         </div>
-      )
-    }else if(currSelectNav==3){
-      return(
+      );
+    } else if (currSelectNav == 2) {
+      return <div>{/* <HistoryCard data={questionHistory}/> */}</div>;
+    } else if (currSelectNav == 3) {
+      return (
         <div>
-          <NonIdealState/>
+          <NonIdealState />
         </div>
-      )
-    }else {
-      return(
+      );
+    } else {
+      return (
         <div>
-          <NonIdealState/>
+          <NonIdealState />
         </div>
-      )
+      );
     }
+  };
 
-  }
-  
-  return(
+  return (
     <div class="container emp-profile">
-            <Container method="post">
-                <Row class="Row">
-                  <ProfileHead/>
-                </Row>
-                
+      <Container method="post">
+        <Row class="Row">
+          <ProfileHead />
+        </Row>
+
+        <Row class="row">
+          <Col md={4}></Col>
+          <Col md={8}>
+            <div class="tab-content profile-tab" id="myTabContent">
+              <div
+                class="tab-pane fade"
+                id="profile"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
                 <Row class="row">
-                    <Col md={4}>
-                    
-                    </Col>
-                    <Col md={8}>
-                        <div class="tab-content profile-tab" id="myTabContent">                          
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <Row class="row">
-                                            <Col md={6} >
-                                                <label>Experience</label>
-                                            </Col>
-                                            <Col md={6} >
-                                                <p>Expert</p>
-                                            </Col>
-                                        </Row>
-                                        <Row class="row">
-                                            <Col md={6} >
-                                                <label>Hourly Rate</label>
-                                            </Col>
-                                            <Col md={6}>
-                                                <p>10$/hr</p>
-                                            </Col>
-                                        </Row>
-                                        <Row class="row">
-                                            <Col md={6}>
-                                                <label>Total Projects</label>
-                                            </Col>
-                                            <Col md={6}>
-                                                <p>230</p>
-                                            </Col>
-                                        </Row>
-                                        <Row class="row">
-                                            <Col md={6} >
-                                                <label>English Level</label>
-                                            </Col>
-                                            <Col md={6} >
-                                                <p>Expert</p>
-                                            </Col>
-                                        </Row>
-                                        <Row class="row">
-                                            <Col md={6} >
-                                                <label>Availability</label>
-                                            </Col>
-                                            <Col md={6} >
-                                                <p>6 months</p>
-                                            </Col>
-                                        </Row>
-                                <Row class="row">
-                                    <Col md={12}>
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </div>
-                    </Col>
+                  <Col md={6}>
+                    <label>Experience</label>
+                  </Col>
+                  <Col md={6}>
+                    <p>Expert</p>
+                  </Col>
                 </Row>
-            </Container>
-            {/* <ProfileOld/>            */}
-        </div>
-  )
-  
+                <Row class="row">
+                  <Col md={6}>
+                    <label>Hourly Rate</label>
+                  </Col>
+                  <Col md={6}>
+                    <p>10$/hr</p>
+                  </Col>
+                </Row>
+                <Row class="row">
+                  <Col md={6}>
+                    <label>Total Projects</label>
+                  </Col>
+                  <Col md={6}>
+                    <p>230</p>
+                  </Col>
+                </Row>
+                <Row class="row">
+                  <Col md={6}>
+                    <label>English Level</label>
+                  </Col>
+                  <Col md={6}>
+                    <p>Expert</p>
+                  </Col>
+                </Row>
+                <Row class="row">
+                  <Col md={6}>
+                    <label>Availability</label>
+                  </Col>
+                  <Col md={6}>
+                    <p>6 months</p>
+                  </Col>
+                </Row>
+                <Row class="row">
+                  <Col md={12}>
+                    <label>Your Bio</label>
+                    <br />
+                    <p>Your detail description</p>
+                  </Col>
+                </Row>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+      {/* <ProfileOld/>            */}
+    </div>
+  );
 };
 
 export default Profile;
