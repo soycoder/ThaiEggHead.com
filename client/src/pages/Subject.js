@@ -28,7 +28,7 @@ function Sub() {
   const [forumData, setForumData] = useState([]);
 
   const SubjectData = new Map();
-  SubjectData.set("sci", ["วิทยาศาสตร์ และเทคโนโลยี","Science and Technology"])
+  SubjectData.set("sci", ["วิทยาศาสตร์ และเทคโนโลยี", "Science and Technology"])
 
 
   useEffect(() => {
@@ -45,12 +45,12 @@ function Sub() {
   function tagData() {
     forumData.map((dataTag) => {
       for (i = 0; i < dataTag.listTag.length; i++) {
-        if (dataTag.listTag[i] !== " ") {
+        if (dataTag.listTag[i] != " ") {
           t = t + " " + dataTag.listTag[i]
         }
       }
       arrayTag = t.split(" ")
-
+      console.log(arrayTag)
     }
     )
     return (
@@ -71,8 +71,13 @@ function Sub() {
   console.log(sumTag)
 
   for (j = 0; j < key.length; j++) {
+    // if (key[j] != "") {
     key[j] = { name: key[j], num: sumTag[j] };
+    // }
+
   }
+
+  key.shift()
   console.log(key)
 
   var [tag, setTag] = useState("");
@@ -146,11 +151,15 @@ function Sub() {
             <div style={{marginLeft:20}} >
               <h2 style={theme.FONTS.h2}>{SubjectData.get(subject)[0]}</h2>
               <h5 style={theme.FONTS.h5}>{SubjectData.get(subject)[1]}</h5>
+            <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
+            <div style={{ marginLeft: 20 }}>
+              <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
+              <h5>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K
                 </Button2>
             </div>
-            
+
           </div>
         </Card.Body>
       </Card>
@@ -166,11 +175,15 @@ function Sub() {
             <div style={{marginLeft:20}}>
               <h2 style={theme.FONTS.h2}>{SubjectData.get(subject)[0]}</h2>
               <h5 style={theme.FONTS.h5}>{SubjectData.get(subject)[1]}</h5>
+            <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
+            <div style={{ marginLeft: 20 }}>
+              <h2>{SubjectData.get(subject)[0]}</h2>
+              <h5>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K
                 </Button2>
             </div>
-            
+
           </div>
         </Card.Body>
       </Card>
@@ -180,6 +193,8 @@ function Sub() {
   const TagSum = () => {
     return(
       <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
+    return (
+      <Card >
         <Card.Header>
           Watched Tags
             <Card.Link href="#">Edit</Card.Link>
@@ -195,31 +210,6 @@ function Sub() {
               )
             })}
           </div>
-        </Card.Body>
-      </Card>
-    )
-  }
-
-  const FilterCard = () => {
-    return (
-      <Card>
-        <Card.Header style={theme.FONTS.filter}>Custom Filter</Card.Header>
-        <Card.Body>
-          <div >
-            <Select isMulti options={optionTag} onChange={handle} style={theme.FONTS.filter}></Select>
-          </div>
-
-        </Card.Body>
-      </Card>
-    )
-  }
-
-  const IgnoreTag = () => {
-    return (
-      <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
-        <Card.Header style={theme.FONTS.filter}>Ignored Tags</Card.Header>
-        <Card.Body style={theme.FONTS.filter}>
-          <Card.Link href="#">Add an ignored tag</Card.Link>
         </Card.Body>
       </Card>
     )
@@ -261,6 +251,17 @@ function Sub() {
             <Card.Footer className="fontETC" style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
          </Card>
           
+            <Card>
+              <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
+              <Card.Body>
+                <div className="leader">
+                  <LeaderBoard />
+                </div>
+
+              </Card.Body>
+              <Card.Footer style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
+            </Card>
+
           </Col>
 
           <Col md={6}>
@@ -273,17 +274,22 @@ function Sub() {
 
           <Col md={2}>
             {/* <AboutSubjectCard/> */}
-            <FilterCard />
-            <br/>
-            <TagSum/>
-            <br/>
-            <IgnoreTag />
-            <br/>
+            <Card>
+              <Card.Header>Custom Filter</Card.Header>
+              <Card.Body>
+                <div >
+                  <Select isMulti options={optionTag} onChange={handle}></Select>
+                </div>
+              </Card.Body>
+            </Card>
+            <TagSum />
+            {/* <IgnoreTag /> */}
             <SpaceRec />
           </Col>
         </Row>
       </Container>
     </div>
+
   );
 
   const old = () => {

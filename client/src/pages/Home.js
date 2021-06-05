@@ -48,19 +48,6 @@ function Home({ isAuthenticated }) {
   const [isShowAnounce, setIsShowAnounce] = useState(true)
 
   const [multipleFiles, setMultipleFiles] = useState([]);
-  const [tag, setTag] = useState("");
-
-  var newArray = datas.filter(function (ele) {
-    var i;
-    var n = ele.listTag.length;
-    for (i = 0; i < n; i++) {
-      if (ele.listTag[i] === tag) {
-        return ele.listTag;
-      } else if (tag === "") {
-        return (newArray = datas);
-      }
-    }
-  });
 
   const subjectNavigate = [
     {
@@ -153,6 +140,7 @@ function Home({ isAuthenticated }) {
       });
   }, []);
 
+  var [tag, setTag] = useState("");
   const [value, getValue] = useState([]);
   var handle = (e) => {
     getValue(Array.isArray(e) ? e.map(x => x.label) : []);
@@ -190,6 +178,30 @@ function Home({ isAuthenticated }) {
   for (j = 0; j < key.length; j++) {
     key[j] = { name: key[j], num: sumTag[j] };
   }
+
+  key.shift()
+
+
+  var newArray = datas.filter(function (ele) {
+    var i, j;
+    var n = ele.listTag.length;
+    var nn = value.length;
+
+    for (i = 0; i <= nn; i++) {
+      for (j = 0; j < n; j++) {
+        if (nn != 0) {
+          tag = value[i]
+        }
+        console.log(tag);
+        if (ele.listTag[j] === tag) {
+          return ele.listTag;
+        }
+        else if (tag === "") {
+          return newArray = datas;
+        }
+      }
+    }
+  });
 
   const mystyle = {
     padding: "20px",
@@ -317,19 +329,12 @@ function Home({ isAuthenticated }) {
               ))}
             </Col>
 
-            <Col md="auto">
+            {/* <Col md="auto"> */}
               <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
                 <Card.Header>Custom Filter</Card.Header>
+              <Card style={{ width: "13rem" }}>
+                <Card.Header>Filter</Card.Header>
                 <Card.Body>
-                  {/* <Card.Link href="#">Create a custom filter</Card.Link> */}
-                  {/* <form>
-                    <input
-                      type="tag"
-                      onChange={(e) => setTag(e.target.value)}
-                      placeholder="Enter tag"
-                    />
-                  </form> */}
-                  
                   <div >
                     <Select isMulti options={optionTag} onChange={handle}></Select>
                   </div>
@@ -341,25 +346,23 @@ function Home({ isAuthenticated }) {
                   Watched Tags
                   <Card.Link href="#">Edit</Card.Link>
                 </Card.Header>
+              <Card>
+                <Card.Header className="card-header">
+                  Tags ทั้งหมด 
+                </Card.Header>  
                 <Card.Body>
-                  <div>
+                  <div >
                     {key.map(item => {
                       return (
                         <div>
                           <Button variant="outline-info" className="app-fontSizeTag" style={theme.FONTS.filter}>{item.name}</Button>{" x "}{item.num}
+                          <Button variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
                         </div>
                       )
                     })}
                   </div>
                 </Card.Body>
               </Card>
-              {/* <br />
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>Ignored Tags</Card.Header>
-                <Card.Body>
-                  <Card.Link href="#">Add an ignored tag</Card.Link>
-                </Card.Body>
-              </Card> */}
               <br />
               <Card style={{ width: "13rem" }}>
                 <ListGroup variant="flush" style={theme.FONTS.Spacesfollow}>
@@ -371,8 +374,9 @@ function Home({ isAuthenticated }) {
                   <ListGroup.Item></ListGroup.Item>
                   <ListGroup.Item></ListGroup.Item>
                 </ListGroup>
+                <div>Hotest Question</div>
               </Card>
-            </Col>
+            {/* </Col> */}
           </Row>
         </Container>
       </body>

@@ -348,13 +348,58 @@ function ForumCard(props) {
           <div class="time" >
             <a href="#" style={theme.FONTS.time}>{userAnswer[0].date}</a> · <i class="fa fa-globe"></i>
           </div>
-          <div className="btn-more"></div>
+          <div class="best-answer"><Icon icon="pin"/> Best Answer</div>
         </div>
       );
     };
 
     const AnswerList = () => {
-      return (
+      let isBestAnswer=true
+
+      if(isBestAnswer){
+        return (
+          <Card className="answerlist-card">
+            <div>
+              <HeaderUserAnswer />
+              <div class="answerlist-content">
+                <div class="answerlist-content-text">
+                  เย้
+                </div>
+
+                {/* <div class="best-answer">Best Answer</div> */}
+  
+                {isShowCommentForm ? (
+                  <div style={{ display: "flex" }}>
+                    <InputGroup
+                      onChange={{}}
+                      placeholder="Add a comment..."
+                      className="input-answer"
+                    />
+                    <Button2 variant="primary" className="btn-answer">
+                      Reply
+                    </Button2>
+                  </div>
+                ) : (
+                  <>
+                    <UpvoteBotton upvote={0} />
+                    <ReplyBotton />
+                  </>
+                )}
+              </div>
+            </div>
+  
+            {comment ? (
+              <>
+                <CommentList />
+                <CommentList />
+              </>
+            ) : (
+              <></>
+            )}
+          </Card>
+        );
+      }else{
+        return (
         <Card className="answerlist-card">
           <div>
             <HeaderUserAnswer />
@@ -394,6 +439,8 @@ function ForumCard(props) {
           )}
         </Card>
       );
+      }
+      
     };
 
     return (

@@ -23,6 +23,12 @@
   margin-bottom: 10px;
 }
 
+.app-fontSizeTag {
+  font-size: 11px;
+  margin-top: 3px;
+  color: black;
+}
+
 .btn-learnmore {
   size: 10px;
   font-size: 12px;
@@ -196,6 +202,14 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 20px;
 }
+
+.card-header{
+  background-color:#212529;
+  color:white;
+  text-align:center;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 251, 0, 0.19);
+}
+
 .co-logo {
   /*display:block;*/
   float: left;
