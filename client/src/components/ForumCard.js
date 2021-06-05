@@ -18,7 +18,7 @@ import { images } from "../constants";
 import { Link } from "react-router-dom";
 import { theme } from "../constants";
 
-import ReactHtmlParser from "react-html-parser";
+var parse = require('html-react-parser');
 
 function ForumCard(props) {
   let forum = props.data;
@@ -194,8 +194,7 @@ function ForumCard(props) {
                       __html: `<div style={{color:'blue'}}>${forum.postText}</div>`,
                     }}
                     id="body-forum-text" /> */}
-                    {/* {parse('<div style={{color:'blue'}}>{forum.postText}</div>')} */}
-                    <div>{ReactHtmlParser(this.state.myContent)}</div>
+                    {parse('<div>{forum.postText}</div>')}
 
                   {!props.isReadLong ? (
 

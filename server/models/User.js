@@ -50,7 +50,7 @@ userSchema.methods.validPassword = function (txtPassword) {
 };
 
 userSchema.methods.generateJWT = function () {
-  const expiresIn = 1800; // 30 min
+  const expiresIn = 10800; // 3 hr
   return {
     token: jsonwebtoken.sign(
       {

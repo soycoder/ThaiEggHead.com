@@ -7,11 +7,13 @@ import {
   get,
   listTag,
   createTag,
+  listEachUser,
 } from "../controller/ForumController.js";
 
 const router = express.Router();
 
 router.get("/", list);
+router.get("/user/:userID", listEachUser);
 router.get("/tag", listTag);
 router.post("/", upload.array("files"), create);
 router.post("/tag", createTag);
