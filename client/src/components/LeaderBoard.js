@@ -7,12 +7,11 @@ export default function WithoutInfo() {
       {
         label: 'Name',
         field: 'name',
-        width: 500
+        sort: 'disabled',
       },
       {
         label: 'Score',
         field: 'score',
-        width: 270,
       }
     ],
     rows: [
