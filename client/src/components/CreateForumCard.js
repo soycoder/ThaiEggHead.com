@@ -191,6 +191,49 @@ const FileUploadScreen = ({ isAuthenticated }) => {
     return <div className="tag">{_Tag}</div>;
   };
 
+  const editorConfiguration = {
+    // plugins: [ ],
+    toolbar: [ 
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      '|',
+      // "uploadImage",
+      "bulletedList",
+      "numberedList",
+      "todoList",
+      "insertTable",
+      "|",
+      "outdent",
+      "indent",
+      "|",
+      "undo",
+      "redo",
+      'code', 
+    ],        
+    ckfinder: {
+      uploadUrl: "/upload",
+      withCredentials: true,
+      headers: {
+        "X-CSRF-TOKEN": "CSFR-Token",
+        Authorization: "Bearer <JSON Web Token>",
+      },
+    },
+    image: {
+      // Configure the available styles.
+      styles: ["alignLeft", "alignCenter", "alignRight"],
+      toolbar: [
+        "imageStyle:alignLeft",
+        "imageStyle:alignCenter",
+        "imageStyle:alignRight",
+        "|",
+        "resizeImage",
+        "|",
+        "imageTextAlternative",
+      ],
+    },
+  };
   useEffect(() => {
     // const token = user?.token;
     // setUser(JSON.parse(localStorage.getItem("profile")));
@@ -242,49 +285,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
               );
             });
           }}
-          config={{
-            toolbar: {
-              items: [
-                "heading",
-                "|",
-                "bold",
-                "italic",
-                "|",
-                "uploadImage",
-                "bulletedList",
-                "numberedList",
-                "todoList",
-                "insertTable",
-                "|",
-                "outdent",
-                "indent",
-                "|",
-                "undo",
-                "redo",
-              ],
-            },
-            ckfinder: {
-              uploadUrl: "/upload",
-              withCredentials: true,
-              headers: {
-                "X-CSRF-TOKEN": "CSFR-Token",
-                Authorization: "Bearer <JSON Web Token>",
-              },
-            },
-            image: {
-              // Configure the available styles.
-              styles: ["alignLeft", "alignCenter", "alignRight"],
-              toolbar: [
-                "imageStyle:alignLeft",
-                "imageStyle:alignCenter",
-                "imageStyle:alignRight",
-                "|",
-                "resizeImage",
-                "|",
-                "imageTextAlternative",
-              ],
-            },
-          }}
+          config={editorConfiguration}
           onChange={handleChange}
         />
       </Form.Group>

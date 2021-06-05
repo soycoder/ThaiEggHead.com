@@ -43,7 +43,8 @@ export default function WithoutInfo() {
     console.log(datatable)
   }
 
-  return <MDBDataTableV5
+  return <MDBDataTableV5 
+    theme={"dark"}
     data={datatable}
     hover
     entries={Top}

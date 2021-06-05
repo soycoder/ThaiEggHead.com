@@ -19,6 +19,7 @@ import { Button as Button2 } from "@blueprintjs/core";
 import Avatar from 'react-avatar';
 import LeaderBoard from '../components/LeaderBoard';
 import Moment from 'react-moment';
+// import * '../App.css'
 
 function Sub() {
   let { subject } = useParams();
@@ -260,11 +261,14 @@ function Sub() {
           <Col md={3}>
 
           <Card>
-            <Card.Header style={{ textAlign: 'center', backgroundColor: "red", color:"#FFFFFF"}}>Leader Board</Card.Header>
+            <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529"}}>Leader Board</Card.Header>
             <Card.Body>
-              <LeaderBoard />
+              <div className="leader">
+                <LeaderBoard />
+              </div>
+              
             </Card.Body>
-            <Card.Footer style={{ textAlign: 'center' }}>To Day : <Moment format="DD/MM/YYYY" /></Card.Footer>
+            <Card.Footer style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
           </Card>
           
           </Col>
