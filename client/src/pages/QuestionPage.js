@@ -7,7 +7,8 @@ import {
   Card,
   Container,
   ListGroup,
-  Button
+  Button,
+  Spinner
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState,} from "react";
@@ -17,7 +18,7 @@ import { Keys } from "@blueprintjs/core";
 
 function QuestionPage() {
     let { question } = useParams();
-    const [forumData, setForumData] = useState({});
+    const [forumData, setForumData] = useState(null);
     var arrayforum = []
 
     useEffect(() => {
@@ -42,8 +43,8 @@ function QuestionPage() {
           <Row>
             {/* <Col></Col> */}
             <Col xs lg="8">
-            {forumData?(<ForumCard data={forumData} />):(<></>)}
-          
+            {forumData?(<ForumCard data={forumData} />):(<Spinner animation="border"></Spinner>)}
+
             {/* {forumData.map((forum) => (
                 
                 <ForumCard data={forum} />
