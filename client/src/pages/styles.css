@@ -212,3 +212,40 @@
 .co-name > a:hover {
   text-decoration: underline;
 }
+
+.user-image-small{
+    /*display:block;*/
+    float: left;
+    margin-right: 8px;
+    border-radius: 50% !important;
+  
+    width: 20px;
+    height: 20px;
+}
+
+.user-name-small a{
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.5;
+    color: gray;
+    text-decoration: none;
+}
+
+.btn-close2 {
+  background-color: transparent;
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  left: 96%;
+  top: 15px;
+}
+
+.btn-closestyle {
+  background-color: transparent;
+  color: gray;
+  border: hidden;
+}
+
+.btn-closestyle:hover{
+  background-color: rgb(76, 80, 92);
+}
