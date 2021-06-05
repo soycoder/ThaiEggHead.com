@@ -55,17 +55,42 @@ export const SIZES = {
 
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle},
-    h1: { fontFamily: "IconicText", fontSize: SIZES.h1  },
-    h2: { fontFamily: "Motorway", fontSize: SIZES.h2 },
-    h3: { fontFamily: "Motorway", fontSize: SIZES.h3 },
-    h4: { fontFamily: "Motorway", fontSize: SIZES.h4 },
-    h5: { fontFamily: "Motorway", fontSize: SIZES.h5 },
-    h6: { fontFamily: "Motorway", fontSize: SIZES.h6 },
-    body1: { fontFamily: "Motorway", fontSize: SIZES.body1 },
-    body2: { fontFamily: "Motorway", fontSize: SIZES.body2 },
-    body3: { fontFamily: "Motorway", fontSize: SIZES.body3 },
-    body4: { fontFamily: "Motorway", fontSize: SIZES.body4 },
+    largeTitle: { fontFamily: "Kanit-Regular", fontSize: SIZES.largeTitle},
+    h1: { fontFamily: "Kanit-Regular", fontSize: SIZES.h1  },
+    h2: { fontFamily: "Kanit-Regular", fontSize: SIZES.h2 },
+    h3: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
+    h4: { fontFamily: "Kanit-Regular", fontSize: SIZES.h4 },
+    h5: { fontFamily: "Kanit-Regular", fontSize: SIZES.h5 },
+    h6: { fontFamily: "Kanit-Regular", fontSize: SIZES.h6 },
+
+    body1: { fontFamily: "Kanit-Regular", fontSize: SIZES.body1 },
+    body2: { fontFamily: "Kanit-Regular", fontSize: SIZES.body2 },
+    body3: { fontFamily: "Kanit-Regular", fontSize: SIZES.body3 },
+    body4: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+
+    leftBar1: { fontFamily: "Kanit-Regular", fontSize: SIZES.h2 },
+    leftBar2: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
+
+    login: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
+
+    filter: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    Spacesfollow: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+
+    LeaderBord: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+
+    nav: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+
+    name: { fontFamily: "Kanit-Regular", fontSize: SIZES.body3 },
+    time: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    score: { fontFamily: "Kanit-Regular", fontSize: SIZES.body3 },
+
+    title: { fontFamily: "Kanit-Regular", fontSize: SIZES.h1 },
+    title1: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
+    title2: { fontFamily: "Kanit-Regular", fontSize: SIZES.h4 },
+    body: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    tag: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    subject: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    post: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
 };
 
 const appTheme = { COLORS, SIZES, FONTS };

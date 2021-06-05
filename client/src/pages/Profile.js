@@ -17,7 +17,7 @@ import AvatarCropper from "../components/ProfileImage";
 
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
-
+import { theme } from "../constants";
 import { images, COLORS, FONTS, SIZES } from "../constants";
 
 const Profile = ({ isAuthenticated }) => {
@@ -143,7 +143,7 @@ const Profile = ({ isAuthenticated }) => {
 
   const NonIdealState = () => {
     return (
-      <div class="bp3-non-ideal-state">
+      <div class="bp3-non-ideal-state" >
         <div class="bp3-non-ideal-state-visual">
           <span class="bp3-icon bp3-icon-folder-open"></span>
         </div>
@@ -199,7 +199,7 @@ const Profile = ({ isAuthenticated }) => {
 
   const Navs = () => {
     return (
-      <Nav variant="tabs" onSelect={handleNavSelect}>
+      <Nav variant="tabs" onSelect={handleNavSelect} style={theme.FONTS.nav}>
         <Nav.Item>
           <Nav.Link eventKey={1}>Profile</Nav.Link>
         </Nav.Item>
@@ -224,17 +224,17 @@ const Profile = ({ isAuthenticated }) => {
         </Col>
         <Col md={6}>
           <div class="profile-head">
-            <h3>{userData.firstName + " " + userData.lastName}</h3>
+            <h3 style={theme.FONTS.h1}>{userData.firstName + " " + userData.lastName}</h3>
             {/* <h5>{userName}</h5> */}
-            <p class="proile-rating">
-              EggHead Score : <span>{eggHeadScore}</span>
+            <p class="proile-rating" style={theme.FONTS.score}>
+              EggHead Score : <span style={theme.FONTS.score}>{eggHeadScore}</span>
             </p>
             <Navs />
             <ContentDisplay />
           </div>
         </Col>
         {user.userID === id ? (
-          <Col md={2}>
+          <Col md={2} style={theme.FONTS.body3}>
             <input
               type="submit"
               class="profile-edit-btn"
@@ -292,9 +292,9 @@ const Profile = ({ isAuthenticated }) => {
               </Col>
               <Col md={10}>
                 <Card.Body>
-                  <Card.Title>{props.data.place}</Card.Title>
-                  <Card.Text>{props.data.degree}</Card.Text>
-                  <Card.Text className="text-muted">
+                  <Card.Title style={theme.FONTS.title1}>{props.data.place}</Card.Title>
+                  <Card.Text style={theme.FONTS.title2}>{props.data.degree}</Card.Text>
+                  <Card.Text className="text-muted" style={theme.FONTS.title2}>
                     {props.data.since}
                   </Card.Text>
                 </Card.Body>
@@ -313,7 +313,7 @@ const Profile = ({ isAuthenticated }) => {
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <Row class="row">
+          <Row class="row" style={theme.FONTS.body4}>
             <Col md={6}>
               <label>Email</label>
             </Col>
@@ -321,7 +321,7 @@ const Profile = ({ isAuthenticated }) => {
               <p>{userData.email}</p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row class="row" style={theme.FONTS.body4}>
             <Col md={6}>
               <label>Name</label>
             </Col>
@@ -329,7 +329,7 @@ const Profile = ({ isAuthenticated }) => {
               <p>{userData.firstName + " " + userData.lastName}</p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row class="row" style={theme.FONTS.body4}>
             <Col md={6}>
               <label>Phone Number</label>
             </Col>
@@ -337,7 +337,7 @@ const Profile = ({ isAuthenticated }) => {
               <p>{phone}</p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row class="row" style={theme.FONTS.body4}>
             <Col md={6}>
               <label>Organization</label>
             </Col>
@@ -345,7 +345,7 @@ const Profile = ({ isAuthenticated }) => {
               <p>{organization}</p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row class="row" style={theme.FONTS.body4}>
             <Col md={11}>
               <br />
               <label>Education</label>

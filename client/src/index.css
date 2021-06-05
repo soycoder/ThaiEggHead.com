@@ -33,7 +33,7 @@ code {
 }
 
 @font-face {
-  font-family: 'Minimal-Regular';
+  font-family: 'Kanit-Regular.ttf';
   src: local('Minimal-Regular'), url(./assets/font/Minimal-Regular.ttf) format('truetype');
 }
 /* Motorway.ttf */

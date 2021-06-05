@@ -21,6 +21,8 @@ import { AuthContext } from "../context/AuthContext";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
+import { theme } from "../constants";
+
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email("Enter a valid email")
@@ -68,7 +70,7 @@ const TextEffect = () => {
 const WelcomeAds = () => {
   return (
     <Container>
-      <p style={FONTS.h1}>ร่วมเป็นส่วนหนึ่งของ</p>
+      <p style={FONTS.body1}>ร่วมเป็นส่วนหนึ่งของ</p>
       <TextEffect></TextEffect>
       <div style={{ margin: 30 }}>
         <Icon
@@ -76,21 +78,21 @@ const WelcomeAds = () => {
           iconSize="20"
           style={{ float: "left", marginRight: 10, margin: 7 }}
         ></Icon>
-        <p style={FONTS.h2}>ถาม-ตอบได้อย่างอิสระ</p>
+        <p style={FONTS.body2}>ถาม-ตอบได้อย่างอิสระ</p>
 
         <Icon
           icon="crown"
           iconSize="20"
           style={{ float: "left", marginRight: 10, margin: 7 }}
         ></Icon>
-        <p style={FONTS.h2}>สะสมคะแนน และเลื่อนยศ</p>
+        <p style={FONTS.body2}>สะสมคะแนน และเลื่อนยศ</p>
 
         <Icon
           icon="inbox-search"
           iconSize="20"
           style={{ float: "left", marginRight: 10, margin: 7 }}
         ></Icon>
-        <p style={FONTS.h2}>ค้นหาด้วยคำสำคัญ และกรองฟอรัมที่สนใจ</p>
+        <p style={FONTS.body2}>ค้นหาด้วยคำสำคัญ และกรองฟอรัมที่สนใจ</p>
       </div>
     </Container>
   );
@@ -326,7 +328,7 @@ const Register = (props) => {
                     value={values.email}
                     autoFocus
                   />
-                  <label for="floatingInput">Email address</label>
+                  <label for="floatingInput" style={theme.FONTS.login}>Email address</label>
                 </div>
 
                 {/*errors.email && touched.email && errors.email */}
@@ -345,7 +347,7 @@ const Register = (props) => {
                     onBlur={handleBlur}
                     value={values.password}
                   />
-                  <label for="floatingPassword">Password</label>
+                  <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
                 </div>
 
                 <div className="col-12 mb-3 ">

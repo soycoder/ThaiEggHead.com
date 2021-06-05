@@ -28,6 +28,7 @@ p #body-forum-text{
   padding: 3px;
   cursor: pointer;
 }
+
 .icon.profile-btn:hover {
   background: #d1d1d198;
   border-radius: 50%;
@@ -210,15 +211,11 @@ p #body-forum-text{
   color: #fff;
 }
 
-.app-fontSizeTag {
-  font-size: 11px;
-  margin-top: 3px;
-}
-
 .table{
   font-family: 'Motorway';
   text-align:center;
-  /* align:center; */
+  align:center;
+  font-size: 13px;
 }
 .mdb-dataTables_paginate{
   display: none;
@@ -227,13 +224,15 @@ p #body-forum-text{
   display: none;
 }
 .mdb-dataTable-head{
+  text-align:center;
+  align:center;
   color: white;
   background-color: #212529;
 }
 
-
 .fontETC{
-  font-family: 'Supermarket';
+  font-size: 16px;
+  font-family: 'Motorway';
 }
 
 

@@ -25,6 +25,7 @@ import jwt_decode from "jwt-decode";
 
 import "./styles.css";
 import Select from "react-select"
+import { theme } from "../constants";
 
 function Home({ isAuthenticated }) {
   // Initial User Profile
@@ -47,19 +48,6 @@ function Home({ isAuthenticated }) {
   const [isShowAnounce, setIsShowAnounce] = useState(true)
 
   const [multipleFiles, setMultipleFiles] = useState([]);
-  const [tag, setTag] = useState("");
-
-  var newArray = datas.filter(function (ele) {
-    var i;
-    var n = ele.listTag.length;
-    for (i = 0; i < n; i++) {
-      if (ele.listTag[i] === tag) {
-        return ele.listTag;
-      } else if (tag === "") {
-        return (newArray = datas);
-      }
-    }
-  });
 
   const subjectNavigate = [
     {
@@ -131,10 +119,10 @@ function Home({ isAuthenticated }) {
   }, []);
 
   const Tag = [
-    { name: "Art", tagID: "Art" },
-    { name: "Database", tagID: "Database" },
-    { name: "Science", tagID: "Scienceact" },
-    { name: "Law", tagID: "Law" },
+    { name: "ศิลปะ", tagID: "ศิลปะ" },
+    { name: "ข่าว", tagID: "ข่าว" },
+    { name: "กีฬา", tagID: "กีฬา" },
+    { name: "สังคม", tagID: "สังคม" },
   ];
 
   const [optionTag, setOptionTag] = useState([]);
@@ -152,6 +140,7 @@ function Home({ isAuthenticated }) {
       });
   }, []);
 
+  var [tag, setTag] = useState("");
   const [value, getValue] = useState([]);
   var handle = (e) => {
     getValue(Array.isArray(e) ? e.map(x => x.label) : []);
@@ -190,6 +179,30 @@ function Home({ isAuthenticated }) {
     key[j] = { name: key[j], num: sumTag[j] };
   }
 
+  key.shift()
+
+
+  var newArray = datas.filter(function (ele) {
+    var i, j;
+    var n = ele.listTag.length;
+    var nn = value.length;
+
+    for (i = 0; i <= nn; i++) {
+      for (j = 0; j < n; j++) {
+        if (nn != 0) {
+          tag = value[i]
+        }
+        console.log(tag);
+        if (ele.listTag[j] === tag) {
+          return ele.listTag;
+        }
+        else if (tag === "") {
+          return newArray = datas;
+        }
+      }
+    }
+  });
+
   const mystyle = {
     padding: "20px",
     fontFamily: "RSU",
@@ -209,7 +222,10 @@ function Home({ isAuthenticated }) {
               className="subject-img"
               style={{ marginRight: 5 }}
             />
-            {subject.subjectName}
+            <div style={theme.FONTS.body3}>
+              {subject.subjectName}
+            </div>
+            
           </Button>
         </Link>
       </li>
@@ -269,20 +285,20 @@ function Home({ isAuthenticated }) {
     return (
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
-          <Card.Text className="card-title">
+          <Card.Text className="card-title" style={theme.FONTS.body2}>
             ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
-          <Card.Text className="card-subtitle">สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
-          <Button variant="primary" className="btn-learnmore">
+          <Card.Text className="card-subtitle" style={theme.FONTS.body3}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
+          <Button variant="primary" className="btn-learnmore" style={theme.FONTS.body4}>
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
-          <img
+          {/* <img
               src={images.logo_event}
               height="130"
               width="130"
               className="event-img"
-            />
+            /> */}
         </Card.Body>
       </Card>
     );
@@ -290,13 +306,13 @@ function Home({ isAuthenticated }) {
 
   return (
     <div>
-      <body style={{ backgroundColor: "#F3F3F3" }}>
+      <body style={{ backgroundColor: "#F3F3F3" }} >
         <br />
         <br />
         <Container fluid="xl">
           <Row xs={1} md={3}>
-            <Col md="auto">
-              <h5 style={{ marginLeft: 54 }}>พื้นที่ความรู้</h5>
+            <Col md="auto" >
+              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.body2}>พื้นที่ความรู้</h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>
 
@@ -314,59 +330,34 @@ function Home({ isAuthenticated }) {
             </Col>
 
             <Col md="auto">
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>Custom Filter</Card.Header>
+              <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
+                <Card.Header>Filter</Card.Header>
                 <Card.Body>
-                  {/* <Card.Link href="#">Create a custom filter</Card.Link> */}
-                  {/* <form>
-                    <input
-                      type="tag"
-                      onChange={(e) => setTag(e.target.value)}
-                      placeholder="Enter tag"
-                    />
-                  </form> */}
-                  
                   <div >
                     <Select isMulti options={optionTag} onChange={handle}></Select>
                   </div>
                 </Card.Body>
               </Card>
               <br />
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>
-                  Watched Tags
-                  <Card.Link href="#">Edit</Card.Link>
-                </Card.Header>
-                <Card.Body>
-                  <div>
+              <Card>
+                <Card.Header className="card-header" style={theme.FONTS.tag}>
+                  Tags ทั้งหมด 
+                </Card.Header>  
+                <Card.Body style={theme.FONTS.tag}>
+                  <div >
                     {key.map(item => {
                       return (
                         <div>
-                          <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
+                          <Button style={theme.FONTS.tag} variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
                         </div>
                       )
                     })}
                   </div>
                 </Card.Body>
               </Card>
-              {/* <br />
-              <Card style={{ width: "13rem" }}>
-                <Card.Header>Ignored Tags</Card.Header>
-                <Card.Body>
-                  <Card.Link href="#">Add an ignored tag</Card.Link>
-                </Card.Body>
-              </Card> */}
               <br />
-              <Card style={{ width: "13rem" }}>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>Spaces to follow</ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                </ListGroup>
+              <Card style={{ width: "13rem" }} style={theme.FONTS.tag}>
+                <div>Hotest Question</div>
               </Card>
             </Col>
           </Row>
