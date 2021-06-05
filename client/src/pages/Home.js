@@ -119,10 +119,10 @@ function Home({ isAuthenticated }) {
   }, []);
 
   const Tag = [
-    { name: "Art", tagID: "Art" },
-    { name: "Database", tagID: "Database" },
-    { name: "Science", tagID: "Scienceact" },
-    { name: "Law", tagID: "Law" },
+    { name: "ศิลปะ", tagID: "ศิลปะ" },
+    { name: "ข่าว", tagID: "ข่าว" },
+    { name: "กีฬา", tagID: "กีฬา" },
+    { name: "สังคม", tagID: "สังคม" },
   ];
 
   const [optionTag, setOptionTag] = useState([]);
@@ -222,7 +222,10 @@ function Home({ isAuthenticated }) {
               className="subject-img"
               style={{ marginRight: 5 }}
             />
-            {subject.subjectName}
+            <div style={theme.FONTS.body3}>
+              {subject.subjectName}
+            </div>
+            
           </Button>
         </Link>
       </li>
@@ -282,20 +285,20 @@ function Home({ isAuthenticated }) {
     return (
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
-          <Card.Text className="card-title">
+          <Card.Text className="card-title" style={theme.FONTS.body2}>
             ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
-          <Card.Text className="card-subtitle">สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
-          <Button variant="primary" className="btn-learnmore">
+          <Card.Text className="card-subtitle" style={theme.FONTS.body3}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
+          <Button variant="primary" className="btn-learnmore" style={theme.FONTS.body4}>
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
-          <img
+          {/* <img
               src={images.logo_event}
               height="130"
               width="130"
               className="event-img"
-            />
+            /> */}
         </Card.Body>
       </Card>
     );
@@ -303,13 +306,13 @@ function Home({ isAuthenticated }) {
 
   return (
     <div>
-      <body style={{ backgroundColor: "#F3F3F3" }}>
+      <body style={{ backgroundColor: "#F3F3F3" }} >
         <br />
         <br />
         <Container fluid="xl">
           <Row xs={1} md={3}>
-            <Col md="auto">
-              <h5 style={{ marginLeft: 54 }}>พื้นที่ความรู้</h5>
+            <Col md="auto" >
+              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.body2}>พื้นที่ความรู้</h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>
 
@@ -327,7 +330,7 @@ function Home({ isAuthenticated }) {
             </Col>
 
             <Col md="auto">
-              <Card style={{ width: "13rem" }}>
+              <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
                 <Card.Header>Filter</Card.Header>
                 <Card.Body>
                   <div >
@@ -337,15 +340,15 @@ function Home({ isAuthenticated }) {
               </Card>
               <br />
               <Card>
-                <Card.Header className="card-header">
+                <Card.Header className="card-header" style={theme.FONTS.tag}>
                   Tags ทั้งหมด 
                 </Card.Header>  
-                <Card.Body>
+                <Card.Body style={theme.FONTS.tag}>
                   <div >
                     {key.map(item => {
                       return (
                         <div>
-                          <Button variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
+                          <Button style={theme.FONTS.tag} variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
                         </div>
                       )
                     })}
@@ -353,7 +356,7 @@ function Home({ isAuthenticated }) {
                 </Card.Body>
               </Card>
               <br />
-              <Card style={{ width: "13rem" }}>
+              <Card style={{ width: "13rem" }} style={theme.FONTS.tag}>
                 <div>Hotest Question</div>
               </Card>
             </Col>

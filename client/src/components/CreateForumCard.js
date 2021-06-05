@@ -48,19 +48,20 @@ const FileUploadScreen = ({ isAuthenticated }) => {
   const [multipleProgress, setMultipleProgress] = useState(0);
 
   const optionsSubject = [
-    { label: "Arts", value: "Arts" },
-    { label: "Communication Arts", value: "Communication Arts" },
-    { label: "Commerce and Accountancy", value: "Commerce and Accountancy" },
-    { label: "Education", value: "Education" },
-    { label: "Engineering", value: "Engineering" },
-    { label: "Fine and Applied Arts", value: "Fine and Applied Arts" },
-    { label: "Law", value: "Law" },
-    { label: "Psychology", value: "Psychology" },
-    { label: "Political Science", value: "Political Science" },
-    { label: "Social Administration", value: "Social Administration" },
-    { label: "Social Work", value: "Social Work" },
-    { label: "Social Administration", value: "Social Administration" },
+    { label: "วิทยาศาสตร์ และเทคโนโลยี", value: "วิทยาศาสตร์ และเทคโนโลยี" },
+    { label: "กฎหมาย", value: "กฎหมาย" },
+    { label: "สังคมสงเคราะห์", value: "สังคมสงเคราะห์" },
+    { label: "รัฐศาสตร์", value: "รัฐศาสตร์" },
+    { label: "วิศวกรรมศาสตร์", value: "วิศวกรรมศาสตร์" },
+    { label: "นิเทศศาสตร์", value: "นิเทศศาสตร์" },
+    { label: "สังคมสงเคราะห์", value: "สังคมสงเคราะห์" },
+    { label: "ศึกษาศาสตร์", value: "ศึกษาศาสตร์" },
+    { label: "พาณิชยศาสตร์ และการบัญชี", value: "พาณิชยศาสตร์ และการบัญชี" },
+    { label: "ศิลปกรรมศาสตร์", value: "ศิลปกรรมศาสตร์" },
+    { label: "ศิลปะ", value: "ศิลปะ" },
+    { label: "จิตวิทยา", value: "จิตวิทยา" },
   ];
+  
 
   const [sourceImg, setSelectImg] = useState([]);
   const MultipleFileChange = (e) => {

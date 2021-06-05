@@ -150,7 +150,7 @@ function Sub() {
             <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
             <div style={{ marginLeft: 20 }}>
               <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
-              <h5>{SubjectData.get(subject)[1]}</h5>
+              <h5 style={theme.FONTS.h2}>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K
                 </Button2>
@@ -169,8 +169,8 @@ function Sub() {
           <div className="subject-header">
             <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
             <div style={{ marginLeft: 20 }}>
-              <h2>{SubjectData.get(subject)[0]}</h2>
-              <h5>{SubjectData.get(subject)[1]}</h5>
+              <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
+              <h5 style={theme.FONTS.h2}>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K
                 </Button2>
@@ -184,10 +184,12 @@ function Sub() {
 
   const TagSum = () => {
     return (
-      <Card >
+      <Card style={theme.FONTS.filter}>
         <Card.Header>
-          Watched Tags
-            <Card.Link href="#">Edit</Card.Link>
+          <div>
+          Watched Tags  <Card.Link href="#">Edit</Card.Link>
+          </div>
+            
         </Card.Header>
         <Card.Body>
           <div>
@@ -207,7 +209,7 @@ function Sub() {
 
   const SpaceRec = () => {
     return (
-      <Card>
+      <Card style={theme.FONTS.filter}>
         <ListGroup variant="flush">
           <ListGroup.Item>Spaces to follow</ListGroup.Item>
           <ListGroup.Item></ListGroup.Item>
@@ -229,17 +231,17 @@ function Sub() {
 
         <Row className="justify-content-md-center">
 
-          <Col md={3}>
+          <Col md={3} >
 
-            <Card>
+            <Card className="fontETC">
               <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
               <Card.Body>
-                <div className="leader">
+                <div className="fontETC">
                   <LeaderBoard />
                 </div>
 
               </Card.Body>
-              <Card.Footer style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
+              <Card.Footer className="fontETC" style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
             </Card>
 
           </Col>
@@ -254,7 +256,7 @@ function Sub() {
 
           <Col md={2}>
             {/* <AboutSubjectCard/> */}
-            <Card>
+            <Card style={theme.FONTS.filter}>
               <Card.Header>Custom Filter</Card.Header>
               <Card.Body>
                 <div >
@@ -262,8 +264,10 @@ function Sub() {
                 </div>
               </Card.Body>
             </Card>
+            <br/>
             <TagSum />
             {/* <IgnoreTag /> */}
+            <br/>
             <SpaceRec />
           </Col>
         </Row>

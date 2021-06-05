@@ -348,7 +348,7 @@ function ForumCard(props) {
           <div class="time" >
             <a href="#" style={theme.FONTS.time}>{userAnswer[0].date}</a> · <i class="fa fa-globe"></i>
           </div>
-          <div class="best-answer"><Icon icon="pin"/> Best Answer</div>
+          <div class="best-answer" style={theme.FONTS.body3}><Icon icon="pin"/> Best Answer</div>
         </div>
       );
     };
