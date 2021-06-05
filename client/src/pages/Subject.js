@@ -19,7 +19,8 @@ import { Button as Button2 } from "@blueprintjs/core";
 import Avatar from 'react-avatar';
 import LeaderBoard from '../components/LeaderBoard';
 import Moment from 'react-moment';
-// import * '../App.css'
+
+import { theme } from "../constants";
 
 function Sub() {
   let { subject } = useParams();
@@ -148,7 +149,7 @@ function Sub() {
           <div className="subject-header">
             <Avatar className="subject-img" size="100" round={false} style={{marginRight:20}} />
             <div style={{marginLeft:20}}>
-              <h2>{SubjectData.get(subject)[0]}</h2>
+              <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
               <h5>{SubjectData.get(subject)[1]}</h5>
               <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
                 Follow 123K

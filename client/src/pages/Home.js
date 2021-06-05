@@ -9,6 +9,7 @@ import {
   Form,
   Modal,
   Button,
+  Image
 } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
@@ -61,62 +62,62 @@ function Home({ isAuthenticated }) {
 
   const subjectNavigate = [
     {
-      subjectName: "Sciences",
+      subjectName: "วิทยาศาสตร์ และเทคโนโลยี",
       link: "/subject/sci",
       img: images.subj_1,
     },
     {
-      subjectName: "Law",
+      subjectName: "กฎหมาย",
       link: "/subject/law",
       img: images.subj_2,
     },
     {
-      subjectName: "Social Administration",
+      subjectName: "สังคมสงเคราะห์",
       link: "/subject/sa",
       img: images.subj_3,
     },
     {
-      subjectName: "Political Science",
+      subjectName: "รัฐศาสตร์",
       link: "/subject/ps",
       img: images.subj_4,
     },
     {
-      subjectName: "Engineering",
+      subjectName: "วิศวกรรมศาสตร์",
       link: "/subject/eg",
       img: images.subj_5,
     },
     {
-      subjectName: "Communication Arts",
+      subjectName: "นิเทศศาสตร์",
       link: "/subject/ca",
       img: images.subj_6,
     },
     {
-      subjectName: "Social Work",
+      subjectName: "สังคมสงเคราะห์",
       link: "/subject/sw",
       img: images.subj_7,
     },
     {
-      subjectName: "Education",
+      subjectName: "ศึกษาศาสตร์",
       link: "/subject/law",
       img: images.subj_8,
     },
     {
-      subjectName: "Commerce and Accountancy",
+      subjectName: "พาณิชยศาสตร์ และการบัญชี",
       link: "/subject/cca",
       img: images.subj_9,
     },
     {
-      subjectName: "Fine and Applied Arts",
+      subjectName: "ศิลปกรรมศาสตร์",
       link: "/subject/faa",
       img: images.subj_10,
     },
     {
-      subjectName: "Arts",
+      subjectName: "ศิลปะ",
       link: "/subject/art",
       img: images.subj_11,
     },
     {
-      subjectName: "Psychology",
+      subjectName: "จิตวิทยา",
       link: "/subject/psyc",
       img: images.subj_12,
     },
@@ -229,9 +230,9 @@ function Home({ isAuthenticated }) {
           <Button className="btn-subjectnav" variant="light" block>
             <img
               src={subject.img}
-              height="23"
-              width="23"
-              className="app-cycle"
+              height="30"
+              width="30"
+              className="subject-img"
               style={{ marginRight: 5 }}
             />
             {subject.subjectName}
@@ -295,13 +296,19 @@ function Home({ isAuthenticated }) {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <Card.Text className="card-title">
-            Announcing ThaiEggHead World Meetup Week 2021
+            ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
-          <Card.Text className="card-subtitle">Join us June 18-25</Card.Text>
+          <Card.Text className="card-subtitle">สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
           <Button variant="primary" className="btn-learnmore">
-            Learn more
+            ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
+          <img
+              src={images.logo_event}
+              height="130"
+              width="130"
+              className="event-img"
+            />
         </Card.Body>
       </Card>
     );
@@ -315,7 +322,7 @@ function Home({ isAuthenticated }) {
         <Container fluid="xl">
           <Row xs={1} md={3}>
             <Col md="auto">
-              <h5 style={{ marginLeft: 54 }}>Space</h5>
+              <h5 style={{ marginLeft: 54 }}>พื้นที่ความรู้</h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>
 

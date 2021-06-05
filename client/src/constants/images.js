@@ -1,4 +1,5 @@
 import logo from "./../assets/images/egghead-logo.png";
+import logo_event from "./../assets/images/egghead-event.png";
 import bg from "./../assets/images/bg2.jpg";
 import bi from "./../assets/images/binary.jpg";
 import pic_cover from "./../assets/images/example-cover.jfif"
@@ -8,13 +9,13 @@ import subj_2 from "./../assets/images/subject/2.png"
 import subj_3 from "./../assets/images/subject/3.png"
 import subj_4 from "./../assets/images/subject/4.png"
 import subj_5 from "./../assets/images/subject/5.png"
-import subj_6 from "./../assets/images/subject/6.jpg"
+import subj_6 from "./../assets/images/subject/6.png"
 import subj_7 from "./../assets/images/subject/7.png"
-import subj_8 from "./../assets/images/subject/8.jpg"
+import subj_8 from "./../assets/images/subject/8.png"
 import subj_9 from "./../assets/images/subject/9.png"
 import subj_10 from "./../assets/images/subject/10.png"
 import subj_11 from "./../assets/images/subject/11.png"
-import subj_12 from "./../assets/images/subject/12.jpg"
+import subj_12 from "./../assets/images/subject/12.png"
 import pro_1 from "./../assets/images/pro_1.jpg"
 import pro_2 from "./../assets/images/pro_2.jpg"
 import pro_3 from "./../assets/images/pro_3.jpg"
@@ -41,5 +42,6 @@ export default {
     pro_1,
     pro_2,
     pro_3,
-    bina
+    bina,
+    logo_event
 }
