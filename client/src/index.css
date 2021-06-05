@@ -31,3 +31,13 @@ code {
   font-family: 'Kanit-Regular';
   src: local('Kanit-Regular'), url(./assets/font/Kanit-Regular.ttf) format('truetype');
 }
+
+@font-face {
+  font-family: 'Minimal-Regular';
+  src: local('Minimal-Regular'), url(./assets/font/Minimal-Regular.ttf) format('truetype');
+}
+/* Motorway.ttf */
+@font-face {
+  font-family: 'Motorway';
+  src: local('Motorway'), url(./assets/font/Motorway.ttf) format('truetype');
+}
