@@ -13,6 +13,21 @@ code {
 }
 
 @font-face {
-  font-family: 'supermarket';
-  src: local('supermarket'), url(./assets/font/supermarket.ttf) format('truetype');
+  font-family: 'IconicText';
+  src: local('IconicText'), url(./assets/font/IconicText.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CSChatThai';
+  src: local('CSChatThai'), url(./assets/font/CSChatThai.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Kanit-Light';
+  src: local('Kanit-Light'), url(./assets/font/Kanit-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Kanit-Regular';
+  src: local('Kanit-Regular'), url(./assets/font/Kanit-Regular.ttf) format('truetype');
 }

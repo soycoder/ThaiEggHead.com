@@ -56,7 +56,7 @@ export const SIZES = {
 };
 export const FONTS = {
     largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle},
-    h1: { fontFamily: "supermarket", fontSize: SIZES.h1  },
+    h1: { fontFamily: "IconicText", fontSize: SIZES.h1  },
     h2: { fontFamily: "supermarket", fontSize: SIZES.h2 },
     h3: { fontFamily: "supermarket", fontSize: SIZES.h3 },
     h4: { fontFamily: "supermarket", fontSize: SIZES.h4 },

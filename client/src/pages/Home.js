@@ -36,7 +36,6 @@ function Home({ isAuthenticated }) {
     user = decoded;
   }
 
-  // Net เพิ่มส่วน ป๊อบอัพกรอกข้อมูล
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -121,21 +120,6 @@ function Home({ isAuthenticated }) {
   ];
 
   useEffect(() => {
-    // setUser(JSON.parse(localStorage.getItem("profile")));
-    // if (user) {
-    //   fetch(`http://localhost:5000/users/google/${user.result.googleId}`)
-    //     .then((res) => res.json())
-    //     .then((res) => {
-    //       let _user = user;
-    //       let _result = _user.result;
-
-    //       _result["userID"] = res.userID;
-    //       _user["result"] = _result;
-    //       //   console.log(_user);
-    //       setUser("User " + _user);
-    //     });
-    // }
-
     fetch("http://localhost:5000/forums")
       .then((res) => res.json())
       .then((res) => setdatas(res));
