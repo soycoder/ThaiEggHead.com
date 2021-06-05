@@ -242,14 +242,16 @@ function ForumCard(props) {
                     <>
                       {objImage.map(item => {
                         return (
-                          <div>
+                          <>
                           <Image
                             src={"http://localhost:5000/" + item.path}
                             fluid
                             className="forum-img"
                           />
-                          <br />
+                          <div>
+                            <br />
                           </div>
+                          </>
                         )
                       })}
                     </>
