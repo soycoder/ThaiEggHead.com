@@ -13,6 +13,7 @@ import {
 import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
 import React, { useState, useEffect, useContext } from "react";
+import { Icon } from "@blueprintjs/core";
 
 import CreateForumCard from "../components/CreateForumCard";
 import ForumCard from "../components/ForumCard";
@@ -213,6 +214,7 @@ function Home({ isAuthenticated }) {
           <Button variant="primary" className="btn-learnmore">
             Learn more
           </Button>
+          <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
         </Card.Body>
       </Card>
     );

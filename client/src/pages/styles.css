@@ -230,3 +230,22 @@
     color: gray;
     text-decoration: none;
 }
+
+.btn-close2 {
+  background-color: transparent;
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  left: 96%;
+  top: 15px;
+}
+
+.btn-closestyle {
+  background-color: transparent;
+  color: gray;
+  border: hidden;
+}
+
+.btn-closestyle:hover{
+  background-color: rgb(76, 80, 92);
+}
