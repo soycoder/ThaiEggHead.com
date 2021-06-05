@@ -1,4 +1,5 @@
 import logo from "./../assets/images/egghead-logo.png";
+import logo_event from "./../assets/images/egghead-event.png";
 import bg from "./../assets/images/bg2.jpg";
 import bi from "./../assets/images/binary.jpg";
 import pic_cover from "./../assets/images/example-cover.jfif"
@@ -41,5 +42,6 @@ export default {
     pro_1,
     pro_2,
     pro_3,
-    bina
+    bina,
+    logo_event
 }

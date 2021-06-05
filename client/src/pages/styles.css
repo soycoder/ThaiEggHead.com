@@ -256,3 +256,7 @@
 .btn-closestyle:hover{
   background-color: rgb(76, 80, 92);
 }
+
+.subject-img{
+  border-radius: 30% !important;
+}

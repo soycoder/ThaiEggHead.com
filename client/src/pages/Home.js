@@ -9,6 +9,7 @@ import {
   Form,
   Modal,
   Button,
+  Image
 } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
@@ -203,9 +204,9 @@ function Home({ isAuthenticated }) {
           <Button className="btn-subjectnav" variant="light" block>
             <img
               src={subject.img}
-              height="23"
-              width="23"
-              className="app-cycle"
+              height="30"
+              width="30"
+              className="subject-img"
               style={{ marginRight: 5 }}
             />
             {subject.subjectName}
@@ -269,13 +270,14 @@ function Home({ isAuthenticated }) {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <Card.Text className="card-title">
-            ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2021"
+            ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
           <Card.Text className="card-subtitle">สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
           <Button variant="primary" className="btn-learnmore">
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
+          
         </Card.Body>
       </Card>
     );
