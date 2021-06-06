@@ -15,6 +15,8 @@
 }
 
 .navbar {
+  z-index: 1;
+  position: relative;
   box-shadow: 0 6px 8px 0 rgba(238, 255, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -351,5 +353,65 @@ a:hover {
   align-items: center;
 }
 
+/* Shadow Play */
+@keyframes mymove {
+  50% {box-shadow: 10px 20px 30px blue;}
+}
+
+#myDIV {
+  z-index: 1;
+  position: relative;
+  background-color: coral;
+  color: white;
+  animation: mymove 5s infinite;
+}
+
+:root {
+	--gradient-shadow: linear-gradient(
+		45deg,
+		#ffffff,
+		#fffde4,
+		#ffffca,
+		#fbffc1,
+		#ffeb77,
+		#fff126,
+		#fff67d,
+		#fdffa0,
+		#ffffe1,
+		#ffffff
+	);
+}
+
+.shadow {
+  z-index: 1;
+  position: relative;
+}
+.shadow:before,
+.shadow:after {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	background: var(--gradient-shadow);
+	background-size: 400%;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	z-index: -1;
+	animation: animate 20s linear infinite;
+}
+
+.shadow:after {
+	filter: blur(20px);
+}
+
+@keyframes animate {
+	0% {
+		background-position: 0 0;
+	}
+	50% {
+		background-position: 300% 0;
+	}
+
+}
 
 

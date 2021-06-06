@@ -285,7 +285,7 @@ function Home({ isAuthenticated }) {
 
   const AnouncingCard = () => {
     return (
-      <Card style={{ marginBottom: 10 }}>
+      <Card style={{ marginBottom: 10 }} className="shadow">
         <Card.Body>
           <Card.Text className="card-title" style={theme.FONTS.home2}>
             ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
