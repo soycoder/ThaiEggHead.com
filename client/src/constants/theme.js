@@ -89,15 +89,20 @@ export const FONTS = {
 
     nav: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
 
-    name: { fontFamily: "Krub-Regular", fontSize: SIZES.body3 },
-    time: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
-    score: { fontFamily: "Krub-Regular", fontSize: SIZES.body3 },
+    name: { fontFamily: "supermarket", fontSize: SIZES.body3 },
+    time: { fontFamily: "supermarket", fontSize: SIZES.body5 },
+    score: { fontFamily: "supermarket", fontSize: SIZES.body3 },
+    profile: { fontFamily: "supermarket", fontSize: SIZES.body1 },
+    detail: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    detail1: { fontFamily: "supermarket", fontSize: SIZES.body3 },
 
-    title: { fontFamily: "Krub-Regular", fontSize: SIZES.h1 },
-    title1: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
-    title2: { fontFamily: "Krub-Regular", fontSize: SIZES.h4 },
-    body: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
-    tag: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
+    title: { fontFamily: "supermarket", fontSize: SIZES.h2 },
+    title1: { fontFamily: "supermarket", fontSize: SIZES.h3 },
+    title2: { fontFamily: "supermarket", fontSize: SIZES.h4 },
+    post: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    tag: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    tag1: { fontFamily: "supermarket", fontSize: SIZES.body5 },
+
     subject: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
     post: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
 };

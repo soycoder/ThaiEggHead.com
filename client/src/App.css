@@ -236,4 +236,7 @@ p #body-forum-text{
   font-family: 'Motorway';
 }
 
-
+#body-forum-text{
+  font-size: 16px;
+  font-family: 'supermarket';
+}

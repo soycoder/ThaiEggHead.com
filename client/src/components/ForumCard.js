@@ -17,8 +17,8 @@ import React, { useState, useEffect } from "react";
 import { images } from "../constants";
 import { Link } from "react-router-dom";
 import { theme } from "../constants";
-
-var parse = require('html-react-parser');
+import ReactHtmlParser from 'react-html-parser'
+import Moment from "react-moment";
 
 function ForumCard(props) {
   let forum = props.data;
@@ -62,8 +62,7 @@ function ForumCard(props) {
       } else {
         var post = forum.postText;
       }
-    }
-    else {
+    } else {
       post = forum.postText;
     }
     useEffect(() => {
@@ -113,7 +112,7 @@ function ForumCard(props) {
 
     const ButtomOption = () => {
       return (
-        <div style={{ marginLeft: 10, marginBottom: 5 }}>
+        <div style={{ marginLeft: 10, marginBottom: 5 }} >
           <UpvoteBotton upvote={10} />
 
           {/* Comment Btn */}
@@ -144,11 +143,11 @@ function ForumCard(props) {
           >
             <Icon icon="more" />
           </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Report</Dropdown.Item>
-            <Dropdown.Item href="#/action-1">Block</Dropdown.Item>
+          <Dropdown.Menu style={theme.FONTS.tag}>
+            <Dropdown.Item href="#/action-1" style={theme.FONTS.tag}>Report</Dropdown.Item>
+            <Dropdown.Item href="#/action-1" style={theme.FONTS.tag}>Block</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item href="#/action-2">Bookmark</Dropdown.Item>
+            <Dropdown.Item href="#/action-2" style={theme.FONTS.tag}>Bookmark</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       );
@@ -166,15 +165,30 @@ function ForumCard(props) {
               <i class="fa fa-chevron-down"></i>
             </div>
             <Link to={`/profile/${user.userID}`}>
-              <img class="co-logo" src={user.imgURL ? user.imgURL : images.pic_profile} />
+              <img
+                class="co-logo"
+                src={user.imgURL ? user.imgURL : images.pic_profile}
+              />
             </Link>
             <div class="co-name">
               <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
               </Link>
             </div>
-            <div class="time">
-              <div class="noselect" style={theme.FONTS.time}>{forum.createdAt}</div> · <i class="fa fa-globe"></i>
+            <div class="time noselect" style={theme.FONTS.time}>
+              <div>
+                <Moment
+                  element="span"
+                  data={forum.createdAt}
+                  locale="th"
+                  format="DD/MM/YYYY"
+                />
+                {" "}·{" "}
+                <Moment fromNow locale="th">
+                  {forum.createdAt}
+                </Moment>
+              </div>
+              {/* <i class="fa fa-globe"></i> */}
             </div>
             <div className="btn-more">
               <MoreButton />
@@ -182,8 +196,11 @@ function ForumCard(props) {
           </div>
           <div class="content">
             {/* <Card.Title>{forum.title}</Card.Title> */}
-            <Link to={`question/${forum.forumID}`} style={{ textDecoration: "black" }}>
-              <Card.Title style={theme.FONTS.bodyTitle}>{forum.title}</Card.Title>
+            <Link
+              to={`question/${forum.forumID}`}
+              style={{ textDecoration: "black" }}
+            >
+              <Card.Title style={theme.FONTS.title}>{forum.title}</Card.Title>
             </Link>
 
             <div style={{ marginBottom: 5 }}>
@@ -194,10 +211,10 @@ function ForumCard(props) {
                       __html: `<div style={{color:'blue'}}>${forum.postText}</div>`,
                     }}
                     id="body-forum-text" /> */}
-                    {parse('<div>{forum.postText}</div>')}
+                    {/* {parse('<div style={{color:'blue'}}>{forum.postText}</div>')} */}
+                    {/* <div style={theme.FONTS.post}>{ReactHtmlParser(this.state.myContent)}</div> */}
 
                   {!props.isReadLong ? (
-
                     <Button
                       className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
                       onClick={() => handleClickViewMore()}
@@ -210,18 +227,22 @@ function ForumCard(props) {
                   ) : (
                     <></>
                   )}
-
                 </>
               ) : (
                 <>
                   {!props.isReadLong ? (
-                    <div id="body-forum-text" onClick={() => handleClickViewMore()} dangerouslySetInnerHTML={{ __html: post }} />
+                    <div
+                      id="body-forum-text"
+                      onClick={() => handleClickViewMore()}
+                      dangerouslySetInnerHTML={{ __html: post }}
+                    />
                   ) : (
                     <div
                       dangerouslySetInnerHTML={{
                         __html: forum.postText,
                       }}
-                      id="body-forum-text" />
+                      id="body-forum-text"
+                    />
                   )}
                 </>
               )}

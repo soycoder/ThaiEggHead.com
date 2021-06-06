@@ -147,8 +147,8 @@ const Profile = ({ isAuthenticated }) => {
         <div class="bp3-non-ideal-state-visual">
           <span class="bp3-icon bp3-icon-folder-open"></span>
         </div>
-        <h4 class="bp3-heading">Empty</h4>
-        <div>You haven't answered any questions yet.</div>
+        <h4 class="bp3-heading" style={theme.FONTS.detail}>Empty</h4>
+        <div style={theme.FONTS.detail}>You haven't answered any questions yet.</div>
       </div>
     );
   };
@@ -224,7 +224,7 @@ const Profile = ({ isAuthenticated }) => {
         </Col>
         <Col md={6}>
           <div class="profile-head">
-            <h3 style={theme.FONTS.h1}>{userData.firstName + " " + userData.lastName}</h3>
+            <h3 style={theme.FONTS.profile}>{userData.firstName + " " + userData.lastName}</h3>
             {/* <h5>{userName}</h5> */}
             <p class="proile-rating" style={theme.FONTS.score}>
               EggHead Score : <span style={theme.FONTS.score}>{eggHeadScore}</span>
@@ -234,7 +234,7 @@ const Profile = ({ isAuthenticated }) => {
           </div>
         </Col>
         {user.userID === id ? (
-          <Col md={2} style={theme.FONTS.body3}>
+          <Col md={2} style={theme.FONTS.detail}>
             <input
               type="submit"
               class="profile-edit-btn"
@@ -271,7 +271,7 @@ const Profile = ({ isAuthenticated }) => {
           return (
             <Card className="app-padding" style={{ marginBottom: 5 }}>
               <Link to={`/question/${item.forumID}`}>
-                <Card.Subtitle>📌{" " + item.title}</Card.Subtitle>
+                <Card.Subtitle  style={theme.FONTS.detail1}>📌{" " + item.title}</Card.Subtitle>
               </Link>
               <ListTag data={item} />
             </Card>
@@ -313,45 +313,45 @@ const Profile = ({ isAuthenticated }) => {
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <Row class="row" style={theme.FONTS.body4}>
+          <Row class="row">
             <Col md={6}>
-              <label>Email</label>
+              <label style={theme.FONTS.detail}>Email</label>
             </Col>
             <Col md={6}>
-              <p>{userData.email}</p>
-            </Col>
-          </Row>
-          <Row class="row" style={theme.FONTS.body4}>
-            <Col md={6}>
-              <label>Name</label>
-            </Col>
-            <Col md={6}>
-              <p>{userData.firstName + " " + userData.lastName}</p>
+              <p style={theme.FONTS.detail}>{userData.email}</p>
             </Col>
           </Row>
-          <Row class="row" style={theme.FONTS.body4}>
+          <Row class="row">
             <Col md={6}>
-              <label>Phone Number</label>
+              <label style={theme.FONTS.detail}>Name</label>
             </Col>
             <Col md={6}>
-              <p>{phone}</p>
-            </Col>
-          </Row>
-          <Row class="row" style={theme.FONTS.body4}>
-            <Col md={6}>
-              <label>Organization</label>
-            </Col>
-            <Col md={6}>
-              <p>{organization}</p>
+              <p style={theme.FONTS.detail}>{userData.firstName + " " + userData.lastName}</p>
             </Col>
           </Row>
-          <Row class="row" style={theme.FONTS.body4}>
+          <Row class="row">
+            <Col md={6}>
+              <label style={theme.FONTS.detail}>Phone Number</label>
+            </Col>
+            <Col md={6}>
+              <p style={theme.FONTS.detail}>{phone}</p>
+            </Col>
+          </Row>
+          <Row class="row">
+            <Col md={6}>
+              <label style={theme.FONTS.detail}>Organization</label>
+            </Col>
+            <Col md={6}>
+              <p  style={theme.FONTS.detail}>{organization}</p>
+            </Col>
+          </Row>
+          <Row class="row">
             <Col md={11}>
               <br />
-              <label>Education</label>
+              <label style={theme.FONTS.detail}>Education</label>
             </Col>
             {education.map((item) => (
-              <EducationCard data={item} />
+              <EducationCard data={item} style={theme.FONTS.detail} />
             ))}
           </Row>
         </div>

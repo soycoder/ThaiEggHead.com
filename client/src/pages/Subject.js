@@ -257,7 +257,7 @@ function Sub() {
           <Col md={2}>
             {/* <AboutSubjectCard/> */}
             <Card style={theme.FONTS.filter}>
-              <Card.Header>Custom Filter</Card.Header>
+              <Card.Header>Filter</Card.Header>
               <Card.Body>
                 <div >
                   <Select isMulti options={optionTag} onChange={handle}></Select>
