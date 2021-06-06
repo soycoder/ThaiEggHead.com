@@ -18,6 +18,10 @@
   box-shadow: 0 6px 8px 0 rgba(238, 255, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.navbar-brand{
+  margin-left:8.3333% !important;
+}
+
 body {
   background-color: #e9ebee;
 }
