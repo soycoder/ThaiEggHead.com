@@ -72,6 +72,7 @@ export const FONTS = {
     body2: { fontFamily: "supermarket", fontSize: SIZES.body2 },
     body3: { fontFamily: "supermarket", fontSize: SIZES.body3 },
     body4: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    bodyุ5: { fontFamily: "supermarket", fontSize: SIZES.body5 },
 
     bodyTitle: { fontFamily: "supermarket", fontSize: SIZES.body1 },
     bodyPost: { fontFamily: "supermarket", fontSize: SIZES.body3 },

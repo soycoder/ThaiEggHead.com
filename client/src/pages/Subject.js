@@ -148,10 +148,9 @@ function Sub({isAuthenticated}) {
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar
+            <img
               className="subject-img"
-              size="100"
-              round={false}
+              src={images.subj_1}
               style={{ marginRight: 20 }}
             />
             <div style={{ marginLeft: 20 }}>
@@ -204,7 +203,7 @@ function Sub({isAuthenticated}) {
       <Card>
         <Card.Header>
           <div style={theme.FONTS.filter}>
-          Watched Tags  <Card.Link href="#">Edit</Card.Link>
+          Tags ทั้งหมด
           </div>
         </Card.Header>
         <Card.Body>
@@ -292,7 +291,7 @@ function Sub({isAuthenticated}) {
           <Col md={2}>
             {/* <AboutSubjectCard/> */}
             <Card >
-              <Card.Header style={theme.FONTS.filter}>Filter</Card.Header>
+              <Card.Header style={theme.FONTS.filter}>คัดกรอง Tags</Card.Header>
               <Card.Body>
                 <div>
                   <Select

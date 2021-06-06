@@ -225,7 +225,7 @@ function Home({ isAuthenticated }) {
       return (
         <Card style={{ marginBottom: 10, padding: 15 }}>
           <Card.Subtitle className="card-username">
-            <NavLink to={`/profile/${user.userID}`}>
+            <NavLink className="question-card-username" to={`/profile/${user.userID}`}>
               {/* <img
                 class="user-image-small"
                 src={user.imgURL ? user.imgURL : images.pic_profile}
@@ -239,7 +239,7 @@ function Home({ isAuthenticated }) {
                   round={true}
                 />
               )}
-              <div class="user-name-small" style={theme.FONTS.name}>
+              <div class="user-name-small ms-1" style={{fontFamily: "supermarket", fontSize: 14, lineHeight:1.4, color:"gray"}}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
               </div>
             </NavLink>
@@ -297,8 +297,8 @@ function Home({ isAuthenticated }) {
           <br/>
           <img
               src={images.logo_event}
-              height="130"
-              width="130"
+              height="100"
+              width="100"
               className="event-img"
             />
         </Card.Body>
@@ -339,9 +339,9 @@ function Home({ isAuthenticated }) {
         <br />
         <Container fluid="xl">
           <Row xs={1} md={3}>
-            <Col md="auto">
-              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.home3}>
-                พื้นที่ความรู้
+            <Col md="auto" className="justify-content-md-center">
+              <h5 style={{fontFamily: "Krub-Regular", fontSize: 17, textAlign:"center",fontWeight: "bold"}}>
+                สาขาวิชา
               </h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>

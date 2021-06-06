@@ -101,23 +101,21 @@ const NavigationBar = ({ isAuthenticated }) => {
   const NavUser = () => {
     return (
       <Navbar.Collapse
-        className="justify-content-end"
-        style={{ marginRight: 250 }}
+        className="justify-content-end navbar-user"
       >
         <div class="bp3-input-group searchbar">
           <span class="bp3-icon bp3-icon-search"></span>
           <input type="text" class="bp3-input" placeholder="Search" />
           <button class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"></button>
         </div>
-        <NavLink to="/create/forum">
+        <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: SIZES.h4}}>
           <Button
             className="ms-3"
             variant="contained"
             color="secondary"
             size="mediem"
-            style={theme.FONTS.body5}
           >
-            Ask Question
+            ตั้งคำถาม
           </Button>
         </NavLink>
         <ProfileOption user={user} auth={auth} />

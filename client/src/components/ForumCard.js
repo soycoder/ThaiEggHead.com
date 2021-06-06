@@ -192,26 +192,29 @@ function ForumCard(props) {
                 />
               )}
             </Link>
-            <div class="co-name">
-              <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
-                {user.firstName ? user.firstName + " " + user.lastName : ""}
-              </Link>
-            </div>
-            <div class="time noselect" style={theme.FONTS.time}>
-              <div>
-                <Moment
-                  element="span"
-                  data={forum.createdAt}
-                  locale="th"
-                  format="DD/MM/YYYY"
-                />{" "}
-                ·{" "}
-                <Moment fromNow locale="th">
-                  {forum.createdAt}
-                </Moment>
+            <div className="ms-1">
+              <div class="co-name">
+                <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
+                  {user.firstName ? user.firstName + " " + user.lastName : ""}
+                </Link>
               </div>
-              {/* <i class="fa fa-globe"></i> */}
+              <div class="time noselect" style={theme.FONTS.time}>
+                <div>
+                  <Moment
+                    element="span"
+                    data={forum.createdAt}
+                    locale="th"
+                    format="DD/MM/YYYY"
+                  />{" "}
+                  ·{" "}
+                  <Moment fromNow locale="th">
+                    {forum.createdAt}
+                  </Moment>
+                </div>
+                {/* <i class="fa fa-globe"></i> */}
+              </div>
             </div>
+            
             <div className="btn-more">
               <MoreButton />
             </div>

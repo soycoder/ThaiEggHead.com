@@ -22,11 +22,17 @@
   margin-left:8.3333% !important;
 }
 
+.navbar-user{
+  margin-right:8.3333% !important;
+}
+
 body {
   background-color: #e9ebee;
 }
 
 .header {
+  display: flex;
+  flex-wrap: wrap;
   margin: 15px;
   margin-bottom:5px;
 }
@@ -288,8 +294,14 @@ a:hover {
 }
 
 .searchbar {
-  width: 30%;
-  justify-self: center;
+  width: 100%;
+  max-width: 400px;
+  min-width: 200px;
+  margin-right: 20px;
+}
+
+.question-card-username{
+  
 }
 
 .best-answer{
