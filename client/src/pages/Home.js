@@ -4,7 +4,6 @@ import {
   Row,
   Col,
   Container,
-  ListGroup,
   Card,
   Form,
   Modal,
@@ -159,11 +158,9 @@ function Home({ isAuthenticated }) {
     tagData();
   }
 
-  const count = {};
-  arrayTag.forEach(function (i) {
-    count[i] = (count[i] || 0) + 1;
-  });
-  console.log(count);
+  const count = {}
+  arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
+  // console.log(count);
 
   var key = [];
   var sumTag = [];
@@ -186,7 +183,7 @@ function Home({ isAuthenticated }) {
         if (nn != 0) {
           tag = value[i];
         }
-        console.log(tag);
+        // console.log(tag);
         if (ele.listTag[j] === tag) {
           return ele.listTag;
         } else if (tag === "") {
@@ -296,16 +293,14 @@ function Home({ isAuthenticated }) {
           >
             ดูข้อมูลเพิ่มเติม
           </Button>
-          <Button
-            className="btn-close btn-close2"
-            onClick={() => setIsShowAnounce(!isShowAnounce)}
-          ></Button>
-          {/* <img
+          <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
+          <br/>
+          <img
               src={images.logo_event}
               height="130"
               width="130"
               className="event-img"
-            /> */}
+            />
         </Card.Body>
       </Card>
     );
@@ -339,7 +334,7 @@ function Home({ isAuthenticated }) {
 
   return (
     <div>
-      <body style={{ backgroundColor: "#F3F3F3" }}>
+      <body style={{ backgroundColor: "#F3F3F3", minHeight:200 }} >
         <br />
         <br />
         <Container fluid="xl">
@@ -355,6 +350,29 @@ function Home({ isAuthenticated }) {
               {isShowAnounce ? <AnouncingCard /> : <></>}
 
               <UserQuestionCard />
+                          
+              {newArray.map((forum) => {
+                if(newArray.length!=0){
+                  console.log(newArray.length);
+                  return(<ForumCard data={forum}></ForumCard>)
+                }
+                  
+                else{
+                  console.log("qsdqsd");
+                  return(
+                    <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
+                      <div class="bp3-non-ideal-state-visual">
+                        <span class="bp3-icon bp3-icon-folder-open"></span>
+                      </div>
+                      <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
+                      <div>สร้างคำถามเองเลยสิ</div>
+                      <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
+                    </div>
+                  )
+                }
+                  
+              
+              })}
 
               {newArray.map((forum) => (
                 <ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>
@@ -376,9 +394,9 @@ function Home({ isAuthenticated }) {
               </Card>
               <br />
               <Card>
-                <Card.Header className="card-header" style={theme.FONTS.tag}>
-                  Tags ทั้งหมด
-                </Card.Header>
+                <Card.Header className="card-header" style={theme.FONTS.filter}>
+                  Tags ทั้งหมด 
+                </Card.Header>  
                 <Card.Body style={theme.FONTS.tag}>
                   <div>
                     {key.map((item) => {
