@@ -1,15 +1,12 @@
 import "../App.css";
-import { images, FONTS } from "../constants";
+import { images } from "../constants";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Row,
   Col,
   Card,
   Container,
-  ListGroup,
   Button,
-  Tooltip,
-  OverlayTrigger,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
@@ -238,7 +235,7 @@ function Sub({isAuthenticated}) {
         <Row className="justify-content-md-center">
           <Col md={3}>
             <Card className="fontETC">
-              <Card.Header className="fontETC" style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
+              <Card.Header className="fontETC" style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529", fontWeight: "bold" }}>Best Egg Head</Card.Header>
               <Card.Body>
                 <div className="fontETC">
                   <LeaderBoard />
@@ -264,7 +261,7 @@ function Sub({isAuthenticated}) {
             ))}
           </Col>
 
-          <Col md={2}>
+          <Col md={3} style={{paddingRight:40}}>
             {/* <AboutSubjectCard/> */}
             <Card >
               <Card.Header style={theme.FONTS.filter}>คัดกรอง Tags</Card.Header>

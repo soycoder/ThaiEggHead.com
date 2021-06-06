@@ -96,36 +96,53 @@ function ForumCard(props) {
       );
     };
 
-    const ListSubjectTag = (props) => {
-      const list = props.data;
-      const subjectTag = list.map((subject) => (
-        <Badge bg="primary" style={{ marginLeft: 4 }}>
-          {subject}
-        </Badge>
-      ));
-      return (
-        <div className="tag" style={theme.FONTS.tag}>
-          {subjectTag}
-        </div>
-      );
-    };
+  const ListSubjectTag = (props) => {
+    const list = props.data;
+    const subjectTag = list.map((subject) => (
+      <Button2 variant="secondary" id="question-subject-tag">
+         {subject}
+      </Button2>
+    ));
+    return <div className="tag" style={theme.FONTS.tag}>{subjectTag}</div>;
+  };
 
-    const ListTag = (props) => {
-      const list = props.data;
-      const subjectTag = list.map(
-        (subject) => (
-          <Badge bg="info" style={{ marginLeft: 4 }}>
-            {subject}
-          </Badge>
-        )
-        // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
-      );
-      return (
-        <div className="tag" style={theme.FONTS.subject}>
-          {subjectTag}
-        </div>
-      );
-    };
+  const ListTag = (props) => {
+    const list = props.data;
+    const subjectTag = list.map((subject) => (
+        <Button2 variant="secondary" id="question-tag">
+          {subject}
+        </Button2>
+      )
+      // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
+    );
+    return <div className="tag" style={theme.FONTS.tag}>{subjectTag}</div>;
+  };
+
+    // const ListSubjectTag = (props) => {
+    //   const list = props.data;
+    //   const subjectTag = list.map((subject) => (
+    //     <Badge bg="primary" style={{ marginLeft: 4 }}>
+    //       {subject}
+    //     </Badge>
+    //   ));
+    //   return (
+    //     <div className="tag" style={theme.FONTS.tag}>
+    //       {subjectTag}
+    //     </div>
+    //   );
+    // };
+
+    // const ListTag = (props) => {
+    //   const list = props.data;
+    //   const subjectTag = list.map((subject) => (
+    //     <Badge bg="warning" style={{ marginLeft: 4 }}>
+    //       {subject}
+    //     </Badge>
+    //     )
+    //     // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
+    //   );
+    //   return <div className="tag" style={theme.FONTS.subject}>{subjectTag}</div>;
+    // };
 
     const ButtomOption = () => {
       return (
@@ -425,17 +442,20 @@ function ForumCard(props) {
             <i class="fa fa-chevron-down"></i>
           </div>
           <img class="co-logo-comment" src={userAnswer[1].img} />
-          <div class="co-name">
-            <a href="#" style={theme.FONTS.body3}>
-              {userAnswer[1].displayName}
-            </a>
+          <div>
+            <div class="co-name">
+              <a href="#" style={theme.FONTS.body3}>
+                {userAnswer[1].displayName}
+              </a>
+            </div>
+            <div class="time">
+              <a href="#" style={theme.FONTS.body5}>
+                {userAnswer[1].date}
+              </a>{" "}
+              · <i class="fa fa-globe"></i>
+            </div>
           </div>
-          <div class="time">
-            <a href="#" style={theme.FONTS.body5}>
-              {userAnswer[1].date}
-            </a>{" "}
-            · <i class="fa fa-globe"></i>
-          </div>
+          
           <div className="btn-more"></div>
         </div>
       );
@@ -448,17 +468,20 @@ function ForumCard(props) {
             <i class="fa fa-chevron-down"></i>
           </div>
           <img class="co-logo" src={userAnswer[0].img} />
-          <div class="co-name">
-            <a href="#" style={theme.FONTS.name}>
-              {userAnswer[0].displayName}
-            </a>
+          <div>
+            <div class="co-name">
+              <a href="#" style={theme.FONTS.name}>
+                {userAnswer[0].displayName}
+              </a>
+            </div>
+            <div class="time">
+              <a href="#" style={theme.FONTS.time}>
+                {userAnswer[0].date}
+              </a>{" "}
+              · <i class="fa fa-globe"></i>
+            </div>
           </div>
-          <div class="time">
-            <a href="#" style={theme.FONTS.time}>
-              {userAnswer[0].date}
-            </a>{" "}
-            · <i class="fa fa-globe"></i>
-          </div>
+          
           <div class="best-answer">
             <Icon icon="pin" /> Best Answer
           </div>
@@ -565,6 +588,7 @@ function ForumCard(props) {
   return (
     <div style={{ marginBottom: 10 }}>
       <Card className="main-card">
+        
         <Question />
         {isShowComment ? <Answer isAuthenticated={props.isAuthenticated}/> : <></>}
       </Card>
