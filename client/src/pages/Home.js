@@ -315,7 +315,7 @@ function Home({ isAuthenticated }) {
 
   const RelateQuestion = () => {
     return (
-      <Card style={{}}>
+      <Card style={theme.FONTS.filter}>
         <Card.Header>คำถามมาแรง 🔥</Card.Header>
         <Card.Body>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -386,9 +386,9 @@ function Home({ isAuthenticated }) {
               ))}
             </Col>
 
-            <Col md={2}>
-              <Card style={{ minWidth: "13rem" }} style={theme.FONTS.filter}>
-                <Card.Header>Filter</Card.Header>
+            <Col md={3} style={{paddingRight:50}}>
+              <Card style={theme.FONTS.filter}>
+                <Card.Header>คัดกรอง Tags</Card.Header>
                 <Card.Body>
                   <div>
                   <Select isMulti options={tags} onChange={handle}></Select>

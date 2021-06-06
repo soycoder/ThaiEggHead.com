@@ -7,7 +7,7 @@ export default function WithoutInfo() {
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
-        label: 'ระดับ',
+        label: 'อันดับที่',
         field: 'rank',
         sort: 'disabled',
       },
@@ -40,19 +40,25 @@ export default function WithoutInfo() {
     // for (let i = 0; i < datatable.length; i++) {
     //   formData.append("files", multipleFiles[i]);
     // }
-    console.log(datatable)
+    // console.log(datatable)
   }
 
-  return <MDBDataTableV5 
-    theme={"dark"}
-    data={datatable}
-    hover
-    entries={Top}
-    // entriesOptions={[5,10]}
-    pagesAmount={4}
-    info={false}
-    striped
-    bordered
-    // paging={false}
-  />;
+  return (
+  <>
+    <MDBDataTableV5 
+      theme={"dark"}
+      data={datatable}
+      hover
+      entries={Top}
+      // entriesOptions={[5,10]}
+      pagesAmount={4}
+      info={false}
+      striped
+      bordered
+      // paging={false}
+    />
+  </>
+  
+  )
+  
 }
