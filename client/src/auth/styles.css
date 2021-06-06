@@ -1,0 +1,10 @@
+.text-switch{
+    color: black;
+    font-family: "supermarket";
+    font-size: 14px;
+}
+
+.text-switch:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

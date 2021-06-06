@@ -11,7 +11,6 @@ import { useDencrypt } from "use-dencrypt-effect";
 import { FONTS, SIZES } from "../constants/theme";
 import { Icon, Card, Elevation } from "@blueprintjs/core";
 import useStyles from "./styles";
-// import Input from "./Input";
 
 import { Player } from "@lottiefiles/react-lottie-player";
 
@@ -22,21 +21,22 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 import { theme } from "../constants";
+import "./styles.css";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Enter a valid email")
-    .required("Email is required"),
+    .email("Please enter a valid email address.")
+    .required("Email is required."),
   password: Yup.string()
-    .min(8, "Password must contain at least 8 characters")
-    .required("Enter your password"),
+    .min(8, "Password must contain at least 8 characters.")
+    .required("Enter your password."),
 });
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
+  firstName: Yup.string().required("First name is required."),
+  lastName: Yup.string().required("Last name is required."),
+  email: Yup.string().email("*Invalid email.").required("Email is required."),
+  password: Yup.string().required("Password is required."),
 });
 
 //
@@ -64,14 +64,19 @@ const TextEffect = () => {
     return () => clearInterval(action);
   }, []);
 
-  return <p style={FONTS.largeTitle}>"{result}" </p>;
+  return <p style={{position: "absolute", fontSize:40, fontFamily: "supermarket"}}>"{result}" </p>;
 };
 
 const WelcomeAds = () => {
   return (
     <Container>
-      <p style={FONTS.body1}>ร่วมเป็นส่วนหนึ่งของ</p>
-      <TextEffect></TextEffect>
+      <div >
+        <p style={FONTS.body1}>ร่วมเป็นส่วนหนึ่งของ</p>
+        <TextEffect></TextEffect>
+        <br/>
+        <br/>
+      </div>
+      
       <div style={{ margin: 30 }}>
         <Icon
           icon="chat"
@@ -85,7 +90,7 @@ const WelcomeAds = () => {
           iconSize="20"
           style={{ float: "left", marginRight: 10, margin: 7 }}
         ></Icon>
-        <p style={FONTS.body2}>สะสมคะแนน และเลื่อนยศ</p>
+        <p style={FONTS.body2}>สะสมคะแนน ขิงเพื่อน</p>
 
         <Icon
           icon="inbox-search"
@@ -155,7 +160,7 @@ const Signin = (props) => {
               <br />
               {/* <label>Email</label> */}
 
-              <div className="form-floating mt-3 mb-3 col-12">
+              <div className="form-floating mt-3 col-12">
                 <input
                   type="email"
                   className="form-control"
@@ -167,29 +172,29 @@ const Signin = (props) => {
                   autoFocus
                   style={FONTS.body3}
                 />
-                <label for="floatingInput" style={FONTS.body3}>Email address</label>
+                <label for="floatingInput" style={theme.FONTS.login}>Email address</label>
               </div>
 
               {/*errors.email && touched.email && errors.email */}
-              <div className="col-12 mb-3 col-12">
+              <div className="col-12 mb-3 col-12" style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
                 <ErrorMessage name="email" />
               </div>
 
-              <div className="form-floating mb-2 col-12">
+              <div className="form-floating col-12">
                 <input
                   type="password"
                   className="form-control"
                   id="floatingPassword"
-                  placeholder="Password"
                   name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
+                  style={FONTS.body3}
                 />
-                <label for="floatingPassword">Password</label>
+                <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
               </div>
 
-              <div className="col-12 mb-3 col-12" style={FONTS.body3}>
+              <div className="col-12 mb-3 col-12" style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
                 {errors.password && touched.password && errors.password}
               </div>
             </Grid>
@@ -287,23 +292,24 @@ const Register = (props) => {
                 {/* <input type="hidden" name="remember" value="true" /> */}
                 <br />
 
-                <div className="form-floating mt-3 mb-2 col-12">
+                <div className="form-floating mt-3 col-12" style={{fontFamily: "supermarket"}}>
                   <input
                     type="firstName"
                     name="firstName"
+                    id="floatingInput"
                     className="form-control"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.firstName}
                   />
-                  <label for="floatingInput">First Name</label>
+                  <label for="floatingInput" style={theme.FONTS.login}>First Name</label>
                 </div>
 
-                <div className="col-12 mb-3 ">
-                  <ErrorMessage name="firstName" />
+                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+                  <ErrorMessage name="firstName"/>
                 </div>
 
-                <div className="form-floating mb-2 col-12">
+                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
                   <input
                     className="form-control"
                     id="floatingInput"
@@ -313,14 +319,14 @@ const Register = (props) => {
                     onBlur={handleBlur}
                     value={values.lastName}
                   />
-                  <label for="floatingInput">Last Name</label>
+                  <label for="floatingInput" style={theme.FONTS.login}>Last Name</label>
                 </div>
 
-                <div className="col-12 mb-3 ">
+                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
                   <ErrorMessage name="lastName" />
                 </div>
 
-                <div className="form-floating mb-2 col-12">
+                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
                   <input
                     type="email"
                     className="form-control"
@@ -335,16 +341,15 @@ const Register = (props) => {
                 </div>
 
                 {/*errors.email && touched.email && errors.email */}
-                <div className="col-12 mb-3 ">
+                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
                   <ErrorMessage name="email" />
                 </div>
 
-                <div className="form-floating mb-2 col-12">
+                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
                   <input
                     type="password"
                     className="form-control"
                     id="floatingPassword"
-                    placeholder="Password"
                     name="password"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -353,7 +358,7 @@ const Register = (props) => {
                   <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
                 </div>
 
-                <div className="col-12 mb-3 " style={FONTS.body3}>
+                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
                   {errors.password && touched.password && errors.password}
                 </div>
               </Grid>
@@ -451,7 +456,7 @@ export const Auth = () => {
   };
 
   const googleError = () =>
-    alert("Google Sign In was unsuccessful. Try again later");
+    console.log("Google Sign In was unsuccessful. Try again later");
 
   //   ! return()
   return (
@@ -481,10 +486,9 @@ export const Auth = () => {
 
         <Grid container justify="flex-end">
           <Grid item>
-            <span onClick={switchMode} variant="link" size="sm">
+            <span onClick={switchMode}>
               <p
-                className="text-dark"
-                style={{ fontFamily: "supermarket", fontSize: SIZES.h3 }}
+                className="text-switch"
               >
                 {isSignup
                   ? "มีบัญชีอยู่แล้วเหรอ? เข้าสู่ระบบ"

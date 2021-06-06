@@ -80,7 +80,7 @@ export const FONTS = {
     leftBar1: { fontFamily: "Krub-Regular", fontSize: SIZES.h2 },
     leftBar2: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
 
-    login: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
+    login: { fontFamily: "Krub-Regular", fontSize: SIZES.h4 },
 
     filter: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
     Spacesfollow: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },

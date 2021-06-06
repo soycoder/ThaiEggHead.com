@@ -149,7 +149,7 @@ const NavigationBar = ({ isAuthenticated }) => {
   const BrandLogo = () => {
     return (
       <>
-        <Navbar.Brand style={{ marginLeft: 250 }}>
+        <Navbar.Brand className="navbar-brand">
           <Link to="/">
             <div>
               <img
@@ -194,6 +194,7 @@ const NavigationBar = ({ isAuthenticated }) => {
       </>
     );
   };
+
   return (
     <div className="Navbar">
       <Navbar expand="lg" bg="dark" variant="dark" className="navbar">
