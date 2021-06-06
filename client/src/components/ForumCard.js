@@ -588,6 +588,7 @@ function ForumCard(props) {
   return (
     <div style={{ marginBottom: 10 }}>
       <Card className="main-card">
+        
         <Question />
         {isShowComment ? <Answer isAuthenticated={props.isAuthenticated}/> : <></>}
       </Card>
