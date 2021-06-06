@@ -26,7 +26,7 @@ const ProfileOption = (props) => {
       <Dropdown.Menu style={{ width: 250 }}>
         <Dropdown.Item className="menu-text">
           <Link to={`/profile/${props.user.userID}`}>
-            <div class="co-name">
+            <div class="co-name" style={theme.FONTS.body4}>
               <img
                 className="img-user2"
                 src={props.user.imgURL ? props.user.imgURL : images.pic_profile}
@@ -36,21 +36,21 @@ const ProfileOption = (props) => {
           </Link>
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item href="#/action-1" className="menu-text">
+        <Dropdown.Item href="#/action-1" className="menu-text" style={theme.FONTS.body4}>
           Bookmark
         </Dropdown.Item>
-        <Dropdown.Item href="#/action-1" className="menu-text">
+        <Dropdown.Item href="#/action-1" className="menu-text" style={theme.FONTS.body4}>
           Your content
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item href="#/action-2" className="menu-text">
+        <Dropdown.Item href="#/action-2" className="menu-text" style={theme.FONTS.body4}>
           Settings
         </Dropdown.Item>
-        <Dropdown.Item href="#/action-2" className="menu-text">
+        <Dropdown.Item href="#/action-2" className="menu-text" style={theme.FONTS.body4}>
           Help
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item onClick={props.auth.logout} className="menu-text">
+        <Dropdown.Item onClick={props.auth.logout} className="menu-text" style={theme.FONTS.body4}>
           Sign out
         </Dropdown.Item>
       </Dropdown.Menu>
