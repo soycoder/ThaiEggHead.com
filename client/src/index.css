@@ -28,16 +28,16 @@ code {
 }
 
 @font-face {
-  font-family: 'Kanit-Regular';
-  src: local('Kanit-Regular'), url(./assets/font/Kanit-Regular.ttf) format('truetype');
+  font-family: 'supermarket';
+  src: local('supermarket'), url(./assets/font/Kanit-Regular.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Kanit-Regular.ttf';
-  src: local('Minimal-Regular'), url(./assets/font/Minimal-Regular.ttf) format('truetype');
+  font-family: 'Prompt-Regular.ttf';
+  src: local('Prompt-Regular'), url(./assets/font/Prompt-Regular.ttf) format('truetype');
 }
 /* Motorway.ttf */
 @font-face {
-  font-family: 'Motorway';
-  src: local('Motorway'), url(./assets/font/Motorway.ttf) format('truetype');
+  font-family: 'Krub-Regular';
+  src: local('Krub-Regular'), url(./assets/font/Krub-Regular.ttf) format('truetype');
 }

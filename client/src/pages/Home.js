@@ -217,12 +217,12 @@ function Home({ isAuthenticated }) {
           <Button className="btn-subjectnav" variant="light" block>
             <img
               src={subject.img}
-              height="30"
-              width="30"
+              height="25"
+              width="25"
               className="subject-img"
               style={{ marginRight: 5 }}
             />
-            <div style={theme.FONTS.body3}>
+            <div style={theme.FONTS.home4}>
               {subject.subjectName}
             </div>
             
@@ -245,7 +245,7 @@ function Home({ isAuthenticated }) {
               />
             </Link>
             <div class="user-name-small">
-              <Link to={`/profile/${user.userID}`}>
+              <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
               </Link>
             </div>
@@ -253,7 +253,7 @@ function Home({ isAuthenticated }) {
 
           <Form>
             <Form.Group>
-              <Form.Control
+              <Form.Control style={theme.FONTS.filter}
                 placeholder="คุณกำลังติดปัญหาอะไรรึเปล่า ? ถามมาสิ"
                 onClick={handleShow}
               />
@@ -285,10 +285,10 @@ function Home({ isAuthenticated }) {
     return (
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
-          <Card.Text className="card-title" style={theme.FONTS.body2}>
+          <Card.Text className="card-title" style={theme.FONTS.home2}>
             ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
-          <Card.Text className="card-subtitle" style={theme.FONTS.body3}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
+          <Card.Text className="card-subtitle" style={theme.FONTS.home4}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
           <Button variant="primary" className="btn-learnmore" style={theme.FONTS.body4}>
             ดูข้อมูลเพิ่มเติม
           </Button>
@@ -312,7 +312,7 @@ function Home({ isAuthenticated }) {
         <Container fluid="xl">
           <Row xs={1} md={3}>
             <Col md="auto" >
-              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.body2}>พื้นที่ความรู้</h5>
+              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.home3}>พื้นที่ความรู้</h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>
 
@@ -329,7 +329,7 @@ function Home({ isAuthenticated }) {
               ))}
             </Col>
 
-            <Col md="auto">
+            <Col md={2}>
               <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
                 <Card.Header>Filter</Card.Header>
                 <Card.Body>
@@ -348,7 +348,7 @@ function Home({ isAuthenticated }) {
                     {key.map(item => {
                       return (
                         <div>
-                          <Button style={theme.FONTS.tag} variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
+                          <Button style={theme.FONTS.tag1} variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
                         </div>
                       )
                     })}

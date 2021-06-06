@@ -142,10 +142,10 @@ const NavigationBar = ({ isAuthenticated }) => {
           
         </Navbar.Brand>
         <Nav className="mr-auto" style={theme.FONTS.nav}>
-          <Nav.Link href="#features">About us</Nav.Link>
-          <Nav.Link href="#features">Home</Nav.Link>
-          <Nav.Link href="#features">Discovery</Nav.Link>
-          <Nav.Link href="#features">Context</Nav.Link>
+          <Nav.Link href="#features"  style={theme.FONTS.nav}>About us</Nav.Link>
+          <Nav.Link href="#features"  style={theme.FONTS.nav}>Home</Nav.Link>
+          <Nav.Link href="#features"  style={theme.FONTS.nav}>Discovery</Nav.Link>
+          <Nav.Link href="#features"  style={theme.FONTS.nav}>Context</Nav.Link>
         </Nav>
       </>
     )

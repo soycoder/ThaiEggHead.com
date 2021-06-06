@@ -14,6 +14,7 @@
 /* Font Management */
 
 p #body-forum-text{
+  color: blue;
   font-size: 20px;
   font-family: "CSChatThai" !important;
 }
@@ -235,4 +236,7 @@ p #body-forum-text{
   font-family: 'Motorway';
 }
 
-
+#body-forum-text{
+  font-size: 16px;
+  font-family: 'supermarket';
+}

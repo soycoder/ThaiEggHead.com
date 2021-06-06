@@ -55,42 +55,56 @@ export const SIZES = {
 
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "Kanit-Regular", fontSize: SIZES.largeTitle},
-    h1: { fontFamily: "Kanit-Regular", fontSize: SIZES.h1  },
-    h2: { fontFamily: "Kanit-Regular", fontSize: SIZES.h2 },
-    h3: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
-    h4: { fontFamily: "Kanit-Regular", fontSize: SIZES.h4 },
-    h5: { fontFamily: "Kanit-Regular", fontSize: SIZES.h5 },
-    h6: { fontFamily: "Kanit-Regular", fontSize: SIZES.h6 },
+    largeTitle: { fontFamily: "Krub-Regular", fontSize: SIZES.largeTitle},
+    h1: { fontFamily: "Prompt-Regular", fontSize: SIZES.h1  },
+    h2: { fontFamily: "Prompt-Regular", fontSize: SIZES.h2 },
+    h3: { fontFamily: "Prompt-Regular", fontSize: SIZES.h3 },
+    h4: { fontFamily: "Prompt-Regular", fontSize: SIZES.h4 },
+    h5: { fontFamily: "Prompt-Regular", fontSize: SIZES.h5 },
+    h6: { fontFamily: "Prompt-Regular", fontSize: SIZES.h6 },
 
-    body1: { fontFamily: "Kanit-Regular", fontSize: SIZES.body1 },
-    body2: { fontFamily: "Kanit-Regular", fontSize: SIZES.body2 },
-    body3: { fontFamily: "Kanit-Regular", fontSize: SIZES.body3 },
-    body4: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    home1: { fontFamily: "Krub-Regular", fontSize: SIZES.body1 },
+    home2: { fontFamily: "Krub-Regular", fontSize: SIZES.body2 },
+    home3: { fontFamily: "Krub-Regular", fontSize: SIZES.body3 },
+    home4: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
 
-    leftBar1: { fontFamily: "Kanit-Regular", fontSize: SIZES.h2 },
-    leftBar2: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
+    body1: { fontFamily: "Prompt-Regular", fontSize: SIZES.body1 },
+    body2: { fontFamily: "Prompt-Regular", fontSize: SIZES.body2 },
+    body3: { fontFamily: "Prompt-Regular", fontSize: SIZES.body3 },
+    body4: { fontFamily: "Prompt-Regular", fontSize: SIZES.body4 },
 
-    login: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
+    bodyTitle: { fontFamily: "supermarket", fontSize: SIZES.body1 },
+    bodyPost: { fontFamily: "supermarket", fontSize: SIZES.body3 },
 
-    filter: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
-    Spacesfollow: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
 
-    LeaderBord: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    leftBar1: { fontFamily: "Krub-Regular", fontSize: SIZES.h2 },
+    leftBar2: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
 
-    nav: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
+    login: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
 
-    name: { fontFamily: "Kanit-Regular", fontSize: SIZES.body3 },
-    time: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
-    score: { fontFamily: "Kanit-Regular", fontSize: SIZES.body3 },
+    filter: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
+    Spacesfollow: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
 
-    title: { fontFamily: "Kanit-Regular", fontSize: SIZES.h1 },
-    title1: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
-    title2: { fontFamily: "Kanit-Regular", fontSize: SIZES.h4 },
-    body: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
-    tag: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
-    subject: { fontFamily: "Kanit-Regular", fontSize: SIZES.body4 },
-    post: { fontFamily: "Kanit-Regular", fontSize: SIZES.h3 },
+    LeaderBord: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
+
+    nav: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
+
+    name: { fontFamily: "supermarket", fontSize: SIZES.body3 },
+    time: { fontFamily: "supermarket", fontSize: SIZES.body5 },
+    score: { fontFamily: "supermarket", fontSize: SIZES.body3 },
+    profile: { fontFamily: "supermarket", fontSize: SIZES.body1 },
+    detail: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    detail1: { fontFamily: "supermarket", fontSize: SIZES.body3 },
+
+    title: { fontFamily: "supermarket", fontSize: SIZES.h2 },
+    title1: { fontFamily: "supermarket", fontSize: SIZES.h3 },
+    title2: { fontFamily: "supermarket", fontSize: SIZES.h4 },
+    post: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    tag: { fontFamily: "supermarket", fontSize: SIZES.body4 },
+    tag1: { fontFamily: "supermarket", fontSize: SIZES.body5 },
+
+    subject: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
+    post: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
 };
 
 const appTheme = { COLORS, SIZES, FONTS };
