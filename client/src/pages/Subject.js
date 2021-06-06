@@ -184,9 +184,9 @@ function Sub() {
 
   const TagSum = () => {
     return (
-      <Card style={theme.FONTS.filter}>
+      <Card>
         <Card.Header>
-          <div>
+          <div style={theme.FONTS.filter}>
           Watched Tags  <Card.Link href="#">Edit</Card.Link>
           </div>
             
@@ -234,7 +234,7 @@ function Sub() {
           <Col md={3} >
 
             <Card className="fontETC">
-              <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
+              <Card.Header className="fontETC" style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
               <Card.Body>
                 <div className="fontETC">
                   <LeaderBoard />
@@ -256,8 +256,8 @@ function Sub() {
 
           <Col md={2}>
             {/* <AboutSubjectCard/> */}
-            <Card style={theme.FONTS.filter}>
-              <Card.Header>Filter</Card.Header>
+            <Card >
+              <Card.Header style={theme.FONTS.filter}>Filter</Card.Header>
               <Card.Body>
                 <div >
                   <Select isMulti options={optionTag} onChange={handle}></Select>

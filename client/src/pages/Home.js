@@ -4,12 +4,10 @@ import {
   Row,
   Col,
   Container,
-  ListGroup,
   Card,
   Form,
   Modal,
   Button,
-  Image
 } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
@@ -44,7 +42,7 @@ function Home({ isAuthenticated }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [datas, setdatas] = useState([]);
-
+  const [isArrayEmpty, setIsArrayEmpty] = useState(false);
   const [isShowAnounce, setIsShowAnounce] = useState(true)
 
   const [multipleFiles, setMultipleFiles] = useState([]);
@@ -161,7 +159,7 @@ function Home({ isAuthenticated }) {
 
   const count = {}
   arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
-  console.log(count);
+  // console.log(count);
 
   var key = [];
   var sumTag = [];
@@ -185,7 +183,7 @@ function Home({ isAuthenticated }) {
         if (nn != 0) {
           tag = value[i]
         }
-        console.log(tag);
+        // console.log(tag);
         if (ele.listTag[j] === tag) {
           return ele.listTag;
         }
@@ -286,12 +284,13 @@ function Home({ isAuthenticated }) {
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
-          {/* <img
+          <br/>
+          <img
               src={images.logo_event}
               height="130"
               width="130"
               className="event-img"
-            /> */}
+            />
         </Card.Body>
       </Card>
     );
@@ -299,7 +298,7 @@ function Home({ isAuthenticated }) {
 
   return (
     <div>
-      <body style={{ backgroundColor: "#F3F3F3" }} >
+      <body style={{ backgroundColor: "#F3F3F3", minHeight:200 }} >
         <br />
         <br />
         <Container fluid="xl">
@@ -316,15 +315,35 @@ function Home({ isAuthenticated }) {
               ) : (<></>)}
 
               <UserQuestionCard />
+                          
+              {newArray.map((forum) => {
+                if(newArray.length!=0){
+                  console.log(newArray.length);
+                  return(<ForumCard data={forum}></ForumCard>)
+                }
+                  
+                else{
+                  console.log("qsdqsd");
+                  return(
+                    <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
+                      <div class="bp3-non-ideal-state-visual">
+                        <span class="bp3-icon bp3-icon-folder-open"></span>
+                      </div>
+                      <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
+                      <div>สร้างคำถามเองเลยสิ</div>
+                      <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
+                    </div>
+                  )
+                }
+                  
+              
+              })}
 
-              {newArray.map((forum) => (
-                <ForumCard data={forum}></ForumCard>
-              ))}
             </Col>
 
             <Col md={2}>
-              <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
-                <Card.Header>Filter</Card.Header>
+              <Card style={theme.FONTS.filter}>
+                <Card.Header style={theme.FONTS.filter}>Filter</Card.Header>
                 <Card.Body>
                   <div >
                     <Select isMulti options={optionTag} onChange={handle}></Select>
@@ -333,7 +352,7 @@ function Home({ isAuthenticated }) {
               </Card>
               <br />
               <Card>
-                <Card.Header className="card-header" style={theme.FONTS.tag}>
+                <Card.Header className="card-header" style={theme.FONTS.filter}>
                   Tags ทั้งหมด 
                 </Card.Header>  
                 <Card.Body style={theme.FONTS.tag}>
@@ -349,9 +368,9 @@ function Home({ isAuthenticated }) {
                 </Card.Body>
               </Card>
               <br />
-              <Card style={{ width: "13rem" }} style={theme.FONTS.tag}>
+              {/* <Card style={{ width: "13rem" }} style={theme.FONTS.tag}>
                 <div>Hotest Question</div>
-              </Card>
+              </Card> */}
             </Col>
           </Row>
         </Container>

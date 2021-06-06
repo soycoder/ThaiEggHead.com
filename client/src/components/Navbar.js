@@ -87,6 +87,7 @@ const NavigationBar = ({ isAuthenticated }) => {
             variant="contained"
             color="secondary"
             size="mediem"
+            style={theme.FONTS.body5}
           >
             Ask Question
           </Button>
