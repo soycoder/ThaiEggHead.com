@@ -1,0 +1,94 @@
+[{
+  "_id": {
+    "$oid": "60bc6f6d88ee043b7453e30a"
+  },
+  "role": "user",
+  "educationList": [],
+  "interestList": [],
+  "userID": "1",
+  "firstName": "APISITH",
+  "lastName": "WONGSORN",
+  "email": "apisith.won@dome.tu.ac.th",
+  "password": "$2b$10$KqSx8Wxxw29fGBhMr/gAROVYQk7w2lETDziQ2whi9AW6AFhoUi1l6",
+  "googleID": "109585993819534771568",
+  "imgURL": "https://lh3.googleusercontent.com/a/AATXAJz5rVtFRsck9IPitC0UIrNrNEvKoTv1dYcRLryN=s96-c",
+  "createdAt": {
+    "$date": "2021-06-06T06:47:09.190Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T06:47:09.190Z"
+  }
+},{
+  "_id": {
+    "$oid": "60bc712e88ee043b7453e30e"
+  },
+  "role": "user",
+  "educationList": [],
+  "interestList": [],
+  "userID": "2",
+  "firstName": "Niwat",
+  "lastName": "Anuyoon",
+  "email": "niwat.anuyoon@gmail.com",
+  "password": "$2b$10$xpO5jCaNs3ASGBO2Rd0ABei.8y2A6FjPfVnXgbZ6KGbJw.bdl9zHC",
+  "createdAt": {
+    "$date": "2021-06-06T06:54:38.862Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T06:54:38.862Z"
+  },
+  "imgURL": "http://localhost:5000/uploads/example-profile.jpeg"
+},{
+  "_id": {
+    "$oid": "60bc721088ee043b7453e311"
+  },
+  "role": "user",
+  "educationList": [],
+  "interestList": [],
+  "userID": "3",
+  "firstName": "พีระพัฒน์ ",
+  "lastName": "ยาโต",
+  "email": "perapat-yato@gmail.com",
+  "password": "$2b$10$BvbqOfO2o986e4ACxuhMce5Mx1HuuHpYudPslr71J0hm3pxgKHDH6",
+  "createdAt": {
+    "$date": "2021-06-06T06:58:24.130Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T06:58:24.130Z"
+  }
+},{
+  "_id": {
+    "$oid": "60bc750588ee043b7453e313"
+  },
+  "role": "user",
+  "educationList": [],
+  "interestList": [],
+  "userID": "4",
+  "firstName": "Atibodee",
+  "lastName": "Mahawan",
+  "email": "atibodee-mahawan@gmail.com",
+  "password": "$2b$10$VlVyuzWRU6cNGYc1jcEid.yi2eYKpQdIpM2uRQ0hUUtxCzbvNyYma",
+  "createdAt": {
+    "$date": "2021-06-06T07:11:01.965Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T07:11:01.965Z"
+  }
+},{
+  "_id": {
+    "$oid": "60bc768788ee043b7453e316"
+  },
+  "role": "user",
+  "educationList": [],
+  "interestList": [],
+  "userID": "5",
+  "firstName": "Yoskorn",
+  "lastName": "Lertratanakham",
+  "email": "yoskorn-ler@gmail.com",
+  "password": "$2b$10$j3dBOkpvuSJKnapRl08Wo.lDswpxGnUxA4CFFC2iHznBO2M/Mum2i",
+  "createdAt": {
+    "$date": "2021-06-06T07:17:27.236Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T07:17:27.236Z"
+  }
+}]

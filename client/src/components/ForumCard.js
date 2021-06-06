@@ -348,7 +348,7 @@ function ForumCard(props) {
         <OverlayTrigger
           key={"top"}
           placement={"top"}
-          overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
+          overlay={<Tooltip id={`tooltip-${"top"}`}>Reply</Tooltip>}
         >
           <Button
             className="bp3-minimal comment2"
@@ -483,7 +483,7 @@ function ForumCard(props) {
                       placeholder="Add a comment..."
                       className="input-answer"
                     />
-                    <Button2 variant="primary" className="btn-answer">
+                    <Button2 variant="primary" className="btn-answer" onClick={handleClickCommentForm}>
                       Reply
                     </Button2>
                   </div>
