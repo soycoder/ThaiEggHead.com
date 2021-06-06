@@ -5,10 +5,12 @@ const SelectTag = (props) => {
   const [option, setOption] = useState([]);
 
   const optionsTag = [
-    { name: "Art", tagID: "Art" },
     { name: "Database", tagID: "Database" },
     { name: "Science", tagID: "Scienceact" },
-    { name: "Law", tagID: "Law" },    
+    { name: "ศิลปะ", tagID: "ศิลปะ" },
+    { name: "ข่าว", tagID: "ข่าว" },
+    { name: "กีฬา", tagID: "กีฬา" },
+    { name: "สังคม", tagID: "สังคม" },
   ];
 
   useEffect(() => {

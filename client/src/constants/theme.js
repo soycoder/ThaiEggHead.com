@@ -55,7 +55,7 @@ export const SIZES = {
 
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "Krub-Regular", fontSize: SIZES.largeTitle},
+    largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle},
     h1: { fontFamily: "Prompt-Regular", fontSize: SIZES.h1  },
     h2: { fontFamily: "Prompt-Regular", fontSize: SIZES.h2 },
     h3: { fontFamily: "Prompt-Regular", fontSize: SIZES.h3 },
@@ -68,10 +68,10 @@ export const FONTS = {
     home3: { fontFamily: "Krub-Regular", fontSize: SIZES.body3 },
     home4: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
 
-    body1: { fontFamily: "Prompt-Regular", fontSize: SIZES.body1 },
-    body2: { fontFamily: "Prompt-Regular", fontSize: SIZES.body2 },
-    body3: { fontFamily: "Prompt-Regular", fontSize: SIZES.body3 },
-    body4: { fontFamily: "Prompt-Regular", fontSize: SIZES.body4 },
+    body1: { fontFamily: "supermarket", fontSize: SIZES.body1 },
+    body2: { fontFamily: "supermarket", fontSize: SIZES.body2 },
+    body3: { fontFamily: "supermarket", fontSize: SIZES.body3 },
+    body4: { fontFamily: "supermarket", fontSize: SIZES.body4 },
 
     bodyTitle: { fontFamily: "supermarket", fontSize: SIZES.body1 },
     bodyPost: { fontFamily: "supermarket", fontSize: SIZES.body3 },

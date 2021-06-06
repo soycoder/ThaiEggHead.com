@@ -329,7 +329,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
           options={optionsSubject}
           onChange={onChangeInputSub}
           defaultValue={[]}
-          placeholder="ตัวอย่าง (วิทยาการคอมพิวเตอร์, ศิลปกรรมศาสตร์, วิศวะกรรมศาสตร์)"
+          placeholder="ตัวอย่าง (วิทยาศาสตร์ และเทคโนโลยี, กฏหมาย, วิศวกรรมศาสตร์)"
         />
       </Form.Group>
 
