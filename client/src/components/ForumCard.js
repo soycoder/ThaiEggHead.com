@@ -425,7 +425,7 @@ function ForumCard(props) {
         <div class="commentlist-content">
           <HeaderUserComment />
           <div class="commentlist-content-text" style={theme.FONTS.h4}>
-            The first one kind of happened where I live for a couple of weeks.
+            ขอแก้ไขนะครับ ยังขาดวัคซีนอีก 34 ล้านโดสครับ ไม่ใช่ 33 ล้าน
           </div>
         </div>
       );
@@ -498,7 +498,8 @@ function ForumCard(props) {
             <div>
               <HeaderUserAnswer />
               <div class="answerlist-content">
-                <div class="answerlist-content-text">เย้</div>
+                <div class="answerlist-content-text"> ในปี 2564 ยังขาดวัคซีนอีก 33 ล้านโดส ซึ่งต้องจัดหาเพิ่มเติม โดยขณะนี้อยู่ในขั้นตอนลงนามในสัญญากับบริษัทไฟเซอร์ 
+                ซึ่งเป็นไปด้วยดีคาดว่าจะลงนามในสัปดาห์หน้า และในส่วนของวัคซีนจอห์นสันแอนด์จอห์นสัน อยู่ในขั้นตอนการเตรียมทำสัญญา ซึ่ง 2 วัคซีนนี้จะได้ 25 ล้านโดส และจะมีแผนจัดหาวัคซีนซิโนแวคอีก 8 ล้านโดส</div>
 
                 {/* <div class="best-answer">Best Answer</div> */}
 
@@ -525,7 +526,6 @@ function ForumCard(props) {
             {comment ? (
               <>
                 <CommentList />
-                <CommentList />
               </>
             ) : (
               <></>
@@ -539,8 +539,7 @@ function ForumCard(props) {
               <HeaderUserAnswer />
               <div class="answerlist-content">
                 <div class="answerlist-content-text" style={theme.FONTS.h4}>
-                  The first one kind of happened where I live for a couple of
-                  weeks.
+                  
                 </div>
 
                 {isShowCommentForm ? (
@@ -565,7 +564,6 @@ function ForumCard(props) {
 
             {comment ? (
               <>
-                <CommentList />
                 <CommentList />
               </>
             ) : (
