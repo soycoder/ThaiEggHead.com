@@ -354,7 +354,7 @@ function Home({ isAuthenticated }) {
               {newArray.map((forum) => {
                 if(newArray.length!=0){
                   console.log(newArray.length);
-                  return(<ForumCard data={forum}></ForumCard>)
+                  return(<ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>)
                 }
                   
                 else{
