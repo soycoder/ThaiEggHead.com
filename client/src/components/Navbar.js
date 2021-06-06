@@ -160,7 +160,7 @@ const NavigationBar = ({ isAuthenticated }) => {
             Discovery
           </Nav.Link>
           <Nav.Link href="#features" style={theme.FONTS.nav}>
-            Context
+            Contact us
           </Nav.Link>
         </Nav>
       </>
