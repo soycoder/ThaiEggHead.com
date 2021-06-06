@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "60bc701f88ee043b7453e30c"
+  },
+  "tagID": "1",
+  "name": "Datetime",
+  "createdAt": {
+    "$date": "2021-06-06T06:50:07.342Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T06:50:07.342Z"
+  }
+},{
+  "_id": {
+    "$oid": "60bc701f88ee043b7453e30d"
+  },
+  "tagID": "1",
+  "name": "Javascript",
+  "createdAt": {
+    "$date": "2021-06-06T06:50:07.348Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T06:50:07.348Z"
+  }
+},{
+  "_id": {
+    "$oid": "60bc719b88ee043b7453e30f"
+  },
+  "tagID": "2",
+  "name": "jQuery ",
+  "createdAt": {
+    "$date": "2021-06-06T06:56:27.886Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T06:56:27.886Z"
+  }
+},{
+  "_id": {
+    "$oid": "60bc75ca88ee043b7453e314"
+  },
+  "tagID": "3",
+  "name": "  พรบ.คอมพิวเตอร์",
+  "createdAt": {
+    "$date": "2021-06-06T07:14:18.053Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T07:14:18.053Z"
+  }
+},{
+  "_id": {
+    "$oid": "60bc803f88ee043b7453e317"
+  },
+  "tagID": "4",
+  "name": "วัคซีน",
+  "createdAt": {
+    "$date": "2021-06-06T07:58:55.522Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-06T07:58:55.522Z"
+  }
+}]

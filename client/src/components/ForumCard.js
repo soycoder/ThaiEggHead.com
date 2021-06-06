@@ -130,7 +130,7 @@ function ForumCard(props) {
     const ButtomOption = () => {
       return (
         <div style={{ marginLeft: 10, marginBottom: 5 }}>
-          <UpvoteBotton upvote={Math.floor((Math.random() * 100) + 1)} />
+          <UpvoteBotton upvote={Math.floor(Math.random() * 100 + 1)} />
 
           {/* Comment Btn */}
           <OverlayTrigger
@@ -143,7 +143,7 @@ function ForumCard(props) {
               icon="comment"
               onClick={() => handleClickComment()}
             >
-              {Math.floor((Math.random() * 10) + 1)}
+              {Math.floor(Math.random() * 10 + 1)}
             </Button>
           </OverlayTrigger>
         </div>
@@ -351,7 +351,7 @@ function ForumCard(props) {
         <OverlayTrigger
           key={"top"}
           placement={"top"}
-          overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
+          overlay={<Tooltip id={`tooltip-${"top"}`}>Reply</Tooltip>}
         >
           <Button
             className="bp3-minimal comment2"
@@ -367,36 +367,40 @@ function ForumCard(props) {
     };
 
     const AnswerForm = () => {
-
-      return (
-        <div>
-          <div className="answer-box ">
-            {/* <img class="co-logo2" src={user?.result.imageUrl} /> */}
-            <NavLink to={`/profile/${user.userID}`} className="me-3">
-            {user?.imgURL ? (
-              <Avatar size="35" src={user.imgURL} round={true} />
-            ) : (
-              <Avatar
-                size="35"
-                name={user.firstName + " " + user.lastName}
-                round={true}
+      if (props.isAuthenticated) {
+        return (
+          <div>
+            <div className="answer-box ">
+              {/* <img class="co-logo2" src={user?.result.imageUrl} /> */}
+              <NavLink to={`/profile/${user.userID}`} className="me-3">
+                {user?.imgURL ? (
+                  <Avatar size="35" src={user.imgURL} round={true} />
+                ) : (
+                  <Avatar
+                    size="35"
+                    name={user.firstName + " " + user.lastName}
+                    round={true}
+                  />
+                )}
+              </NavLink>
+              <InputGroup
+                onChange={{}}
+                placeholder="Add a answer..."
+                className="input-answer"
               />
-            )}</NavLink>
-            <InputGroup
-              onChange={{}}
-              placeholder="Add a answer..."
-              className="input-answer"
-            />
-            <Button2
-              variant="primary"
-              className="btn-answer"
-              style={theme.FONTS.h4}
-            >
-              Add answer
-            </Button2>
+              <Button2
+                variant="primary"
+                className="btn-answer"
+                style={theme.FONTS.h4}
+              >
+                Add answer
+              </Button2>
+            </div>
           </div>
-        </div>
-      );
+        );
+      } else {
+        return <></>;
+      }
     };
 
     const CommentList = () => {
@@ -482,7 +486,7 @@ function ForumCard(props) {
                       placeholder="Add a comment..."
                       className="input-answer"
                     />
-                    <Button2 variant="primary" className="btn-answer">
+                    <Button2 variant="primary" className="btn-answer" onClick={handleClickCommentForm}>
                       Reply
                     </Button2>
                   </div>
@@ -551,7 +555,7 @@ function ForumCard(props) {
 
     return (
       <div className="answer-pad">
-        <AnswerForm user={user}/>
+        <AnswerForm user={user} />
         <AnswerList />
       </div>
     );
@@ -562,7 +566,7 @@ function ForumCard(props) {
     <div style={{ marginBottom: 10 }}>
       <Card className="main-card">
         <Question />
-        {isShowComment ? <Answer /> : <></>}
+        {isShowComment ? <Answer isAuthenticated={props.isAuthenticated}/> : <></>}
       </Card>
     </div>
   );

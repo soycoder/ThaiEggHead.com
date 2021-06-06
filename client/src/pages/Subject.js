@@ -68,71 +68,51 @@ function Sub({isAuthenticated}) {
 
   var key = [];
   var sumTag = [];
-  key = Object.keys(count);
-  sumTag = Object.values(count);
-  console.log(key);
-  console.log(sumTag);
+  key = Object.keys(count)
+  sumTag = Object.values(count)
+  console.log(key)
+  console.log(sumTag)
+  var tags = []
 
   for (j = 0; j < key.length; j++) {
     // if (key[j] != "") {
-    key[j] = { name: key[j], num: sumTag[j] };
+    tags[j] = { label: key[j], value: sumTag[j] };
     // }
   }
 
-  key.shift();
-  console.log(key);
+  tags.shift()
+  // console.log(key)
+
+  var [valueTag, getValueTag] = useState([]);
+  var handle = (e) => {
+    getValueTag(Array.isArray(e) ? e.map(x => x.label) : []);
+  }
 
   var [tag, setTag] = useState("");
-  const [value, getValue] = useState([]);
-  console.log(tag);
+  // console.log(tag)
+  // console.log(valueTag)
   var newArray = forumData.filter(function (ele) {
-    var i, j;
-    var n = ele.listTag.length;
-    var nn = value.length;
-    // console.log(tag, value)
-    // console.log(nn);
-    for (i = 0; i <= nn; i++) {
-      for (j = 0; j < n; j++) {
-        // console.log(n);
-        if (nn != 0) {
-          tag = value[i];
+  var i, j;
+  var n = ele.listTag.length;
+  var nn = valueTag.length;
+    console.log(n)
+
+      for (j = 0; j < nn; j++) {
+        for (i=0; i<n; i++){
+          if (ele.listTag[i] == valueTag[j]) {
+ 
+              return ele.listTag; 
+  
+          } 
         }
-        console.log(tag);
-        if (ele.listTag[j] === tag) {
-          return ele.listTag;
-        } else if (tag === "") {
-          return (newArray = forumData);
-        }
-      }
+    }
+    if (nn == 0) {
+      return newArray = forumData;
     }
   });
-  console.log(newArray);
 
-  const Tag = [
-    { name: "Art", tagID: "Art" },
-    { name: "Database", tagID: "Database" },
-    { name: "Science", tagID: "Scienceact" },
-    { name: "Law", tagID: "Law" },
-  ];
+  console.log(newArray)
 
-  const [optionTag, setOptionTag] = useState([]);
-  useEffect(() => {
-    fetch(`http://localhost:5000/forums/tag`)
-      .then((res) => res.json())
-      .then((res) => {
-        let array = Tag.concat(res);
-        let options = array.map((d) => ({
-          value: d.tagID,
-          label: d.name,
-        }));
-        // console.log(options);
-        setOptionTag(options);
-      });
-  }, []);
-
-  var handle = (e) => {
-    getValue(Array.isArray(e) ? e.map((x) => x.label) : []);
-  };
 
   const HeaderImage = () => {
     return (
@@ -208,15 +188,11 @@ function Sub({isAuthenticated}) {
         </Card.Header>
         <Card.Body>
           <div>
-            {key.map((item) => {
+            {tags.map(item => {
               // console.log(filledArray)
               return (
                 <div>
-                  <Button variant="outline-info" className="app-fontSizeTag">
-                    {item.name}
-                  </Button>
-                  {" x "}
-                  {item.num}
+                  <Button variant="outline-info" className="app-fontSizeTag">{item.label}</Button>{" x "}{item.value}
                 </div>
               );
             })}
@@ -294,11 +270,7 @@ function Sub({isAuthenticated}) {
               <Card.Header style={theme.FONTS.filter}>คัดกรอง Tags</Card.Header>
               <Card.Body>
                 <div>
-                  <Select
-                    isMulti
-                    options={optionTag}
-                    onChange={handle}
-                  ></Select>
+                <Select isMulti options={tags} onChange={handle}></Select>
                 </div>
               </Card.Body>
             </Card>

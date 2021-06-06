@@ -164,32 +164,39 @@ function Home({ isAuthenticated }) {
 
   var key = [];
   var sumTag = [];
-  key = Object.keys(count);
-  sumTag = Object.values(count);
+  key = Object.keys(count)
+  sumTag = Object.values(count)
+  var tags = []
 
   for (j = 0; j < key.length; j++) {
-    key[j] = { name: key[j], num: sumTag[j] };
+    tags[j] = { label: key[j], value: sumTag[j] };
   }
 
-  key.shift();
+  tags.shift()
 
+  var [valueTag, getValueTag] = useState([]);
+  var handle = (e) => {
+    getValueTag(Array.isArray(e) ? e.map(x => x.label) : []);
+    
+  }
+  console.log(valueTag)
   var newArray = datas.filter(function (ele) {
     var i, j;
     var n = ele.listTag.length;
-    var nn = value.length;
+    var nn = valueTag.length;
+    console.log(n)
 
-    for (i = 0; i <= nn; i++) {
-      for (j = 0; j < n; j++) {
-        if (nn != 0) {
-          tag = value[i];
+      for (j = 0; j < nn; j++) {
+        for (i=0; i<n; i++){
+          if (ele.listTag[i] == valueTag[j]) {
+ 
+              return ele.listTag; 
+  
+          } 
         }
-        // console.log(tag);
-        if (ele.listTag[j] === tag) {
-          return ele.listTag;
-        } else if (tag === "") {
-          return (newArray = datas);
-        }
-      }
+    }
+    if (nn == 0) {
+      return newArray = datas;
     }
   });
 
@@ -354,7 +361,7 @@ function Home({ isAuthenticated }) {
               {newArray.map((forum) => {
                 if(newArray.length!=0){
                   console.log(newArray.length);
-                  return(<ForumCard data={forum}></ForumCard>)
+                  return(<ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>)
                 }
                   
                 else{
@@ -384,11 +391,7 @@ function Home({ isAuthenticated }) {
                 <Card.Header>Filter</Card.Header>
                 <Card.Body>
                   <div>
-                    <Select
-                      isMulti
-                      options={optionTag}
-                      onChange={handle}
-                    ></Select>
+                  <Select isMulti options={tags} onChange={handle}></Select>
                   </div>
                 </Card.Body>
               </Card>
@@ -398,19 +401,11 @@ function Home({ isAuthenticated }) {
                   Tags ทั้งหมด 
                 </Card.Header>  
                 <Card.Body style={theme.FONTS.tag}>
-                  <div>
-                    {key.map((item) => {
+                  <div >
+                    {tags.map(item => {
                       return (
                         <div>
-                          <Button
-                            style={theme.FONTS.tag1}
-                            variant="outline-warning"
-                            className="app-fontSizeTag"
-                          >
-                            {item.name}
-                          </Button>
-                          {"  x "}
-                          {item.num}
+                          <Button style={theme.FONTS.tag1} variant="outline-warning" className="app-fontSizeTag">{item.label}</Button>{"  x "}{item.value}
                         </div>
                       );
                     })}
