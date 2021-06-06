@@ -129,7 +129,7 @@ function Sub({isAuthenticated}) {
         <Card.Body>
           <div className="subject-header">
             <img
-              className="subject-img"
+              className="subject-img2"
               src={images.subj_1}
               style={{ marginRight: 20 }}
             />
