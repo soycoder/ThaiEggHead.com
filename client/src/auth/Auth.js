@@ -134,7 +134,7 @@ const Signin = (props) => {
 
   return (
     <>
-      <Formik
+      <Formik 
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => submitCredentials(values)}
         validationSchema={LoginSchema}
@@ -165,8 +165,9 @@ const Signin = (props) => {
                   onBlur={handleBlur}
                   value={values.email}
                   autoFocus
+                  style={FONTS.body3}
                 />
-                <label for="floatingInput">Email address</label>
+                <label for="floatingInput" style={FONTS.body3}>Email address</label>
               </div>
 
               {/*errors.email && touched.email && errors.email */}
@@ -188,7 +189,7 @@ const Signin = (props) => {
                 <label for="floatingPassword">Password</label>
               </div>
 
-              <div className="col-12 mb-3 col-12">
+              <div className="col-12 mb-3 col-12" style={FONTS.body3}>
                 {errors.password && touched.password && errors.password}
               </div>
             </Grid>
@@ -266,7 +267,9 @@ const Register = (props) => {
             password: "",
           }}
           onSubmit={(values) => submitCredentials(values)}
+          style={FONTS.body3}
           validationSchema={SignupSchema}
+          
         >
           {({
             values,
@@ -279,8 +282,8 @@ const Register = (props) => {
           }) => (
             <form onSubmit={handleSubmit} className={classes.form}>
               <Grid container>
-                {signupSuccess && <div> Signup Success {signupSuccess} </div>}
-                {signupError && <div> Signup Error {signupError} </div>}
+                {signupSuccess && <div style={FONTS.body3}> Signup Success {signupSuccess} </div>}
+                {signupError && <div style={FONTS.body3}> Signup Error {signupError} </div>}
                 {/* <input type="hidden" name="remember" value="true" /> */}
                 <br />
 
@@ -350,7 +353,7 @@ const Register = (props) => {
                   <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
                 </div>
 
-                <div className="col-12 mb-3 ">
+                <div className="col-12 mb-3 " style={FONTS.body3}>
                   {errors.password && touched.password && errors.password}
                 </div>
               </Grid>

@@ -117,21 +117,14 @@ function Home({ isAuthenticated }) {
       .then((res) => res.json())
       .then((res) => setdatas(res));
   }, []);
-
-  const Tag = [
-    { name: "ศิลปะ", tagID: "ศิลปะ" },
-    { name: "ข่าว", tagID: "ข่าว" },
-    { name: "กีฬา", tagID: "กีฬา" },
-    { name: "สังคม", tagID: "สังคม" },
-  ];
-
+  
   const [optionTag, setOptionTag] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/forums/tag`)
       .then((res) => res.json())
       .then((res) => {
-        let array = Tag.concat(res);
-        let options = array.map((d) => ({
+        // let array = Tag.concat(res);
+        let options = res.map((d) => ({
           value: d.tagID,
           label: d.name,
         }));
