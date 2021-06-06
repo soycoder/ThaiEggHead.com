@@ -12,24 +12,26 @@ import {
   OverlayTrigger,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useState } from "react";
 import ForumCard from "../components/ForumCard";
-import Select from "react-select"
+import Select from "react-select";
 import { Button as Button2 } from "@blueprintjs/core";
-import Avatar from 'react-avatar';
-import LeaderBoard from '../components/LeaderBoard';
-import Moment from 'react-moment';
+import Avatar from "react-avatar";
+import LeaderBoard from "../components/LeaderBoard";
+import Moment from "react-moment";
 
 import { theme } from "../constants";
 
-function Sub() {
+function Sub({isAuthenticated}) {
   let { subject } = useParams();
   // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
 
   const SubjectData = new Map();
-  SubjectData.set("sci", ["วิทยาศาสตร์ และเทคโนโลยี", "Science and Technology"])
-
+  SubjectData.set("sci", [
+    "วิทยาศาสตร์ และเทคโนโลยี",
+    "Science and Technology",
+  ]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/forums?subject=${SubjectData.get(subject)[0]}`)
@@ -37,52 +39,52 @@ function Sub() {
       .then((res) => setForumData(res));
   }, []);
 
-  var t = " "
-  var i, j
-  var arrayTag = []
-  var filledArray = []
+  var t = " ";
+  var i, j;
+  var arrayTag = [];
+  var filledArray = [];
 
   function tagData() {
     forumData.map((dataTag) => {
       for (i = 0; i < dataTag.listTag.length; i++) {
         if (dataTag.listTag[i] != " ") {
-          t = t + " " + dataTag.listTag[i]
+          t = t + " " + dataTag.listTag[i];
         }
       }
-      arrayTag = t.split(" ")
-      console.log(arrayTag)
-    }
-    )
-    return (
-      arrayTag
-    )
+      arrayTag = t.split(" ");
+      console.log(arrayTag);
+    });
+    return arrayTag;
   }
-  { tagData() }
+  {
+    tagData();
+  }
 
-  const count = {}
-  arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
+  const count = {};
+  arrayTag.forEach(function (i) {
+    count[i] = (count[i] || 0) + 1;
+  });
   console.log(count);
 
   var key = [];
   var sumTag = [];
-  key = Object.keys(count)
-  sumTag = Object.values(count)
-  console.log(key)
-  console.log(sumTag)
+  key = Object.keys(count);
+  sumTag = Object.values(count);
+  console.log(key);
+  console.log(sumTag);
 
   for (j = 0; j < key.length; j++) {
     // if (key[j] != "") {
     key[j] = { name: key[j], num: sumTag[j] };
     // }
-
   }
 
-  key.shift()
-  console.log(key)
+  key.shift();
+  console.log(key);
 
   var [tag, setTag] = useState("");
   const [value, getValue] = useState([]);
-  console.log(tag)
+  console.log(tag);
   var newArray = forumData.filter(function (ele) {
     var i, j;
     var n = ele.listTag.length;
@@ -93,19 +95,18 @@ function Sub() {
       for (j = 0; j < n; j++) {
         // console.log(n);
         if (nn != 0) {
-          tag = value[i]
+          tag = value[i];
         }
         console.log(tag);
         if (ele.listTag[j] === tag) {
           return ele.listTag;
-        }
-        else if (tag === "") {
-          return newArray = forumData;
+        } else if (tag === "") {
+          return (newArray = forumData);
         }
       }
     }
   });
-  console.log(newArray)
+  console.log(newArray);
 
   const Tag = [
     { name: "Art", tagID: "Art" },
@@ -127,131 +128,173 @@ function Sub() {
         // console.log(options);
         setOptionTag(options);
       });
-
-
   }, []);
 
-
   var handle = (e) => {
-    getValue(Array.isArray(e) ? e.map(x => x.label) : []);
-  }
+    getValue(Array.isArray(e) ? e.map((x) => x.label) : []);
+  };
 
   const HeaderImage = () => {
     return (
-      <img className="subject-img-bg" src="http://trumpwallpapers.com/wp-content/uploads/Science-Wallpaper-42-1920x1080-1.jpg" />
-    )
-  }
+      <img
+        className="subject-img-bg"
+        src="http://trumpwallpapers.com/wp-content/uploads/Science-Wallpaper-42-1920x1080-1.jpg"
+      />
+    );
+  };
 
   const SubjectHeaderCard = () => {
     return (
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
+            <Avatar
+              className="subject-img"
+              size="100"
+              round={false}
+              style={{ marginRight: 20 }}
+            />
             <div style={{ marginLeft: 20 }}>
               <h2 style={theme.FONTS.title}>{SubjectData.get(subject)[0]}</h2>
               <h5 style={theme.FONTS.title2}>{SubjectData.get(subject)[1]}</h5>
-              <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
+              <Button2
+                className="bp3-minimal bp3-intent-primary bp3-outlined"
+                id="follow"
+                icon="add-to-artifact"
+              >
                 Follow 123K
-                </Button2>
+              </Button2>
             </div>
-
           </div>
         </Card.Body>
       </Card>
-    )
-  }
+    );
+  };
 
   const AboutSubjectCard = () => {
     return (
       <Card style={{ marginBottom: 10 }}>
         <Card.Body>
           <div className="subject-header">
-            <Avatar className="subject-img" size="100" round={false} style={{ marginRight: 20 }} />
+            <Avatar
+              className="subject-img"
+              size="100"
+              round={false}
+              style={{ marginRight: 20 }}
+            />
             <div style={{ marginLeft: 20 }}>
               <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
               <h5 style={theme.FONTS.h2}>{SubjectData.get(subject)[1]}</h5>
-              <Button2 className="bp3-minimal bp3-intent-primary bp3-outlined" id="follow" icon="add-to-artifact">
+              <Button2
+                className="bp3-minimal bp3-intent-primary bp3-outlined"
+                id="follow"
+                icon="add-to-artifact"
+              >
                 Follow 123K
-                </Button2>
+              </Button2>
             </div>
-
           </div>
         </Card.Body>
       </Card>
-    )
-  }
+    );
+  };
 
   const TagSum = () => {
     return (
       <Card style={theme.FONTS.filter}>
         <Card.Header>
           <div>
-          Watched Tags  <Card.Link href="#">Edit</Card.Link>
+            Watched Tags <Card.Link href="#">Edit</Card.Link>
           </div>
-            
         </Card.Header>
         <Card.Body>
           <div>
-            {key.map(item => {
+            {key.map((item) => {
               // console.log(filledArray)
               return (
                 <div>
-                  <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
+                  <Button variant="outline-info" className="app-fontSizeTag">
+                    {item.name}
+                  </Button>
+                  {" x "}
+                  {item.num}
                 </div>
-              )
+              );
             })}
           </div>
         </Card.Body>
       </Card>
-    )
-  }
+    );
+  };
 
-  const SpaceRec = () => {
+
+  const RelateQuestion = () => {
     return (
-      <Card style={theme.FONTS.filter}>
-        <ListGroup variant="flush">
-          <ListGroup.Item>Spaces to follow</ListGroup.Item>
-          <ListGroup.Item></ListGroup.Item>
-          <ListGroup.Item></ListGroup.Item>
-          <ListGroup.Item></ListGroup.Item>
-          <ListGroup.Item></ListGroup.Item>
-          <ListGroup.Item></ListGroup.Item>
-          <ListGroup.Item></ListGroup.Item>
-        </ListGroup>
+      <Card style={{}}>
+        <Card.Header>คำถามมาแรง 🔥</Card.Header>
+        <Card.Body>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <a id="relate-question">
+              เชื้อราดำใน Chernobyl
+              อาจสามารถปกป้องนักบินอวกาศจากรังสีมรณะบนดาวอังคารได้ไหม
+            </a>
+            <a id="relate-question">
+              อะไรที่สามารถนำมาทำผัดกะเพรานอกเหนือเนื้อสัตว์ปกติได้อีกมั้ย?
+            </a>
+            <a id="relate-question">กระจกรถยนต์หลุดจากกิ๊บหนีบแก้ปัญหายังไง</a>
+            <a id="relate-question">
+              ผู้หญิงจะเพอร์เฟคและมีเสน่ห์ที่สุดช่วงอายุเท่าไหร่?
+            </a>
+            <a id="relate-question">ถ้าเราแนะนำเพื่อนให้ไปกู้ถือว่าผิดไหม</a>
+          </div>
+
+          <br />
+        </Card.Body>
       </Card>
-    )
-  }
+    );
+  };
+
   // console.log(value);
   return (
     <div>
       <HeaderImage />
 
       <Container fluid="xl">
-
         <Row className="justify-content-md-center">
-
-          <Col md={3} >
-
+          <Col md={3}>
             <Card className="fontETC">
-              <Card.Header style={{ textAlign: 'center', backgroundColor: "#ffe529", color: "#212529" }}>Leader Board</Card.Header>
+              <Card.Header
+                style={{
+                  textAlign: "center",
+                  backgroundColor: "#ffe529",
+                  color: "#212529",
+                }}
+              >
+                Leader Board
+              </Card.Header>
               <Card.Body>
                 <div className="fontETC">
                   <LeaderBoard />
                 </div>
-
               </Card.Body>
-              <Card.Footer className="fontETC" style={{ textAlign: 'center', color: "white", backgroundColor: "#494c4f" }}>Latest Update : <Moment format="DD/MM/YYYY" /></Card.Footer>
+              <Card.Footer
+                className="fontETC"
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  backgroundColor: "#494c4f",
+                }}
+              >
+                Latest Update : <Moment format="DD/MM/YYYY" />
+              </Card.Footer>
             </Card>
-
           </Col>
 
           <Col md={6}>
             <SubjectHeaderCard />
             {newArray.map((forum) => (
-              <ForumCard data={forum}></ForumCard>
+              <ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>
             ))}
-
           </Col>
 
           <Col md={2}>
@@ -259,132 +302,24 @@ function Sub() {
             <Card style={theme.FONTS.filter}>
               <Card.Header>Filter</Card.Header>
               <Card.Body>
-                <div >
-                  <Select isMulti options={optionTag} onChange={handle}></Select>
+                <div>
+                  <Select
+                    isMulti
+                    options={optionTag}
+                    onChange={handle}
+                  ></Select>
                 </div>
               </Card.Body>
             </Card>
-            <br/>
+            <br />
             <TagSum />
             {/* <IgnoreTag /> */}
-            <br/>
-            <SpaceRec />
+            <br />
+            <RelateQuestion />
           </Col>
         </Row>
       </Container>
     </div>
-
   );
-
-  const old = () => {
-    <div className="App">
-      {/* <div className="app-content"></div> */}
-      <div>
-        <Row>
-          <Col>
-            <Card>
-              <Card.Img src={images.bg} height="240" width="30" />
-              <Card.ImgOverlay>
-                <Row>
-                  <Col xs={2}>
-                    <div className="app-paddingSubjIMG">
-                      <Card.Img
-                        src={images.subj_1}
-                        height="200"
-                        width="50"
-                        style={{ width: "15rem" }}
-                        className="app-cycleSubject"
-                      />
-                    </div>
-                  </Col>
-                  <Col xs={10} className="app-subjectFont">
-                    Science and Technology
-                        <h4>วิทยาศาสตร์และเทคโนโลยี</h4>
-                  </Col>
-                </Row>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-      <body style={{ backgroundColor: "#F3F3F3" }}>
-        <br />
-        <br />
-        <Container>
-          <Row>
-            <Col></Col>
-            <Col xs={7}>
-              {newArray.map((forum) => (
-                <ForumCard data={forum}></ForumCard>
-              ))}
-              {/* {Tag()} */}
-            </Col>
-
-            <Col>
-              <Card style={{ width: "15rem" }}>
-                <Card.Header>Custom Filter</Card.Header>
-                <Card.Body>
-                  <Card.Link href="#">Create a custom filter</Card.Link>
-                  <form>
-                    {/* <input name="tag" id="tag" /> */}
-                    <input
-                      type="tag"
-                      onChange={e => setTag(e.target.value)}
-                      placeholder="Enter tag"
-                    />
-                  </form>
-                  <br />
-                  <div >
-                    <Select isMulti options={optionTag} onChange={handle}></Select>
-                  </div>
-
-                </Card.Body>
-              </Card>
-              <br />
-              <Card style={{ width: "15rem" }}>
-                <Card.Header>
-                  Watched Tags
-                    <Card.Link href="#">Edit</Card.Link>
-                </Card.Header>
-                <Card.Body>
-                  <div>
-                    {key.map(item => {
-                      // console.log(filledArray)
-                      return (
-                        <div>
-                          <Button variant="outline-info" className="app-fontSizeTag">{item.name}</Button>{" x "}{item.num}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </Card.Body>
-              </Card>
-              <br />
-              <Card style={{ width: "15rem" }}>
-                <Card.Header>Ignored Tags</Card.Header>
-                <Card.Body>
-                  <Card.Link href="#">Add an ignored tag</Card.Link>
-                </Card.Body>
-              </Card>
-              <br />
-              <Card style={{ width: "15rem" }}>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>Spaces to follow</ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                  <ListGroup.Item></ListGroup.Item>
-                </ListGroup>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </body>
-    </div>
-  }
 }
 export default Sub;
-
-

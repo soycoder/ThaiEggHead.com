@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
-import { Avatar, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
@@ -10,47 +10,75 @@ import "./styles.css";
 import { theme } from "../constants";
 import { images, SIZES, COLORS } from "../constants";
 
+import Avatar from "react-avatar";
+
 const ProfileOption = (props) => {
   return (
     <Dropdown style={{ marginLeft: 20 }}>
       <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
-        {/* <Avatar
-          src={props.user.imgURL}
-          style={{ marginLeft: SIZES.padding, width: 35, height: 35 }}
-        ></Avatar> */}
-        <img
-          className="img-user"
-          src={props.user.imgURL ? props.user.imgURL : images.pic_profile}
-        />
+        {props.user.imgURL ? (
+          <Avatar size="40" src={props.user.imgURL} round={true} />
+        ) : (
+          <Avatar
+            size="40"
+            name={props.user.firstName + " " + props.user.lastName}
+            round={true}
+          />
+        )}
       </Dropdown.Toggle>
       <Dropdown.Menu style={{ width: 250 }}>
         <Dropdown.Item className="menu-text">
-          <Link to={`/profile/${props.user.userID}`}>
-            <div class="co-name" style={theme.FONTS.body4}>
-              <img
-                className="img-user2"
-                src={props.user.imgURL ? props.user.imgURL : images.pic_profile}
-              />
+          <NavLink to={`/profile/${props.user.userID}`}>
+            <div class="co-name card" style={theme.FONTS.body4}>
+              {props.user.imgURL ? (
+                <Avatar size="40" src={props.user.imgURL} round={true} />
+              ) : (
+                <Avatar
+                  size="40"
+                  name={props.user.firstName + " " + props.user.lastName}
+                  round={true}
+                />
+              )}
               {props.user.firstName + " " + props.user.lastName}
             </div>
-          </Link>
+          </NavLink>
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item href="#/action-1" className="menu-text" style={theme.FONTS.body4}>
+        <Dropdown.Item
+          href="#/action-1"
+          className="menu-text"
+          style={theme.FONTS.body4}
+        >
           Bookmark
         </Dropdown.Item>
-        <Dropdown.Item href="#/action-1" className="menu-text" style={theme.FONTS.body4}>
+        <Dropdown.Item
+          href="#/action-1"
+          className="menu-text"
+          style={theme.FONTS.body4}
+        >
           Your content
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item href="#/action-2" className="menu-text" style={theme.FONTS.body4}>
+        <Dropdown.Item
+          href="#/action-2"
+          className="menu-text"
+          style={theme.FONTS.body4}
+        >
           Settings
         </Dropdown.Item>
-        <Dropdown.Item href="#/action-2" className="menu-text" style={theme.FONTS.body4}>
+        <Dropdown.Item
+          href="#/action-2"
+          className="menu-text"
+          style={theme.FONTS.body4}
+        >
           Help
         </Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item onClick={props.auth.logout} className="menu-text" style={theme.FONTS.body4}>
+        <Dropdown.Item
+          onClick={props.auth.logout}
+          className="menu-text"
+          style={theme.FONTS.body4}
+        >
           Sign out
         </Dropdown.Item>
       </Dropdown.Menu>

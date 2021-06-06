@@ -9,9 +9,9 @@ import {
   Form,
   Modal,
   Button,
-  Image
+  Image,
 } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Link, NavLink, Redirect } from "react-router-dom";
 import { images } from "../constants";
 import React, { useState, useEffect, useContext } from "react";
 import { Icon } from "@blueprintjs/core";
@@ -24,8 +24,10 @@ import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
 
 import "./styles.css";
-import Select from "react-select"
+import Select from "react-select";
 import { theme } from "../constants";
+
+import Avatar from "react-avatar";
 
 function Home({ isAuthenticated }) {
   // Initial User Profile
@@ -45,7 +47,7 @@ function Home({ isAuthenticated }) {
   const handleShow = () => setShow(true);
   const [datas, setdatas] = useState([]);
 
-  const [isShowAnounce, setIsShowAnounce] = useState(true)
+  const [isShowAnounce, setIsShowAnounce] = useState(true);
 
   const [multipleFiles, setMultipleFiles] = useState([]);
 
@@ -117,7 +119,7 @@ function Home({ isAuthenticated }) {
       .then((res) => res.json())
       .then((res) => setdatas(res));
   }, []);
-  
+
   const [optionTag, setOptionTag] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/forums/tag`)
@@ -136,44 +138,43 @@ function Home({ isAuthenticated }) {
   var [tag, setTag] = useState("");
   const [value, getValue] = useState([]);
   var handle = (e) => {
-    getValue(Array.isArray(e) ? e.map(x => x.label) : []);
-  }
+    getValue(Array.isArray(e) ? e.map((x) => x.label) : []);
+  };
 
-  var i, j
-  var t = " "
-  var arrayTag = []
+  var i, j;
+  var t = " ";
+  var arrayTag = [];
   function tagData() {
     datas.map((dataTag) => {
       for (i = 0; i < dataTag.listTag.length; i++) {
         if (dataTag.listTag[i] !== " ") {
-          t = t + " " + dataTag.listTag[i]
+          t = t + " " + dataTag.listTag[i];
         }
       }
-      arrayTag = t.split(" ")
-
-    }
-    )
-    return (
-      arrayTag
-    )
+      arrayTag = t.split(" ");
+    });
+    return arrayTag;
   }
-  { tagData() }
+  {
+    tagData();
+  }
 
-  const count = {}
-  arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
+  const count = {};
+  arrayTag.forEach(function (i) {
+    count[i] = (count[i] || 0) + 1;
+  });
   console.log(count);
 
   var key = [];
   var sumTag = [];
-  key = Object.keys(count)
-  sumTag = Object.values(count)
+  key = Object.keys(count);
+  sumTag = Object.values(count);
 
   for (j = 0; j < key.length; j++) {
     key[j] = { name: key[j], num: sumTag[j] };
   }
 
-  key.shift()
-
+  key.shift();
 
   var newArray = datas.filter(function (ele) {
     var i, j;
@@ -183,14 +184,13 @@ function Home({ isAuthenticated }) {
     for (i = 0; i <= nn; i++) {
       for (j = 0; j < n; j++) {
         if (nn != 0) {
-          tag = value[i]
+          tag = value[i];
         }
         console.log(tag);
         if (ele.listTag[j] === tag) {
           return ele.listTag;
-        }
-        else if (tag === "") {
-          return newArray = datas;
+        } else if (tag === "") {
+          return (newArray = datas);
         }
       }
     }
@@ -215,10 +215,7 @@ function Home({ isAuthenticated }) {
               className="subject-img"
               style={{ marginRight: 5 }}
             />
-            <div style={theme.FONTS.home4}>
-              {subject.subjectName}
-            </div>
-            
+            <div style={theme.FONTS.home4}>{subject.subjectName}</div>
           </Button>
         </Link>
       </li>
@@ -231,22 +228,30 @@ function Home({ isAuthenticated }) {
       return (
         <Card style={{ marginBottom: 10, padding: 15 }}>
           <Card.Subtitle className="card-username">
-            <Link to={`/profile/${user.userID}`}>
-              <img
+            <NavLink to={`/profile/${user.userID}`}>
+              {/* <img
                 class="user-image-small"
                 src={user.imgURL ? user.imgURL : images.pic_profile}
-              />
-            </Link>
-            <div class="user-name-small">
-              <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
+              /> */}
+              {user.imgURL ? (
+                <Avatar size="20" src={user.imgURL} round={true} />
+              ) : (
+                <Avatar
+                  size="20"
+                  name={user.firstName + " " + user.lastName}
+                  round={true}
+                />
+              )}
+              <div class="user-name-small" style={theme.FONTS.name}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
-              </Link>
-            </div>
+              </div>
+            </NavLink>
           </Card.Subtitle>
 
           <Form>
             <Form.Group>
-              <Form.Control style={theme.FONTS.filter}
+              <Form.Control
+                style={theme.FONTS.filter}
                 placeholder="คุณกำลังติดปัญหาอะไรรึเปล่า ? ถามมาสิ"
                 onClick={handleShow}
               />
@@ -281,11 +286,20 @@ function Home({ isAuthenticated }) {
           <Card.Text className="card-title" style={theme.FONTS.home2}>
             ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
           </Card.Text>
-          <Card.Text className="card-subtitle" style={theme.FONTS.home4}>สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน</Card.Text>
-          <Button variant="primary" className="btn-learnmore" style={theme.FONTS.body4}>
+          <Card.Text className="card-subtitle" style={theme.FONTS.home4}>
+            สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน
+          </Card.Text>
+          <Button
+            variant="primary"
+            className="btn-learnmore"
+            style={theme.FONTS.body4}
+          >
             ดูข้อมูลเพิ่มเติม
           </Button>
-          <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
+          <Button
+            className="btn-close btn-close2"
+            onClick={() => setIsShowAnounce(!isShowAnounce)}
+          ></Button>
           {/* <img
               src={images.logo_event}
               height="130"
@@ -297,61 +311,96 @@ function Home({ isAuthenticated }) {
     );
   };
 
+  const RelateQuestion = () => {
+    return (
+      <Card style={{}}>
+        <Card.Header>คำถามมาแรง 🔥</Card.Header>
+        <Card.Body>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <a id="relate-question">
+              เชื้อราดำใน Chernobyl
+              อาจสามารถปกป้องนักบินอวกาศจากรังสีมรณะบนดาวอังคารได้ไหม
+            </a>
+            <a id="relate-question">
+              อะไรที่สามารถนำมาทำผัดกะเพรานอกเหนือเนื้อสัตว์ปกติได้อีกมั้ย?
+            </a>
+            <a id="relate-question">กระจกรถยนต์หลุดจากกิ๊บหนีบแก้ปัญหายังไง</a>
+            <a id="relate-question">
+              ผู้หญิงจะเพอร์เฟคและมีเสน่ห์ที่สุดช่วงอายุเท่าไหร่?
+            </a>
+            <a id="relate-question">ถ้าเราแนะนำเพื่อนให้ไปกู้ถือว่าผิดไหม</a>
+          </div>
+
+          <br />
+        </Card.Body>
+      </Card>
+    );
+  };
+
   return (
     <div>
-      <body style={{ backgroundColor: "#F3F3F3" }} >
+      <body style={{ backgroundColor: "#F3F3F3" }}>
         <br />
         <br />
         <Container fluid="xl">
           <Row xs={1} md={3}>
-            <Col md="auto" >
-              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.home3}>พื้นที่ความรู้</h5>
+            <Col md="auto">
+              <h5 style={{ marginLeft: 54 }} style={theme.FONTS.home3}>
+                พื้นที่ความรู้
+              </h5>
               <LeftNavigate data={subjectNavigate} />
             </Col>
 
             <Col md={6}>
-
-              {isShowAnounce ? (
-                <AnouncingCard />
-              ) : (<></>)}
+              {isShowAnounce ? <AnouncingCard /> : <></>}
 
               <UserQuestionCard />
 
               {newArray.map((forum) => (
-                <ForumCard data={forum}></ForumCard>
+                <ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>
               ))}
             </Col>
 
             <Col md={2}>
-              <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
+              <Card style={{ minWidth: "13rem" }} style={theme.FONTS.filter}>
                 <Card.Header>Filter</Card.Header>
                 <Card.Body>
-                  <div >
-                    <Select isMulti options={optionTag} onChange={handle}></Select>
+                  <div>
+                    <Select
+                      isMulti
+                      options={optionTag}
+                      onChange={handle}
+                    ></Select>
                   </div>
                 </Card.Body>
               </Card>
               <br />
               <Card>
                 <Card.Header className="card-header" style={theme.FONTS.tag}>
-                  Tags ทั้งหมด 
-                </Card.Header>  
+                  Tags ทั้งหมด
+                </Card.Header>
                 <Card.Body style={theme.FONTS.tag}>
-                  <div >
-                    {key.map(item => {
+                  <div>
+                    {key.map((item) => {
                       return (
                         <div>
-                          <Button style={theme.FONTS.tag1} variant="outline-warning" className="app-fontSizeTag">{item.name}</Button>{"  x "}{item.num}
+                          <Button
+                            style={theme.FONTS.tag1}
+                            variant="outline-warning"
+                            className="app-fontSizeTag"
+                          >
+                            {item.name}
+                          </Button>
+                          {"  x "}
+                          {item.num}
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </Card.Body>
               </Card>
               <br />
-              <Card style={{ width: "13rem" }} style={theme.FONTS.tag}>
-                <div>Hotest Question</div>
-              </Card>
+              <RelateQuestion />
             </Col>
           </Row>
         </Container>

@@ -12,25 +12,34 @@ import {
   Form,
   Button as Button2,
 } from "react-bootstrap";
+
+import Avatar from "react-avatar";
+
 import { Button, Icon, InputGroup } from "@blueprintjs/core";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { images } from "../constants";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { theme } from "../constants";
 
 import Moment from "react-moment";
 
+import { AuthContext } from "../context/AuthContext";
+import jwt_decode from "jwt-decode";
+
 function ForumCard(props) {
   let forum = props.data;
 
-  // var numImage = forum.listImage;
-  // var i;
-  // var objImage = [];
-  // if (numImage.length > 0) {
-  //   for (i = 0; i < numImage.length; i++) {
-  //     objImage[i] = { path: numImage[i].filePath };
-  //   }
-  // }
+  // Initial User Profile
+  const auth = useContext(AuthContext);
+
+  var { token } = auth?.authState;
+  var decoded;
+  var user;
+
+  if (props.isAuthenticated) {
+    decoded = jwt_decode(token);
+    user = decoded;
+  }
 
   const [isShowComment, setIsShowComment] = useState(false);
   const [isViewMore, setIsViewMore] = useState(false);
@@ -121,7 +130,7 @@ function ForumCard(props) {
     const ButtomOption = () => {
       return (
         <div style={{ marginLeft: 10, marginBottom: 5 }}>
-          <UpvoteBotton upvote={10} />
+          <UpvoteBotton upvote={Math.floor((Math.random() * 100) + 1)} />
 
           {/* Comment Btn */}
           <OverlayTrigger
@@ -134,7 +143,7 @@ function ForumCard(props) {
               icon="comment"
               onClick={() => handleClickComment()}
             >
-              {124}
+              {Math.floor((Math.random() * 10) + 1)}
             </Button>
           </OverlayTrigger>
         </div>
@@ -173,10 +182,15 @@ function ForumCard(props) {
               <i class="fa fa-chevron-down"></i>
             </div>
             <Link to={`/profile/${user.userID}`}>
-              <img
-                class="co-logo"
-                src={user.imgURL ? user.imgURL : images.pic_profile}
-              />
+              {user.imgURL ? (
+                <Avatar size="40" src={user.imgURL} round={true} />
+              ) : (
+                <Avatar
+                  size="40"
+                  name={user.firstName + " " + user.lastName}
+                  round={true}
+                />
+              )}
             </Link>
             <div class="co-name">
               <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
@@ -299,7 +313,7 @@ function ForumCard(props) {
     );
   };
 
-  const Answer = () => {
+  const Answer = (props) => {
     const dummyComment = [
       {
         comment: "NOPE",
@@ -309,9 +323,6 @@ function ForumCard(props) {
     const [isLoadingAnswer, setIsLoadingAnswer] = useState(true);
     const [isShowCommentForm, setIsShowCommentForm] = useState(false);
     const [comment, setComment] = useState(dummyComment);
-    const [user, setUser] = useState(
-      JSON.parse(localStorage?.getItem("profile"))
-    );
     const [userAnswer, setUserAnswer] = useState(dummyUser);
 
     const UpvoteBotton = (props) => {
@@ -353,10 +364,21 @@ function ForumCard(props) {
     };
 
     const AnswerForm = () => {
+
       return (
         <div>
-          <div className="answer-box">
-            <img class="co-logo2" src={user?.result.imageUrl} />
+          <div className="answer-box ">
+            {/* <img class="co-logo2" src={user?.result.imageUrl} /> */}
+            <NavLink to={`/profile/${user.userID}`} className="me-3">
+            {user?.imgURL ? (
+              <Avatar size="35" src={user.imgURL} round={true} />
+            ) : (
+              <Avatar
+                size="35"
+                name={user.firstName + " " + user.lastName}
+                round={true}
+              />
+            )}</NavLink>
             <InputGroup
               onChange={{}}
               placeholder="Add a answer..."
@@ -526,7 +548,7 @@ function ForumCard(props) {
 
     return (
       <div className="answer-pad">
-        <AnswerForm />
+        <AnswerForm user={user}/>
         <AnswerList />
       </div>
     );
