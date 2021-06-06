@@ -17,7 +17,7 @@ import Select from "react-select"
 import { Keys } from "@blueprintjs/core";
 import { theme } from "../constants";
 
-function QuestionPage() {
+function QuestionPage({isAuthenticated}) {
   let { question } = useParams();
   const [forumData, setForumData] = useState(null);
 
@@ -86,7 +86,7 @@ function QuestionPage() {
             <Spinner animation="border"></Spinner>
             )} */}
 
-            {forumData?(<ForumCard data={forumData} isReadLong={true}/>):(<Spinner animation="border"></Spinner>)}
+            {forumData?(<ForumCard data={forumData} isReadLong={true} isAuthenticated={isAuthenticated}/>):(<Spinner animation="border"></Spinner>)}
 
           </Col>
           <Col md={3}>
