@@ -4,12 +4,10 @@ import {
   Row,
   Col,
   Container,
-  ListGroup,
   Card,
   Form,
   Modal,
   Button,
-  Image
 } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { images } from "../constants";
@@ -44,7 +42,7 @@ function Home({ isAuthenticated }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [datas, setdatas] = useState([]);
-
+  const [isArrayEmpty, setIsArrayEmpty] = useState(false);
   const [isShowAnounce, setIsShowAnounce] = useState(true)
 
   const [multipleFiles, setMultipleFiles] = useState([]);
@@ -161,7 +159,7 @@ function Home({ isAuthenticated }) {
 
   const count = {}
   arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
-  console.log(count);
+  // console.log(count);
 
   var key = [];
   var sumTag = [];
@@ -185,7 +183,7 @@ function Home({ isAuthenticated }) {
         if (nn != 0) {
           tag = value[i]
         }
-        console.log(tag);
+        // console.log(tag);
         if (ele.listTag[j] === tag) {
           return ele.listTag;
         }
@@ -299,7 +297,7 @@ function Home({ isAuthenticated }) {
 
   return (
     <div>
-      <body style={{ backgroundColor: "#F3F3F3" }} >
+      <body style={{ backgroundColor: "#F3F3F3", minHeight:200 }} >
         <br />
         <br />
         <Container fluid="xl">
@@ -316,14 +314,34 @@ function Home({ isAuthenticated }) {
               ) : (<></>)}
 
               <UserQuestionCard />
+                          
+              {newArray.map((forum) => {
+                if(newArray.length!=0){
+                  console.log(newArray.length);
+                  return(<ForumCard data={forum}></ForumCard>)
+                }
+                  
+                else{
+                  console.log("qsdqsd");
+                  return(
+                    <div class="bp3-non-ideal-state">
+                      <div class="bp3-non-ideal-state-visual">
+                        <span class="bp3-icon bp3-icon-folder-open"></span>
+                      </div>
+                      <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
+                      <div>สร้างคำถามเองเลยสิ</div>
+                      <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
+                    </div>
+                  )
+                }
+                  
+              
+              })}
 
-              {newArray.map((forum) => (
-                <ForumCard data={forum}></ForumCard>
-              ))}
             </Col>
 
             <Col md={2}>
-              <Card style={{ width: "13rem" }} style={theme.FONTS.filter}>
+              <Card style={theme.FONTS.filter}>
                 <Card.Header>Filter</Card.Header>
                 <Card.Body>
                   <div >
@@ -349,9 +367,9 @@ function Home({ isAuthenticated }) {
                 </Card.Body>
               </Card>
               <br />
-              <Card style={{ width: "13rem" }} style={theme.FONTS.tag}>
+              {/* <Card style={{ width: "13rem" }} style={theme.FONTS.tag}>
                 <div>Hotest Question</div>
-              </Card>
+              </Card> */}
             </Col>
           </Row>
         </Container>

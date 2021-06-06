@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Navbar, Nav, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Avatar, Button } from "@material-ui/core";
 
 import { AuthContext } from "../context/AuthContext";
@@ -71,7 +71,7 @@ const NavigationBar = ({ isAuthenticated }) => {
   }
 
   const NavUser = () => {
-    return(
+    return (
       <Navbar.Collapse
         className="justify-content-end"
         style={{ marginRight: 250 }}
@@ -79,37 +79,46 @@ const NavigationBar = ({ isAuthenticated }) => {
         <div class="bp3-input-group searchbar">
           <span class="bp3-icon bp3-icon-search"></span>
           <input type="text" class="bp3-input" placeholder="Search" />
-          <button class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right" ></button>
+          <button class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"></button>
         </div>
-
+        <NavLink to="/create/forum">
+          <Button
+            className="ms-3"
+            variant="contained"
+            color="secondary"
+            size="mediem"
+          >
+            Ask Question
+          </Button>
+        </NavLink>
         <ProfileOption user={user} auth={auth} />
       </Navbar.Collapse>
-    )
-  }
+    );
+  };
 
   const NavNonUser = () => {
-    return(
+    return (
       <Navbar.Collapse className="justify-content-end">
-        <Button
-          component={Link}
-          to="/auth"
-          style={{
-            marginLeft: SIZES.padding2 * 2,
-            marginRight: SIZES.padding3 * 4,
-            borderRadius: 19,
-          }}
-          variant="contained"
-          color="secondary"
-          size="mediem"
-        >
-          Join us
-        </Button>
+        <NavLink to="/auth">
+          <Button
+            style={{
+              marginLeft: SIZES.padding2 * 2,
+              marginRight: SIZES.padding3 * 4,
+              borderRadius: 19,
+            }}
+            variant="contained"
+            color="secondary"
+            size="mediem"
+          >
+            Join us
+          </Button>
+        </NavLink>
       </Navbar.Collapse>
-    )
-  }
+    );
+  };
 
   const BrandLogo = () => {
-    return(
+    return (
       <>
         <Navbar.Brand style={{ marginLeft: 250 }}>
           <Link to="/">
@@ -133,34 +142,36 @@ const NavigationBar = ({ isAuthenticated }) => {
                   fontSize: 30,
                   marginLeft: 75,
                 }}
-                
               >
                 ThaiEggHead
               </div>
             </div>
           </Link>
-          
         </Navbar.Brand>
         <Nav className="mr-auto" style={theme.FONTS.nav}>
-          <Nav.Link href="#features"  style={theme.FONTS.nav}>About us</Nav.Link>
-          <Nav.Link href="#features"  style={theme.FONTS.nav}>Home</Nav.Link>
-          <Nav.Link href="#features"  style={theme.FONTS.nav}>Discovery</Nav.Link>
-          <Nav.Link href="#features"  style={theme.FONTS.nav}>Context</Nav.Link>
+          <Nav.Link href="#features" style={theme.FONTS.nav}>
+            About us
+          </Nav.Link>
+          <Nav.Link href="#features" style={theme.FONTS.nav}>
+            Home
+          </Nav.Link>
+          <Nav.Link href="#features" style={theme.FONTS.nav}>
+            Discovery
+          </Nav.Link>
+          <Nav.Link href="#features" style={theme.FONTS.nav}>
+            Context
+          </Nav.Link>
         </Nav>
       </>
-    )
-  }
+    );
+  };
   return (
     <div className="Navbar">
       <Navbar expand="lg" bg="dark" variant="dark" className="navbar">
-        <BrandLogo/>
-          
+        <BrandLogo />
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          {user ? (
-            <NavUser/>
-          ) : (
-            <NavNonUser/>
-          )}
+        {user ? <NavUser /> : <NavNonUser />}
       </Navbar>
     </div>
   );

@@ -18,7 +18,7 @@ import AvatarCropper from "../components/ProfileImage";
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
 import { theme } from "../constants";
-import { images, COLORS, FONTS, SIZES } from "../constants";
+import { FONTS } from "../constants";
 
 const Profile = ({ isAuthenticated }) => {
   const dummyUser = {
@@ -143,12 +143,16 @@ const Profile = ({ isAuthenticated }) => {
 
   const NonIdealState = () => {
     return (
-      <div class="bp3-non-ideal-state" >
+      <div class="bp3-non-ideal-state">
         <div class="bp3-non-ideal-state-visual">
           <span class="bp3-icon bp3-icon-folder-open"></span>
         </div>
-        <h4 class="bp3-heading" style={theme.FONTS.detail}>Empty</h4>
-        <div style={theme.FONTS.detail}>You haven't answered any questions yet.</div>
+        <h4 class="bp3-heading" style={theme.FONTS.detail}>
+          Empty
+        </h4>
+        <div style={theme.FONTS.detail}>
+          You haven't answered any questions yet.
+        </div>
       </div>
     );
   };
@@ -224,10 +228,13 @@ const Profile = ({ isAuthenticated }) => {
         </Col>
         <Col md={6}>
           <div class="profile-head">
-            <h3 style={theme.FONTS.profile}>{userData.firstName + " " + userData.lastName}</h3>
+            <h3 style={theme.FONTS.profile}>
+              {userData.firstName + " " + userData.lastName}
+            </h3>
             {/* <h5>{userName}</h5> */}
             <p class="proile-rating" style={theme.FONTS.score}>
-              EggHead Score : <span style={theme.FONTS.score}>{eggHeadScore}</span>
+              EggHead Score :{" "}
+              <span style={theme.FONTS.score}>{eggHeadScore}</span>
             </p>
             <Navs />
             <ContentDisplay />
@@ -254,7 +261,6 @@ const Profile = ({ isAuthenticated }) => {
 
       const subjectTag = _list.map(
         (subject) => {
-          
           return (
             <Badge bg="info" style={{ marginLeft: 4 }}>
               {/* <Link to={`/subject/${}`}>{subject}</Link> */}
@@ -271,7 +277,9 @@ const Profile = ({ isAuthenticated }) => {
           return (
             <Card className="app-padding" style={{ marginBottom: 5 }}>
               <Link to={`/question/${item.forumID}`}>
-                <Card.Subtitle  style={theme.FONTS.detail1}>📌{" " + item.title}</Card.Subtitle>
+                <Card.Subtitle style={theme.FONTS.detail1}>
+                  📌{" " + item.title}
+                </Card.Subtitle>
               </Link>
               <ListTag data={item} />
             </Card>
@@ -292,8 +300,12 @@ const Profile = ({ isAuthenticated }) => {
               </Col>
               <Col md={10}>
                 <Card.Body>
-                  <Card.Title style={theme.FONTS.title1}>{props.data.place}</Card.Title>
-                  <Card.Text style={theme.FONTS.title2}>{props.data.degree}</Card.Text>
+                  <Card.Title style={theme.FONTS.title1}>
+                    {props.data.place}
+                  </Card.Title>
+                  <Card.Text style={theme.FONTS.title2}>
+                    {props.data.degree}
+                  </Card.Text>
                   <Card.Text className="text-muted" style={theme.FONTS.title2}>
                     {props.data.since}
                   </Card.Text>
@@ -326,7 +338,9 @@ const Profile = ({ isAuthenticated }) => {
               <label style={theme.FONTS.detail}>Name</label>
             </Col>
             <Col md={6}>
-              <p style={theme.FONTS.detail}>{userData.firstName + " " + userData.lastName}</p>
+              <p style={theme.FONTS.detail}>
+                {userData.firstName + " " + userData.lastName}
+              </p>
             </Col>
           </Row>
           <Row class="row">
@@ -342,7 +356,7 @@ const Profile = ({ isAuthenticated }) => {
               <label style={theme.FONTS.detail}>Organization</label>
             </Col>
             <Col md={6}>
-              <p  style={theme.FONTS.detail}>{organization}</p>
+              <p style={theme.FONTS.detail}>{organization}</p>
             </Col>
           </Row>
           <Row class="row">

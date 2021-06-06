@@ -32,7 +32,7 @@ function Sub() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/forums?subject=${subject}`)
+    fetch(`http://localhost:5000/forums?subject=${SubjectData.get(subject)[0]}`)
       .then((res) => res.json())
       .then((res) => setForumData(res));
   }, []);
