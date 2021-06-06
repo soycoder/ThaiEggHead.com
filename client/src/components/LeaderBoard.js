@@ -49,7 +49,8 @@ export default function WithoutInfo() {
     hover
     entries={Top}
     // entriesOptions={[5,10]}
-    pagesAmount={4}
+    // pagesAmount={4}
+    searching={false}
     info={false}
     striped
     bordered
