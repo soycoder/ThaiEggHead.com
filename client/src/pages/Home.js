@@ -288,7 +288,7 @@ function Home({ isAuthenticated }) {
       <Card style={{ marginBottom: 10 }} className="shadow">
         <Card.Body>
           <Card.Text className="card-title" style={theme.FONTS.home2}>
-            ประกาศงานแข่งขัน "ThaiEggHead World Meetup Week 2025"
+            ประชาสัมพันธ์ร่วมกิจกรรม "ThaiEggHead CS385 Meetup 2025"
           </Card.Text>
           <Card.Text className="card-subtitle" style={theme.FONTS.home4}>
             สมัครเข้าร่วมได้ตั้งแต่วันที่ 18-25 มิถุนายน
