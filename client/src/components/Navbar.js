@@ -9,11 +9,12 @@ import jwt_decode from "jwt-decode";
 import "./styles.css";
 import { theme } from "../constants";
 import { images, SIZES } from "../constants";
-import { Position, Toaster, Intent } from "@blueprintjs/core";
+import { Position, Toaster, Intent, InputGroup } from "@blueprintjs/core";
 import Avatar from "react-avatar";
 
 const NavigationBar = ({ isAuthenticated }) => {
   const [toaster, setToaster] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   function addToast() {
     toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING,  icon: "warning-sign" });
@@ -111,9 +112,11 @@ const NavigationBar = ({ isAuthenticated }) => {
       >
         <div class="bp3-input-group searchbar">
           <span class="bp3-icon bp3-icon-search"></span>
-          <input type="text" class="bp3-input" placeholder="Search" />
-          <button class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"></button>
+          <input value={searchKeyword} type="text" class="bp3-input" placeholder="Search" onChange={(e) => setSearchKeyword(e.target.value)}/>
+          <Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right">
+          </Link>
         </div>
+
         <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: SIZES.h4}}>
           <Button
             className="ms-3"
