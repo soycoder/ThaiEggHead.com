@@ -5,13 +5,13 @@ const ToasterCard = () => {
   const [toaster, setToaster] = useState([]);
 
   function addToast() {
-    toaster.show({ message: "Toasted!", intent: Intent.DANGER });
+    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.DANGER });
   }
 
   return (
     <div>
       <Button onClick={addToast} text="Procure toast" />
-      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)} />
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
     </div>
   );
 };

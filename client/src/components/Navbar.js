@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar, Nav, Dropdown, DropdownButton, ButtonGroup, SplitButton } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
@@ -9,7 +9,7 @@ import jwt_decode from "jwt-decode";
 import "./styles.css";
 import { theme } from "../constants";
 import { images, SIZES, COLORS } from "../constants";
-
+import { Position, Toaster, Intent } from "@blueprintjs/core";
 import Avatar from "react-avatar";
 
 const ProfileOption = (props) => {
@@ -87,6 +87,12 @@ const ProfileOption = (props) => {
 };
 
 const NavigationBar = ({ isAuthenticated }) => {
+  const [toaster, setToaster] = useState([]);
+
+  function addToast() {
+    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.DANGER });
+  }
+
   const auth = useContext(AuthContext);
 
   var { token } = auth?.authState;
@@ -176,16 +182,13 @@ const NavigationBar = ({ isAuthenticated }) => {
           </Link>
         </Navbar.Brand>
         <Nav className="mr-auto" style={theme.FONTS.nav}>
-          <Nav.Link href="#features" style={theme.FONTS.nav}>
+          <Nav.Link onClick={addToast} style={theme.FONTS.nav}>
             About us
           </Nav.Link>
-          <Nav.Link href="#features" style={theme.FONTS.nav}>
-            Home
-          </Nav.Link>
-          <Nav.Link href="#features" style={theme.FONTS.nav}>
+          <Nav.Link onClick={addToast} style={theme.FONTS.nav}>
             Discovery
           </Nav.Link>
-          <Nav.Link href="#features" style={theme.FONTS.nav}>
+          <Nav.Link onClick={addToast} style={theme.FONTS.nav}>
             Contact us
           </Nav.Link>
         </Nav>
@@ -195,6 +198,7 @@ const NavigationBar = ({ isAuthenticated }) => {
 
   return (
     <div className="Navbar">
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
       <Navbar expand="lg" bg="dark" variant="dark" className="navbar">
         <BrandLogo />
 
