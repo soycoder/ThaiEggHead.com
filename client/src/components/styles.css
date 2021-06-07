@@ -418,7 +418,7 @@ a:hover {
   align-self: flex-end !important;
 }
 
-.dropdown-menu.show{
+.dropdown-menu-user{
   margin-left: -210px;
 }
 

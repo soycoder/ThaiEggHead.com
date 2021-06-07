@@ -33,7 +33,7 @@ const NavigationBar = ({ isAuthenticated }) => {
   
   const ProfileOption = (props) => {
     return (
-      <Dropdown alignRight style={{ marginLeft: 20 }}>
+      <Dropdown alignRight style={{ marginLeft: 20 }} >
         <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
           {props.user.imgURL ? (
             <Avatar size="40" src={props.user.imgURL} round={true} />
@@ -45,7 +45,7 @@ const NavigationBar = ({ isAuthenticated }) => {
             />
           )}
         </Dropdown.Toggle>
-        <Dropdown.Menu style={{ width: 250 }}>
+        <Dropdown.Menu className="dropdown-menu-user" style={{ width: 250 }}>
           <Dropdown.Item className="menu-text">
             <NavLink to={`/profile/${props.user.userID}`}>
               <div class="co-name" style={theme.FONTS.body4}>

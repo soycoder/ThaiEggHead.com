@@ -48,7 +48,7 @@ function SearchForum({isAuthenticated}) {
 
     const CardSearchResult = (props) => {
         return(
-            <Card className="app-padding" style={{ marginBottom: 5 }}>
+            <Card className="app-padding card-search-result">
               <Link to={`/question/${props.data.forumID}`}>
                 <Card.Subtitle style={{fontFamily: "Krub-Regular", fontSize:14, color:"black"}}>
                   {" " + props.data.title}
