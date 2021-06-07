@@ -213,7 +213,7 @@ const NavigationBar = ({ isAuthenticated }) => {
         {user ? <>
           <div class="bp3-input-group searchbar justify-content-end">
             <span class="bp3-icon bp3-icon-search"></span>
-            <input value={searchKeyword} type="text" class="bp3-input" placeholder="Search" onChange={SearchKeyword}/>
+            <input value={searchKeyword} type="text" class="bp3-input" placeholder="ค้นหาคำถาม" onChange={SearchKeyword}/>
             {searchKeyword?(<Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"/>):(<></>)}
           </div>
           <NavUser />

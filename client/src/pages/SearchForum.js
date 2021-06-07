@@ -8,9 +8,10 @@ import {
   Container,
   Button,
   Card,
-  Badge
+  Badge,
+  NavLink
 } from "react-bootstrap";
-import { useParams, NavLink, Link } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ForumCard from "../components/ForumCard";
 import { Position, Toaster, Intent } from "@blueprintjs/core";
@@ -20,6 +21,7 @@ function SearchForum({isAuthenticated}) {
     const [datas, setDatas] = useState(null)
     const [searchQuery, setSearchQuery] = useState("");
     const forums = datas
+    const loc = useLocation();
 
     useEffect(() => {
         fetch("http://localhost:5000/forums")
@@ -28,7 +30,7 @@ function SearchForum({isAuthenticated}) {
               setDatas(res);
               setSearchQuery(keyword)
           })
-      }, []);
+      }, [loc]);
     
     const filterPosts = (forums, query) => {
         if (!query) {
@@ -42,6 +44,7 @@ function SearchForum({isAuthenticated}) {
     };
 
     const filteredPosts = filterPosts(forums, searchQuery);
+    console.log(filteredPosts);
 
     const CardSearchResult = (props) => {
         return(
@@ -100,8 +103,35 @@ function SearchForum({isAuthenticated}) {
     }
 
     if(datas){
-        if(keyword==null)
-            return (<div>NO FORUM</div>)
+        if(filteredPosts.length==0)
+            return (
+            <div>
+                <Container fluid="xl">
+                    <Row className="justify-content-md-center">
+                    
+                    <Col md={6}>
+                        <CurrentSearch/>
+                        <div class="bp3-non-ideal-state" style={FONTS.filter}>
+                            <div class="bp3-non-ideal-state-visual">
+                                <span class="bp3-icon bp3-icon-folder-open"></span>
+                            </div>
+                            <h4 class="bp3-heading" style={{fontFamily: "Krub-Regular", fontSize: 22}}>ไม่มีคำถามที่คุณกำลังตามหา</h4>
+                            <div style={{fontFamily: "Krub-Regular", fontSize: 16}}>สร้างคำถามเองเลยสิ</div>
+                            <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: 12}}>
+                                <Button
+                                variant="warning"
+                                >
+                                ตั้งคำถาม
+                                </Button>
+                            </NavLink>
+                            </div>
+                    </Col>
+
+                    
+                    </Row>
+                </Container>
+            </div>
+                )
         else
             return (
                 <div>
