@@ -303,7 +303,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
           onChange={(e) => MultipleFileChange(e)}
           type="file"
           id="formFileMultiple"
-          // multiple
+          multiple
         />
       </Form.Group>
 

@@ -263,27 +263,3 @@ export const remove = (req, res) => {
       });
     });
 };
-/////////////////////////NetteN/////////////////////////
-// export  imgUserUpload = async (req, res, next) => {
-//   try{
-//       const file = new imgfile({
-//           fileName: req.file.originalname,
-//           filePath: req.file.path,
-//           fileType: req.file.mimetype,
-//           fileSize: fileSizeFormatter(req.file.size, 2) // 0.00
-//       });
-//       await file.save();
-//       res.status(201).send('File Uploaded Successfully');
-//   }catch(error) {
-//       res.status(400).send(error.message);
-//   }
-// }
-// export const getimgUserFiles = async (req, res, next) => {
-//   try{
-//       const files = await imgfile.find();
-//       res.status(200).send(files);
-//   }catch(error) {
-//       res.status(400).send(error.message);
-//   }
-// }
-/////////////////////////NetteN/////////////////////////
