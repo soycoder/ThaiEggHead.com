@@ -18,7 +18,7 @@ const NavigationBar = ({ isAuthenticated }) => {
   let history = useHistory();
 
   function addToast() {
-    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING,  icon: "warning-sign" });
+    toaster.show({ message: "Oops! ขออภัยอยู่ระหว่างการปรับปรุง", intent: Intent.WARNING,  icon: "warning-sign" });
   }
 
   const auth = useContext(AuthContext);

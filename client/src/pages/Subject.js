@@ -31,7 +31,7 @@ function Sub({isAuthenticated}) {
   const loc = useLocation();
 
   function addToast() {
-    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING, icon: "warning-sign" });
+    toaster.show({ message: "Oops! ขออภัยอยู่ระหว่างการปรับปรุง", intent: Intent.WARNING, icon: "warning-sign" });
   }
 
   const subjectImages = [

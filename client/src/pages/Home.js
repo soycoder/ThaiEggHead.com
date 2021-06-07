@@ -33,7 +33,7 @@ function Home({ isAuthenticated }) {
   const [toaster, setToaster] = useState([]);
 
   function addToast() {
-    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING,  icon: "warning-sign" });
+    toaster.show({ message: "Oops! ขออภัยอยู่ระหว่างการปรับปรุง", intent: Intent.WARNING,  icon: "warning-sign" });
   }
   // Initial User Profile
   const auth = useContext(AuthContext);
