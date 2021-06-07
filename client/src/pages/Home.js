@@ -254,7 +254,7 @@ function Home({ isAuthenticated }) {
                 src={user.imgURL ? user.imgURL : images.pic_profile}
               /> */}
               {user.imgURL ? (
-                <Avatar size="20" src={user.imgURL} round={true} />
+                <Avatar size="20" src={user.imgURL.indexOf("http") == 0 ? user.imgURL : "http://localhost:5000/"+user.imgURL} round={true} />
               ) : (
                 <Avatar
                   size="20"

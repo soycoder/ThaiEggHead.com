@@ -242,7 +242,7 @@ function ForumCard(props) {
                 </div>
                 <Link to={`/profile/${_user.userID}`}>
                   {_user.imgURL ? (
-                    <Avatar size="40" src={_user.imgURL} round={true} />
+                    <Avatar size="40" src={_user.imgURL.indexOf("http") == 0 ? _user.imgURL : "http://localhost:5000/"+_user.imgURL} round={true} />
                   ) : (
                     <Avatar
                       size="40"

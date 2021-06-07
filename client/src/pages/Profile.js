@@ -167,7 +167,7 @@ const Profile = ({ isAuthenticated }) => {
             <>
               <Avatar
                 size="200"
-                src={userData.imgURL}
+                src={userData.imgURL.indexOf("http") == 0 ? userData.imgURL : "http://localhost:5000/"+userData.imgURL}
                 round={true}
                 onClick={handleImgSelect}
                 className="img-edit"
@@ -213,7 +213,7 @@ const Profile = ({ isAuthenticated }) => {
           {userData.imgURL ? (
             <Avatar
               size="200"
-              src={userData.imgURL}
+              src={userData.imgURL.indexOf("http") == 0 ? userData.imgURL : "http://localhost:5000/"+userData.imgURL}
               round={true}
             />
           ) : (

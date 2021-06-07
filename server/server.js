@@ -8,7 +8,7 @@ import { default as user } from "./routes/UserRouter.js";
 import { default as forum } from "./routes/ForumRouter.js";
 import { default as answer } from "./routes/AnswerRouter.js";
 import { default as comment } from "./routes/CommentRouter.js";
-import { default as interest } from "./routes/Profile.InterestRouter.js";
+
 
 function errorHandler(err, req, res, next) {
   if (res.headersSent) {
@@ -35,9 +35,6 @@ app.use("/forums", forum);
 app.use("/answers", answer);
 // REST for comment
 app.use("/comments", comment);
-
-// REST for Profile/interest
-app.use("/profile/interest", interest);
 
 
 app.get("/", (req, res) => {

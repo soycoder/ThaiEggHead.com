@@ -6,8 +6,8 @@ import { isBlank, logError, validatorEmail } from "../util/util.js";
 
 import User from "../models/User.js";
 
-import {Buffer} from 'buffer';
-import fs from 'fs';
+import { Buffer } from "buffer";
+import fs from "fs";
 
 // Retrieve and return all products from the const Products.
 export const list = (req, res) => {
@@ -181,30 +181,31 @@ export let getImg = (req, res) => {
   let userID = req.params.userID;
 
   User.findOne({ userID: userID })
-  .then(user => {
-      if (!user) return res.status(404).send("User not found with id " + userID)
+    .then((user) => {
+      if (!user)
+        return res.status(404).send("User not found with id " + userID);
 
       if (user.avatar && user.avatar.image) {
-          // convert buffer to base64 and then return
-          var img = Buffer.from(user.avatar.image, 'base64');
-          res.writeHead(200, {
-            'Content-Type': user.avatar.contentType,
-            'Content-Length': img.length
-          });
-          return res.end(img); 
-      } 
-      else return res.send("No image yet")
-  })
-  .catch(err => res.status(404).send(err))
-}
+        // convert buffer to base64 and then return
+        var img = Buffer.from(user.avatar.image, "base64");
+        res.writeHead(200, {
+          "Content-Type": user.avatar.contentType,
+          "Content-Length": img.length,
+        });
+        return res.end(img);
+      } else return res.send("No image yet");
+    })
+    .catch((err) => res.status(404).send(err));
+};
 
 // Update an avatar identified by the userId in the request
 export let putImg = (req, res) => {
   let userID = req.params.userID;
 
   // Validate Request
-  if (!req.body) return res.status(422).json(logError('Need updated data'));
+  if (!req.body) return res.status(422).json(logError("Need updated data"));
 
+  let filesArray = [];
   if (req.files) {
     req.files.forEach((element) => {
       const file = {
@@ -215,38 +216,57 @@ export let putImg = (req, res) => {
       };
       filesArray.push(file);
     });
-      User.findOne({ userID: userID })
-      .then(user => {            
-          if(!user) {
-              return res.status(404).json(logError("User not found with id " + req.params.userId));
-          }
-          var img = fs.readFileSync(req.files[0].path);
 
-          var encode_image = img.toString('base64');
-          // Define a JSONobject for the image attributes for saving to database
-          
-          var avatar = {
-               contentType: req.files[0].mimetype,
-               image:  Buffer.from(encode_image, 'base64')
-          };
-          req.files.forEach((file, i) => {
-             fs.unlink(file.path, function (err) {
-                  if (err) {
-                      res.status(422).json("Cannot delete temp file"); 
-                  } 
-                  console.log('successfully deleted tmp file');
-              })
-          })
-          user.avatar = avatar;
-          user.save().then(result => {                         
-              res.contentType(user.avatar.contentType)
-              return res.send(user.avatar)
-          }).catch(err => { res.status(422).send(err)})
+    let newData = {
+      userID: req.body.userID,
+      imgURL: filesArray[0].filePath,
+    };
+
+    console.log("newData : ", newData);
+
+    User.findOneAndUpdate(
+      { userID: req.body.userID },
+      { $set: newData },
+      { new: true }
+    )
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send({
+            errors: {
+              global: "User not found with userID " + req.params.userID,
+            },
+          });
+        }
+        res.send(user);
       })
-      .catch(err => {console.log(err); return res.status(404).json(logError(err))})
-  } else return res.status(404).json(logError("No image file"))
+      .catch((err) => {
+        if (err.kind === "ObjectId") {
+          return res.status(404).send({
+            errors: {
+              global: "User not found with userID " + req.params.userID,
+            },
+          });
+        }
+        return res.status(500).send({
+          errors: {
+            global: "Error updating User with userID " + req.params.userID,
+          },
+        });
+      });
+  }
 };
 
+export const fileSizeFormatter = (bytes, decimal) => {
+  if (bytes === 0) {
+    return "0 Bytes";
+  }
+  const dm = decimal || 2;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "YB", "ZB"];
+  const index = Math.floor(Math.log(bytes) / Math.log(1000));
+  return (
+    parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + " " + sizes[index]
+  );
+};
 
 // ! Delete
 export const remove = (req, res) => {

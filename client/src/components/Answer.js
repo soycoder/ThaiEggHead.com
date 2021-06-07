@@ -211,7 +211,7 @@ const Answer = (props) => {
 
         <Link to={`/profile/${user.userID}`} className="me-1">
           {user.imgURL ? (
-            <Avatar size="35" src={user.imgURL} round={true} />
+            <Avatar size="35" src={user.imgURL.indexOf("http") == 0 ? user.imgURL : "http://localhost:5000/"+user.imgURL} round={true} />
           ) : (
             <Avatar
               size="35"
@@ -318,7 +318,7 @@ const Answer = (props) => {
             {/* <img class="co-logo2" src={user?.result.imageUrl} /> */}
             <NavLink to={`/profile/${user.userID}`} className="me-3">
               {user?.imgURL ? (
-                <Avatar size="35" src={user.imgURL} round={true} />
+                <Avatar size="35" src={user.imgURL.indexOf("http") == 0 ? user.imgURL : "http://localhost:5000/"+user.imgURL} round={true} />
               ) : (
                 <Avatar
                   size="35"
@@ -531,7 +531,7 @@ const Answer = (props) => {
         </div>
         <Link to={`/profile/${user.userID}`} className="me-1">
           {user.imgURL ? (
-            <Avatar size="35" src={user.imgURL} round={true} />
+            <Avatar size="35" src={user.imgURL.indexOf("http") == 0 ? user.imgURL : "http://localhost:5000/"+user.imgURL} round={true} />
           ) : (
             <Avatar
               size="35"

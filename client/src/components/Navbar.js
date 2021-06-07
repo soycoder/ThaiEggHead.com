@@ -44,7 +44,7 @@ const NavigationBar = ({ isAuthenticated }) => {
       <Dropdown alignRight style={{ marginLeft: 20 }} >
         <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
           {props.user.imgURL ? (
-            <Avatar size="40" src={props.user.imgURL} round={true} />
+            <Avatar size="40" src={props.user.imgURL.indexOf("http") == 0 ? props.user.imgURL : "http://localhost:5000/"+props.user.imgURL} round={true} />
           ) : (
             <Avatar
               size="40"
@@ -58,7 +58,7 @@ const NavigationBar = ({ isAuthenticated }) => {
             <NavLink to={`/profile/${props.user.userID}`}>
               <div class="co-name" style={theme.FONTS.body4}>
                 {props.user.imgURL ? (
-                  <Avatar size="40" src={props.user.imgURL} round={true} />
+                  <Avatar size="40" src={props.user.imgURL.indexOf("http") == 0 ? props.user.imgURL : "http://localhost:5000/"+props.user.imgURL} round={true} />
                 ) : (
                   <Avatar
                     size="40"

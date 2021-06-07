@@ -1,26 +1,19 @@
-import axios from 'axios';
+import axios from "axios";
 
-const apiUrl = 'http://localhost:5000/users/avatar/';
+const apiUrl = "http://localhost:5000/users/avatar/";
 
-export const imgUserUpload = async (data, imgFile) => {
-    try {
-        // console.log(data)
-        // console.log("op "+data.imgURL)
-        let user = data.userID;
-        // console.log(user)
-        let path = imgFile[0].name;
-        console.log(path)
+export const avatarFileUpload = async (data, options) => {
+  try {
+    var object = {};
+    data.forEach((value, key) => (object[key] = value));
+    console.log(object.userID);
 
-        // await axios.put(apiUrl, user, path);
-    } catch (error) {
-        throw error;
-    }
-}
-export const getimgUserFiles = async () => {
-    try {
-        const { data } = await axios.get(apiUrl + 'getSingleFiles');
-        return data;
-    } catch (error) {
-        throw error;
-    }
-}
+    await axios.put(apiUrl + object.userID, data, options);
+    // console.log(data);
+    // for (var pair of data.entries()) {
+    //   console.log(pair[1]);
+    // }
+  } catch (error) {
+    throw error;
+  }
+};
