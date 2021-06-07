@@ -1,5 +1,5 @@
 import "../App.css";
-import { images } from "../constants";
+import { images, FONTS } from "../constants";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Row,
@@ -20,13 +20,6 @@ function SearchForum({isAuthenticated}) {
     const [datas, setDatas] = useState(null)
     const [searchQuery, setSearchQuery] = useState("");
     const forums = datas
-
-    console.log(keyword);
-
-    const handleChange = (e) => {
-        console.log(e.target.value);
-        setSearchQuery(e.target.value);
-    }
 
     useEffect(() => {
         fetch("http://localhost:5000/forums")
@@ -50,34 +43,35 @@ function SearchForum({isAuthenticated}) {
 
     const filteredPosts = filterPosts(forums, searchQuery);
 
-    // const Search = () => (
-    //     <form>
-    //         <input
-    //             value={searchQuery}
-    //             onChange={e => handleChange(e)}
-    //             type="text"
-    //             placeholder="Search blog posts"
-    //         />
-            
-    //         <button type="submit">Search</button>
-    //     </form>
-    // );
-
     const CardSearchResult = (props) => {
         return(
             <Card className="app-padding" style={{ marginBottom: 5 }}>
               <Link to={`/question/${props.data.forumID}`}>
-                <Card.Subtitle>
-                  📌{" " + props.data.title}
+                <Card.Subtitle style={{fontFamily: "Krub-Regular", fontSize:14, color:"black"}}>
+                  {" " + props.data.title}
                 </Card.Subtitle>
               </Link>
-              <ListTag data={props.data} />
+              <div style={{display:"flex"}}>
+                <ListSubjectTag data={props.data}/>
+                <ListTag data={props.data} />
+              </div>
+              
             </Card>
         )
     }
 
+    const ListSubjectTag = (props) => {
+        const list = props.data.listSubject;
+        const subjectTag = list.map((subject) => (
+            <Badge bg="warning" style={{ marginLeft: 4 }}>
+             {subject}
+             </Badge>
+        ));
+        return <div className="tag" style={FONTS.tag}>{subjectTag}</div>;
+      };
+
     const ListTag = (props) => {
-        const _list = props.data.listSubject;
+        const _list = props.data.listTag;
         // console.log(_list);
   
         const subjectTag = _list.map(
@@ -105,34 +99,33 @@ function SearchForum({isAuthenticated}) {
         )
     }
 
-    if(datas)
-        return (
-            <div>
-                <Container fluid="xl">
-                    <Row className="justify-content-md-center">
-                    <Col md={3}>
+    if(datas){
+        if(keyword==null)
+            return (<div>NO FORUM</div>)
+        else
+            return (
+                <div>
+                    <Container fluid="xl">
+                        <Row className="justify-content-md-center">
                         
-                    </Col>
+                        <Col md={6}>
+                            <CurrentSearch/>
+                            <div className="search-result">
+                                <ul>
+                                    {filteredPosts.map(forums => (
+                                        <CardSearchResult data={forums}/>
+                                    ))}
+                                </ul>
+                            </div>
+                        </Col>
 
-                    <Col md={6}>
-                        <CurrentSearch/>
-                        <div className="search-result">
-                            <ul>
-                                {filteredPosts.map(forums => (
-                                    <CardSearchResult data={forums}/>
-                                ))}
-                            </ul>
-                        </div>
-                    </Col>
-
-                    <Col md={3} style={{paddingRight:40}}>
-                       
-                    </Col>
-                    </Row>
-                </Container>
-            </div>
+                        
+                        </Row>
+                    </Container>
+                </div>
+            );
+    }
         
-        );
     else{
         return(<div>Loading...</div>)
     }

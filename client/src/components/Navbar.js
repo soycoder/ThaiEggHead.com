@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navbar, Nav, Dropdown } from "react-bootstrap";
+import { Navbar, Nav, Dropdown, Form, FormControl } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
@@ -105,17 +105,22 @@ const NavigationBar = ({ isAuthenticated }) => {
     );
   };
 
+  const SearchKeyword = (e) => {
+    setSearchKeyword(e.target.value)
+  }
+
   const NavUser = () => {
     return (
       <Navbar.Collapse
         className="justify-content-end navbar-user"
       >
-        <div class="bp3-input-group searchbar">
+        {/* <div class="bp3-input-group searchbar">
           <span class="bp3-icon bp3-icon-search"></span>
-          <input value={searchKeyword} type="text" class="bp3-input" placeholder="Search" onChange={(e) => setSearchKeyword(e.target.value)}/>
-          <Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right">
-          </Link>
-        </div>
+          
+          <input value={searchKeyword} type="text" class="bp3-input" placeholder="Search" onChange={SearchKeyword}/>
+          {searchKeyword?(<Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"/>):(<></>)}
+          
+        </div> */}
 
         <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: SIZES.h4}}>
           <Button
@@ -204,9 +209,15 @@ const NavigationBar = ({ isAuthenticated }) => {
       <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
       <Navbar expand="lg" bg="dark" variant="dark" className="navbar">
         <BrandLogo />
-
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        {user ? <NavUser /> : <NavNonUser />}
+        {user ? <>
+          <div class="bp3-input-group searchbar justify-content-end">
+            <span class="bp3-icon bp3-icon-search"></span>
+            <input value={searchKeyword} type="text" class="bp3-input" placeholder="Search" onChange={SearchKeyword}/>
+            {searchKeyword?(<Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"/>):(<></>)}
+          </div>
+          <NavUser />
+        </> : <NavNonUser />}
       </Navbar>
     </div>
   );
