@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navbar, Nav, Dropdown, DropdownButton, ButtonGroup, SplitButton } from "react-bootstrap";
+import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 
 import "./styles.css";
 import { theme } from "../constants";
-import { images, SIZES, COLORS } from "../constants";
+import { images, SIZES } from "../constants";
 import { Position, Toaster, Intent } from "@blueprintjs/core";
 import Avatar from "react-avatar";
 

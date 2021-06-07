@@ -8,13 +8,14 @@ import {
   Container,
   Button,
 } from "react-bootstrap";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ForumCard from "../components/ForumCard";
 import Select from "react-select";
 import { Button as Button2 } from "@blueprintjs/core";
 import Avatar from "react-avatar";
 import LeaderBoard from "../components/LeaderBoard";
+import { Position, Toaster, Intent } from "@blueprintjs/core";
 import Moment from "react-moment";
 import _ from 'lodash';
 
@@ -25,6 +26,12 @@ function Sub({isAuthenticated}) {
   // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
   const [isHasForum, setIsHasForum] = useState(true);
+
+  const [toaster, setToaster] = useState([]);
+
+  function addToast() {
+    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.DANGER });
+  }
 
   const subjectImages = [
     images.subj_1,
@@ -130,6 +137,69 @@ function Sub({isAuthenticated}) {
     "140K"
   ]);
 
+  const subjectNavigate = [
+    {
+      subjectName: "วิทยาศาสตร์ และเทคโนโลยี",
+      link: "/subject/sci",
+      img: images.subj_1,
+    },
+    {
+      subjectName: "กฎหมาย",
+      link: "/subject/law",
+      img: images.subj_2,
+    },
+    {
+      subjectName: "สังคมสงเคราะห์",
+      link: "/subject/sa",
+      img: images.subj_3,
+    },
+    {
+      subjectName: "รัฐศาสตร์",
+      link: "/subject/ps",
+      img: images.subj_4,
+    },
+    {
+      subjectName: "วิศวกรรมศาสตร์",
+      link: "/subject/eg",
+      img: images.subj_5,
+    },
+    {
+      subjectName: "นิเทศศาสตร์",
+      link: "/subject/ca",
+      img: images.subj_6,
+    },
+    {
+      subjectName: "แพทย์ศาสตร์",
+      link: "/subject/ms",
+      img: images.subj_7,
+    },
+    {
+      subjectName: "ศึกษาศาสตร์",
+      link: "/subject/ed",
+      img: images.subj_8,
+    },
+    {
+      subjectName: "พาณิชยศาสตร์ และการบัญชี",
+      link: "/subject/cca",
+      img: images.subj_9,
+    },
+    {
+      subjectName: "ศิลปกรรมศาสตร์",
+      link: "/subject/faa",
+      img: images.subj_10,
+    },
+    {
+      subjectName: "ศิลปะ",
+      link: "/subject/art",
+      img: images.subj_11,
+    },
+    {
+      subjectName: "จิตวิทยา",
+      link: "/subject/psyc",
+      img: images.subj_12,
+    },
+  ];
+
   useEffect(() => {
     fetch(`http://localhost:5000/forums?subject=${SubjectData.get(subject)[0]}`)
       .then((res) => res.json())
@@ -213,6 +283,26 @@ function Sub({isAuthenticated}) {
   
   console.log(newArray)
 
+  const LeftNavigate = (props) => {
+    const data = props.data;
+    const listSubject = data.map((subject) => (
+      <li>
+        <Link to={subject.link} style={{ textDecoration: "black" }}>
+          <Button className="btn-subjectnav" variant="light" block>
+            <img
+              src={subject.img}
+              height="25"
+              width="25"
+              className="subject-img"
+              style={{ marginRight: 5 }}
+            />
+            <div style={theme.FONTS.home4}>{subject.subjectName}</div>
+          </Button>
+        </Link>
+      </li>
+    ));
+    return <ul className="ul-navsubject" style={{marginLeft:-20}}>{listSubject}</ul>;
+  };
 
   const HeaderImage = () => {
     return (
@@ -240,6 +330,7 @@ function Sub({isAuthenticated}) {
                 className="bp3-minimal bp3-intent-primary bp3-outlined"
                 id="follow"
                 icon="add-to-artifact"
+                onClick={addToast}
               >
                 Follow {SubjectData.get(subject)[3]}
               </Button2>
@@ -328,26 +419,6 @@ function Sub({isAuthenticated}) {
         </div>
       )
     }
-    {newArray.map((forum) => {
-      if(isHasForum){
-        
-      }
-        
-      else{
-        return(
-          <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
-            <div class="bp3-non-ideal-state-visual">
-              <span class="bp3-icon bp3-icon-folder-open"></span>
-            </div>
-            <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
-            <div>สร้างคำถามเองเลยสิ</div>
-            <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
-          </div>
-        )
-      }
-        
-    
-    })}
   }
 
 
@@ -380,8 +451,8 @@ function Sub({isAuthenticated}) {
   // console.log(value);
   return (
     <div>
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
       <HeaderImage />
-
       <Container fluid="xl">
         <Row className="justify-content-md-center">
           <Col md={3}>
@@ -403,6 +474,10 @@ function Sub({isAuthenticated}) {
                 Latest Update : <Moment format="DD/MM/YYYY" />
               </Card.Footer>
             </Card>
+            <h5 style={{fontFamily: "Krub-Regular", fontSize: 17, textAlign:"center",fontWeight: "bold", marginTop:30}}>
+                สาขาวิชา
+              </h5>
+            <LeftNavigate data={subjectNavigate}/>
           </Col>
 
           <Col md={6}>
