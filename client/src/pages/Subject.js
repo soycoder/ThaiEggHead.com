@@ -24,7 +24,35 @@ function Sub({isAuthenticated}) {
   // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
 
-  const subjectImages = [images.subj_1,images.subj_2,images.subj_3,images.subj_4,images.subj_5,images.subj_6,images.subj_7,images.subj_8,images.subj_9,images.subj_10,images.subj_11,images.subj_12]
+  const subjectImages = [
+    images.subj_1,
+    images.subj_2,
+    images.subj_3,
+    images.subj_4,
+    images.subj_5,
+    images.subj_6,
+    images.subj_7,
+    images.subj_8,
+    images.subj_9,
+    images.subj_10,
+    images.subj_11,
+    images.subj_12
+  ]
+
+  const subjectCover = [
+    images.cover_1,
+    images.cover_2,
+    images.cover_3,
+    images.cover_4,
+    images.cover_5,
+    images.cover_6,
+    images.cover_7,
+    images.cover_8,
+    images.cover_9,
+    images.cover_10,
+    images.cover_11,
+    images.cover_12
+  ]
 
   const SubjectData = new Map();
   SubjectData.set("sci", [
@@ -186,7 +214,7 @@ function Sub({isAuthenticated}) {
     return (
       <img
         className="subject-img-bg"
-        src="http://trumpwallpapers.com/wp-content/uploads/Science-Wallpaper-42-1920x1080-1.jpg"
+        src={subjectCover[SubjectData.get(subject)[2]]}
       />
     );
   };
