@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import Subject from "./pages/Subject";
 import Auth from "./auth/Auth";
 import QuestionPage from "./pages/QuestionPage";
+import SearchForum from "./pages/SearchForum"
 
 // const App = () => (
 //   <Router>
@@ -47,6 +48,9 @@ const UnauthenticatedRoutes = ({ isAuthenticated }) => (
         </Route>
         <Route path="/question/:question">
           <QuestionPage isAuthenticated={isAuthenticated} />
+        </Route>
+        <Route path="/searchforum/:keyword">
+          <SearchForum isAuthenticated={isAuthenticated} />
         </Route>
       </Suspense>
     </Switch>

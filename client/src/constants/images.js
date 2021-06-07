@@ -16,6 +16,19 @@ import subj_9 from "./../assets/images/subject/9.png"
 import subj_10 from "./../assets/images/subject/10.png"
 import subj_11 from "./../assets/images/subject/11.png"
 import subj_12 from "./../assets/images/subject/12.png"
+import cover_1 from "./../assets/images/subject_cover/1.jpg"
+import cover_2 from "./../assets/images/subject_cover/2.jpg"
+import cover_3 from "./../assets/images/subject_cover/3.jpg"
+import cover_4 from "./../assets/images/subject_cover/4.png"
+import cover_5 from "./../assets/images/subject_cover/5.jpg"
+import cover_6 from "./../assets/images/subject_cover/6.jpg"
+import cover_7 from "./../assets/images/subject_cover/7.jpg"
+import cover_8 from "./../assets/images/subject_cover/8.jpg"
+import cover_9 from "./../assets/images/subject_cover/9.jpg"
+import cover_10 from "./../assets/images/subject_cover/10.jpg"
+import cover_11 from "./../assets/images/subject_cover/11.jpg"
+import cover_12 from "./../assets/images/subject_cover/12.jpg"
+
 import pro_1 from "./../assets/images/pro_1.jpg"
 import pro_2 from "./../assets/images/pro_2.jpg"
 import pro_3 from "./../assets/images/pro_3.jpg"
@@ -43,5 +56,17 @@ export default {
     pro_2,
     pro_3,
     bina,
-    logo_event
+    logo_event,
+    cover_1,
+    cover_2,
+    cover_3,
+    cover_4,
+    cover_5,
+    cover_6,
+    cover_7,
+    cover_8,
+    cover_9,
+    cover_10,
+    cover_11,
+    cover_12,
 }

@@ -54,7 +54,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
     { label: "รัฐศาสตร์", value: "รัฐศาสตร์" },
     { label: "วิศวกรรมศาสตร์", value: "วิศวกรรมศาสตร์" },
     { label: "นิเทศศาสตร์", value: "นิเทศศาสตร์" },
-    { label: "สังคมสงเคราะห์", value: "สังคมสงเคราะห์" },
+    { label: "แพทยศาสตร์", value: "แพทยศาสตร์" },
     { label: "ศึกษาศาสตร์", value: "ศึกษาศาสตร์" },
     { label: "พาณิชยศาสตร์ และการบัญชี", value: "พาณิชยศาสตร์ และการบัญชี" },
     { label: "ศิลปกรรมศาสตร์", value: "ศิลปกรรมศาสตร์" },
@@ -254,6 +254,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
 
   return (
     <Form className="mb-3">
+      <div style={{textAlign:"center", fontFamily: "Krub-Regular", fontSize:29}}>ตั้งคำถาม</div>
       <Form.Group className="mb-3">
         <Form.Label style={theme.FONTS.h1}>หัวข้อ</Form.Label>
         <br />

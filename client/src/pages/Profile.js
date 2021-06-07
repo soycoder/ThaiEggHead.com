@@ -8,13 +8,13 @@ import {
   Modal,
   Nav,
   Badge,
+  Button
 } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { Icon } from "@blueprintjs/core";
 import "../App.css";
 import Avatar from "react-avatar";
 import AvatarCropper from "../components/ProfileImage";
-
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
 import { theme } from "../constants";
@@ -68,19 +68,11 @@ const Profile = ({ isAuthenticated }) => {
     },
   ]);
 
-  const [questionHistory, setQuestionHistory] = useState(
-    {
-      head: "Can you share some screenshots worth of 1243.3k+ upvotes?",
-      tag: ["messages", "function "],
-    },
-    {
-      head: "Have you ever come back to your vehicle only to find something quite unexpected?",
-      tag: ["messages", "function "],
-    }
-  );
   const [numQuestion, setNumQuestion] = useState(0);
   const [numAnswer, setNumAnswer] = useState(0);
   const [numComment, setNumComment] = useState(0);
+
+  const [isEditMode, setIsEditMode] = useState(false);
 
   //UTILITY
   const [currSelectNav, setCurrSelectNav] = useState(1);
@@ -141,6 +133,10 @@ const Profile = ({ isAuthenticated }) => {
 
   const handleImage = () => {};
 
+  const handleEdit = () => {
+    setIsEditMode(!isEditMode);
+  }
+
   const NonIdealState = () => {
     return (
       <div class="bp3-non-ideal-state">
@@ -164,41 +160,73 @@ const Profile = ({ isAuthenticated }) => {
   };
 
   const ProfileImg = () => {
-    return (
-      <div class="profile-img">
-        {userData.imgURL ? (
-          <Avatar
-            size="200"
-            src={userData.imgURL}
-            round={true}
-            onClick={handleImgSelect}
-          />
-        ) : (
-          <Avatar
-            size="200"
-            name={userData.firstName + " " + userData.lastName}
-            round={true}
-            onClick={handleImgSelect}
-          />
-        )}
+    if(isEditMode){
+      return (
+        <div class="profile-img">
+          {userData.imgURL ? (
+            <>
+              <Avatar
+                size="200"
+                src={userData.imgURL}
+                round={true}
+                onClick={handleImgSelect}
+                className="img-edit"
+              />
+              <Icon onClick={handleImgSelect} icon="edit" iconSize={70} style={{position:"absolute", marginLeft:-130, marginTop:60, color:"white"}}/>
+            </>
+          ) : (
+            <>
+              <Avatar
+                size="200"
+                name={userData.firstName + " " + userData.lastName}
+                round={true}
+                onClick={handleImgSelect}
+                className="img-edit"
+              />
+              <Icon onClick={handleImgSelect} icon="edit" iconSize={70} style={{position:"absolute", marginLeft:-130, marginTop:60, color:"white"}}/>
+            </>
+          )}
 
-        <Modal
-          size="lg"
-          show={lgShow}
-          onHide={() => setLgShow(false)}
-          aria-labelledby="example-modal-sizes-title-lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-lg" style={FONTS.h1}>
-              แก้ไข/รูปโปรไฟล์
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <AvatarCropper data={user} />
-          </Modal.Body>
-        </Modal>
-      </div>
-    );
+          <Modal
+            size="lg"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-lg" style={FONTS.h1}>
+                แก้ไข/รูปโปรไฟล์
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <form action="/profile" method="post" enctype="multipart/form-data">
+                <input type="file" name="avatar"/>
+              </form>
+              <AvatarCropper data={user} />
+            </Modal.Body>
+          </Modal>
+        </div>
+      ); 
+    }else{
+      return (
+        <div class="profile-img">
+          {userData.imgURL ? (
+            <Avatar
+              size="200"
+              src={userData.imgURL}
+              round={true}
+            />
+          ) : (
+            <Avatar
+              size="200"
+              name={userData.firstName + " " + userData.lastName}
+              round={true}
+            />
+          )}
+        </div>
+      ); 
+    }
+    
   };
 
   const Navs = () => {
@@ -242,13 +270,12 @@ const Profile = ({ isAuthenticated }) => {
         </Col>
         {user.userID === id ? (
           <Col md={2} style={theme.FONTS.detail}>
-            <input
-              type="submit"
+            <Button
+              variant="secondary"
               class="profile-edit-btn"
-              name="btnAddMore"
-              value="Edit Profile"
-            />
-          </Col>
+              onClick={handleEdit}
+            >Edit Profile</Button>
+          </Col>  
         ) : null}
       </>
     );
@@ -397,323 +424,9 @@ const Profile = ({ isAuthenticated }) => {
         <Row class="Row">
           <ProfileHead data={forum} />
         </Row>
-
-        <Row class="row">
-          <Col md={4}></Col>
-          <Col md={8}>
-            <div class="tab-content profile-tab" id="myTabContent">
-              <div
-                class="tab-pane fade"
-                id="profile"
-                role="tabpanel"
-                aria-labelledby="profile-tab"
-              >
-                <Row class="row">
-                  <Col md={6}>
-                    <label>Experience</label>
-                  </Col>
-                  <Col md={6}>
-                    <p>Expert</p>
-                  </Col>
-                </Row>
-                <Row class="row">
-                  <Col md={6}>
-                    <label>Hourly Rate</label>
-                  </Col>
-                  <Col md={6}>
-                    <p>10$/hr</p>
-                  </Col>
-                </Row>
-                <Row class="row">
-                  <Col md={6}>
-                    <label>Total Projects</label>
-                  </Col>
-                  <Col md={6}>
-                    <p>230</p>
-                  </Col>
-                </Row>
-                <Row class="row">
-                  <Col md={6}>
-                    <label>English Level</label>
-                  </Col>
-                  <Col md={6}>
-                    <p>Expert</p>
-                  </Col>
-                </Row>
-                <Row class="row">
-                  <Col md={6}>
-                    <label>Availability</label>
-                  </Col>
-                  <Col md={6}>
-                    <p>6 months</p>
-                  </Col>
-                </Row>
-                <Row class="row">
-                  <Col md={12}>
-                    <label>Your Bio</label>
-                    <br />
-                    <p>Your detail description</p>
-                  </Col>
-                </Row>
-              </div>
-            </div>
-          </Col>
-        </Row>
       </Container>
-      {/* <ProfileOld/>            */}
     </div>
   );
 };
 
 export default Profile;
-
-// const Profile = () => {
-//   let { id } = useParams();
-//   const [data, setData] = useState({});
-//   const [forum, setForum] = useState({});
-//   const [answer, setAnswer] = useState({});
-
-//   // Photo Edit
-//   const [lgShow, setLgShow] = useState(false);
-
-//   // Education Edit
-//   const [educationShow, setEducationShow] = useState(false);
-
-//   useEffect(() => {
-//     fetch(`http://localhost:5000/users/${id}`)
-//       .then((res) => res.json())
-//       .then((res) => setData(res));
-//     fetch(`http://localhost:5000/forums?userID=${id}`)
-//       .then((res) => res.json())
-//       .then((res) => setForum(res));
-//     fetch(`http://localhost:5000/answers?userID=${id}`)
-//       .then((res) => res.json())
-//       .then((res) => setAnswer(res));
-//   }, []);
-
-//   function dateToString(d) {
-//     return `${d.slice(8, 10)}/${d.slice(5, 7)}/${d.slice(0, 4)}`;
-//   }
-//   return (
-//     <div style={{ backgroundColor: "#dddddd" }}>
-//       <Container fluid style={{ backgroundColor: "#fff" }}>
-//         {/* <input type="file" id="myfile" name="myfile"  > */}
-//         <div className="cover-profile">
-//           <Image src={images.pic_cover} fluid className="img-cover-profile" />
-//         </div>
-
-//         {/* </input> */}
-//         <Container>
-//           <Row xs={12} md={9} className="display-flex mt-3">
-//             <Col xs={12} md={3}>
-//               <button
-//                 className="profile-btn profile-photo-edit"
-//                 onClick={() => setLgShow(true)}
-//               >
-//                 <Image
-//                   className="pic-profile"
-//                   src={userData.imgURL}
-//                   roundedCircle
-//                 />
-//               </button>
-//               {/* Modal For Edit Pic */}
-//               <Modal
-//                 size="lg"
-//                 show={lgShow}
-//                 onHide={() => setLgShow(false)}
-//                 aria-labelledby="example-modal-sizes-title-lg"
-//               >
-//                 <Modal.Header closeButton>
-//                   <Modal.Title
-//                     id="example-modal-sizes-title-lg"
-//                     style={FONTS.h1}
-//                   >
-//                     แก้ไข/รูปโปรไฟล์
-//                   </Modal.Title>
-//                 </Modal.Header>
-//                 <Modal.Body>...</Modal.Body>
-//               </Modal>
-//               {/* Modal For Edit Pic */}
-//             </Col>
-//             <Col xs={12} md={9}>
-//               <Row>
-//                 <Col xs={11} md={11}>
-//                   <Card.Title
-//                     style={FONTS.h1}
-//                   >{`${userData.firstName} ${userData.lastName}`}</Card.Title>
-//                   <Card.Subtitle style={FONTS.h2}>
-//                     @{userData.userName}
-//                   </Card.Subtitle>
-//                   <Card.Body style={FONTS.body3}>
-//                     {userData.birthDate ? (
-//                       <p>{dateToString(userData.birthDate)}</p>
-//                     ) : (
-//                       <p>{"-"}</p>
-//                     )}
-//                     {userData.bio && userData.bio.length > 0 ? (
-//                       <p>{userData.bio}</p>
-//                     ) : (
-//                       <p>{"-"}</p>
-//                     )}
-//                   </Card.Body>
-//                 </Col>
-//                 <Col xs={1} md={1}>
-//                   <button className="icon profile-btn">
-//                     <Icon icon="edit" iconSize="20" intent="primary" />
-//                   </button>
-//                 </Col>
-//               </Row>
-//             </Col>
-//           </Row>
-//         </Container>
-//       </Container>
-//       <br />
-
-//       <Container>
-//         {/* #1 */}
-//         <Card>
-//           <Card.Body>
-//             <Card.Title style={FONTS.h2}>Activity</Card.Title>
-//             {/* <Card.Subtitle className="mb-2 text-muted">
-//               Card Subtitle
-//             </Card.Subtitle> */}
-//             <Row style={FONTS.h3}>
-//               <Col className="text-center">
-//                 ตั้งกระทู้คำถาม
-//                 <br />
-//                 {forum.length}
-//                 <br />
-//                 คร้ัง
-//               </Col>
-//               <Col className="text-center">
-//                 ตอบคำถาม
-//                 <br />
-//                 {answer.length}
-//                 <br />
-//                 คร้ัง
-//               </Col>
-//               {/* <Col className="text-center">
-//                 ได้รับรับรางวัลคำตอบที่ดีที่สุด
-//                 <br />
-//                 {10}
-//                 <br />
-//                 คร้ัง
-//               </Col> */}
-//             </Row>
-//           </Card.Body>
-//         </Card>
-//         <br />
-//         {/* #2 */}
-//         <Card>
-//           <Card.Body>
-//             <Row>
-//               <Col md={11}>
-//                 <Card.Title style={FONTS.h2}>Education</Card.Title>
-//                 <Education />
-//                 {/* Modal For Edit Education */}
-//                 <Modal
-//                   size="lg"
-//                   show={educationShow}
-//                   onHide={() => setEducationShow(false)}
-//                   aria-labelledby="example-modal-sizes-title-lg"
-//                 >
-//                   <Modal.Header closeButton>
-//                     <Modal.Title
-//                       id="example-modal-sizes-title-lg"
-//                       style={FONTS.h1}
-//                     >
-//                       แก้ไข Education
-//                     </Modal.Title>
-//                   </Modal.Header>
-//                   <Modal.Body>...</Modal.Body>
-//                 </Modal>
-//                 {/* Modal For Edit Education */}
-//               </Col>
-//               <Col md={1}>
-//                 <button className="icon profile-btn">
-//                   <Icon icon="plus" iconSize="20" intent="primary" />
-//                 </button>
-//                 <br />
-//                 <button className="icon profile-btn" onClick={() => setEducationShow(true)}>
-//                   <Icon icon="edit" iconSize="20" intent="primary" />
-//                 </button>
-//               </Col>
-//             </Row>
-//           </Card.Body>
-//         </Card>
-//         <br />
-//         {/* #3 */}
-//         <Card>
-//           <Card.Body>
-//             <Card.Title style={FONTS.h2}>Interests</Card.Title>
-//             <Interests />
-//           </Card.Body>
-//         </Card>
-//       </Container>
-//     </div>
-//   );
-// };
-
-// const Education = () => {
-//   return (
-//     <>
-//       <Row className="edu-card" style={{ fontFamily: "supermarket" }}>
-//         <Col md={2} className="edu-logo">
-//           <Image
-//             style={{ height: "80px" }}
-//             src="https://tu.ac.th/uploads/media/logo/logo01.jpg"
-//           />
-//         </Col>
-//         <Col md={10}>
-//           <Card.Body>
-//             <Card.Title>Thammasat University</Card.Title>
-//             <Card.Text>
-//               {"Bachelor of Science"} - {"BS, Computer Science"}
-//             </Card.Text>
-//             <Card.Text className="text-muted">2018 - 2021</Card.Text>
-//           </Card.Body>
-//         </Col>
-//       </Row>
-//     </>
-//   );
-// };
-
-// const Interests = () => {
-//   return (
-//     <>
-//       <Row className="interest-card" style={{ fontFamily: "supermarket" }}>
-//         <Col md={2} className="interest-logo">
-//           <Image
-//             style={{ height: "80px" }}
-//             src="https://tu.ac.th/uploads/media/logo/logo01.jpg"
-//           />
-//         </Col>
-//         <Col md={10}>
-//           <Card.Body>
-//             <Card.Title>{"Thammasat University"}</Card.Title>
-//             <Card.Text className="text-muted">
-//               {Math.floor(Math.random() * 10000 + 1) * 100 + " followers"}
-//             </Card.Text>
-//           </Card.Body>
-//         </Col>
-//       </Row>
-//       <Row className="interest-card">
-//         <Col md={2} className="interest-logo">
-//           <Image
-//             style={{ height: "80px" }}
-//             src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png"
-//           />
-//         </Col>
-//         <Col md={10}>
-//           <Card.Body>
-//             <Card.Title>{"Linkedin Guide to Networking"}</Card.Title>
-//             <Card.Text className="text-muted">
-//               {Math.floor(Math.random() * 10000 + 1) * 10 + " followers"}
-//             </Card.Text>
-//           </Card.Body>
-//         </Col>
-//       </Row>
-//     </>
-//   );
-// };
-// export default Profile;

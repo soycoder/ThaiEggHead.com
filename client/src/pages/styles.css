@@ -317,3 +317,42 @@
   padding: 7px;
 }
 
+.img-edit{
+  filter: blur(8px);
+  -webkit-filter: blur(2px);
+}
+
+.create-forum-page{
+  display: flex;
+  justify-content: center;
+}
+
+.create-forum-div{
+  margin-top: 40px;
+  margin-left: 150px;
+  width: 70%;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.search-result {
+  display: flex;
+  margin-top: 20px
+}
+
+.header-seach{
+  margin-top: 20px;
+}
+
+.card-search-result{
+  margin-bottom: 5px;
+  width: 600px;
+}
