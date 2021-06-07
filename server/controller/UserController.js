@@ -206,6 +206,15 @@ export let putImg = (req, res) => {
   if (!req.body) return res.status(422).json(logError('Need updated data'));
 
   if (req.files) {
+    req.files.forEach((element) => {
+      const file = {
+        fileName: element.originalname,
+        filePath: element.path,
+        fileType: element.mimetype,
+        fileSize: fileSizeFormatter(element.size, 2),
+      };
+      filesArray.push(file);
+    });
       User.findOne({ userID: userID })
       .then(user => {            
           if(!user) {

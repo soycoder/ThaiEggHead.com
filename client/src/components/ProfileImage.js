@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Avatar from "react-avatar-edit";
 import { images } from "../constants";
 import { Button, Icon } from "@blueprintjs/core";
+import { Form } from "react-bootstrap";
 
+import {imgUserUpload} from '../auth/apiImgUser'
 import axios from 'axios';
 
 const ProfileImage = (props) => {
@@ -60,7 +62,42 @@ const ProfileImage = (props) => {
       })
       .catch((err) => console.log(err));
   };
+  
+  const [PreviewImg, setPreviewImg] = useState('');
+  const [imgFile, setimgFile] = useState('');
+  const FileImg= (e) => {
+    setimgFile(e.target.files);
+    setMultipleProgress(0);
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+      Array.from(e.target.files).map((file) => URL.revokeObjectURL(file));
+      setPreviewImg(filesArray);
+    }
+  };
+  const [multipleProgress, setMultipleProgress] = useState(0);
 
+  const mulitpleFileOptions = {
+    onUploadProgress: (progressEvent) => {
+      const { loaded, total } = progressEvent;
+      const percentage = Math.floor(((loaded / 1000) * 100) / (total / 1000));
+      setMultipleProgress(percentage);
+    },
+  };
+  const uploadFile = async () => {
+      let arr = {}
+      arr.userID = user.userID;
+      arr.imgIRL = imgFile;
+      const formData = new FormData();
+      // console.log(user.userID)
+      formData.append('userID', user.userID)
+      // console.log(PreviewImg)
+      formData.append('imgURL', imgFile);
+      await imgUserUpload(arr,imgFile)
+      window.location.href = `http://localhost:3000/profile/${user.userID}`;
+  }
+  
   return (
     <div className="container-fluid">
       <div className="row">
@@ -71,14 +108,18 @@ const ProfileImage = (props) => {
 
       <div className="row">
         <div className="col-7">
-          <Avatar
+        <Form.Control
+          onChange={(e) => FileImg(e)}
+          type="file"
+        />
+          {/* <Avatar
             width={390}
             height={295}
             exportSize={390}
             onCrop={onCropDefault}
             onClose={onCloseDefault}
-            src={src}
-          />
+            src={PreviewImg}
+          /> */}
         </div>
 
         <div className="col-2">
@@ -86,11 +127,12 @@ const ProfileImage = (props) => {
           <img
             alt=""
             style={{ width: "150px", height: "150px" }}
-            src={defaultPreview}
+            src={PreviewImg}
           />
         </div>
       </div>
-      <Button onClick="">
+      {/* {console.log(PreviewImg)} */}
+      <Button onClick={uploadFile}>
         <Icon /> Confirm
       </Button>
     </div>

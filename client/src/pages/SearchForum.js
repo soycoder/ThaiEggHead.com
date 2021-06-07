@@ -11,10 +11,8 @@ import {
   Badge,
   NavLink
 } from "react-bootstrap";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, useLocation, Link, useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import ForumCard from "../components/ForumCard";
-import { Position, Toaster, Intent } from "@blueprintjs/core";
 
 function SearchForum({isAuthenticated}) {
     let { keyword } = useParams();
@@ -22,6 +20,7 @@ function SearchForum({isAuthenticated}) {
     const [searchQuery, setSearchQuery] = useState("");
     const forums = datas
     const loc = useLocation();
+    let history = useHistory();
 
     useEffect(() => {
         fetch("http://localhost:5000/forums")
@@ -102,6 +101,11 @@ function SearchForum({isAuthenticated}) {
         )
     }
 
+    const handleKeyPress = (event) => {
+          history.push(`/create/forum`);
+        
+      }
+
     if(datas){
         if(filteredPosts.length==0)
             return (
@@ -119,9 +123,10 @@ function SearchForum({isAuthenticated}) {
                             <div style={{fontFamily: "Krub-Regular", fontSize: 16}}>สร้างคำถามเองเลยสิ</div>
                             <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: 12}}>
                                 <Button
-                                variant="warning"
-                                >
-                                ตั้งคำถาม
+                                    variant="warning"
+                                    onClick={handleKeyPress}
+                                    >
+                                    ตั้งคำถาม
                                 </Button>
                             </NavLink>
                             </div>
