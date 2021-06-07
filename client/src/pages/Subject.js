@@ -30,7 +30,7 @@ function Sub({isAuthenticated}) {
   const [toaster, setToaster] = useState([]);
 
   function addToast() {
-    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.DANGER });
+    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING, icon: "warning-sign" });
   }
 
   const subjectImages = [
@@ -428,18 +428,18 @@ function Sub({isAuthenticated}) {
         <Card.Header>คำถามมาแรง 🔥</Card.Header>
         <Card.Body>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <a id="relate-question">
+            <a id="relate-question" onClick={addToast}>
               เชื้อราดำใน Chernobyl
               อาจสามารถปกป้องนักบินอวกาศจากรังสีมรณะบนดาวอังคารได้ไหม
             </a>
-            <a id="relate-question">
+            <a id="relate-question" onClick={addToast}>
               อะไรที่สามารถนำมาทำผัดกะเพรานอกเหนือเนื้อสัตว์ปกติได้อีกมั้ย?
             </a>
-            <a id="relate-question">กระจกรถยนต์หลุดจากกิ๊บหนีบแก้ปัญหายังไง</a>
-            <a id="relate-question">
+            <a id="relate-question" onClick={addToast}>กระจกรถยนต์หลุดจากกิ๊บหนีบแก้ปัญหายังไง</a>
+            <a id="relate-question" onClick={addToast}>
               ผู้หญิงจะเพอร์เฟคและมีเสน่ห์ที่สุดช่วงอายุเท่าไหร่?
             </a>
-            <a id="relate-question">ถ้าเราแนะนำเพื่อนให้ไปกู้ถือว่าผิดไหม</a>
+            <a id="relate-question" onClick={addToast}>ถ้าเราแนะนำเพื่อนให้ไปกู้ถือว่าผิดไหม</a>
           </div>
 
           <br />

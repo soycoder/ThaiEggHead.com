@@ -25,10 +25,16 @@ import jwt_decode from "jwt-decode";
 import "./styles.css";
 import Select from "react-select";
 import { theme } from "../constants";
+import { Position, Toaster, Intent } from "@blueprintjs/core";
 
 import Avatar from "react-avatar";
 
 function Home({ isAuthenticated }) {
+  const [toaster, setToaster] = useState([]);
+
+  function addToast() {
+    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING,  icon: "warning-sign" });
+  }
   // Initial User Profile
   const auth = useContext(AuthContext);
 
@@ -297,6 +303,7 @@ function Home({ isAuthenticated }) {
             variant="primary"
             className="btn-learnmore"
             style={theme.FONTS.body4}
+            onClick={addToast}
           >
             ดูข้อมูลเพิ่มเติม
           </Button>
@@ -319,18 +326,19 @@ function Home({ isAuthenticated }) {
         <Card.Header>คำถามมาแรง 🔥</Card.Header>
         <Card.Body>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <a id="relate-question">
+            <a id="relate-question" onClick={addToast}>
               เชื้อราดำใน Chernobyl
               อาจสามารถปกป้องนักบินอวกาศจากรังสีมรณะบนดาวอังคารได้ไหม
             </a>
-            <a id="relate-question">
+            <a id="relate-question" onClick={addToast}>
               อะไรที่สามารถนำมาทำผัดกะเพรานอกเหนือเนื้อสัตว์ปกติได้อีกมั้ย?
             </a>
             <a id="relate-question">กระจกรถยนต์หลุดจากกิ๊บหนีบแก้ปัญหายังไง</a>
-            <a id="relate-question">
+            <a id="relate-question" onClick={addToast}>
               ผู้หญิงจะเพอร์เฟคและมีเสน่ห์ที่สุดช่วงอายุเท่าไหร่?
             </a>
-            <a id="relate-question">ถ้าเราแนะนำเพื่อนให้ไปกู้ถือว่าผิดไหม</a>
+            <a id="relate-question" onClick={addToast}>
+              ถ้าเราแนะนำเพื่อนให้ไปกู้ถือว่าผิดไหม</a>
           </div>
 
           <br />
@@ -341,6 +349,7 @@ function Home({ isAuthenticated }) {
 
   return (
     <div>
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
       <body style={{ backgroundColor: "#F3F3F3", minHeight:200 }} >
         <br />
         <br />

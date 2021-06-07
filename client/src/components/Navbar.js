@@ -12,85 +12,11 @@ import { images, SIZES } from "../constants";
 import { Position, Toaster, Intent } from "@blueprintjs/core";
 import Avatar from "react-avatar";
 
-const ProfileOption = (props) => {
-  return (
-    <Dropdown alignRight style={{ marginLeft: 20 }}>
-      <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
-        {props.user.imgURL ? (
-          <Avatar size="40" src={props.user.imgURL} round={true} />
-        ) : (
-          <Avatar
-            size="40"
-            name={props.user.firstName + " " + props.user.lastName}
-            round={true}
-          />
-        )}
-      </Dropdown.Toggle>
-      <Dropdown.Menu style={{ width: 250 }}>
-        <Dropdown.Item className="menu-text">
-          <NavLink to={`/profile/${props.user.userID}`}>
-            <div class="co-name" style={theme.FONTS.body4}>
-              {props.user.imgURL ? (
-                <Avatar size="40" src={props.user.imgURL} round={true} />
-              ) : (
-                <Avatar
-                  size="40"
-                  name={props.user.firstName + " " + props.user.lastName}
-                  round={true}
-                />
-              )}
-              {"  " + props.user.firstName + " " + props.user.lastName}
-            </div>
-          </NavLink>
-        </Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item
-          href="#/action-1"
-          className="menu-text"
-          style={theme.FONTS.body4}
-        >
-          Bookmark
-        </Dropdown.Item>
-        <Dropdown.Item
-          href="#/action-1"
-          className="menu-text"
-          style={theme.FONTS.body4}
-        >
-          Your content
-        </Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item
-          href="#/action-2"
-          className="menu-text"
-          style={theme.FONTS.body4}
-        >
-          Settings
-        </Dropdown.Item>
-        <Dropdown.Item
-          href="#/action-2"
-          className="menu-text"
-          style={theme.FONTS.body4}
-        >
-          Help
-        </Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item
-          onClick={props.auth.logout}
-          className="menu-text"
-          style={theme.FONTS.body4}
-        >
-          Sign out
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  );
-};
-
 const NavigationBar = ({ isAuthenticated }) => {
   const [toaster, setToaster] = useState([]);
 
   function addToast() {
-    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.DANGER });
+    toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING,  icon: "warning-sign" });
   }
 
   const auth = useContext(AuthContext);
@@ -103,6 +29,80 @@ const NavigationBar = ({ isAuthenticated }) => {
     decoded = jwt_decode(token);
     user = decoded;
   }
+  
+  const ProfileOption = (props) => {
+    return (
+      <Dropdown alignRight style={{ marginLeft: 20 }}>
+        <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
+          {props.user.imgURL ? (
+            <Avatar size="40" src={props.user.imgURL} round={true} />
+          ) : (
+            <Avatar
+              size="40"
+              name={props.user.firstName + " " + props.user.lastName}
+              round={true}
+            />
+          )}
+        </Dropdown.Toggle>
+        <Dropdown.Menu style={{ width: 250 }}>
+          <Dropdown.Item className="menu-text">
+            <NavLink to={`/profile/${props.user.userID}`}>
+              <div class="co-name" style={theme.FONTS.body4}>
+                {props.user.imgURL ? (
+                  <Avatar size="40" src={props.user.imgURL} round={true} />
+                ) : (
+                  <Avatar
+                    size="40"
+                    name={props.user.firstName + " " + props.user.lastName}
+                    round={true}
+                  />
+                )}
+                {"  " + props.user.firstName + " " + props.user.lastName}
+              </div>
+            </NavLink>
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            className="menu-text"
+            style={theme.FONTS.body4}
+            onClick={addToast}
+          >
+            Bookmark
+          </Dropdown.Item>
+          <Dropdown.Item
+            className="menu-text"
+            style={theme.FONTS.body4}
+            onClick={addToast}
+          >
+            Your content
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            className="menu-text"
+            style={theme.FONTS.body4}
+            onClick={addToast}
+          >
+            Settings
+          </Dropdown.Item>
+          <Dropdown.Item
+            className="menu-text"
+            style={theme.FONTS.body4}
+            onClick={addToast}
+          >
+            Help
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item
+            onClick={props.auth.logout}
+            className="menu-text"
+            style={theme.FONTS.body4}
+          >
+            Sign out
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  };
 
   const NavUser = () => {
     return (
