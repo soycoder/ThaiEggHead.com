@@ -8,7 +8,7 @@ import {
   Container,
   Button,
 } from "react-bootstrap";
-import { useParams, NavLink, Link } from "react-router-dom";
+import { useParams, NavLink, Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ForumCard from "../components/ForumCard";
 import Select from "react-select";
@@ -28,6 +28,7 @@ function Sub({isAuthenticated}) {
   const [isHasForum, setIsHasForum] = useState(true);
 
   const [toaster, setToaster] = useState([]);
+  const loc = useLocation();
 
   function addToast() {
     toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING, icon: "warning-sign" });
@@ -201,6 +202,7 @@ function Sub({isAuthenticated}) {
   ];
 
   useEffect(() => {
+    setIsHasForum(true)
     fetch(`http://localhost:5000/forums?subject=${SubjectData.get(subject)[0]}`)
       .then((res) => res.json())
       .then((res) => {
@@ -208,7 +210,7 @@ function Sub({isAuthenticated}) {
         setForumData(res)
       })
       
-  }, []);
+  }, [loc]);
 
   var t = " ";
   var i, j;
