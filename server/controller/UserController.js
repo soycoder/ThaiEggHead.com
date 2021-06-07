@@ -206,6 +206,15 @@ export let putImg = (req, res) => {
   if (!req.body) return res.status(422).json(logError('Need updated data'));
 
   if (req.files) {
+    req.files.forEach((element) => {
+      const file = {
+        fileName: element.originalname,
+        filePath: element.path,
+        fileType: element.mimetype,
+        fileSize: fileSizeFormatter(element.size, 2),
+      };
+      filesArray.push(file);
+    });
       User.findOne({ userID: userID })
       .then(user => {            
           if(!user) {
@@ -254,3 +263,27 @@ export const remove = (req, res) => {
       });
     });
 };
+/////////////////////////NetteN/////////////////////////
+// export  imgUserUpload = async (req, res, next) => {
+//   try{
+//       const file = new imgfile({
+//           fileName: req.file.originalname,
+//           filePath: req.file.path,
+//           fileType: req.file.mimetype,
+//           fileSize: fileSizeFormatter(req.file.size, 2) // 0.00
+//       });
+//       await file.save();
+//       res.status(201).send('File Uploaded Successfully');
+//   }catch(error) {
+//       res.status(400).send(error.message);
+//   }
+// }
+// export const getimgUserFiles = async (req, res, next) => {
+//   try{
+//       const files = await imgfile.find();
+//       res.status(200).send(files);
+//   }catch(error) {
+//       res.status(400).send(error.message);
+//   }
+// }
+/////////////////////////NetteN/////////////////////////

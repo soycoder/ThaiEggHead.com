@@ -200,7 +200,7 @@ const Profile = ({ isAuthenticated }) => {
             </Modal.Header>
             <Modal.Body>
               <form action="/profile" method="post" enctype="multipart/form-data">
-                <input type="file" name="avatar"/>
+                {/* <input type="file" name="avatar"/> */}
               </form>
               <AvatarCropper data={user} />
             </Modal.Body>

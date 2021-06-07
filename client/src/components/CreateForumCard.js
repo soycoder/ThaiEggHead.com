@@ -45,8 +45,6 @@ const FileUploadScreen = ({ isAuthenticated }) => {
     // handleClose();
   };
 
-  const [multipleProgress, setMultipleProgress] = useState(0);
-
   const optionsSubject = [
     { label: "วิทยาศาสตร์ และเทคโนโลยี", value: "วิทยาศาสตร์ และเทคโนโลยี" },
     { label: "กฎหมาย", value: "กฎหมาย" },
@@ -62,9 +60,9 @@ const FileUploadScreen = ({ isAuthenticated }) => {
     { label: "จิตวิทยา", value: "จิตวิทยา" },
   ];
   
-
   const [sourceImg, setSelectImg] = useState([]);
   const MultipleFileChange = (e) => {
+    console.log(multipleFiles)
     setMultipleFiles(e.target.files);
     setMultipleProgress(0);
     if (e.target.files) {
@@ -85,6 +83,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
     // console.log("S " + s);
   }
 
+  const [multipleProgress, setMultipleProgress] = useState(0);
   const mulitpleFileOptions = {
     onUploadProgress: (progressEvent) => {
       const { loaded, total } = progressEvent;
@@ -163,7 +162,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
         UploadMultipleFiles();
         sentTag();
         // history.push("/");
-        window.location.href = "http://localhost:3000/";
+        // window.location.href = "http://localhost:3000/";
       } else {
         result.value = false;
       }
@@ -304,7 +303,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
           onChange={(e) => MultipleFileChange(e)}
           type="file"
           id="formFileMultiple"
-          multiple
+          // multiple
         />
       </Form.Group>
 
