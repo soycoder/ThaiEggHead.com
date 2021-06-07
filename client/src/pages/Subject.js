@@ -244,42 +244,48 @@ function Sub({isAuthenticated}) {
   console.log(key)
   console.log(sumTag)
   var tags = []
+  var tagSelect = []
 
   for (j = 0; j < key.length; j++) {
-    // if (key[j] != "") {
     tags[j] = { label: key[j], value: sumTag[j] };
-    // }
+    tagSelect[j] = { value: j, label: key[j]};
   }
 
   tags.shift()
-  // console.log(key)
+  tagSelect.shift()
 
   var [valueTag, getValueTag] = useState([]);
   var handle = (e) => {
     getValueTag(Array.isArray(e) ? e.map(x => x.label) : []);
   }
 
-  var [tag, setTag] = useState("");
-  // console.log(tag)
-  // console.log(valueTag)
   var newArray = forumData.filter(function (ele) {
-  var i, j;
-  var n = ele.listTag.length;
-  var nn = valueTag.length;
-    console.log(n)
-
-      for (j = 0; j < nn; j++) {
-        for (i=0; i<n; i++){
-          if (ele.listTag[i] == valueTag[j]) {
-              return ele.listTag;
+    var i, j, count = 0, count2 = 0;
+    var numDB = ele.listTag.length;
+    var numFilter = valueTag.length;
   
-          } 
+      for (i=0; i<numFilter; i++){
+        for (j=0; j<numDB; j++){
+          if (valueTag[i] == ele.listTag[j]){
+            count += 1
+          }
         }
-    }
-    if (nn == 0) {
-      return newArray = forumData;
-    }
-  });
+      }
+      if (count > 0){
+        if (count == numDB){
+          count2 += 1
+          return ele.listTag
+        }
+        if (count != 0 && count2 == 0) {
+          return ele.listTag
+        }  
+      }
+      if (numFilter == 0){
+        return newArray = forumData
+      }
+      count = 0
+  
+    });
   
   console.log(newArray)
 
@@ -516,7 +522,7 @@ function Sub({isAuthenticated}) {
               <Card.Header style={theme.FONTS.filter}>คัดกรอง Tags</Card.Header>
               <Card.Body>
                 <div>
-                <Select isMulti options={tags} onChange={handle}></Select>
+                <Select isMulti options={tagSelect} onChange={handle}></Select>
                 </div>
               </Card.Body>
             </Card>

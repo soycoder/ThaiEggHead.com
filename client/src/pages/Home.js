@@ -166,19 +166,21 @@ function Home({ isAuthenticated }) {
 
   const count = {}
   arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
-  // console.log(count);
 
   var key = [];
   var sumTag = [];
   key = Object.keys(count)
   sumTag = Object.values(count)
   var tags = []
+  var tagSelect = []
 
   for (j = 0; j < key.length; j++) {
     tags[j] = { label: key[j], value: sumTag[j] };
+    tagSelect[j] = { value: j, label: key[j]};
   }
 
   tags.shift()
+  tagSelect.shift()
 
   var [valueTag, getValueTag] = useState([]);
   var handle = (e) => {
@@ -187,23 +189,31 @@ function Home({ isAuthenticated }) {
   }
   console.log(valueTag)
   var newArray = datas.filter(function (ele) {
-    var i, j;
-    var n = ele.listTag.length;
-    var nn = valueTag.length;
-    console.log(n)
+    var i, j, count = 0, count2 = 0;
+    var numDB = ele.listTag.length;
+    var numFilter = valueTag.length;
 
-      for (j = 0; j < nn; j++) {
-        for (i=0; i<n; i++){
-          if (ele.listTag[i] == valueTag[j]) {
- 
-              return ele.listTag; 
-  
-          } 
+    for (i=0; i<numFilter; i++){
+      for (j=0; j<numDB; j++){
+        if (valueTag[i] == ele.listTag[j]){
+          count += 1
         }
+      }
     }
-    if (nn == 0) {
-      return newArray = datas;
+    if (count > 0){
+      if (count == numDB){
+        count2 += 1
+        return ele.listTag
+      }
+      if (count != 0 && count2 == 0) {
+        return ele.listTag
+      }  
     }
+    if (numFilter == 0){
+      return newArray = datas
+    }
+    count = 0
+    // count2 = 0
   });
 
   const mystyle = {
@@ -390,9 +400,9 @@ function Home({ isAuthenticated }) {
               
               })}
 
-              {newArray.map((forum) => (
+              {/* {newArray.map((forum) => (
                 <ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>
-              ))}
+              ))} */}
             </Col>
 
             <Col md={3} style={{paddingRight:50}}>
@@ -400,7 +410,7 @@ function Home({ isAuthenticated }) {
                 <Card.Header>คัดกรอง Tags</Card.Header>
                 <Card.Body>
                   <div>
-                  <Select isMulti options={tags} onChange={handle}></Select>
+                  <Select isMulti options={tagSelect} onChange={handle}></Select>
                   </div>
                 </Card.Body>
               </Card>
