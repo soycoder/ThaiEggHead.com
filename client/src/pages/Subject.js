@@ -24,11 +24,82 @@ function Sub({isAuthenticated}) {
   // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
 
+  const subjectImages = [images.subj_1,images.subj_2,images.subj_3,images.subj_4,images.subj_5,images.subj_6,images.subj_7,images.subj_8,images.subj_9,images.subj_10,images.subj_11,images.subj_12]
+
   const SubjectData = new Map();
   SubjectData.set("sci", [
     "วิทยาศาสตร์ และเทคโนโลยี",
     "Science and Technology",
+    "0",
+    "442K"
   ]);
+  SubjectData.set("law", [
+    "กฎหมาย",
+    "Law",
+    "1",
+    "125K"
+  ]);
+  SubjectData.set("sa", [
+    "สังคมสงเคราะห์",
+    "ocial Administration",
+    "2",
+    "112K"
+  ]);
+  SubjectData.set("ps", [
+    "รัฐศาสตร์",
+    "Political Science",
+    "3",
+    "310K"
+  ]);
+  SubjectData.set("eg", [
+    "วิศวกรรมศาสตร์",
+    "Engineering",
+    "4",
+    "321K"
+  ]);
+  SubjectData.set("ca", [
+    "นิเทศศาสตร์",
+    "Communication Arts",
+    "5",
+    "140K"
+  ]);
+  SubjectData.set("ms", [
+    "แพทย์ศาสตร์",
+    "Medical Science",
+    "6",
+    "242K"
+  ]);
+  SubjectData.set("ed", [
+    "ศึกษาศาสตร์",
+    "Education",
+    "7",
+    "133K"
+  ]);
+  SubjectData.set("cca", [
+    "พาณิชยศาสตร์ และการบัญชี",
+    "Commerce and Accountancy",
+    "8",
+    "110K"
+  ]);
+  SubjectData.set("faa", [
+    "ศิลปกรรมศาสตร์",
+    "Fine and Applied Arts",
+    "9",
+    "240K"
+  ]);
+  SubjectData.set("art", [
+    "ศิลปะ",
+    "Art",
+    "10",
+    "122K"
+  ]);
+  SubjectData.set("psyc", [
+    "จิตวิทยา",
+    "Psychology",
+    "11",
+    "140K"
+  ]);
+
 
   useEffect(() => {
     fetch(`http://localhost:5000/forums?subject=${SubjectData.get(subject)[0]}`)
@@ -127,7 +198,7 @@ function Sub({isAuthenticated}) {
           <div className="subject-header">
             <img
               className="subject-img2"
-              src={images.subj_1}
+              src={subjectImages[SubjectData.get(subject)[2]]}
               style={{ marginRight: 20 }}
             />
             <div style={{ marginLeft: 20 }}>
@@ -138,7 +209,7 @@ function Sub({isAuthenticated}) {
                 id="follow"
                 icon="add-to-artifact"
               >
-                Follow 123K
+                Follow {SubjectData.get(subject)[3]}
               </Button2>
             </div>
           </div>

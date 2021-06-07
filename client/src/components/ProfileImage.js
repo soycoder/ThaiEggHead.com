@@ -99,38 +99,3 @@ const ProfileImage = (props) => {
 
 export default ProfileImage;
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     const src = images.logo;
-//     this.state = {
-//       preview: null,
-//       defaultPreview: null,
-//       src,
-//     };
-//     this.onCrop = this.onCrop.bind(this);
-//     this.onCropDefault = this.onCropDefault.bind(this);
-//     this.onClose = this.onClose.bind(this);
-//     this.onCloseDefault = this.onCloseDefault.bind(this);
-//   }
-
-//   onCropDefault(preview) {
-//     this.setState({ defaultPreview: preview });
-//   }
-
-//   onCrop(preview) {
-//     this.setState({ preview });
-//   }
-
-//   onCloseDefault() {
-//     this.setState({ defaultPreview: null });
-//   }
-
-//   onClose() {
-//     this.setState({ preview: null });
-//   }
-
-//   render() {}
-// }
-
-// export default App;

@@ -317,3 +317,8 @@
   padding: 7px;
 }
 
+.img-edit{
+  filter: blur(8px);
+  -webkit-filter: blur(2px);
+}
+

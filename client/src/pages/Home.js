@@ -82,13 +82,13 @@ function Home({ isAuthenticated }) {
       img: images.subj_6,
     },
     {
-      subjectName: "สังคมสงเคราะห์",
-      link: "/subject/sw",
+      subjectName: "แพทย์ศาสตร์",
+      link: "/subject/ms",
       img: images.subj_7,
     },
     {
       subjectName: "ศึกษาศาสตร์",
-      link: "/subject/law",
+      link: "/subject/ed",
       img: images.subj_8,
     },
     {
