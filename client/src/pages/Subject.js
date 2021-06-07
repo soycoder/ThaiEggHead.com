@@ -7,9 +7,8 @@ import {
   Card,
   Container,
   Button,
-  NavLink
 } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import ForumCard from "../components/ForumCard";
 import Select from "react-select";
@@ -72,7 +71,7 @@ function Sub({isAuthenticated}) {
   ]);
   SubjectData.set("sa", [
     "สังคมสงเคราะห์",
-    "ocial Administration",
+    "Social Administration",
     "2",
     "112K"
   ]);
@@ -95,7 +94,7 @@ function Sub({isAuthenticated}) {
     "140K"
   ]);
   SubjectData.set("ms", [
-    "แพทย์ศาสตร์",
+    "แพทยศาสตร์",
     "Medical Science",
     "6",
     "242K"

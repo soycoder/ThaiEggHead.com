@@ -322,3 +322,14 @@
   -webkit-filter: blur(2px);
 }
 
+.create-forum-page{
+  display: flex;
+  justify-content: center;
+}
+
+.create-forum-div{
+  margin-top: 40px;
+  margin-left: 150px;
+  width: 70%;
+}
+
