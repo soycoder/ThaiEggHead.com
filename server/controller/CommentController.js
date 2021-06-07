@@ -25,7 +25,10 @@ export const create = (req, res) => {
     comment
       .save()
       .then(() => {
-        return res.send({ success: "Create Successfully" });
+        return res.send({
+          success: "Create Successfully",
+          commentID: `${data["commentID"]}`,
+        });
       })
       .catch(() =>
         res.status(404).send({
