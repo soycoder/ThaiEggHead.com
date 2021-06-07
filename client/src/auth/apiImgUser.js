@@ -10,8 +10,8 @@ export const imgUserUpload = async (data, imgFile) => {
         // console.log(user)
         let path = imgFile[0].name;
         console.log(path)
-        
-        await axios.put(apiUrl, user, path);
+
+        // await axios.put(apiUrl, user, path);
     } catch (error) {
         throw error;
     }

@@ -162,7 +162,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
         UploadMultipleFiles();
         sentTag();
         // history.push("/");
-        // window.location.href = "http://localhost:3000/";
+        window.location.href = "http://localhost:3000/";
       } else {
         result.value = false;
       }

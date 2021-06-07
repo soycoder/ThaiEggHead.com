@@ -95,6 +95,7 @@ const ProfileImage = (props) => {
       // console.log(PreviewImg)
       formData.append('imgURL', imgFile);
       await imgUserUpload(arr,imgFile)
+      window.location.href = `http://localhost:3000/profile/${user.userID}`;
   }
   
   return (
