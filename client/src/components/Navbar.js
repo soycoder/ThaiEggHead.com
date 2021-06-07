@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { Navbar, Nav, Dropdown, Form, FormControl } from "react-bootstrap";
-import { NavLink, Link } from "react-router-dom";
+import { Navbar, Nav, Dropdown } from "react-bootstrap";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 import { AuthContext } from "../context/AuthContext";
@@ -9,12 +9,13 @@ import jwt_decode from "jwt-decode";
 import "./styles.css";
 import { theme } from "../constants";
 import { images, SIZES } from "../constants";
-import { Position, Toaster, Intent, InputGroup } from "@blueprintjs/core";
+import { Position, Toaster, Intent } from "@blueprintjs/core";
 import Avatar from "react-avatar";
 
 const NavigationBar = ({ isAuthenticated }) => {
   const [toaster, setToaster] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
+  let history = useHistory();
 
   function addToast() {
     toaster.show({ message: "Sorry! We are under constructed", intent: Intent.WARNING,  icon: "warning-sign" });
@@ -29,6 +30,13 @@ const NavigationBar = ({ isAuthenticated }) => {
   if (isAuthenticated) {
     decoded = jwt_decode(token);
     user = decoded;
+  }
+
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter' && searchKeyword.length!=0){
+      console.log('enter press here! ')
+      history.push(`/searchforum/${searchKeyword}`);
+    }
   }
   
   const ProfileOption = (props) => {
@@ -213,7 +221,7 @@ const NavigationBar = ({ isAuthenticated }) => {
         {user ? <>
           <div class="bp3-input-group searchbar justify-content-end">
             <span class="bp3-icon bp3-icon-search"></span>
-            <input value={searchKeyword} type="text" class="bp3-input" placeholder="ค้นหาคำถาม" onChange={SearchKeyword}/>
+            <input value={searchKeyword} type="text" class="bp3-input" placeholder="ค้นหาคำถาม" onChange={SearchKeyword} onKeyPress={handleKeyPress}/>
             {searchKeyword?(<Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"/>):(<></>)}
           </div>
           <NavUser />
