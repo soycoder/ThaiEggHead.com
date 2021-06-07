@@ -51,7 +51,7 @@ const Answer = (props) => {
   const [toaster, setToaster] = useState([]);
 
   function addToast(msg) {
-    toaster.show({ message: `${msg}`, intent: Intent.DANGER });
+    toaster.show({ message: `${msg}`, intent: Intent.WARNING, icon: "edit" });
   }
 
   // * Sub-Component | Comment
@@ -395,7 +395,9 @@ const Answer = (props) => {
         .then((res) => {
           setAnswerData(res);
           setAmountLike(res.whoVoteLike.length);
-          setIsYouLike(res.whoVoteLike.indexOf(user.userID) == -1 ? true : false)
+          setIsYouLike(
+            res.whoVoteLike.indexOf(user.userID) == -1 ? false : true
+          );
           setCommentList(res.listComment);
           setAmountComment(res.listComment.length);
           // console.log("Comment : ", res);
@@ -409,7 +411,6 @@ const Answer = (props) => {
             });
         });
     }, []);
-
 
     const handleVote = () => {
       let whoVoteLike = answerData.whoVoteLike;

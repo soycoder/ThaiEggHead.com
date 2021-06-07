@@ -67,7 +67,7 @@ function ForumCard(props) {
   ];
 
   function addToast(msg) {
-    toaster.show({ message: `${msg}`, intent: Intent.DANGER });
+    toaster.show({ message: `${msg}`, intent: Intent.WARNING, icon: "edit" });
   }
 
   const Question = () => {
@@ -78,7 +78,7 @@ function ForumCard(props) {
     const [amountLike, setAmountLike] = useState(whoVoteLike.length);
     const [amountAnswer, setAmountAnswer] = useState(listAnswer.length);
     const [isYouLike, setIsYouLike] = useState(
-      whoVoteLike.indexOf(user.userID) == -1 ? true : false
+      whoVoteLike.indexOf(user.userID) == -1 ? false : true
     );
 
     if (!props.isReadLong) {
@@ -100,10 +100,6 @@ function ForumCard(props) {
           setIsUserLoading(true);
         });
     }, []);
-
-    useEffect(() => {
-      setIsYouLike(whoVoteLike.indexOf(user.userID) == -1 ? true : false);
-    }, [whoVoteLike]);
 
     const handleVote = () => {
       if (props.isAuthenticated) {
