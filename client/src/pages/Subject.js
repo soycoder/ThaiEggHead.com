@@ -7,6 +7,7 @@ import {
   Card,
   Container,
   Button,
+  NavLink
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ import { Button as Button2 } from "@blueprintjs/core";
 import Avatar from "react-avatar";
 import LeaderBoard from "../components/LeaderBoard";
 import Moment from "react-moment";
+import _ from 'lodash';
 
 import { theme } from "../constants";
 
@@ -23,6 +25,7 @@ function Sub({isAuthenticated}) {
   let { subject } = useParams();
   // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
+  const [isHasForum, setIsHasForum] = useState(true);
 
   const subjectImages = [
     images.subj_1,
@@ -128,11 +131,14 @@ function Sub({isAuthenticated}) {
     "140K"
   ]);
 
-
   useEffect(() => {
     fetch(`http://localhost:5000/forums?subject=${SubjectData.get(subject)[0]}`)
       .then((res) => res.json())
-      .then((res) => setForumData(res));
+      .then((res) => {
+        if(_.isEmpty(res))setIsHasForum(false)
+        setForumData(res)
+      })
+      
   }, []);
 
   var t = " ";
@@ -196,8 +202,7 @@ function Sub({isAuthenticated}) {
       for (j = 0; j < nn; j++) {
         for (i=0; i<n; i++){
           if (ele.listTag[i] == valueTag[j]) {
- 
-              return ele.listTag; 
+              return ele.listTag;
   
           } 
         }
@@ -206,7 +211,7 @@ function Sub({isAuthenticated}) {
       return newArray = forumData;
     }
   });
-
+  
   console.log(newArray)
 
 
@@ -298,6 +303,54 @@ function Sub({isAuthenticated}) {
     );
   };
 
+  const RenderForum = () => {
+    if(isHasForum){
+      return(
+        <>
+        {newArray.map((forum) =><ForumCard data={forum} isAuthenticated={isAuthenticated}/>)}
+        </>
+      )
+      
+    }else{
+      return(
+        <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
+          <div class="bp3-non-ideal-state-visual">
+            <span class="bp3-icon bp3-icon-folder-open"></span>
+          </div>
+          <h4 class="bp3-heading" style={{fontFamily: "Krub-Regular", fontSize: 22}}>ไม่มีคำถามที่คุณกำลังตามหา</h4>
+          <div style={{fontFamily: "Krub-Regular", fontSize: 16}}>สร้างคำถามเองเลยสิ</div>
+          <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: 12}}>
+            <Button
+              variant="warning"
+            >
+              ตั้งคำถาม
+            </Button>
+          </NavLink>
+        </div>
+      )
+    }
+    {newArray.map((forum) => {
+      if(isHasForum){
+        
+      }
+        
+      else{
+        return(
+          <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
+            <div class="bp3-non-ideal-state-visual">
+              <span class="bp3-icon bp3-icon-folder-open"></span>
+            </div>
+            <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
+            <div>สร้างคำถามเองเลยสิ</div>
+            <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
+          </div>
+        )
+      }
+        
+    
+    })}
+  }
+
 
   const RelateQuestion = () => {
     return (
@@ -355,9 +408,32 @@ function Sub({isAuthenticated}) {
 
           <Col md={6}>
             <SubjectHeaderCard />
-            {newArray.map((forum) => (
+            
+            <RenderForum/>
+            {/* {newArray.map((forum) => {
+                if(isHasForum){
+                  return(<ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>)
+                }
+                  
+                else{
+                  return(
+                    <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
+                      <div class="bp3-non-ideal-state-visual">
+                        <span class="bp3-icon bp3-icon-folder-open"></span>
+                      </div>
+                      <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
+                      <div>สร้างคำถามเองเลยสิ</div>
+                      <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
+                    </div>
+                  )
+                }
+                  
+              
+              })} */}
+
+            {/* {newArray.map((forum) => (
               <ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>
-            ))}
+            ))} */}
           </Col>
 
           <Col md={3} style={{paddingRight:40}}>
