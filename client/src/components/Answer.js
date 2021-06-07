@@ -396,7 +396,11 @@ const Answer = (props) => {
           setAnswerData(res);
           setAmountLike(res.whoVoteLike.length);
           setIsYouLike(
-            res.whoVoteLike.indexOf(user.userID) == -1 ? false : true
+            isAuthenticated
+              ? res.whoVoteLike.indexOf(user.userID) == -1
+                ? false
+                : true
+              : false
           );
           setCommentList(res.listComment);
           setAmountComment(res.listComment.length);

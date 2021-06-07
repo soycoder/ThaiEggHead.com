@@ -78,7 +78,11 @@ function ForumCard(props) {
     const [amountLike, setAmountLike] = useState(whoVoteLike.length);
     const [amountAnswer, setAmountAnswer] = useState(listAnswer.length);
     const [isYouLike, setIsYouLike] = useState(
-      whoVoteLike.indexOf(user.userID) == -1 ? false : true
+      props.isAuthenticated
+        ? whoVoteLike.indexOf(user.userID) == -1
+          ? false
+          : true
+        : false
     );
 
     if (!props.isReadLong) {
