@@ -16,6 +16,7 @@ import {
 import Avatar from "react-avatar";
 
 import { Button, Icon, InputGroup } from "@blueprintjs/core";
+import { Position, Toaster, Intent } from "@blueprintjs/core";
 import React, { useState, useEffect, useContext } from "react";
 import { images } from "../constants";
 import { Link, NavLink } from "react-router-dom";
@@ -25,6 +26,7 @@ import Moment from "react-moment";
 
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 import Answer from "./Answer";
 
@@ -45,6 +47,7 @@ function ForumCard(props) {
 
   const [isShowComment, setIsShowComment] = useState(false);
   const [isViewMore, setIsViewMore] = useState(false);
+  const [toaster, setToaster] = useState([]);
 
   const handleClickComment = () => {
     setIsShowComment(!isShowComment);
@@ -63,11 +66,20 @@ function ForumCard(props) {
     },
   ];
 
-  const Question = () => {
-    const [user, setUser] = useState(dummyUser);
-    let whoVoteLike = forum.whoVoteLike
+  function addToast(msg) {
+    toaster.show({ message: `${msg}`, intent: Intent.DANGER });
+  }
 
-    console.log("whoVoteLike : ", whoVoteLike);
+  const Question = () => {
+    const [_user, setUser] = useState(dummyUser);
+    const [isUserLoading, setIsUserLoading] = useState(false);
+    let whoVoteLike = forum.whoVoteLike;
+    let listAnswer = forum.listAnswer;
+    const [amountLike, setAmountLike] = useState(whoVoteLike.length);
+    const [amountAnswer, setAmountAnswer] = useState(listAnswer.length);
+    const [isYouLike, setIsYouLike] = useState(
+      whoVoteLike.indexOf(user.userID) == -1 ? true : false
+    );
 
     if (!props.isReadLong) {
       var n = forum.postText.length;
@@ -85,8 +97,41 @@ function ForumCard(props) {
         .then((res) => res.json())
         .then((res) => {
           setUser(res);
+          setIsUserLoading(true);
         });
     }, []);
+
+    useEffect(() => {
+      setIsYouLike(whoVoteLike.indexOf(user.userID) == -1 ? true : false);
+    }, [whoVoteLike]);
+
+    const handleVote = () => {
+      if (props.isAuthenticated) {
+        let index = whoVoteLike.indexOf(user.userID);
+        if (index == -1) {
+          setIsYouLike(true);
+          whoVoteLike.push(user.userID);
+          setAmountLike(amountLike + 1);
+          let update = {
+            forumID: forum.forumID,
+            whoVoteLike: whoVoteLike,
+          };
+          axios.put(`/forums/${forum.forumID}`, update);
+        } else {
+          setIsYouLike(false);
+
+          let update = {
+            forumID: forum.forumID,
+            whoVoteLike: whoVoteLike,
+          };
+          whoVoteLike.splice(index, 1);
+          setAmountLike(amountLike - 1);
+          axios.put(`/forums/${forum.forumID}`, update);
+        }
+      } else {
+        addToast("โปรด Login ก่อน");
+      }
+    };
 
     const UpvoteBotton = (props) => {
       return (
@@ -95,78 +140,67 @@ function ForumCard(props) {
           placement={"top"}
           overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
         >
-          <Button className="bp3-minimal comment" icon="thumbs-up">
-            {props.upvote}
+          <Button
+            className="bp3-minimal comment"
+            icon="thumbs-up"
+            variant="success"
+            onClick={handleVote}
+            intent={isYouLike ? Intent.PRIMARY : Intent.NONE}
+          >
+            {amountLike}
           </Button>
         </OverlayTrigger>
       );
     };
 
-  const ListSubjectTag = (props) => {
-    const list = props.data;
-    const subjectTag = list.map((subject) => (
-      <Button2 variant="secondary" id="question-subject-tag">
-         {subject}
-      </Button2>
-    ));
-    return <div className="tag" style={theme.FONTS.tag}>{subjectTag}</div>;
-  };
-
-  const ListTag = (props) => {
-    const list = props.data;
-    const subjectTag = list.map((subject) => (
-        <Button2 variant="secondary" id="question-tag">
+    const ListSubjectTag = (props) => {
+      const list = props.data;
+      const subjectTag = list.map((subject) => (
+        <Button2 variant="secondary" id="question-subject-tag">
           {subject}
         </Button2>
-      )
-      // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
-    );
-    return <div className="tag" style={theme.FONTS.tag}>{subjectTag}</div>;
-  };
+      ));
+      return (
+        <div className="tag" style={theme.FONTS.tag}>
+          {subjectTag}
+        </div>
+      );
+    };
 
-    // const ListSubjectTag = (props) => {
-    //   const list = props.data;
-    //   const subjectTag = list.map((subject) => (
-    //     <Badge bg="primary" style={{ marginLeft: 4 }}>
-    //       {subject}
-    //     </Badge>
-    //   ));
-    //   return (
-    //     <div className="tag" style={theme.FONTS.tag}>
-    //       {subjectTag}
-    //     </div>
-    //   );
-    // };
-
-    // const ListTag = (props) => {
-    //   const list = props.data;
-    //   const subjectTag = list.map((subject) => (
-    //     <Badge bg="warning" style={{ marginLeft: 4 }}>
-    //       {subject}
-    //     </Badge>
-    //     )
-    //     // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
-    //   );
-    //   return <div className="tag" style={theme.FONTS.subject}>{subjectTag}</div>;
-    // };
+    const ListTag = (props) => {
+      const list = props.data;
+      const subjectTag = list.map(
+        (subject) => (
+          <Button2 variant="secondary" id="question-tag">
+            {subject}
+          </Button2>
+        )
+        // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
+      );
+      return (
+        <div className="tag" style={theme.FONTS.tag}>
+          {subjectTag}
+        </div>
+      );
+    };
 
     const ButtomOption = () => {
       return (
         <div style={{ marginLeft: 10, marginBottom: 5 }}>
-          <UpvoteBotton upvote={whoVoteLike.length} />
+          <UpvoteBotton amountLike={amountLike} setAmountLike={setAmountLike} />
 
-          {/* Comment Btn */}
+          {/* Answer Btn */}
           <OverlayTrigger
             key={"top"}
             placement={"top"}
-            overlay={<Tooltip id={`tooltip-${"top"}`}>Comment</Tooltip>}
+            overlay={<Tooltip id={`tooltip-${"top"}`}>Answer</Tooltip>}
           >
             <Button
               className="bp3-minimal comment"
               icon="comment"
               onClick={() => handleClickComment()}
             >
-              {Math.floor(Math.random() * 10 + 1)}
+              {amountAnswer}
             </Button>
           </OverlayTrigger>
         </div>
@@ -199,142 +233,154 @@ function ForumCard(props) {
 
     return (
       <>
-        <div>
-          <div class="header">
-            <div class="options">
-              <i class="fa fa-chevron-down"></i>
-            </div>
-            <Link to={`/profile/${user.userID}`}>
-              {user.imgURL ? (
-                <Avatar size="40" src={user.imgURL} round={true} />
-              ) : (
-                <Avatar
-                  size="40"
-                  name={user.firstName + " " + user.lastName}
-                  round={true}
-                />
-              )}
-            </Link>
-            <div className="ms-1">
-              <div class="co-name">
-                <Link to={`/profile/${user.userID}`} style={theme.FONTS.name}>
-                  {user.firstName ? user.firstName + " " + user.lastName : ""}
-                </Link>
-              </div>
-              <div class="time noselect" style={theme.FONTS.time}>
-                <div>
-                  <Moment
-                    element="span"
-                    data={forum.createdAt}
-                    locale="th"
-                    format="DD/MM/YYYY"
-                  />{" "}
-                  ·{" "}
-                  <Moment fromNow locale="th">
-                    {forum.createdAt}
-                  </Moment>
+        {isUserLoading ? (
+          <>
+            <div>
+              <div class="header">
+                <div class="options">
+                  <i class="fa fa-chevron-down"></i>
                 </div>
-                {/* <i class="fa fa-globe"></i> */}
-              </div>
-            </div>
-            
-            <div className="btn-more">
-              <MoreButton />
-            </div>
-          </div>
-          <div class="content">
-            {/* <Card.Title>{forum.title}</Card.Title> */}
-            <Link
-              to={`/question/${forum.forumID}`}
-              style={{ textDecoration: "black" }}
-            >
-              <Card.Title style={theme.FONTS.body3}>{forum.title}</Card.Title>
-            </Link>
-
-            <div style={{ marginBottom: 5 }}>
-              {isViewMore ? (
-                <>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: forum.postText,
-                    }}
-                    id="body-forum-text"
-                  />
-
-                  {!props.isReadLong ? (
-                    <Button
-                      className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
-                      onClick={() => handleClickViewMore()}
+                <Link to={`/profile/${_user.userID}`}>
+                  {_user.imgURL ? (
+                    <Avatar size="40" src={_user.imgURL} round={true} />
+                  ) : (
+                    <Avatar
+                      size="40"
+                      name={_user.firstName + " " + _user.lastName}
+                      round={true}
+                    />
+                  )}
+                </Link>
+                <div className="ms-1">
+                  <div class="co-name">
+                    <Link
+                      to={`/profile/${_user.userID}`}
+                      style={theme.FONTS.name}
                     >
-                      <div style={theme.FONTS.h4}>(แสดงน้อยลง)</div>
-                    </Button>
-                  ) : (
-                    <></>
-                  )}
-                </>
-              ) : (
-                <>
-                  {!props.isReadLong ? (
-                    <div
-                      id="body-forum-text"
-                      onClick={() => handleClickViewMore()}
-                      dangerouslySetInnerHTML={{ __html: post }}
-                    />
-                  ) : (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: forum.postText,
-                      }}
-                      id="body-forum-text"
-                    />
-                  )}
-                </>
-              )}
-            </div>
-            <>
-              {!props.isReadLong ? (
-                <>
-                  {forum.listImage[0]?.filePath ? (
-                    <Image
-                      src={
-                        "http://localhost:5000/" + forum.listImage[0]?.filePath
-                      }
-                      fluid
-                      className="forum-img"
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </>
-              ) : (
-                <>
-                  {forum.listImage ? (
+                      {_user.firstName
+                        ? _user.firstName + " " + _user.lastName
+                        : ""}
+                    </Link>
+                  </div>
+                  <div class="time noselect" style={theme.FONTS.time}>
+                    <div>
+                      <Moment
+                        element="span"
+                        data={forum.createdAt}
+                        locale="th"
+                        format="DD/MM/YYYY"
+                      />{" "}
+                      ·{" "}
+                      <Moment fromNow locale="th">
+                        {forum.createdAt}
+                      </Moment>
+                    </div>
+                    {/* <i class="fa fa-globe"></i> */}
+                  </div>
+                </div>
+
+                <div className="btn-more">
+                  <MoreButton />
+                </div>
+              </div>
+              <div class="content">
+                {/* <Card.Title>{forum.title}</Card.Title> */}
+                <Link
+                  to={`/question/${forum.forumID}`}
+                  style={{ textDecoration: "black" }}
+                >
+                  <Card.Title style={theme.FONTS.body3}>
+                    {forum.title}
+                  </Card.Title>
+                </Link>
+
+                <div style={{ marginBottom: 5 }}>
+                  {isViewMore ? (
                     <>
-                      {forum.listImage.map((item) => {
-                        return (
-                          <>
-                            <Image
-                              src={"http://localhost:5000/" + item.filePath}
-                              fluid
-                              className="forum-img mt-3 noselect nodrag img-thumbnail"
-                            />
-                          </>
-                        );
-                      })}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: forum.postText,
+                        }}
+                        id="body-forum-text"
+                      />
+
+                      {!props.isReadLong ? (
+                        <Button
+                          className="btn-viewmore bp3-minimal bp3-small bp3-fill bp3-intent-primary"
+                          onClick={() => handleClickViewMore()}
+                        >
+                          <div style={theme.FONTS.h4}>(แสดงน้อยลง)</div>
+                        </Button>
+                      ) : (
+                        <></>
+                      )}
                     </>
                   ) : (
-                    <></>
+                    <>
+                      {!props.isReadLong ? (
+                        <div
+                          id="body-forum-text"
+                          onClick={() => handleClickViewMore()}
+                          dangerouslySetInnerHTML={{ __html: post }}
+                        />
+                      ) : (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: forum.postText,
+                          }}
+                          id="body-forum-text"
+                        />
+                      )}
+                    </>
+                  )}
+                </div>
+                <>
+                  {!props.isReadLong ? (
+                    <>
+                      {forum.listImage[0]?.filePath ? (
+                        <Image
+                          src={
+                            "http://localhost:5000/" +
+                            forum.listImage[0]?.filePath
+                          }
+                          fluid
+                          className="forum-img"
+                        />
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {forum.listImage ? (
+                        <>
+                          {forum.listImage.map((item) => {
+                            return (
+                              <>
+                                <Image
+                                  src={"http://localhost:5000/" + item.filePath}
+                                  fluid
+                                  className="forum-img mt-3 noselect nodrag img-thumbnail"
+                                />
+                              </>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </>
                   )}
                 </>
-              )}
-            </>
-          </div>
-        </div>
-        <div className="card-tag">
-          <ListSubjectTag data={forum.listSubject} />
-          <ListTag data={forum.listTag} />
-        </div>
-        <ButtomOption />
+              </div>
+            </div>
+            <div className="card-tag">
+              <ListSubjectTag data={forum.listSubject} />
+              <ListTag data={forum.listTag} />
+            </div>
+            <ButtomOption />
+          </>
+        ) : null}
       </>
     );
   };
@@ -343,9 +389,14 @@ function ForumCard(props) {
   return (
     <div style={{ marginBottom: 10 }}>
       <Card className="main-card">
-        
         <Question />
-        {isShowComment ? <Answer data={forum} isAuthenticated={props.isAuthenticated}/> : <></>}
+        {isShowComment ? (
+          <Answer data={forum} isAuthenticated={props.isAuthenticated} />
+        ) : (
+          <></>
+        )}
+
+        <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)} />
       </Card>
     </div>
   );

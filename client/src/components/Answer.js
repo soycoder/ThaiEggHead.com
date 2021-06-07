@@ -8,7 +8,7 @@ import {
   OverlayTrigger,
   Card,
   Dropdown,
-  Image,
+  FormControl,
   Button as Button2,
 } from "react-bootstrap";
 
@@ -25,6 +25,8 @@ import { theme } from "../constants";
 
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
+
+import axios from "axios";
 
 const Answer = (props) => {
   let forum = props.data;
@@ -51,44 +53,6 @@ const Answer = (props) => {
   function addToast(msg) {
     toaster.show({ message: `${msg}`, intent: Intent.DANGER });
   }
-
-  const UpvoteBotton = (props) => {
-    return (
-      <OverlayTrigger
-        key={"top"}
-        placement={"top"}
-        overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
-      >
-        <Button
-          className="bp3-minimal comment2"
-          icon="thumbs-up"
-          style={theme.FONTS.body4}
-        >
-          Upvote · {props.upvote}
-        </Button>
-      </OverlayTrigger>
-    );
-  };
-
-  const ReplyBotton = () => {
-    return (
-      <OverlayTrigger
-        key={"top"}
-        placement={"top"}
-        overlay={<Tooltip id={`tooltip-${"top"}`}>Reply</Tooltip>}
-      >
-        <Button
-          className="bp3-minimal comment2"
-          icon="chat"
-          style={{ marginLeft: 5 }}
-          onClick={handleClickCommentForm}
-          style={theme.FONTS.body4}
-        >
-          Reply
-        </Button>
-      </OverlayTrigger>
-    );
-  };
 
   // * Sub-Component | Comment
   const CommentList = (props) => {
@@ -217,14 +181,16 @@ const Answer = (props) => {
 
     return (
       <div style={{ display: "flex" }} className="ps-3">
-        <InputGroup
+        <FormControl
+          as="textarea"
           onChange={onChangeAddComment}
           placeholder="Add a comment..."
           className="input-answer"
+          value={commentText}
         />
         <Button2
           variant="primary"
-          className="btn-answer"
+          className="btn-answer bs-2"
           onClick={validatecommentText}
         >
           Reply
@@ -286,7 +252,7 @@ const Answer = (props) => {
 
     const onChangeAddAnswer = (e) => {
       setAnswerText(e.target.value);
-      console.log(e.target.value);
+      //   console.log(e.target.value);
     };
 
     const handleAddAnswer = () => {
@@ -336,6 +302,15 @@ const Answer = (props) => {
         });
     };
 
+    const validateAnswerText = () => {
+      if (answerText === "") {
+        addToast("โปรดกรอก ข้อความ ก่อน");
+      }
+      if (answerText !== "") {
+        handleAddAnswer();
+      }
+    };
+
     if (isAuthenticated) {
       return (
         <div>
@@ -352,7 +327,8 @@ const Answer = (props) => {
                 />
               )}
             </NavLink>
-            <InputGroup
+            <FormControl
+              as="textarea"
               onChange={onChangeAddAnswer}
               placeholder="Add a answer..."
               className="input-answer"
@@ -362,7 +338,7 @@ const Answer = (props) => {
               variant="primary"
               className="btn-answer"
               style={theme.FONTS.h4}
-              onClick={handleAddAnswer}
+              onClick={validateAnswerText}
             >
               Add answer
             </Button2>
@@ -385,10 +361,10 @@ const Answer = (props) => {
         .then((res) => res.json())
         .then((res) => {
           setAnswerList(res.listAnswer.reverse());
-          console.log("res : ", res.listAnswer);
+          console.log("refresh");
         });
     }, []);
-
+    // Option [answerList]
     return (
       <>
         {answerList.map((ans) => (
@@ -400,12 +376,17 @@ const Answer = (props) => {
 
   const AnswerCard = (props) => {
     let answerID = props.answerID;
+
+    const [amountComment, setAmountComment] = useState(0);
+    const [amountLike, setAmountLike] = useState(0);
+
     let isAuthenticated = props.isAuthenticated;
 
     const [answerData, setAnswerData] = useState([]);
     const [userData, setUserData] = useState(null);
     const [isEachAnsCardLoading, setIsEachAnsCardLoading] = useState(false);
     const [commentList, setCommentList] = useState(null);
+    const [isYouLike, setIsYouLike] = useState(null);
 
     useEffect(() => {
       // ? Request GET | Answer
@@ -413,9 +394,11 @@ const Answer = (props) => {
         .then((res) => res.json())
         .then((res) => {
           setAnswerData(res);
-          // console.log("Ans : ", res);
+          setAmountLike(res.whoVoteLike.length);
+          setIsYouLike(res.whoVoteLike.indexOf(user.userID) == -1 ? true : false)
           setCommentList(res.listComment);
-          console.log("Comment : ", res);
+          setAmountComment(res.listComment.length);
+          // console.log("Comment : ", res);
           // ? Request GET | user
           fetch(`http://localhost:5000/users/${res.userID}`)
             .then((res) => res.json())
@@ -426,6 +409,76 @@ const Answer = (props) => {
             });
         });
     }, []);
+
+
+    const handleVote = () => {
+      let whoVoteLike = answerData.whoVoteLike;
+
+      if (isAuthenticated) {
+        let index = whoVoteLike.indexOf(user.userID);
+        if (index == -1) {
+          setIsYouLike(true);
+          whoVoteLike.push(user.userID);
+          setAmountLike(amountLike + 1);
+          let update = {
+            answerID: answerData.answerID,
+            whoVoteLike: whoVoteLike,
+          };
+          axios.put(`/answers/${answerData.answerID}`, update);
+        } else {
+          setIsYouLike(false);
+          let update = {
+            answerID: answerData.answerID,
+            whoVoteLike: whoVoteLike,
+          };
+          whoVoteLike.splice(index, 1);
+          setAmountLike(amountLike - 1);
+          axios.put(`/answers/${answerData.answerID}`, update);
+        }
+      } else {
+        addToast("โปรด Login ก่อน");
+      }
+    };
+
+    const UpvoteBotton = (props) => {
+      return (
+        <OverlayTrigger
+          key={"top"}
+          placement={"top"}
+          overlay={<Tooltip id={`tooltip-${"top"}`}>Upvote</Tooltip>}
+        >
+          <Button
+            className="bp3-minimal comment2"
+            icon="thumbs-up"
+            style={theme.FONTS.body4}
+            onClick={handleVote}
+            intent={isYouLike ? Intent.PRIMARY : Intent.NONE}
+          >
+            {amountLike}
+          </Button>
+        </OverlayTrigger>
+      );
+    };
+
+    const ReplyBotton = () => {
+      return (
+        <OverlayTrigger
+          key={"top"}
+          placement={"top"}
+          overlay={<Tooltip id={`tooltip-${"top"}`}>Reply</Tooltip>}
+        >
+          <Button
+            className="bp3-minimal comment2 ms-2"
+            icon="chat"
+            style={{ marginLeft: 5 }}
+            onClick={handleClickCommentForm}
+            style={theme.FONTS.body4}
+          >
+            {amountComment}
+          </Button>
+        </OverlayTrigger>
+      );
+    };
 
     return (
       <>
@@ -438,7 +491,7 @@ const Answer = (props) => {
                   {answerData.answerText}
                 </div>
 
-                <UpvoteBotton upvote={0} />
+                <UpvoteBotton />
                 <ReplyBotton />
 
                 {isShowCommentForm && isAuthenticated ? (
@@ -456,9 +509,8 @@ const Answer = (props) => {
               <></>
             )}
           </Card>
-        ) : (
-          <div>Loading</div>
-        )}
+        ) : null}
+        {/* <div>Loading</div> */}
       </>
     );
   };
