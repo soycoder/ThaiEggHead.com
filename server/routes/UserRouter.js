@@ -22,8 +22,7 @@ router.post("/signin", checkSignin);
 router.get("/google/:googleID", getByGoogleID);
 router.get("/:userID", get);
 router.put("/:userID", put);
-router.put('/avatar/:userId', upload.any() ,auth.authenticate(), putImg);
-router.get('/avatar/:userId', auth.authenticate(), getImg);
+router.put('/avatar/:userId', upload.any(), putImg);
 router.delete("/:userID", remove);
 
 export default router;
