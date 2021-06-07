@@ -68,19 +68,11 @@ const Profile = ({ isAuthenticated }) => {
     },
   ]);
 
-  const [questionHistory, setQuestionHistory] = useState(
-    {
-      head: "Can you share some screenshots worth of 1243.3k+ upvotes?",
-      tag: ["messages", "function "],
-    },
-    {
-      head: "Have you ever come back to your vehicle only to find something quite unexpected?",
-      tag: ["messages", "function "],
-    }
-  );
   const [numQuestion, setNumQuestion] = useState(0);
   const [numAnswer, setNumAnswer] = useState(0);
   const [numComment, setNumComment] = useState(0);
+
+
 
   //UTILITY
   const [currSelectNav, setCurrSelectNav] = useState(1);

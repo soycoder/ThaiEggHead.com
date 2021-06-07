@@ -72,6 +72,7 @@ body {
 }
 
 .co-name > a {
+  flex-direction: row !important;
   font-family: Helvetica;
   font-size: 14px;
   font-weight: bold;
@@ -411,7 +412,14 @@ a:hover {
 	50% {
 		background-position: 300% 0;
 	}
+}
 
+.custom_nav_link{
+  align-self: flex-end !important;
+}
+
+.dropdown-menu.show{
+  margin-left: -210px;
 }
 
 

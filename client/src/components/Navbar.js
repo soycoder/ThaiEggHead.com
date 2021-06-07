@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Navbar, Nav, Dropdown } from "react-bootstrap";
+import { Navbar, Nav, Dropdown, DropdownButton, ButtonGroup, SplitButton } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
@@ -14,7 +14,7 @@ import Avatar from "react-avatar";
 
 const ProfileOption = (props) => {
   return (
-    <Dropdown style={{ marginLeft: 20 }}>
+    <Dropdown alignRight style={{ marginLeft: 20 }}>
       <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
         {props.user.imgURL ? (
           <Avatar size="40" src={props.user.imgURL} round={true} />
@@ -29,7 +29,7 @@ const ProfileOption = (props) => {
       <Dropdown.Menu style={{ width: 250 }}>
         <Dropdown.Item className="menu-text">
           <NavLink to={`/profile/${props.user.userID}`}>
-            <div class="co-name card" style={theme.FONTS.body4}>
+            <div class="co-name" style={theme.FONTS.body4}>
               {props.user.imgURL ? (
                 <Avatar size="40" src={props.user.imgURL} round={true} />
               ) : (
@@ -39,7 +39,7 @@ const ProfileOption = (props) => {
                   round={true}
                 />
               )}
-              {props.user.firstName + " " + props.user.lastName}
+              {"  " + props.user.firstName + " " + props.user.lastName}
             </div>
           </NavLink>
         </Dropdown.Item>
