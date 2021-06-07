@@ -20,13 +20,16 @@ export const create = (req, res) => {
     let data = req.body;
     data["answerID"] = parseInt(old_id) + 1;
 
-    //new answer with answerID continue 
+    //new answer with answerID continue
     let answer = new Answer(req.body);
-    
+
     answer
       .save()
       .then(() => {
-        return res.send({ success: "Create Successfully" });
+        return res.send({
+          success: "Create Successfully",
+          answerID: `${data["answerID"]}`,
+        });
       })
       .catch(() =>
         res.status(404).send({

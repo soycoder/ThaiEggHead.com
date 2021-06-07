@@ -80,6 +80,7 @@ export const create = async (req, res, next) => {
   }
 };
 
+
 export const get = async (req, res, next) => {
   let forumID = req.params.forumID;
   Forum.findOne({ forumID: forumID })
@@ -115,6 +116,46 @@ export const fileSizeFormatter = (bytes, decimal) => {
   return (
     parseFloat((bytes / Math.pow(1000, index)).toFixed(dm)) + " " + sizes[index]
   );
+};
+
+// Update a forum identified by the forumID in the request
+export const put = (req, res) => {
+  // Validate Request
+  const data = req.body || {};
+  console.log(data);
+
+  if (!data || data.forumID != req.params.forumID)
+    return res.status(422).send({ error: "forumID must be alphanumeric." });
+  // Find Forum and update it with the request body
+  Forum.findOneAndUpdate(
+    { forumID: req.params.forumID },
+    { $set: data },
+    { new: true }
+  )
+    .then((forum) => {
+      if (!forum) {
+        return res.status(404).send({
+          errors: {
+            global: "Forum not found with forumID " + req.params.forumID,
+          },
+        });
+      }
+      res.send(forum);
+    })
+    .catch((err) => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          errors: {
+            global: "Forum not found with forumID " + req.params.forumID,
+          },
+        });
+      }
+      return res.status(500).send({
+        errors: {
+          global: "Error updating Forum with forumID " + req.params.forumID,
+        },
+      });
+    });
 };
 
 // ! Tag

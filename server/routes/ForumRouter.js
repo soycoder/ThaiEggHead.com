@@ -8,6 +8,7 @@ import {
   listTag,
   createTag,
   listEachUser,
+  put,
 } from "../controller/ForumController.js";
 
 const router = express.Router();
@@ -18,5 +19,7 @@ router.get("/tag", listTag);
 router.post("/", upload.array("files"), create);
 router.post("/tag", createTag);
 router.get("/:forumID", get);
+router.put("/:forumID", put);
+
 
 export default router;

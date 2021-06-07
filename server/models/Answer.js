@@ -4,9 +4,9 @@ const answerSchema = new mongoose.Schema(
   {
     answerID: String,
     userID: String,
+    forumID: String,
     answerText: String,
     listComment: Array,
-    createTime: Date,
     whoVoteLike: Array,
     whoVoteDislike: Array,
   },

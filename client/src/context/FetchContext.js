@@ -1,20 +1,20 @@
-//import React, { createContext, useContext } from 'react';
-import React, { createContext } from 'react';
+import React, { createContext, useContext } from 'react';
+// import React, { createContext } from 'react';
 import axios from 'axios';
-//import { AuthContext } from './AuthContext';
+import { AuthContext } from './AuthContext';
 
 const FetchContext = createContext();
 const { Provider } = FetchContext;
 
 const FetchProvider = ({ children }) => {
-//  const authContext = useContext(AuthContext);
+ const authContext = useContext(AuthContext);
 
   const authAxios = axios.create();
 
   authAxios.interceptors.request.use(
     config => {
-//      config.headers.Authorization = `Bearer ${authContext.authState.token}`;
-      config.withCredentials = true;
+     config.headers.Authorization = `Bearer ${authContext.authState.token}`;
+      // config.withCredentials = true;
       return config;
     },
     error => {

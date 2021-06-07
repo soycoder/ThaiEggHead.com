@@ -18,20 +18,19 @@ content-type: application/json
 }
 
 ###
-GET  http://localhost:5000/forums/3 HTTP/1.1
+GET  http://localhost:5000/forums/1 HTTP/1.1
 
 ###
 
 GET  http://localhost:5000/forums/user/1 HTTP/1.1
 
 ###
-PUT  http://localhost:5000/forums/9846146545 HTTP/1.1
+PUT  http://localhost:5000/forums/1 HTTP/1.1
 content-type: application/json
 
 { 
-    "forumID":"9846146545",
-    "listTag": ["sci","c lang"],
-    "listImage":["http://pngimg.com/uploads/chrome_logo/chrome_logo_PNG34.png"]
+    "forumID":"1",
+    "listAnswer": ["1"]
 }
 
 ###
