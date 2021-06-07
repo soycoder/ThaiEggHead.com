@@ -46,7 +46,7 @@ const ProfileImage = (props) => {
       setMultipleProgress(percentage);
     },
   };
-
+  
   const UploadMultipleFiles = async () => {
     const formData = new FormData();
     formData.append("userID", user.userID);
@@ -99,13 +99,13 @@ const ProfileImage = (props) => {
             src={PreviewImg}
           /> */}
         </div>
-
+        {/* props.user.imgURL.indexOf("http") == 0 ? props.user.imgURL : "http://localhost:5000/"+props.user.imgURL */}
         <div className="col-2">
           <h5>Preview</h5>
           <img
             alt=""
             style={{ width: "150px", height: "150px" }}
-            src={PreviewImg}
+            src={file}
           />
         </div>
       </div>
