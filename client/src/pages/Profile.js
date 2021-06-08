@@ -10,7 +10,7 @@ import {
   Badge,
   Button
 } from "react-bootstrap";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { Icon } from "@blueprintjs/core";
 import "../App.css";
 import Avatar from "react-avatar";
@@ -21,6 +21,7 @@ import { theme } from "../constants";
 import { FONTS } from "../constants";
 
 const Profile = ({ isAuthenticated }) => {
+  const loc = useLocation();
   const dummyUser = {
     firstName: "",
     LastName: "",
@@ -90,7 +91,7 @@ const Profile = ({ isAuthenticated }) => {
     //   fetch(`http://localhost:5000/answers?userID=${id}`)
     //     .then((res) => res.json())
     //     .then((res) => setAnswer(res));
-  }, []);
+  }, [loc]);
 
   const Interests = () => {
     return (
