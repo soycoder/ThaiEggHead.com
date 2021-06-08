@@ -36,7 +36,9 @@ const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required."),
   lastName: Yup.string().required("Last name is required."),
   email: Yup.string().email("*Invalid email.").required("Email is required."),
-  password: Yup.string().required("Password is required."),
+  password: Yup.string()
+      .required("Password is required.")
+      .min(8, "Password must contain at least 8 characters.")
 });
 
 const values = ["ชุมชนอุดมปัญญา", "สังคมแห่งการแบ่งปัน", "Thai Egghead.com"];
@@ -391,6 +393,7 @@ export const Auth = () => {
   };
 
   const googleSuccess = async (res) => {
+    console.log(res);
   };
 
   const googleError = () =>
