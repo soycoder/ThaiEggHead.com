@@ -55,7 +55,7 @@ const ProfileImage = (props) => {
       formData.append("files", multipleFiles[i]);
     }
     // let data = { userID: user.userID, files: multipleFiles };
-
+    window.location.reload()
     await avatarFileUpload(formData, mulitpleFileOptions);
   };
 
