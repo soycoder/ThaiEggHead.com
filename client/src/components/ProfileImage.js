@@ -1,37 +1,10 @@
 import React, { useState } from "react";
-import Avatar from "react-avatar-edit";
-import { images } from "../constants";
 import { Button, Icon } from "@blueprintjs/core";
-import { Form } from "react-bootstrap";
 
 import { avatarFileUpload } from "../auth/apiImgUser";
-import axios from "axios";
 
 const ProfileImage = (props) => {
   const user = props.data;
-
-  const [preview, setPreview] = useState("");
-  const [defaultPreview, setDefaultPreview] = useState("");
-  const [src, setSrc] = useState("");
-
-  const onCropDefault = (preview) => {
-    setDefaultPreview(preview);
-  };
-
-  const onCrop = (preview) => {
-    setPreview(preview);
-  };
-
-  const onCloseDefault = () => {
-    setDefaultPreview(null);
-  };
-
-  const onClose = () => {
-    setPreview(null);
-  };
-
-  const [PreviewImg, setPreviewImg] = useState("");
-  const [imgFile, setimgFile] = useState("");
 
   const [multipleFiles, setMultipleFiles] = useState("");
   const [multipleProgress, setMultipleProgress] = useState(0);
@@ -46,7 +19,7 @@ const ProfileImage = (props) => {
       setMultipleProgress(percentage);
     },
   };
-  
+
   const UploadMultipleFiles = async () => {
     const formData = new FormData();
     formData.append("userID", user.userID);
@@ -54,14 +27,12 @@ const ProfileImage = (props) => {
     for (let i = 0; i < multipleFiles.length; i++) {
       formData.append("files", multipleFiles[i]);
     }
-    // let data = { userID: user.userID, files: multipleFiles };
     window.location.reload()
     await avatarFileUpload(formData, mulitpleFileOptions);
   };
 
   const MultipleFileChange = (e) => {
     setMultipleFiles(e.target.files);
-    console.log(multipleFiles);
     setMultipleProgress(0);
     if (e.target.files) {
       const filesArray = Array.from(e.target.files).map((file) =>
@@ -89,17 +60,7 @@ const ProfileImage = (props) => {
             id="formFileMultiple"
             multiple
           />
-
-          {/* <Avatar
-            width={390}
-            height={295}
-            exportSize={390}
-            onCrop={onCropDefault}
-            onClose={onCloseDefault}
-            src={PreviewImg}
-          /> */}
         </div>
-        {/* props.user.imgURL.indexOf("http") == 0 ? props.user.imgURL : "http://localhost:5000/"+props.user.imgURL */}
         <div className="col-2">
           <h5>Preview</h5>
           <img
@@ -109,7 +70,6 @@ const ProfileImage = (props) => {
           />
         </div>
       </div>
-      {/* {console.log(PreviewImg)} */}
       <Button onClick={UploadMultipleFiles}>
         <Icon /> Confirm
       </Button>

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useContext } from "react";
+import React, { Suspense, useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,21 +13,6 @@ import Subject from "./pages/Subject";
 import Auth from "./auth/Auth";
 import QuestionPage from "./pages/QuestionPage";
 import SearchForum from "./pages/SearchForum"
-
-// const App = () => (
-//   <Router>
-//     <div>
-//       <Navbar />
-//       <Switch>
-//         <Route path="/" exact component={Home} />
-//         <Route path="/Auth" exact component={Auth} />
-//         <Route path="/CreateForum" exact component={CreateForum} />
-//         <Route path="/Profile/:id" exact component={Profile} />
-//         <Route path="/Subject/:subject" exact component={Subject} />
-//       </Switch>
-//     </div>
-//   </Router>
-// );
 
 const UnauthenticatedRoutes = ({ isAuthenticated }) => (
   <>
@@ -59,7 +44,6 @@ const UnauthenticatedRoutes = ({ isAuthenticated }) => (
 
 const AuthenticatedRoute = ({ children, ...rest }) => {
   const auth = useContext(AuthContext);
-  console.log("rest", rest);
   return (
     <Route
       {...rest}

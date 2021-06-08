@@ -45,12 +45,8 @@ const Profile = ({ isAuthenticated }) => {
   let { id } = useParams();
   const [userData, setUserData] = useState(dummyUser);
   const [forum, setForum] = useState([]);
-  const [answer, setAnswer] = useState({});
 
   //INFO DISPLAY
-  // const [displayName, setDisplayName] = useState("PupeePupee");
-  // const [userName, setUserName] = useState("Yoskorn Lertratanakham");
-  // const [email, setEmail] = useState("yoskon.ler@dome.tu.ac.th");
   const [phone, setPhone] = useState("N/A");
   const [organization, setOrganization] = useState("Thammasat University");
   const [eggHeadScore, setEggHeadScore] = useState(125);
@@ -86,53 +82,8 @@ const Profile = ({ isAuthenticated }) => {
       .then((res) => {
         setForum(res);
         setNumQuestion(res.length);
-        // console.log(forum);
       });
-    //   fetch(`http://localhost:5000/answers?userID=${id}`)
-    //     .then((res) => res.json())
-    //     .then((res) => setAnswer(res));
   }, [loc]);
-
-  const Interests = () => {
-    return (
-      <>
-        <Row className="interest-card" style={{ fontFamily: "supermarket" }}>
-          <Col md={2} className="interest-logo">
-            <Image
-              style={{ height: "80px" }}
-              src="https://tu.ac.th/uploads/media/logo/logo01.jpg"
-            />
-          </Col>
-          <Col md={10}>
-            <Card.Body>
-              <Card.Title>{"Thammasat University"}</Card.Title>
-              <Card.Text className="text-muted">
-                {Math.floor(Math.random() * 10000 + 1) * 100 + " followers"}
-              </Card.Text>
-            </Card.Body>
-          </Col>
-        </Row>
-        <Row className="interest-card">
-          <Col md={2} className="interest-logo">
-            <Image
-              style={{ height: "80px" }}
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png"
-            />
-          </Col>
-          <Col md={10}>
-            <Card.Body>
-              <Card.Title>{"Linkedin Guide to Networking"}</Card.Title>
-              <Card.Text className="text-muted">
-                {Math.floor(Math.random() * 10000 + 1) * 10 + " followers"}
-              </Card.Text>
-            </Card.Body>
-          </Col>
-        </Row>
-      </>
-    );
-  };
-
-  const handleImage = () => {};
 
   const handleEdit = () => {
     setIsEditMode(!isEditMode);
@@ -140,11 +91,11 @@ const Profile = ({ isAuthenticated }) => {
 
   const NonIdealState = () => {
     return (
-      <div class="bp3-non-ideal-state">
-        <div class="bp3-non-ideal-state-visual">
-          <span class="bp3-icon bp3-icon-folder-open"></span>
+      <div className="bp3-non-ideal-state">
+        <div className="bp3-non-ideal-state-visual">
+          <span className="bp3-icon bp3-icon-folder-open"></span>
         </div>
-        <h4 class="bp3-heading" style={theme.FONTS.detail}>
+        <h4 className="bp3-heading" style={theme.FONTS.detail}>
           Empty
         </h4>
         <div style={theme.FONTS.detail}>
@@ -161,19 +112,19 @@ const Profile = ({ isAuthenticated }) => {
   };
 
   const ProfileImg = () => {
-    if(isEditMode){
+    if (isEditMode) {
       return (
-        <div class="profile-img">
+        <div className="profile-img">
           {userData.imgURL ? (
             <>
               <Avatar
                 size="200"
-                src={userData.imgURL.indexOf("http") == 0 ? userData.imgURL : "http://localhost:5000/"+userData.imgURL}
+                src={userData.imgURL.indexOf("http")===0 ? userData.imgURL : "http://localhost:5000/" + userData.imgURL}
                 round={true}
                 onClick={handleImgSelect}
                 className="img-edit"
               />
-              <Icon onClick={handleImgSelect} icon="edit" iconSize={70} style={{position:"absolute", marginLeft:-130, marginTop:60, color:"white"}}/>
+              <Icon onClick={handleImgSelect} icon="edit" iconSize={70} style={{ position: "absolute", marginLeft: -130, marginTop: 60, color: "white" }} />
             </>
           ) : (
             <>
@@ -184,7 +135,7 @@ const Profile = ({ isAuthenticated }) => {
                 onClick={handleImgSelect}
                 className="img-edit"
               />
-              <Icon onClick={handleImgSelect} icon="edit" iconSize={70} style={{position:"absolute", marginLeft:-130, marginTop:60, color:"white"}}/>
+              <Icon onClick={handleImgSelect} icon="edit" iconSize={70} style={{ position: "absolute", marginLeft: -130, marginTop: 60, color: "white" }} />
             </>
           )}
 
@@ -201,20 +152,19 @@ const Profile = ({ isAuthenticated }) => {
             </Modal.Header>
             <Modal.Body>
               <form action="/profile" method="post" enctype="multipart/form-data">
-                {/* <input type="file" name="avatar"/> */}
               </form>
               <AvatarCropper data={user} />
             </Modal.Body>
           </Modal>
         </div>
-      ); 
-    }else{
+      );
+    } else {
       return (
-        <div class="profile-img">
+        <div className="profile-img">
           {userData.imgURL ? (
             <Avatar
               size="200"
-              src={userData.imgURL.indexOf("http") == 0 ? userData.imgURL : "http://localhost:5000/"+userData.imgURL}
+              src={userData.imgURL.indexOf("http")===0 ? userData.imgURL : "http://localhost:5000/" + userData.imgURL}
               round={true}
             />
           ) : (
@@ -225,9 +175,8 @@ const Profile = ({ isAuthenticated }) => {
             />
           )}
         </div>
-      ); 
+      );
     }
-    
   };
 
   const Navs = () => {
@@ -256,12 +205,11 @@ const Profile = ({ isAuthenticated }) => {
           <ProfileImg />
         </Col>
         <Col md={6}>
-          <div class="profile-head">
+          <div className="profile-head">
             <h3 style={theme.FONTS.profile}>
               {userData.firstName + " " + userData.lastName}
             </h3>
-            {/* <h5>{userName}</h5> */}
-            <p class="proile-rating" style={theme.FONTS.score}>
+            <p className="proile-rating" style={theme.FONTS.score}>
               EggHead Score :{" "}
               <span style={theme.FONTS.score}>{eggHeadScore}</span>
             </p>
@@ -273,10 +221,10 @@ const Profile = ({ isAuthenticated }) => {
           <Col md={2} style={theme.FONTS.detail}>
             <Button
               variant="secondary"
-              class="profile-edit-btn"
+              className="profile-edit-btn"
               onClick={handleEdit}
             >Edit Profile</Button>
-          </Col>  
+          </Col>
         ) : null}
       </>
     );
@@ -285,17 +233,13 @@ const Profile = ({ isAuthenticated }) => {
   const HistoryCard = () => {
     const ListTag = (props) => {
       const _list = props.data.listSubject;
-      // console.log(_list);
-
       const subjectTag = _list.map(
         (subject) => {
           return (
             <Badge bg="info" style={{ marginLeft: 4 }}>
-              {/* <Link to={`/subject/${}`}>{subject}</Link> */}
             </Badge>
           );
         }
-        // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
       return <div className="tag">{subjectTag}</div>;
     };
@@ -345,15 +289,15 @@ const Profile = ({ isAuthenticated }) => {
       );
     };
 
-    if (currSelectNav == 1) {
+    if (currSelectNav===1) {
       return (
         <div
-          class="tab-pane fade show active"
+          className="tab-pane fade show active"
           id="home"
           role="tabpanel"
           aria-labelledby="home-tab"
         >
-          <Row class="row">
+          <Row className="row">
             <Col md={6}>
               <label style={theme.FONTS.detail}>Email</label>
             </Col>
@@ -361,7 +305,7 @@ const Profile = ({ isAuthenticated }) => {
               <p style={theme.FONTS.detail}>{userData.email}</p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row className="row">
             <Col md={6}>
               <label style={theme.FONTS.detail}>Name</label>
             </Col>
@@ -371,7 +315,7 @@ const Profile = ({ isAuthenticated }) => {
               </p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row className="row">
             <Col md={6}>
               <label style={theme.FONTS.detail}>Phone Number</label>
             </Col>
@@ -379,7 +323,7 @@ const Profile = ({ isAuthenticated }) => {
               <p style={theme.FONTS.detail}>{phone}</p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row className="row">
             <Col md={6}>
               <label style={theme.FONTS.detail}>Organization</label>
             </Col>
@@ -387,7 +331,7 @@ const Profile = ({ isAuthenticated }) => {
               <p style={theme.FONTS.detail}>{organization}</p>
             </Col>
           </Row>
-          <Row class="row">
+          <Row className="row">
             <Col md={11}>
               <br />
               <label style={theme.FONTS.detail}>Education</label>
@@ -398,13 +342,13 @@ const Profile = ({ isAuthenticated }) => {
           </Row>
         </div>
       );
-    } else if (currSelectNav == 2) {
+    } else if (currSelectNav===2) {
       return (
         <div>
           <HistoryCard />
         </div>
       );
-    } else if (currSelectNav == 3) {
+    } else if (currSelectNav===3) {
       return (
         <div>
           <NonIdealState />
@@ -420,9 +364,9 @@ const Profile = ({ isAuthenticated }) => {
   };
 
   return (
-    <div class="container emp-profile">
+    <div className="container emp-profile">
       <Container method="post">
-        <Row class="Row">
+        <Row className="Row">
           <ProfileHead data={forum} />
         </Row>
       </Container>

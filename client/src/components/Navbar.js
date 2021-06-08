@@ -18,7 +18,7 @@ const NavigationBar = ({ isAuthenticated }) => {
   let history = useHistory();
 
   function addToast() {
-    toaster.show({ message: "Oops! ขออภัยอยู่ระหว่างการปรับปรุง", intent: Intent.WARNING,  icon: "warning-sign" });
+    toaster.show({ message: "Oops! ขออภัยอยู่ระหว่างการปรับปรุง", intent: Intent.WARNING, icon: "warning-sign" });
   }
 
   const auth = useContext(AuthContext);
@@ -33,18 +33,17 @@ const NavigationBar = ({ isAuthenticated }) => {
   }
 
   const handleKeyPress = (event) => {
-    if(event.key === 'Enter' && searchKeyword.length!=0){
-      console.log('enter press here! ')
+    if (event.key === 'Enter' && searchKeyword.length !== 0) {
       history.push(`/searchforum/${searchKeyword}`);
     }
   }
-  
+
   const ProfileOption = (props) => {
     return (
-      <Dropdown alignRight style={{ marginLeft: 20 }} >
+      <Dropdown style={{ marginLeft: 20 }} >
         <Dropdown.Toggle variant="light" className="btn-morestyle" bsPrefix="p-0">
           {props.user.imgURL ? (
-            <Avatar size="40" src={props.user.imgURL.indexOf("http") == 0 ? props.user.imgURL : "http://localhost:5000/"+props.user.imgURL} round={true} />
+            <Avatar size="40" src={props.user.imgURL.indexOf("http") === 0 ? props.user.imgURL : "http://localhost:5000/" + props.user.imgURL} round={true} />
           ) : (
             <Avatar
               size="40"
@@ -56,9 +55,9 @@ const NavigationBar = ({ isAuthenticated }) => {
         <Dropdown.Menu className="dropdown-menu-user" style={{ width: 250 }}>
           <Dropdown.Item className="menu-text">
             <NavLink to={`/profile/${props.user.userID}`}>
-              <div class="co-name" style={theme.FONTS.body4}>
+              <div className="co-name" style={theme.FONTS.body4}>
                 {props.user.imgURL ? (
-                  <Avatar size="40" src={props.user.imgURL.indexOf("http") == 0 ? props.user.imgURL : "http://localhost:5000/"+props.user.imgURL} round={true} />
+                  <Avatar size="40" src={props.user.imgURL.indexOf("http") === 0 ? props.user.imgURL : "http://localhost:5000/" + props.user.imgURL} round={true} />
                 ) : (
                   <Avatar
                     size="40"
@@ -122,20 +121,11 @@ const NavigationBar = ({ isAuthenticated }) => {
       <Navbar.Collapse
         className="justify-content-end navbar-user"
       >
-        {/* <div class="bp3-input-group searchbar">
-          <span class="bp3-icon bp3-icon-search"></span>
-          
-          <input value={searchKeyword} type="text" class="bp3-input" placeholder="Search" onChange={SearchKeyword}/>
-          {searchKeyword?(<Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"/>):(<></>)}
-          
-        </div> */}
-
-        <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: SIZES.h4}}>
+        <NavLink to="/create/forum" style={{ fontFamily: "Krub-Regular", fontSize: SIZES.h4 }}>
           <Button
             className="ms-3"
             variant="contained"
             color="secondary"
-            size="mediem"
           >
             ตั้งคำถาม
           </Button>
@@ -157,7 +147,6 @@ const NavigationBar = ({ isAuthenticated }) => {
             }}
             variant="contained"
             color="secondary"
-            size="mediem"
           >
             Join us
           </Button>
@@ -214,15 +203,15 @@ const NavigationBar = ({ isAuthenticated }) => {
 
   return (
     <div className="Navbar">
-      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)} />
       <Navbar expand="lg" bg="dark" variant="dark" className="navbar">
         <BrandLogo />
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         {user ? <>
-          <div class="bp3-input-group searchbar justify-content-end">
-            <span class="bp3-icon bp3-icon-search"></span>
-            <input value={searchKeyword} type="text" class="bp3-input" placeholder="ค้นหาคำถาม" onChange={SearchKeyword} onKeyPress={handleKeyPress}/>
-            {searchKeyword?(<Link to={`/searchforum/${searchKeyword}`} class="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right"/>):(<></>)}
+          <div className="bp3-input-group searchbar justify-content-end">
+            <span className="bp3-icon bp3-icon-search"></span>
+            <input value={searchKeyword} type="text" className="bp3-input" placeholder="ค้นหาคำถาม" onChange={SearchKeyword} onKeyPress={handleKeyPress} />
+            {searchKeyword ? (<Link to={`/searchforum/${searchKeyword}`} className="bp3-button bp3-minimal bp3-intent-primary bp3-icon-arrow-right" />) : (<></>)}
           </div>
           <NavUser />
         </> : <NavNonUser />}

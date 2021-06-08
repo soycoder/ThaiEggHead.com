@@ -39,14 +39,6 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string().required("Password is required."),
 });
 
-//
-const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
 const values = ["ชุมชนอุดมปัญญา", "สังคมแห่งการแบ่งปัน", "Thai Egghead.com"];
 
 const TextEffect = () => {
@@ -64,7 +56,7 @@ const TextEffect = () => {
     return () => clearInterval(action);
   }, []);
 
-  return <p style={{position: "absolute", fontSize:40, fontFamily: "supermarket"}}>"{result}" </p>;
+  return <p style={{ position: "absolute", fontSize: 40, fontFamily: "supermarket" }}>"{result}" </p>;
 };
 
 const WelcomeAds = () => {
@@ -73,10 +65,10 @@ const WelcomeAds = () => {
       <div >
         <p style={FONTS.body1}>ร่วมเป็นส่วนหนึ่งของ</p>
         <TextEffect></TextEffect>
-        <br/>
-        <br/>
+        <br />
+        <br />
       </div>
-      
+
       <div style={{ margin: 30 }}>
         <Icon
           icon="chat"
@@ -115,7 +107,6 @@ const Signin = (props) => {
       setLoginLoading(true);
       const { data } = await axios.post("/users/signin", credentials);
       let { user } = data;
-      console.log("login", data);
       let context = {
         token: user.token,
         userInfo: user.firstName + " " + user.lastName,
@@ -131,7 +122,6 @@ const Signin = (props) => {
     } catch (error) {
       setLoginLoading(false);
       const { data } = error.response;
-      console.log(data);
       setLoginError(data.errors.global);
       setLoginSuccess(null);
     }
@@ -139,7 +129,7 @@ const Signin = (props) => {
 
   return (
     <>
-      <Formik 
+      <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => submitCredentials(values)}
         validationSchema={LoginSchema}
@@ -176,7 +166,7 @@ const Signin = (props) => {
               </div>
 
               {/*errors.email && touched.email && errors.email */}
-              <div className="col-12 mb-3 col-12" style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+              <div className="col-12 mb-3 col-12" style={{ color: "OrangeRed", fontFamily: "supermarket", fontSize: 12 }}>
                 <ErrorMessage name="email" />
               </div>
 
@@ -194,7 +184,7 @@ const Signin = (props) => {
                 <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
               </div>
 
-              <div className="col-12 mb-3 col-12" style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+              <div className="col-12 mb-3 col-12" style={{ color: "OrangeRed", fontFamily: "supermarket", fontSize: 12 }}>
                 {errors.password && touched.password && errors.password}
               </div>
             </Grid>
@@ -230,8 +220,6 @@ const Register = (props) => {
     try {
       setSignupLoading(true);
       const { data } = await axios.post(`/users/register`, credentials);
-
-      let { user } = data;
 
       setSignupSuccess(data.message);
       setSignupError("");
@@ -274,7 +262,7 @@ const Register = (props) => {
           onSubmit={(values) => submitCredentials(values)}
           style={FONTS.body3}
           validationSchema={SignupSchema}
-          
+
         >
           {({
             values,
@@ -289,10 +277,9 @@ const Register = (props) => {
               <Grid container>
                 {signupSuccess && <div style={FONTS.body3}> Signup Success {signupSuccess} </div>}
                 {signupError && <div style={FONTS.body3}> Signup Error {signupError} </div>}
-                {/* <input type="hidden" name="remember" value="true" /> */}
                 <br />
 
-                <div className="form-floating mt-3 col-12" style={{fontFamily: "supermarket"}}>
+                <div className="form-floating mt-3 col-12" style={{ fontFamily: "supermarket" }}>
                   <input
                     type="firstName"
                     name="firstName"
@@ -305,11 +292,11 @@ const Register = (props) => {
                   <label for="floatingInput" style={theme.FONTS.login}>First Name</label>
                 </div>
 
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
-                  <ErrorMessage name="firstName"/>
+                <div className="col-12 mb-3 " style={{ color: "OrangeRed", fontFamily: "supermarket", fontSize: 12 }}>
+                  <ErrorMessage name="firstName" />
                 </div>
 
-                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
+                <div className="form-floating col-12" style={{ fontFamily: "supermarket" }}>
                   <input
                     className="form-control"
                     id="floatingInput"
@@ -322,11 +309,11 @@ const Register = (props) => {
                   <label for="floatingInput" style={theme.FONTS.login}>Last Name</label>
                 </div>
 
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+                <div className="col-12 mb-3 " style={{ color: "OrangeRed", fontFamily: "supermarket", fontSize: 12 }}>
                   <ErrorMessage name="lastName" />
                 </div>
 
-                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
+                <div className="form-floating col-12" style={{ fontFamily: "supermarket" }}>
                   <input
                     type="email"
                     className="form-control"
@@ -341,11 +328,11 @@ const Register = (props) => {
                 </div>
 
                 {/*errors.email && touched.email && errors.email */}
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+                <div className="col-12 mb-3 " style={{ color: "OrangeRed", fontFamily: "supermarket", fontSize: 12 }}>
                   <ErrorMessage name="email" />
                 </div>
 
-                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
+                <div className="form-floating col-12" style={{ fontFamily: "supermarket" }}>
                   <input
                     type="password"
                     className="form-control"
@@ -358,7 +345,7 @@ const Register = (props) => {
                   <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
                 </div>
 
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+                <div className="col-12 mb-3 " style={{ color: "OrangeRed", fontFamily: "supermarket", fontSize: 12 }}>
                   {errors.password && touched.password && errors.password}
                 </div>
               </Grid>
@@ -387,9 +374,6 @@ const Register = (props) => {
 };
 
 export const Auth = () => {
-  // ! useContext()
-  const authContext = useContext(AuthContext);
-
   // ! useState()
   const [isSignup, setIsSignup] = useState(false);
   const [redirectOnLogin, setRedirectOnLogin] = useState(false);
@@ -407,58 +391,11 @@ export const Auth = () => {
   };
 
   const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const _token = res?.tokenId;
-
-    const userGoogleRegister = {
-      googleID: result?.googleId,
-      imgURL: result?.imageUrl,
-      email: result?.email,
-      password: _token,
-      firstName: result?.givenName,
-      lastName: result?.familyName,
-      role: "user",
-    };
-
-    const userGoogleSignin = {
-      email: result?.email,
-      password: _token,
-    };
-
-    const __res = await axios
-      .get(`/users/google/${userGoogleRegister.googleID}`)
-      .then(async (res) => {
-        // alert(JSON.stringify(res));
-
-        let { data } = await axios.post("/users/signin", userGoogleSignin);
-        let { user: _user } = data;
-        // alert(JSON.stringify(_user));
-        let context = {
-          token: _user.token,
-          userInfo: _user.firstName + " " + _user.lastName,
-          expiresAt: new Date().getTime() / 1000 + _user.expiresIn,
-        };
-        // alert(JSON.stringify(context));
-        authContext.setAuthState(context);
-        setTimeout(() => {
-          setRedirectOnLogin(true);
-        }, 700);
-      })
-      .catch(async (error) => {
-        let { user } = await axios
-          .post("/users/register", userGoogleRegister)
-          .then(() => {
-            setTimeout(() => {
-              handleShow();
-            }, 700);
-          });
-      });
   };
 
   const googleError = () =>
     console.log("Google Sign In was unsuccessful. Try again later");
 
-  //   ! return()
   return (
     <>
       {redirectOnLogin && <Redirect to="/" />}
@@ -529,7 +466,6 @@ export const Auth = () => {
           <Modal.Title>สถานะการสมัคร</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center mt-2 mb-2">
-          {/* <Icon icon="saved" iconSize={100} intent={Intent.SUCCESS} /> */}
           <Player
             autoplay
             loop
@@ -574,17 +510,6 @@ const AuthPage = () => {
         </Col>
       </Row>
     </Container>
-    //        <Container>
-    //        <Row>
-    //            <Col xs={8} md={6}>
-    //                <WelcomeAds/>
-    //            </Col>
-
-    //            <Col xs={6} md={4}>
-    //                <Auth/>
-    //            </Col>
-    //        </Row>
-    //    </Container>
   );
 };
 

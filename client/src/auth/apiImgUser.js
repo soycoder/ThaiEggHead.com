@@ -9,10 +9,7 @@ export const avatarFileUpload = async (data, options) => {
     console.log(object.userID);
 
     await axios.put(apiUrl + object.userID, data, options);
-    // console.log(data);
-    // for (var pair of data.entries()) {
-    //   console.log(pair[1]);
-    // }
+
   } catch (error) {
     throw error;
   }

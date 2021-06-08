@@ -1,8 +1,7 @@
-
 export const COLORS = {
     // base colors
-    primary: "#FFE529", 
-    secondary: "#cacfd9",   
+    primary: "#FFE529",
+    secondary: "#cacfd9",
 
     // colors
     black: "#1E1F20",
@@ -27,7 +26,7 @@ export const COLORS = {
 
     blue: "#5ACDFF",
     lightBlue: "#D4FCFF",
-    
+
 };
 export const SIZES = {
     // global sizes
@@ -55,8 +54,8 @@ export const SIZES = {
 
 };
 export const FONTS = {
-    largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle},
-    h1: { fontFamily: "Prompt-Regular", fontSize: SIZES.h1  },
+    largeTitle: { fontFamily: "supermarket", fontSize: SIZES.largeTitle },
+    h1: { fontFamily: "Prompt-Regular", fontSize: SIZES.h1 },
     h2: { fontFamily: "Prompt-Regular", fontSize: SIZES.h2 },
     h3: { fontFamily: "Prompt-Regular", fontSize: SIZES.h3 },
     h4: { fontFamily: "Prompt-Regular", fontSize: SIZES.h4 },
@@ -105,7 +104,7 @@ export const FONTS = {
     tag1: { fontFamily: "supermarket", fontSize: SIZES.body5 },
 
     subject: { fontFamily: "Krub-Regular", fontSize: SIZES.body4 },
-    post: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
+    postSubject: { fontFamily: "Krub-Regular", fontSize: SIZES.h3 },
 };
 
 const appTheme = { COLORS, SIZES, FONTS };

@@ -2,7 +2,6 @@ import React from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import '../App.css'
 
-
 export default function WithoutInfo() {
   const [datatable, setDatatable] = React.useState({
     columns: [
@@ -36,12 +35,6 @@ export default function WithoutInfo() {
   });
 
   const Top = 5;
-  const loopConst = () =>{
-    // for (let i = 0; i < datatable.length; i++) {
-    //   formData.append("files", multipleFiles[i]);
-    // }
-    // console.log(datatable)
-  }
 
   return (
   <>
@@ -50,12 +43,10 @@ export default function WithoutInfo() {
       data={datatable}
       hover
       entries={Top}
-      // entriesOptions={[5,10]}
       pagesAmount={4}
       info={false}
       striped
       bordered
-      // paging={false}
     />
   </>
   

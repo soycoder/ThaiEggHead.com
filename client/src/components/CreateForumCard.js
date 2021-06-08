@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { multipleFilesUpload } from "../auth/apiFile";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -6,7 +6,6 @@ import Select from "react-select";
 import { Modal, Button, Form, Badge } from "react-bootstrap";
 import Swal from "sweetalert2";
 import SelectTag from "./SelectTag";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { theme } from "../constants";
@@ -15,7 +14,6 @@ import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
 
 const FileUploadScreen = ({ isAuthenticated }) => {
-  let history = useHistory();
   // Initial User Profile
   const auth = useContext(AuthContext);
 
@@ -26,7 +24,6 @@ const FileUploadScreen = ({ isAuthenticated }) => {
   if (isAuthenticated) {
     decoded = jwt_decode(token);
     user = decoded;
-    // alert(JSON.stringify(user));
   }
 
   const [multipleFiles, setMultipleFiles] = useState("");
@@ -59,10 +56,9 @@ const FileUploadScreen = ({ isAuthenticated }) => {
     { label: "ศิลปะ", value: "ศิลปะ" },
     { label: "จิตวิทยา", value: "จิตวิทยา" },
   ];
-  
+
   const [sourceImg, setSelectImg] = useState([]);
   const MultipleFileChange = (e) => {
-    console.log(multipleFiles)
     setMultipleFiles(e.target.files);
     setMultipleProgress(0);
     if (e.target.files) {
@@ -80,7 +76,6 @@ const FileUploadScreen = ({ isAuthenticated }) => {
   function deleteFile(e) {
     const s = file.filter((item, index) => index !== e);
     setFile(s);
-    // console.log("S " + s);
   }
 
   const [multipleProgress, setMultipleProgress] = useState(0);
@@ -120,7 +115,6 @@ const FileUploadScreen = ({ isAuthenticated }) => {
   const handleChange = (e, editor) => {
     const body = editor.getData();
     setBody(body);
-    // console.log("Body : " + body);
   };
 
   function onChangeInputTag(tag) {
@@ -172,7 +166,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
   const ListSubjectTag = (props) => {
     let list = props.data;
     let _Subject = list.map((subject) => (
-      <Badge bg="primary" style={{ marginLeft: 4 }}>
+      <Badge key={subject} bg="primary" style={{ marginLeft: 4 }}>
         {subject}
       </Badge>
     ));
@@ -194,7 +188,7 @@ const FileUploadScreen = ({ isAuthenticated }) => {
 
   const editorConfiguration = {
     // plugins: [ ],
-    toolbar: [ 
+    toolbar: [
       // 'heading',
       // '|',
       'bold',
@@ -211,8 +205,8 @@ const FileUploadScreen = ({ isAuthenticated }) => {
       "|",
       "undo",
       "redo",
-      'code', 
-    ],        
+      'code',
+    ],
     ckfinder: {
       uploadUrl: "/upload",
       withCredentials: true,
@@ -235,25 +229,10 @@ const FileUploadScreen = ({ isAuthenticated }) => {
       ],
     },
   };
-  useEffect(() => {
-    // const token = user?.token;
-    // setUser(JSON.parse(localStorage.getItem("profile")));
-    // if (user) {
-    //   let _user = user;
-    //   let _result = _user.result;
-    //   fetch(`http://localhost:5000/users/google/${_result.googleId}`)
-    //     .then((res) => res.json())
-    //     .then((res) => {
-    //       _result["userID"] = res.userID;
-    //       _user["result"] = _result;
-    //       setUser("User " + _user);
-    //     });
-    // }
-  }, []);
 
   return (
     <Form className="mb-3">
-      <div style={{textAlign:"center", fontFamily: "Krub-Regular", fontSize:29}}>ตั้งคำถาม</div>
+      <div style={{ textAlign: "center", fontFamily: "Krub-Regular", fontSize: 29 }}>ตั้งคำถาม</div>
       <Form.Group className="mb-3">
         <Form.Label style={theme.FONTS.h1}>หัวข้อ</Form.Label>
         <br />

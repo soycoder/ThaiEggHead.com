@@ -1,0 +1,135 @@
+Date : 2021-06-08 10:41:31
+Directory : d:\GitHub\ThaiEggHead
+Total : 86 files,  64414 codes, 420 comments, 909 blanks, all 65743 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |         10 |     57,879 |          0 |          7 |     57,886 |
+| JavaScript |         63 |      5,442 |        349 |        667 |      6,458 |
+| CSS        |          5 |        914 |         18 |        153 |      1,085 |
+| HTTP       |          5 |        106 |         28 |         47 |        181 |
+| Markdown   |          1 |         38 |          0 |         33 |         71 |
+| HTML       |          1 |         34 |         25 |          2 |         61 |
+| XML        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                              |         86 |     64,414 |        420 |        909 |     65,743 |
+| client                                                         |         46 |     56,933 |        294 |        695 |     57,922 |
+| client\public                                                  |          2 |         59 |         25 |          3 |         87 |
+| client\src                                                     |         41 |      5,073 |        269 |        657 |      5,999 |
+| client\src\auth                                                |          6 |        617 |         31 |         80 |        728 |
+| client\src\components                                          |         10 |      2,002 |        134 |        268 |      2,404 |
+| client\src\constants                                           |          5 |        159 |          4 |         32 |        195 |
+| client\src\context                                             |          2 |         97 |          2 |         19 |        118 |
+| client\src\pages                                               |          8 |      1,823 |         56 |        199 |      2,078 |
+| client\src\util                                                |          2 |         13 |          2 |          4 |         19 |
+| sample_data                                                    |          3 |        311 |          0 |          0 |        311 |
+| server                                                         |         35 |      6,681 |        126 |        212 |      7,019 |
+| server\Test                                                    |          5 |        106 |         28 |         47 |        181 |
+| server\config                                                  |          4 |         65 |          0 |          4 |         69 |
+| server\controller                                              |          5 |        715 |         60 |         76 |        851 |
+| server\helpers                                                 |          2 |         43 |          2 |          8 |         53 |
+| server\models                                                  |          7 |        239 |          7 |         25 |        271 |
+| server\routes                                                  |          5 |         90 |          1 |         18 |        109 |
+| server\temp                                                    |          1 |         13 |          5 |          6 |         24 |
+| server\util                                                    |          2 |         72 |         11 |         10 |         93 |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                       | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\GitHub\ThaiEggHead\client\README.md                         | Markdown   |         38 |          0 |         33 |         71 |
+| d:\GitHub\ThaiEggHead\client\package-lock.json                 | JSON       |     51,689 |          0 |          1 |     51,690 |
+| d:\GitHub\ThaiEggHead\client\package.json                      | JSON       |         74 |          0 |          1 |         75 |
+| d:\GitHub\ThaiEggHead\client\public\index.html                 | HTML       |         34 |         25 |          2 |         61 |
+| d:\GitHub\ThaiEggHead\client\public\manifest.json              | JSON       |         25 |          0 |          1 |         26 |
+| d:\GitHub\ThaiEggHead\client\src\App.css                       | CSS        |        214 |          6 |         26 |        246 |
+| d:\GitHub\ThaiEggHead\client\src\App.js                        | JavaScript |         81 |         14 |         11 |        106 |
+| d:\GitHub\ThaiEggHead\client\src\App.test.js                   | JavaScript |          7 |          0 |          2 |          9 |
+| d:\GitHub\ThaiEggHead\client\src\auth\Auth.js                  | JavaScript |        504 |         22 |         66 |        592 |
+| d:\GitHub\ThaiEggHead\client\src\auth\Input.js                 | JavaScript |         28 |          0 |          3 |         31 |
+| d:\GitHub\ThaiEggHead\client\src\auth\apiFile.js               | JavaScript |         32 |          5 |          3 |         40 |
+| d:\GitHub\ThaiEggHead\client\src\auth\apiImgUser.js            | JavaScript |         12 |          4 |          4 |         20 |
+| d:\GitHub\ThaiEggHead\client\src\auth\styles.css               | CSS        |          9 |          0 |          1 |         10 |
+| d:\GitHub\ThaiEggHead\client\src\auth\styles.js                | JavaScript |         32 |          0 |          3 |         35 |
+| d:\GitHub\ThaiEggHead\client\src\components\Answer.js          | JavaScript |        489 |         34 |         61 |        584 |
+| d:\GitHub\ThaiEggHead\client\src\components\CreateForumCard.js | JavaScript |        356 |         27 |         35 |        418 |
+| d:\GitHub\ThaiEggHead\client\src\components\ForumCard.js       | JavaScript |        370 |          3 |         33 |        406 |
+| d:\GitHub\ThaiEggHead\client\src\components\LeaderBoard.js     | JavaScript |         52 |          6 |          6 |         64 |
+| d:\GitHub\ThaiEggHead\client\src\components\Navbar.js          | JavaScript |        213 |          5 |         17 |        235 |
+| d:\GitHub\ThaiEggHead\client\src\components\ProfileImage.js    | JavaScript |         96 |          7 |         18 |        121 |
+| d:\GitHub\ThaiEggHead\client\src\components\SelectTag.js       | JavaScript |         38 |         46 |         19 |        103 |
+| d:\GitHub\ThaiEggHead\client\src\components\ToasterCard.js     | JavaScript |         15 |          0 |          5 |         20 |
+| d:\GitHub\ThaiEggHead\client\src\components\UpvoteButton.js    | JavaScript |         24 |          0 |          3 |         27 |
+| d:\GitHub\ThaiEggHead\client\src\components\styles.css         | CSS        |        349 |          6 |         71 |        426 |
+| d:\GitHub\ThaiEggHead\client\src\constants\actionTypes.js      | JavaScript |          2 |          0 |          1 |          3 |
+| d:\GitHub\ThaiEggHead\client\src\constants\icons.js            | JavaScript |          0 |          0 |          1 |          1 |
+| d:\GitHub\ThaiEggHead\client\src\constants\images.js           | JavaScript |         70 |          0 |          2 |         72 |
+| d:\GitHub\ThaiEggHead\client\src\constants\index.js            | JavaScript |          3 |          0 |          2 |          5 |
+| d:\GitHub\ThaiEggHead\client\src\constants\theme.js            | JavaScript |         84 |          4 |         26 |        114 |
+| d:\GitHub\ThaiEggHead\client\src\context\AuthContext.js        | JavaScript |         56 |          0 |         11 |         67 |
+| d:\GitHub\ThaiEggHead\client\src\context\FetchContext.js       | JavaScript |         41 |          2 |          8 |         51 |
+| d:\GitHub\ThaiEggHead\client\src\index.css                     | CSS        |         36 |          1 |          7 |         44 |
+| d:\GitHub\ThaiEggHead\client\src\index.js                      | JavaScript |         10 |         15 |          6 |         31 |
+| d:\GitHub\ThaiEggHead\client\src\logo.svg                      | XML        |          1 |          0 |          0 |          1 |
+| d:\GitHub\ThaiEggHead\client\src\pages\CreateForum.js          | JavaScript |         15 |          0 |          5 |         20 |
+| d:\GitHub\ThaiEggHead\client\src\pages\General.js              | JavaScript |          0 |          0 |          1 |          1 |
+| d:\GitHub\ThaiEggHead\client\src\pages\Home.js                 | JavaScript |        397 |          7 |         41 |        445 |
+| d:\GitHub\ThaiEggHead\client\src\pages\Profile.js              | JavaScript |        393 |         13 |         28 |        434 |
+| d:\GitHub\ThaiEggHead\client\src\pages\QuestionPage.js         | JavaScript |         83 |          7 |         17 |        107 |
+| d:\GitHub\ThaiEggHead\client\src\pages\SearchForum.js          | JavaScript |        145 |          2 |         22 |        169 |
+| d:\GitHub\ThaiEggHead\client\src\pages\Subject.js              | JavaScript |        484 |         22 |         37 |        543 |
+| d:\GitHub\ThaiEggHead\client\src\pages\styles.css              | CSS        |        306 |          5 |         48 |        359 |
+| d:\GitHub\ThaiEggHead\client\src\reportWebVitals.js            | JavaScript |         12 |          0 |          2 |         14 |
+| d:\GitHub\ThaiEggHead\client\src\setupTests.js                 | JavaScript |          1 |          4 |          1 |          6 |
+| d:\GitHub\ThaiEggHead\client\src\util\authAxios.js             | JavaScript |          7 |          2 |          2 |         11 |
+| d:\GitHub\ThaiEggHead\client\src\util\fetch.js                 | JavaScript |          6 |          0 |          2 |          8 |
+| d:\GitHub\ThaiEggHead\package-lock.json                        | JSON       |        465 |          0 |          1 |        466 |
+| d:\GitHub\ThaiEggHead\package.json                             | JSON       |         24 |          0 |          1 |         25 |
+| d:\GitHub\ThaiEggHead\sample_data\Forum.json                   | JSON       |        156 |          0 |          0 |        156 |
+| d:\GitHub\ThaiEggHead\sample_data\Tag.json                     | JSON       |         61 |          0 |          0 |         61 |
+| d:\GitHub\ThaiEggHead\sample_data\User.json                    | JSON       |         94 |          0 |          0 |         94 |
+| d:\GitHub\ThaiEggHead\server\Test\answer.rest                  | HTTP       |         23 |          5 |          8 |         36 |
+| d:\GitHub\ThaiEggHead\server\Test\comment.rest                 | HTTP       |         20 |          5 |          7 |         32 |
+| d:\GitHub\ThaiEggHead\server\Test\forum.rest                   | HTTP       |         30 |         10 |         17 |         57 |
+| d:\GitHub\ThaiEggHead\server\Test\image.rest                   | HTTP       |          1 |          1 |          1 |          3 |
+| d:\GitHub\ThaiEggHead\server\Test\user.rest                    | HTTP       |         32 |          7 |         14 |         53 |
+| d:\GitHub\ThaiEggHead\server\config\database.js                | JavaScript |         31 |          0 |          2 |         33 |
+| d:\GitHub\ThaiEggHead\server\config\databaseTest.js            | JavaScript |         11 |          0 |          1 |         12 |
+| d:\GitHub\ThaiEggHead\server\config\jwtConfig.js               | JavaScript |          9 |          0 |          0 |          9 |
+| d:\GitHub\ThaiEggHead\server\config\mongodb.config.js          | JavaScript |         14 |          0 |          1 |         15 |
+| d:\GitHub\ThaiEggHead\server\controller\AnswerController.js    | JavaScript |         99 |          8 |         10 |        117 |
+| d:\GitHub\ThaiEggHead\server\controller\CommentController.js   | JavaScript |        102 |          8 |          9 |        119 |
+| d:\GitHub\ThaiEggHead\server\controller\ForumController.js     | JavaScript |        167 |         21 |         17 |        205 |
+| d:\GitHub\ThaiEggHead\server\controller\UserController.js      | JavaScript |        241 |         15 |         30 |        286 |
+| d:\GitHub\ThaiEggHead\server\controller\_ForumController.js    | JavaScript |        106 |          8 |         10 |        124 |
+| d:\GitHub\ThaiEggHead\server\helpers\filehelper.js             | JavaScript |         20 |          1 |          3 |         24 |
+| d:\GitHub\ThaiEggHead\server\helpers\filehelperUser.js         | JavaScript |         23 |          1 |          5 |         29 |
+| d:\GitHub\ThaiEggHead\server\index.js                          | JavaScript |         12 |          1 |          5 |         18 |
+| d:\GitHub\ThaiEggHead\server\models\Answer.js                  | JavaScript |         16 |          0 |          2 |         18 |
+| d:\GitHub\ThaiEggHead\server\models\Comment.js                 | JavaScript |         14 |          0 |          2 |         16 |
+| d:\GitHub\ThaiEggHead\server\models\Forum.js                   | JavaScript |         31 |          2 |          2 |         35 |
+| d:\GitHub\ThaiEggHead\server\models\Tag.js                     | JavaScript |         16 |          0 |          2 |         18 |
+| d:\GitHub\ThaiEggHead\server\models\User.js                    | JavaScript |         98 |          4 |          8 |        110 |
+| d:\GitHub\ThaiEggHead\server\models\imgfile.js                 | JavaScript |         21 |          0 |          3 |         24 |
+| d:\GitHub\ThaiEggHead\server\models\mulitipleFileSchema.js     | JavaScript |         43 |          1 |          6 |         50 |
+| d:\GitHub\ThaiEggHead\server\package-lock.json                 | JSON       |      5,259 |          0 |          1 |      5,260 |
+| d:\GitHub\ThaiEggHead\server\package.json                      | JSON       |         32 |          0 |          1 |         33 |
+| d:\GitHub\ThaiEggHead\server\routes\AnswerRouter.js            | JavaScript |         15 |          0 |          3 |         18 |
+| d:\GitHub\ThaiEggHead\server\routes\CommentRouter.js           | JavaScript |         15 |          0 |          3 |         18 |
+| d:\GitHub\ThaiEggHead\server\routes\ForumRouter.js             | JavaScript |         20 |          1 |          5 |         26 |
+| d:\GitHub\ThaiEggHead\server\routes\UserRouter.js              | JavaScript |         25 |          0 |          4 |         29 |
+| d:\GitHub\ThaiEggHead\server\routes\_ForumRouter.js            | JavaScript |         15 |          0 |          3 |         18 |
+| d:\GitHub\ThaiEggHead\server\server.js                         | JavaScript |         35 |         11 |         11 |         57 |
+| d:\GitHub\ThaiEggHead\server\temp\TestIdenticon.js             | JavaScript |         13 |          5 |          6 |         24 |
+| d:\GitHub\ThaiEggHead\server\util\jwt-passport.js              | JavaScript |         35 |          5 |          4 |         44 |
+| d:\GitHub\ThaiEggHead\server\util\util.js                      | JavaScript |         37 |          6 |          6 |         49 |
+| Total                                                          |            |     64,414 |        420 |        909 |     65,743 |
++----------------------------------------------------------------+------------+------------+------------+------------+------------+
