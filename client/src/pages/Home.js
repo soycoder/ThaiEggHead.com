@@ -295,7 +295,7 @@ function Home({ isAuthenticated }) {
         </Card>
       );
     } else {
-      return <div>Please Login</div>;
+      return null;
     }
   };
 
