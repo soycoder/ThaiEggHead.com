@@ -29,15 +29,11 @@ const userSchema = new mongoose.Schema(
     firstName: String,
     lastName: String,
     imgURL: String,
-    avatar: {image: Buffer, contentType: String},
     gender: String,
     birthDate: Date,
     bio: String,
     country: String,
-    timeRegister: Date,
     score: Number,
-    educationList: [Object],
-    interestList: [Object],
   },
   { versionKey: false, timestamps: true }
 );

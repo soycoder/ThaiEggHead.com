@@ -8,7 +8,6 @@ const answerSchema = new mongoose.Schema(
     answerText: String,
     listComment: Array,
     whoVoteLike: Array,
-    whoVoteDislike: Array,
   },
   { versionKey: false, timestamps: true }
 );

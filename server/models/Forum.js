@@ -23,7 +23,6 @@ const forumSchema = new mongoose.Schema(
     listAnswer: Array,
     listComment: Array,
     whoVoteLike: Array,
-    whoVoteDislike: Array,
     view: Number,
     isSolution: String,
   },

@@ -6,7 +6,6 @@ const commentSchema = new mongoose.Schema(
     answerID: String,
     userID: String,
     commentText: String,
-    createTime: Date,
   },
   { versionKey: false, timestamps: true }
 );
