@@ -379,13 +379,17 @@ function ForumCard(props) {
     );
   };
 
+  const handleCloseComment = () => {
+    setIsShowComment(false)
+  }
+
   // Main Render
   return (
     <div style={{ marginBottom: 10 }}>
       <Card className="main-card">
         <Question />
         {isShowComment ? (
-          <Answer data={forum} isAuthenticated={props.isAuthenticated} />
+          <Answer data={forum} showcomment={handleCloseComment} isAuthenticated={props.isAuthenticated} />
         ) : (
           <></>
         )}

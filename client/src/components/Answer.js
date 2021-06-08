@@ -21,6 +21,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 
 const Answer = (props) => {
+  let handlecomment = props.showcomment
   let forum = props.data;
   let isAuthenticated = props.isAuthenticated;
 
@@ -162,6 +163,7 @@ const Answer = (props) => {
       }
       if (commentText !== "") {
         handleAddComment();
+        handlecomment();
       }
     };
 
@@ -286,11 +288,14 @@ const Answer = (props) => {
     };
 
     const validateAnswerText = () => {
+      
       if (answerText === "") {
         addToast("โปรดกรอก ข้อความ ก่อน");
+
       }
       if (answerText !== "") {
         handleAddAnswer();
+        handlecomment();
       }
     };
 
