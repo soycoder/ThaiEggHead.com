@@ -461,6 +461,7 @@ const Register = (props) => {
 };
 
 export const Auth = () => {
+  const authContext = useContext(AuthContext);
   // ! useState()
   const [isSignup, setIsSignup] = useState(false);
   const [redirectOnLogin, setRedirectOnLogin] = useState(false);
