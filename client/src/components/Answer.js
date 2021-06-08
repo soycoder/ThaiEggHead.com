@@ -429,7 +429,7 @@ const Answer = (props) => {
             answerID: answerData.answerID,
             whoVoteLike: whoVoteLike,
           };
-          axios.put(`/answers/${answerData.answerID}`, update);
+          axios.put(`http://localhost:5000/answers/${answerData.answerID}`, update);
         } else {
           setIsYouLike(false);
           let update = {
@@ -438,7 +438,7 @@ const Answer = (props) => {
           };
           whoVoteLike.splice(index, 1);
           setAmountLike(amountLike - 1);
-          axios.put(`/answers/${answerData.answerID}`, update);
+          axios.put(`http://localhost:5000/answers/${answerData.answerID}`, update);
         }
       } else {
         addToast("โปรด Login ก่อน");

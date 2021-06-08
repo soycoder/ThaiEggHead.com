@@ -64,19 +64,25 @@ const TextEffect = () => {
     return () => clearInterval(action);
   }, []);
 
-  return <p style={{position: "absolute", fontSize:40, fontFamily: "supermarket"}}>"{result}" </p>;
+  return (
+    <p
+      style={{ position: "absolute", fontSize: 40, fontFamily: "supermarket" }}
+    >
+      "{result}"{" "}
+    </p>
+  );
 };
 
 const WelcomeAds = () => {
   return (
     <Container>
-      <div >
+      <div>
         <p style={FONTS.body1}>ร่วมเป็นส่วนหนึ่งของ</p>
         <TextEffect></TextEffect>
-        <br/>
-        <br/>
+        <br />
+        <br />
       </div>
-      
+
       <div style={{ margin: 30 }}>
         <Icon
           icon="chat"
@@ -113,7 +119,7 @@ const Signin = (props) => {
   const submitCredentials = async (credentials) => {
     try {
       setLoginLoading(true);
-      const { data } = await axios.post("/users/signin", credentials);
+      const { data } = await axios.post("http://localhost:5000/users/signin", credentials);
       let { user } = data;
       console.log("login", data);
       let context = {
@@ -139,7 +145,7 @@ const Signin = (props) => {
 
   return (
     <>
-      <Formik 
+      <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => submitCredentials(values)}
         validationSchema={LoginSchema}
@@ -172,11 +178,20 @@ const Signin = (props) => {
                   autoFocus
                   style={FONTS.body3}
                 />
-                <label for="floatingInput" style={theme.FONTS.login}>Email address</label>
+                <label for="floatingInput" style={theme.FONTS.login}>
+                  Email address
+                </label>
               </div>
 
               {/*errors.email && touched.email && errors.email */}
-              <div className="col-12 mb-3 col-12" style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+              <div
+                className="col-12 mb-3 col-12"
+                style={{
+                  color: "OrangeRed",
+                  fontFamily: "supermarket",
+                  fontSize: 12,
+                }}
+              >
                 <ErrorMessage name="email" />
               </div>
 
@@ -191,10 +206,19 @@ const Signin = (props) => {
                   value={values.password}
                   style={FONTS.body3}
                 />
-                <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
+                <label for="floatingPassword" style={theme.FONTS.login}>
+                  Password
+                </label>
               </div>
 
-              <div className="col-12 mb-3 col-12" style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+              <div
+                className="col-12 mb-3 col-12"
+                style={{
+                  color: "OrangeRed",
+                  fontFamily: "supermarket",
+                  fontSize: 12,
+                }}
+              >
                 {errors.password && touched.password && errors.password}
               </div>
             </Grid>
@@ -229,7 +253,7 @@ const Register = (props) => {
   const submitCredentials = async (credentials) => {
     try {
       setSignupLoading(true);
-      const { data } = await axios.post(`/users/register`, credentials);
+      const { data } = await axios.post(`http://localhost:5000/users/register`, credentials);
 
       let { user } = data;
 
@@ -274,7 +298,6 @@ const Register = (props) => {
           onSubmit={(values) => submitCredentials(values)}
           style={FONTS.body3}
           validationSchema={SignupSchema}
-          
         >
           {({
             values,
@@ -287,12 +310,22 @@ const Register = (props) => {
           }) => (
             <form onSubmit={handleSubmit} className={classes.form}>
               <Grid container>
-                {signupSuccess && <div style={FONTS.body3}> Signup Success {signupSuccess} </div>}
-                {signupError && <div style={FONTS.body3}> Signup Error {signupError} </div>}
+                {signupSuccess && (
+                  <div style={FONTS.body3}>
+                    {" "}
+                    Signup Success {signupSuccess}{" "}
+                  </div>
+                )}
+                {signupError && (
+                  <div style={FONTS.body3}> Signup Error {signupError} </div>
+                )}
                 {/* <input type="hidden" name="remember" value="true" /> */}
                 <br />
 
-                <div className="form-floating mt-3 col-12" style={{fontFamily: "supermarket"}}>
+                <div
+                  className="form-floating mt-3 col-12"
+                  style={{ fontFamily: "supermarket" }}
+                >
                   <input
                     type="firstName"
                     name="firstName"
@@ -302,14 +335,26 @@ const Register = (props) => {
                     onBlur={handleBlur}
                     value={values.firstName}
                   />
-                  <label for="floatingInput" style={theme.FONTS.login}>First Name</label>
+                  <label for="floatingInput" style={theme.FONTS.login}>
+                    First Name
+                  </label>
                 </div>
 
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
-                  <ErrorMessage name="firstName"/>
+                <div
+                  className="col-12 mb-3 "
+                  style={{
+                    color: "OrangeRed",
+                    fontFamily: "supermarket",
+                    fontSize: 12,
+                  }}
+                >
+                  <ErrorMessage name="firstName" />
                 </div>
 
-                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
+                <div
+                  className="form-floating col-12"
+                  style={{ fontFamily: "supermarket" }}
+                >
                   <input
                     className="form-control"
                     id="floatingInput"
@@ -319,14 +364,26 @@ const Register = (props) => {
                     onBlur={handleBlur}
                     value={values.lastName}
                   />
-                  <label for="floatingInput" style={theme.FONTS.login}>Last Name</label>
+                  <label for="floatingInput" style={theme.FONTS.login}>
+                    Last Name
+                  </label>
                 </div>
 
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+                <div
+                  className="col-12 mb-3 "
+                  style={{
+                    color: "OrangeRed",
+                    fontFamily: "supermarket",
+                    fontSize: 12,
+                  }}
+                >
                   <ErrorMessage name="lastName" />
                 </div>
 
-                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
+                <div
+                  className="form-floating col-12"
+                  style={{ fontFamily: "supermarket" }}
+                >
                   <input
                     type="email"
                     className="form-control"
@@ -337,15 +394,27 @@ const Register = (props) => {
                     value={values.email}
                     autoFocus
                   />
-                  <label for="floatingInput" style={theme.FONTS.login}>Email address</label>
+                  <label for="floatingInput" style={theme.FONTS.login}>
+                    Email address
+                  </label>
                 </div>
 
                 {/*errors.email && touched.email && errors.email */}
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+                <div
+                  className="col-12 mb-3 "
+                  style={{
+                    color: "OrangeRed",
+                    fontFamily: "supermarket",
+                    fontSize: 12,
+                  }}
+                >
                   <ErrorMessage name="email" />
                 </div>
 
-                <div className="form-floating col-12" style={{fontFamily: "supermarket"}}>
+                <div
+                  className="form-floating col-12"
+                  style={{ fontFamily: "supermarket" }}
+                >
                   <input
                     type="password"
                     className="form-control"
@@ -355,10 +424,19 @@ const Register = (props) => {
                     onBlur={handleBlur}
                     value={values.password}
                   />
-                  <label for="floatingPassword" style={theme.FONTS.login}>Password</label>
+                  <label for="floatingPassword" style={theme.FONTS.login}>
+                    Password
+                  </label>
                 </div>
 
-                <div className="col-12 mb-3 " style={{color:"OrangeRed", fontFamily: "supermarket", fontSize: 12}}>
+                <div
+                  className="col-12 mb-3 "
+                  style={{
+                    color: "OrangeRed",
+                    fontFamily: "supermarket",
+                    fontSize: 12,
+                  }}
+                >
                   {errors.password && touched.password && errors.password}
                 </div>
               </Grid>
@@ -407,18 +485,19 @@ export const Auth = () => {
   };
 
   const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const _token = res?.tokenId;
+    const result = res.profileObj;
+    const _token = `${result.givenName}**${result.familyName}`;
 
     const userGoogleRegister = {
-      googleID: result?.googleId,
-      imgURL: result?.imageUrl,
-      email: result?.email,
+      googleID: result.googleId,
+      imgURL: result.imageUrl,
+      email: result.email,
       password: _token,
-      firstName: result?.givenName,
-      lastName: result?.familyName,
+      firstName: result.givenName,
+      lastName: result.familyName,
       role: "user",
     };
+    // console.log("userGoogleRegister ", userGoogleRegister);
 
     const userGoogleSignin = {
       email: result?.email,
@@ -426,13 +505,14 @@ export const Auth = () => {
     };
 
     const __res = await axios
-      .get(`/users/google/${userGoogleRegister.googleID}`)
+      .get(`http://localhost:5000/users/google/${result.googleId}`)
       .then(async (res) => {
-        // alert(JSON.stringify(res));
+        // console.log(res);
+        // console.log("userGoogleSignin ",userGoogleSignin);
 
-        let { data } = await axios.post("/users/signin", userGoogleSignin);
-        let { user: _user } = data;
-        // alert(JSON.stringify(_user));
+        let { data } = await axios.post("http://localhost:5000/users/signin", userGoogleSignin);
+        let _user = data.user;
+        // console.log("_user ",_user);
         let context = {
           token: _user.token,
           userInfo: _user.firstName + " " + _user.lastName,
@@ -445,8 +525,8 @@ export const Auth = () => {
         }, 700);
       })
       .catch(async (error) => {
-        let { user } = await axios
-          .post("/users/register", userGoogleRegister)
+        let registerState = await axios
+          .post("http://localhost:5000/users/register", userGoogleRegister)
           .then(() => {
             setTimeout(() => {
               handleShow();
@@ -487,9 +567,7 @@ export const Auth = () => {
         <Grid container justify="flex-end">
           <Grid item>
             <span onClick={switchMode}>
-              <p
-                className="text-switch"
-              >
+              <p className="text-switch">
                 {isSignup
                   ? "มีบัญชีอยู่แล้วเหรอ? เข้าสู่ระบบ"
                   : "ยังไม่มีบัญชีเหรอ? ลงทะเบียน"}

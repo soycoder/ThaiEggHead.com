@@ -116,7 +116,7 @@ function ForumCard(props) {
             forumID: forum.forumID,
             whoVoteLike: whoVoteLike,
           };
-          axios.put(`/forums/${forum.forumID}`, update);
+          axios.put(`http://localhost:5000/forums/${forum.forumID}`, update);
         } else {
           setIsYouLike(false);
 
@@ -126,7 +126,7 @@ function ForumCard(props) {
           };
           whoVoteLike.splice(index, 1);
           setAmountLike(amountLike - 1);
-          axios.put(`/forums/${forum.forumID}`, update);
+          axios.put(`http://localhost:5000/forums/${forum.forumID}`, update);
         }
       } else {
         addToast("โปรด Login ก่อน");
