@@ -186,7 +186,7 @@ function Home({ isAuthenticated }) {
       return newArray = datas
     }
     count = 0
-    return newArray = datas
+    return null
   });
 
   const mystyle = {

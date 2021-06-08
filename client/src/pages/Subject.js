@@ -281,7 +281,7 @@ function Sub({ isAuthenticated }) {
       return newArray = forumData
     }
     count = 0
-
+    return null
   });
 
   const LeftNavigate = (props) => {
