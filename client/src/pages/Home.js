@@ -8,17 +8,13 @@ import {
   Form,
   Modal,
   Button,
-  Image,
 } from "react-bootstrap";
 import { Link, NavLink, Redirect } from "react-router-dom";
 import { images } from "../constants";
 import React, { useState, useEffect, useContext } from "react";
-import { Icon } from "@blueprintjs/core";
 
 import CreateForumCard from "../components/CreateForumCard";
 import ForumCard from "../components/ForumCard";
-import { getMultipleFiles } from "../auth/apiFile";
-
 import { AuthContext } from "../context/AuthContext";
 import jwt_decode from "jwt-decode";
 
@@ -33,8 +29,9 @@ function Home({ isAuthenticated }) {
   const [toaster, setToaster] = useState([]);
 
   function addToast() {
-    toaster.show({ message: "Oops! ขออภัยอยู่ระหว่างการปรับปรุง", intent: Intent.WARNING,  icon: "warning-sign" });
+    toaster.show({ message: "Oops! ขออภัยอยู่ระหว่างการปรับปรุง", intent: Intent.WARNING, icon: "warning-sign" });
   }
+
   // Initial User Profile
   const auth = useContext(AuthContext);
 
@@ -51,10 +48,7 @@ function Home({ isAuthenticated }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [datas, setdatas] = useState([]);
-
   const [isShowAnounce, setIsShowAnounce] = useState(true);
-
-  const [multipleFiles, setMultipleFiles] = useState([]);
 
   const subjectNavigate = [
     {
@@ -125,27 +119,6 @@ function Home({ isAuthenticated }) {
       .then((res) => setdatas(res));
   }, []);
 
-  const [optionTag, setOptionTag] = useState([]);
-  useEffect(() => {
-    fetch(`http://localhost:5000/forums/tag`)
-      .then((res) => res.json())
-      .then((res) => {
-        // let array = Tag.concat(res);
-        let options = res.map((d) => ({
-          value: d.tagID,
-          label: d.name,
-        }));
-        // console.log(options);
-        setOptionTag(options);
-      });
-  }, []);
-
-  var [tag, setTag] = useState("");
-  const [value, getValue] = useState([]);
-  var handle = (e) => {
-    getValue(Array.isArray(e) ? e.map((x) => x.label) : []);
-  };
-
   var i, j;
   var t = " ";
   var arrayTag = [];
@@ -157,12 +130,13 @@ function Home({ isAuthenticated }) {
         }
       }
       arrayTag = t.split(" ");
+      return null;
     });
+
     return arrayTag;
   }
-  {
-    tagData();
-  }
+  tagData();
+  
 
   const count = {}
   arrayTag.forEach(function (i) { count[i] = (count[i] || 0) + 1; });
@@ -176,7 +150,7 @@ function Home({ isAuthenticated }) {
 
   for (j = 0; j < key.length; j++) {
     tags[j] = { label: key[j], value: sumTag[j] };
-    tagSelect[j] = { value: j, label: key[j]};
+    tagSelect[j] = { value: j, label: key[j] };
   }
 
   tags.shift()
@@ -185,35 +159,34 @@ function Home({ isAuthenticated }) {
   var [valueTag, getValueTag] = useState([]);
   var handle = (e) => {
     getValueTag(Array.isArray(e) ? e.map(x => x.label) : []);
-    
+
   }
-  console.log(valueTag)
   var newArray = datas.filter(function (ele) {
     var i, j, count = 0, count2 = 0;
     var numDB = ele.listTag.length;
     var numFilter = valueTag.length;
 
-    for (i=0; i<numFilter; i++){
-      for (j=0; j<numDB; j++){
-        if (valueTag[i] == ele.listTag[j]){
+    for (i = 0; i < numFilter; i++) {
+      for (j = 0; j < numDB; j++) {
+        if (valueTag[i]===ele.listTag[j]) {
           count += 1
         }
       }
     }
-    if (count > 0){
-      if (count == numDB){
+    if (count > 0) {
+      if (count===numDB) {
         count2 += 1
         return ele.listTag
       }
-      if (count != 0 && count2 == 0) {
+      if (count !== 0 && count2===0) {
         return ele.listTag
-      }  
+      }
     }
-    if (numFilter == 0){
+    if (numFilter===0) {
       return newArray = datas
     }
     count = 0
-    // count2 = 0
+    return null
   });
 
   const mystyle = {
@@ -225,10 +198,11 @@ function Home({ isAuthenticated }) {
   const LeftNavigate = (props) => {
     const data = props.data;
     const listSubject = data.map((subject) => (
-      <li>
+      <li key={subject.link}>
         <Link to={subject.link} style={{ textDecoration: "black" }}>
           <Button className="btn-subjectnav" variant="light" block>
             <img
+              alt="subject"
               src={subject.img}
               height="25"
               width="25"
@@ -249,12 +223,8 @@ function Home({ isAuthenticated }) {
         <Card style={{ marginBottom: 10, padding: 15 }}>
           <Card.Subtitle className="card-username">
             <NavLink className="question-card-username" to={`/profile/${user.userID}`}>
-              {/* <img
-                class="user-image-small"
-                src={user.imgURL ? user.imgURL : images.pic_profile}
-              /> */}
               {user.imgURL ? (
-                <Avatar size="20" src={user.imgURL.indexOf("http") == 0 ? user.imgURL : "http://localhost:5000/"+user.imgURL} round={true} />
+                <Avatar size="20" src={user.imgURL.indexOf("http")===0 ? user.imgURL : "http://localhost:5000/" + user.imgURL} round={true} />
               ) : (
                 <Avatar
                   size="20"
@@ -262,7 +232,7 @@ function Home({ isAuthenticated }) {
                   round={true}
                 />
               )}
-              <div class="user-name-small ms-1" style={{fontFamily: "supermarket", fontSize: 14, lineHeight:1.4, color:"gray"}}>
+              <div className="user-name-small ms-1" style={{ fontFamily: "supermarket", fontSize: 14, lineHeight: 1.4, color: "gray" }}>
                 {user.firstName ? user.firstName + " " + user.lastName : ""}
               </div>
             </NavLink>
@@ -282,7 +252,6 @@ function Home({ isAuthenticated }) {
                 size="lg"
               >
                 <Container style={mystyle}>
-                  {/* <Card.Title>Create Forum</Card.Title> */}
                   {isAuthenticated ? (
                     <CreateForumCard isAuthenticated={auth.isAuthenticated()} />
                   ) : (
@@ -318,13 +287,14 @@ function Home({ isAuthenticated }) {
             ดูข้อมูลเพิ่มเติม
           </Button>
           <Button className="btn-close btn-close2" onClick={() => setIsShowAnounce(!isShowAnounce)}></Button>
-          <br/>
+          <br />
           <img
-              src={images.logo_event}
-              height="100"
-              width="100"
-              className="event-img"
-            />
+            alt="logo"
+            src={images.logo_event}
+            height="100"
+            width="100"
+            className="event-img"
+          />
         </Card.Body>
       </Card>
     );
@@ -336,21 +306,20 @@ function Home({ isAuthenticated }) {
         <Card.Header>คำถามมาแรง 🔥</Card.Header>
         <Card.Body>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <a id="relate-question" onClick={addToast}>
+            <a href="#/" id="relate-question" onClick={addToast}>
               เชื้อราดำใน Chernobyl
               อาจสามารถปกป้องนักบินอวกาศจากรังสีมรณะบนดาวอังคารได้ไหม
             </a>
-            <a id="relate-question" onClick={addToast}>
+            <a href="#/" id="relate-question" onClick={addToast}>
               อะไรที่สามารถนำมาทำผัดกะเพรานอกเหนือเนื้อสัตว์ปกติได้อีกมั้ย?
             </a>
-            <a id="relate-question">กระจกรถยนต์หลุดจากกิ๊บหนีบแก้ปัญหายังไง</a>
-            <a id="relate-question" onClick={addToast}>
+            <a href="#/" id="relate-question">กระจกรถยนต์หลุดจากกิ๊บหนีบแก้ปัญหายังไง</a>
+            <a href="#/" id="relate-question" onClick={addToast}>
               ผู้หญิงจะเพอร์เฟคและมีเสน่ห์ที่สุดช่วงอายุเท่าไหร่?
             </a>
-            <a id="relate-question" onClick={addToast}>
+            <a href="#/" id="relate-question" onClick={addToast}>
               ถ้าเราแนะนำเพื่อนให้ไปกู้ถือว่าผิดไหม</a>
           </div>
-
           <br />
         </Card.Body>
       </Card>
@@ -359,14 +328,14 @@ function Home({ isAuthenticated }) {
 
   return (
     <div>
-      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
-      <body style={{ backgroundColor: "#F3F3F3", minHeight:200 }} >
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)} />
+      <body style={{ backgroundColor: "#F3F3F3", minHeight: 200 }} >
         <br />
         <br />
         <Container fluid="xl">
           <Row xs={1} md={3}>
             <Col md="auto" className="justify-content-md-center">
-              <h5 style={{fontFamily: "Krub-Regular", fontSize: 17, textAlign:"center",fontWeight: "bold"}}>
+              <h5 style={{ fontFamily: "Krub-Regular", fontSize: 17, textAlign: "center", fontWeight: "bold" }}>
                 สาขาวิชา
               </h5>
               <LeftNavigate data={subjectNavigate} />
@@ -376,49 +345,42 @@ function Home({ isAuthenticated }) {
               {isShowAnounce ? <AnouncingCard /> : <></>}
 
               <UserQuestionCard />
-                          
+
               {newArray.map((forum) => {
-                if(newArray.length!=0){
-                  console.log(newArray.length);
-                  return(<ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>)
+                if (newArray.length !== 0) {
+                  return (<ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>)
                 }
-                  
-                else{
-                  console.log("qsdqsd");
-                  return(
-                    <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
-                      <div class="bp3-non-ideal-state-visual">
-                        <span class="bp3-icon bp3-icon-folder-open"></span>
+
+                else {
+                  return (
+                    <div className="bp3-non-ideal-state" style={theme.FONTS.filter}>
+                      <div className="bp3-non-ideal-state-visual">
+                        <span className="bp3-icon bp3-icon-folder-open"></span>
                       </div>
-                      <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
+                      <h4 className="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
                       <div>สร้างคำถามเองเลยสิ</div>
-                      <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
+                      <button className="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
                     </div>
                   )
                 }
-                  
-              
               })}
 
-              {/* {newArray.map((forum) => (
-                <ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>
-              ))} */}
             </Col>
 
-            <Col md={3} style={{paddingRight:50}}>
+            <Col md={3} style={{ paddingRight: 50 }}>
               <Card style={theme.FONTS.filter}>
                 <Card.Header>คัดกรอง Tags</Card.Header>
                 <Card.Body>
                   <div>
-                  <Select isMulti options={tagSelect} onChange={handle}></Select>
+                    <Select isMulti options={tagSelect} onChange={handle}></Select>
                   </div>
                 </Card.Body>
               </Card>
               <br />
               <Card>
                 <Card.Header className="card-header" style={theme.FONTS.filter}>
-                  Tags ทั้งหมด 
-                </Card.Header>  
+                  Tags ทั้งหมด
+                </Card.Header>
                 <Card.Body style={theme.FONTS.tag}>
                   <div >
                     {tags.map(item => {

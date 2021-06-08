@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Button, Position, Toaster, Intent } from "@blueprintjs/core";
 
 const ToasterCard = () => {
@@ -11,7 +11,7 @@ const ToasterCard = () => {
   return (
     <div>
       <Button onClick={addToast} text="Procure toast" />
-      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)} />
     </div>
   );
 };

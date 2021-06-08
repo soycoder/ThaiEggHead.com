@@ -1,9 +1,10 @@
-import React, { useState} from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Tooltip,
   OverlayTrigger,
 } from "react-bootstrap";
+
 const Upvote = () => {
 
   return (

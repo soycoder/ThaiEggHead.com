@@ -41,11 +41,11 @@ const AuthProvider = ({ children }) => {
     if (!authState.userInfo && !authState.expiresAt) {
       return false;
     }
-    if (authState.expiresAt < new Date().getTime() / 1000) {
-      console.log("EXPIRED");
-    } else {
-      console.log("Not expired!");
-    }
+    // if (authState.expiresAt < new Date().getTime() / 1000) {
+    //   console.log("EXPIRED");
+    // } else {
+    //   console.log("Not expired!");
+    // }
     return new Date().getTime() / 1000 < authState.expiresAt;
   };
 

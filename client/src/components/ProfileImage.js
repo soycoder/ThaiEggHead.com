@@ -1,11 +1,7 @@
 import React, { useState, useContext } from "react";
-import Avatar from "react-avatar-edit";
-import { images } from "../constants";
 
 import {
   Button,
-  Icon,
-  Form,
   Modal,
   InputGroup,
   FormControl,
@@ -33,36 +29,13 @@ const ProfileImage = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [show, setShow] = useState(false);
 
-
   const handleClose = () => setShow(false);
-  const handleShow = () => multipleFiles ? setShow(true):alert("กรุณา เลือกรูป ก่อน");
+  const handleShow = () =>
+    multipleFiles ? setShow(true) : alert("กรุณา เลือกรูป ก่อน");
 
   const onChangePassword = (e) => {
     setConfirmPassword(e.target.value);
   };
-
-  const [preview, setPreview] = useState("");
-  const [defaultPreview, setDefaultPreview] = useState("");
-  const [src, setSrc] = useState("");
-
-  const onCropDefault = (preview) => {
-    setDefaultPreview(preview);
-  };
-
-  const onCrop = (preview) => {
-    setPreview(preview);
-  };
-
-  const onCloseDefault = () => {
-    setDefaultPreview(null);
-  };
-
-  const onClose = () => {
-    setPreview(null);
-  };
-
-  const [PreviewImg, setPreviewImg] = useState("");
-  const [imgFile, setimgFile] = useState("");
 
   const [multipleFiles, setMultipleFiles] = useState(null);
   const [multipleProgress, setMultipleProgress] = useState(0);
@@ -115,7 +88,6 @@ const ProfileImage = (props) => {
 
   const MultipleFileChange = (e) => {
     setMultipleFiles(e.target.files);
-    console.log(multipleFiles);
     setMultipleProgress(0);
     if (e.target.files) {
       const filesArray = Array.from(e.target.files).map((file) =>
@@ -129,8 +101,6 @@ const ProfileImage = (props) => {
 
   return (
     <div className="container-fluid">
-      
-
       <div className="row">
         <div className="col-7">
           <input
@@ -138,23 +108,12 @@ const ProfileImage = (props) => {
             type="file"
             id="formFileMultiple"
           />
-
-          {/* <Avatar
-            width={390}
-            height={295}
-            exportSize={390}
-            onCrop={onCropDefault}
-            onClose={onCloseDefault}
-            src={PreviewImg}
-          /> */}
         </div>
-        {/* props.user.imgURL.indexOf("http") == 0 ? props.user.imgURL : "http://localhost:5000/"+props.user.imgURL */}
         <div className="col-2">
           <h5>Preview</h5>
           <img alt="" style={{ width: "150px", height: "150px" }} src={file} />
         </div>
       </div>
-      {/* {console.log(PreviewImg)} */}
       <Button onClick={handleShow}>ต่อไป</Button>
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>

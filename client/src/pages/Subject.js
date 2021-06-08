@@ -21,9 +21,8 @@ import _ from 'lodash';
 
 import { theme } from "../constants";
 
-function Sub({isAuthenticated}) {
+function Sub({ isAuthenticated }) {
   let { subject } = useParams();
-  // const buttonn = <button>create a custom Filter</button>;
   const [forumData, setForumData] = useState([]);
   const [isHasForum, setIsHasForum] = useState(true);
 
@@ -206,16 +205,15 @@ function Sub({isAuthenticated}) {
     fetch(`http://localhost:5000/forums?subject=${SubjectData.get(subject)[0]}`)
       .then((res) => res.json())
       .then((res) => {
-        if(_.isEmpty(res))setIsHasForum(false)
+        if (_.isEmpty(res)) setIsHasForum(false)
         setForumData(res)
       })
-      
+
   }, [loc]);
 
   var t = " ";
   var i, j;
   var arrayTag = [];
-  var filledArray = [];
 
   function tagData() {
     forumData.map((dataTag) => {
@@ -225,7 +223,6 @@ function Sub({isAuthenticated}) {
         }
       }
       arrayTag = t.split(" ");
-      console.log(arrayTag);
     });
     return arrayTag;
   }
@@ -237,20 +234,18 @@ function Sub({isAuthenticated}) {
   arrayTag.forEach(function (i) {
     count[i] = (count[i] || 0) + 1;
   });
-  console.log(count);
 
   var key = [];
   var sumTag = [];
   key = Object.keys(count)
   sumTag = Object.values(count)
-  console.log(key)
-  console.log(sumTag)
+
   var tags = []
   var tagSelect = []
 
   for (j = 0; j < key.length; j++) {
     tags[j] = { label: key[j], value: sumTag[j] };
-    tagSelect[j] = { value: j, label: key[j]};
+    tagSelect[j] = { value: j, label: key[j] };
   }
 
   tags.shift()
@@ -265,36 +260,34 @@ function Sub({isAuthenticated}) {
     var i, j, count = 0, count2 = 0;
     var numDB = ele.listTag.length;
     var numFilter = valueTag.length;
-  
-      for (i=0; i<numFilter; i++){
-        for (j=0; j<numDB; j++){
-          if (valueTag[i] == ele.listTag[j]){
-            count += 1
-          }
+
+    for (i = 0; i < numFilter; i++) {
+      for (j = 0; j < numDB; j++) {
+        if (valueTag[i]===ele.listTag[j]) {
+          count += 1
         }
       }
-      if (count > 0){
-        if (count == numDB){
-          count2 += 1
-          return ele.listTag
-        }
-        if (count != 0 && count2 == 0) {
-          return ele.listTag
-        }  
+    }
+    if (count > 0) {
+      if (count===numDB) {
+        count2 += 1
+        return ele.listTag
       }
-      if (numFilter == 0){
-        return newArray = forumData
+      if (count != 0 && count2===0) {
+        return ele.listTag
       }
-      count = 0
-  
-    });
-  
-  console.log(newArray)
+    }
+    if (numFilter===0) {
+      return newArray = forumData
+    }
+    count = 0
+    return null
+  });
 
   const LeftNavigate = (props) => {
     const data = props.data;
     const listSubject = data.map((subject) => (
-      <li>
+      <li key={subject.link}>
         <Link to={subject.link} style={{ textDecoration: "black" }}>
           <Button className="btn-subjectnav" variant="light" block>
             <img
@@ -309,7 +302,7 @@ function Sub({isAuthenticated}) {
         </Link>
       </li>
     ));
-    return <ul className="ul-navsubject" style={{marginLeft:-20}}>{listSubject}</ul>;
+    return <ul className="ul-navsubject" style={{ marginLeft: -20 }}>{listSubject}</ul>;
   };
 
   const HeaderImage = () => {
@@ -349,46 +342,17 @@ function Sub({isAuthenticated}) {
     );
   };
 
-  const AboutSubjectCard = () => {
-    return (
-      <Card style={{ marginBottom: 10 }}>
-        <Card.Body>
-          <div className="subject-header">
-            <Avatar
-              className="subject-img"
-              size="100"
-              round={false}
-              style={{ marginRight: 20 }}
-            />
-            <div style={{ marginLeft: 20 }}>
-              <h2 style={theme.FONTS.h1}>{SubjectData.get(subject)[0]}</h2>
-              <h5 style={theme.FONTS.h2}>{SubjectData.get(subject)[1]}</h5>
-              <Button2
-                className="bp3-minimal bp3-intent-primary bp3-outlined"
-                id="follow"
-                icon="add-to-artifact"
-              >
-                Follow 123K
-              </Button2>
-            </div>
-          </div>
-        </Card.Body>
-      </Card>
-    );
-  };
-
   const TagSum = () => {
     return (
       <Card>
         <Card.Header>
           <div style={theme.FONTS.filter}>
-          Tags ทั้งหมด
+            Tags ทั้งหมด
           </div>
         </Card.Header>
         <Card.Body>
           <div>
             {tags.map(item => {
-              // console.log(filledArray)
               return (
                 <div>
                   <Button variant="outline-info" className="app-fontSizeTag">{item.label}</Button>{" x "}{item.value}
@@ -402,22 +366,21 @@ function Sub({isAuthenticated}) {
   };
 
   const RenderForum = () => {
-    if(isHasForum){
-      return(
+    if (isHasForum) {
+      return (
         <>
-        {newArray.map((forum) =><ForumCard data={forum} isAuthenticated={isAuthenticated}/>)}
+          {newArray.map((forum) => <ForumCard data={forum} isAuthenticated={isAuthenticated} />)}
         </>
       )
-      
-    }else{
-      return(
-        <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
-          <div class="bp3-non-ideal-state-visual">
-            <span class="bp3-icon bp3-icon-folder-open"></span>
+    } else {
+      return (
+        <div className="bp3-non-ideal-state" style={theme.FONTS.filter}>
+          <div className="bp3-non-ideal-state-visual">
+            <span className="bp3-icon bp3-icon-folder-open"></span>
           </div>
-          <h4 class="bp3-heading" style={{fontFamily: "Krub-Regular", fontSize: 22}}>ไม่มีคำถามที่คุณกำลังตามหา</h4>
-          <div style={{fontFamily: "Krub-Regular", fontSize: 16}}>สร้างคำถามเองเลยสิ</div>
-          <NavLink to="/create/forum" style={{fontFamily: "Krub-Regular", fontSize: 12}}>
+          <h4 className="bp3-heading" style={{ fontFamily: "Krub-Regular", fontSize: 22 }}>ไม่มีคำถามที่คุณกำลังตามหา</h4>
+          <div style={{ fontFamily: "Krub-Regular", fontSize: 16 }}>สร้างคำถามเองเลยสิ</div>
+          <NavLink to="/create/forum" style={{ fontFamily: "Krub-Regular", fontSize: 12 }}>
             <Button
               variant="warning"
             >
@@ -456,10 +419,9 @@ function Sub({isAuthenticated}) {
     );
   };
 
-  // console.log(value);
   return (
     <div>
-      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)}/>
+      <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)} />
       <HeaderImage />
       <Container fluid="xl">
         <Row className="justify-content-md-center">
@@ -482,55 +444,28 @@ function Sub({isAuthenticated}) {
                 Latest Update : <Moment format="DD/MM/YYYY" />
               </Card.Footer>
             </Card>
-            <h5 style={{fontFamily: "Krub-Regular", fontSize: 17, textAlign:"center",fontWeight: "bold", marginTop:30}}>
-                สาขาวิชา
+            <h5 style={{ fontFamily: "Krub-Regular", fontSize: 17, textAlign: "center", fontWeight: "bold", marginTop: 30 }}>
+              สาขาวิชา
               </h5>
-            <LeftNavigate data={subjectNavigate}/>
+            <LeftNavigate data={subjectNavigate} />
           </Col>
 
           <Col md={6}>
             <SubjectHeaderCard />
-            
-            <RenderForum/>
-            {/* {newArray.map((forum) => {
-                if(isHasForum){
-                  return(<ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>)
-                }
-                  
-                else{
-                  return(
-                    <div class="bp3-non-ideal-state" style={theme.FONTS.filter}>
-                      <div class="bp3-non-ideal-state-visual">
-                        <span class="bp3-icon bp3-icon-folder-open"></span>
-                      </div>
-                      <h4 class="bp3-heading">ไม่มีคำถามที่คุณกำลังตามหา</h4>
-                      <div>สร้างคำถามเองเลยสิ</div>
-                      <button class="bp3-button bp3-intent-primary">ตั้งคำถาม</button>
-                    </div>
-                  )
-                }
-                  
-              
-              })} */}
-
-            {/* {newArray.map((forum) => (
-              <ForumCard data={forum} isAuthenticated={isAuthenticated}></ForumCard>
-            ))} */}
+            <RenderForum />
           </Col>
 
-          <Col md={3} style={{paddingRight:40}}>
-            {/* <AboutSubjectCard/> */}
+          <Col md={3} style={{ paddingRight: 40 }}>
             <Card >
               <Card.Header style={theme.FONTS.filter}>คัดกรอง Tags</Card.Header>
               <Card.Body>
                 <div>
-                <Select isMulti options={tagSelect} onChange={handle}></Select>
+                  <Select isMulti options={tagSelect} onChange={handle}></Select>
                 </div>
               </Card.Body>
             </Card>
             <br />
             <TagSum />
-            {/* <IgnoreTag /> */}
             <br />
             <RelateQuestion />
           </Col>

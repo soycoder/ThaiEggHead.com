@@ -36,17 +36,11 @@ const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required."),
   lastName: Yup.string().required("Last name is required."),
   email: Yup.string().email("*Invalid email.").required("Email is required."),
-  password: Yup.string().required("Password is required."),
+  password: Yup.string()
+    .required("Password is required.")
+    .min(8, "Password must contain at least 8 characters."),
 });
 
-//
-const initialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
 const values = ["ชุมชนอุดมปัญญา", "สังคมแห่งการแบ่งปัน", "Thai Egghead.com"];
 
 const TextEffect = () => {
@@ -68,7 +62,7 @@ const TextEffect = () => {
     <p
       style={{ position: "absolute", fontSize: 40, fontFamily: "supermarket" }}
     >
-      "{result}"{" "}
+      "{result}"
     </p>
   );
 };
@@ -119,9 +113,11 @@ const Signin = (props) => {
   const submitCredentials = async (credentials) => {
     try {
       setLoginLoading(true);
-      const { data } = await axios.post("http://localhost:5000/users/signin", credentials);
+      const { data } = await axios.post(
+        "http://localhost:5000/users/signin",
+        credentials
+      );
       let { user } = data;
-      console.log("login", data);
       let context = {
         token: user.token,
         userInfo: user.firstName + " " + user.lastName,
@@ -137,7 +133,6 @@ const Signin = (props) => {
     } catch (error) {
       setLoginLoading(false);
       const { data } = error.response;
-      console.log(data);
       setLoginError(data.errors.global);
       setLoginSuccess(null);
     }
@@ -253,9 +248,10 @@ const Register = (props) => {
   const submitCredentials = async (credentials) => {
     try {
       setSignupLoading(true);
-      const { data } = await axios.post(`http://localhost:5000/users/register`, credentials);
-
-      let { user } = data;
+      const { data } = await axios.post(
+        `http://localhost:5000/users/register`,
+        credentials
+      );
 
       setSignupSuccess(data.message);
       setSignupError("");
@@ -319,7 +315,7 @@ const Register = (props) => {
                 {signupError && (
                   <div style={FONTS.body3}> Signup Error {signupError} </div>
                 )}
-                {/* <input type="hidden" name="remember" value="true" /> */}
+
                 <br />
 
                 <div
@@ -465,9 +461,6 @@ const Register = (props) => {
 };
 
 export const Auth = () => {
-  // ! useContext()
-  const authContext = useContext(AuthContext);
-
   // ! useState()
   const [isSignup, setIsSignup] = useState(false);
   const [redirectOnLogin, setRedirectOnLogin] = useState(false);
@@ -510,7 +503,10 @@ export const Auth = () => {
         // console.log(res);
         // console.log("userGoogleSignin ",userGoogleSignin);
 
-        let { data } = await axios.post("http://localhost:5000/users/signin", userGoogleSignin);
+        let { data } = await axios.post(
+          "http://localhost:5000/users/signin",
+          userGoogleSignin
+        );
         let _user = data.user;
         // console.log("_user ",_user);
         let context = {
@@ -538,7 +534,6 @@ export const Auth = () => {
   const googleError = () =>
     console.log("Google Sign In was unsuccessful. Try again later");
 
-  //   ! return()
   return (
     <>
       {redirectOnLogin && <Redirect to="/" />}
@@ -607,7 +602,6 @@ export const Auth = () => {
           <Modal.Title>สถานะการสมัคร</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center mt-2 mb-2">
-          {/* <Icon icon="saved" iconSize={100} intent={Intent.SUCCESS} /> */}
           <Player
             autoplay
             loop
@@ -652,17 +646,6 @@ const AuthPage = () => {
         </Col>
       </Row>
     </Container>
-    //        <Container>
-    //        <Row>
-    //            <Col xs={8} md={6}>
-    //                <WelcomeAds/>
-    //            </Col>
-
-    //            <Col xs={6} md={4}>
-    //                <Auth/>
-    //            </Col>
-    //        </Row>
-    //    </Container>
   );
 };
 

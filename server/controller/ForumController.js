@@ -97,13 +97,6 @@ export const get = async (req, res, next) => {
         errors: { global: "Error retrieving Forum with forumID " + forumID },
       });
     });
-  // console.log(filter);
-  // try {
-  //   const files = await Forum.find(filter);
-  //   res.status(200).send(files);
-  // } catch (error) {
-  //   res.status(400).send(error.message);
-  // }
 };
 
 export const fileSizeFormatter = (bytes, decimal) => {

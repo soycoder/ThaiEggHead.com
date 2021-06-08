@@ -5,21 +5,18 @@ import {
   Tooltip,
   OverlayTrigger,
   Card,
-  Badge,
-  Spinner,
   Dropdown,
   Image,
-  Form,
   Button as Button2,
 } from "react-bootstrap";
 
 import Avatar from "react-avatar";
 
-import { Button, Icon, InputGroup } from "@blueprintjs/core";
+import { Button, Icon } from "@blueprintjs/core";
 import { Position, Toaster, Intent } from "@blueprintjs/core";
 import React, { useState, useEffect, useContext } from "react";
 import { images } from "../constants";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { theme } from "../constants";
 
 import Moment from "react-moment";
@@ -79,7 +76,7 @@ function ForumCard(props) {
     const [amountAnswer, setAmountAnswer] = useState(listAnswer.length);
     const [isYouLike, setIsYouLike] = useState(
       props.isAuthenticated
-        ? whoVoteLike.indexOf(user.userID) == -1
+        ? whoVoteLike.indexOf(user.userID) === -1
           ? false
           : true
         : false
@@ -108,7 +105,7 @@ function ForumCard(props) {
     const handleVote = () => {
       if (props.isAuthenticated) {
         let index = whoVoteLike.indexOf(user.userID);
-        if (index == -1) {
+        if (index === -1) {
           setIsYouLike(true);
           whoVoteLike.push(user.userID);
           setAmountLike(amountLike + 1);
@@ -133,7 +130,7 @@ function ForumCard(props) {
       }
     };
 
-    const UpvoteBotton = (props) => {
+    const UpvoteBotton = () => {
       return (
         <OverlayTrigger
           key={"top"}
@@ -156,7 +153,7 @@ function ForumCard(props) {
     const ListSubjectTag = (props) => {
       const list = props.data;
       const subjectTag = list.map((subject) => (
-        <Button2 variant="secondary" id="question-subject-tag">
+        <Button2 key={subject} variant="secondary" id="question-subject-tag">
           {subject}
         </Button2>
       ));
@@ -175,7 +172,6 @@ function ForumCard(props) {
             {subject}
           </Button2>
         )
-        // style={{backgroundColor:COLORS.black, color:COLORS.white, marginRight:5}}
       );
       return (
         <div className="tag" style={theme.FONTS.tag}>
@@ -236,13 +232,13 @@ function ForumCard(props) {
         {isUserLoading ? (
           <>
             <div>
-              <div class="header">
-                <div class="options">
-                  <i class="fa fa-chevron-down"></i>
+              <div className="header">
+                <div className="options">
+                  <i className="fa fa-chevron-down"></i>
                 </div>
                 <Link to={`/profile/${_user.userID}`}>
                   {_user.imgURL ? (
-                    <Avatar size="40" src={_user.imgURL.indexOf("http") == 0 ? _user.imgURL : "http://localhost:5000/"+_user.imgURL} round={true} />
+                    <Avatar size="40" src={_user.imgURL.indexOf("http") === 0 ? _user.imgURL : "http://localhost:5000/" + _user.imgURL} round={true} />
                   ) : (
                     <Avatar
                       size="40"
@@ -252,7 +248,7 @@ function ForumCard(props) {
                   )}
                 </Link>
                 <div className="ms-1">
-                  <div class="co-name">
+                  <div className="co-name">
                     <Link
                       to={`/profile/${_user.userID}`}
                       style={theme.FONTS.name}
@@ -262,7 +258,7 @@ function ForumCard(props) {
                         : ""}
                     </Link>
                   </div>
-                  <div class="time noselect" style={theme.FONTS.time}>
+                  <div className="time noselect" style={theme.FONTS.time}>
                     <div>
                       <Moment
                         element="span"
@@ -275,7 +271,6 @@ function ForumCard(props) {
                         {forum.createdAt}
                       </Moment>
                     </div>
-                    {/* <i class="fa fa-globe"></i> */}
                   </div>
                 </div>
 
@@ -283,8 +278,7 @@ function ForumCard(props) {
                   <MoreButton />
                 </div>
               </div>
-              <div class="content">
-                {/* <Card.Title>{forum.title}</Card.Title> */}
+              <div className="content">
                 <Link
                   to={`/question/${forum.forumID}`}
                   style={{ textDecoration: "black" }}
@@ -385,17 +379,20 @@ function ForumCard(props) {
     );
   };
 
+  const handleCloseComment = () => {
+    setIsShowComment(false)
+  }
+
   // Main Render
   return (
     <div style={{ marginBottom: 10 }}>
       <Card className="main-card">
         <Question />
         {isShowComment ? (
-          <Answer data={forum} isAuthenticated={props.isAuthenticated} />
+          <Answer data={forum} showcomment={handleCloseComment} isAuthenticated={props.isAuthenticated} />
         ) : (
           <></>
         )}
-
         <Toaster position={Position.TOP} ref={(ref) => setToaster(ref)} />
       </Card>
     </div>
