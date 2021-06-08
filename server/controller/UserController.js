@@ -44,7 +44,6 @@ export let checkSignin = (req, res) => {
 // add new user
 export const create = (req, res) => {
   User.findOne({}, {}, { sort: { createdAt: -1 } }, function (err, _user) {
-    console.log(_user);
     let old_id = "";
     if (_user) old_id = _user.userID;
     else old_id = "0";
