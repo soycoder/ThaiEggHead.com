@@ -28,5 +28,8 @@
   },
   "devDependencies": {},
   "author": "",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "dotenv": "^16.0.1"
+  }
 }
